@@ -73,12 +73,12 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Cutting Edge Cooking Skill Book")]
+    [LocDisplayName("Eco+ Cutting Edge Cooking Skill Book")]
     [Ecopedia("Items", "Skill Books", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     public partial class CuttingEdgeCookingSkillBook : SkillBook<CuttingEdgeCookingSkill, CuttingEdgeCookingSkillScroll> {}
 
     [Serialized]
-    [LocDisplayName("Cutting Edge Cooking Skill Scroll")]
+    [LocDisplayName("Eco+ Cutting Edge Cooking Skill Scroll")]
     public partial class CuttingEdgeCookingSkillScroll : SkillScroll<CuttingEdgeCookingSkill, CuttingEdgeCookingSkillBook> {}
 
 
@@ -90,7 +90,7 @@ namespace Eco.Mods.TechTree
             var recipe = new Recipe();
             recipe.Init(
                 "CuttingEdgeCooking",  //noloc
-                Localizer.DoStr("Cutting Edge Cooking Skill BScrollook"),
+                Localizer.DoStr("Eco+ Cutting Edge Cooking Skill BScrollook"),
                 new List<IngredientElement>
                 {
                     new IngredientElement(typeof(CulinaryResearchPaperAdvancedItem), 200, typeof(AdvancedCookingSkill)),
@@ -108,7 +108,7 @@ namespace Eco.Mods.TechTree
             this.LaborInCalories = CreateLaborInCaloriesValue(1, typeof(AdvancedCookingSkill));
             this.CraftMinutes = CreateCraftTimeValue(typeof(CuttingEdgeCookingSkillBookRecipe), 60, typeof(AdvancedCookingSkill));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Cutting Edge Cooking Skill Scroll"), typeof(CuttingEdgeCookingSkillBookRecipe));
+            this.Initialize(Localizer.DoStr("Eco+ Cutting Edge Cooking Skill Scroll"), typeof(CuttingEdgeCookingSkillBookRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(ResearchTableObject), this);
         }

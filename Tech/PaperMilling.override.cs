@@ -73,12 +73,12 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Paper Milling Skill Book")]
+    [LocDisplayName("Eco+ Paper Milling Skill Book")]
     [Ecopedia("Items", "Skill Books", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     public partial class PaperMillingSkillBook : SkillBook<PaperMillingSkill, PaperMillingSkillScroll> {}
 
     [Serialized]
-    [LocDisplayName("Paper Milling Skill Scroll")]
+    [LocDisplayName("Eco+ Paper Milling Skill Scroll")]
     public partial class PaperMillingSkillScroll : SkillScroll<PaperMillingSkill, PaperMillingSkillBook> {}
 
 
@@ -90,7 +90,7 @@ namespace Eco.Mods.TechTree
             var recipe = new Recipe();
             recipe.Init(
                 "PaperMilling",  //noloc
-                Localizer.DoStr("Paper Milling Skill Scroll"),
+                Localizer.DoStr("Eco+ Paper Milling Skill Scroll"),
                 new List<IngredientElement>
                 {
                     new IngredientElement(typeof(DendrologyResearchPaperAdvancedItem), 50, typeof(CarpentrySkill)),
@@ -104,7 +104,7 @@ namespace Eco.Mods.TechTree
             this.LaborInCalories = CreateLaborInCaloriesValue(1, typeof(CarpentrySkill));
             this.CraftMinutes = CreateCraftTimeValue(typeof(PaperMillingSkillBookRecipe), 15, typeof(CarpentrySkill));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Paper Milling Skill Scroll"), typeof(PaperMillingSkillBookRecipe));
+            this.Initialize(Localizer.DoStr("Eco+ Paper Milling Skill Scroll"), typeof(PaperMillingSkillBookRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(ResearchTableObject), this);
         }

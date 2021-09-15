@@ -73,12 +73,12 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Glassworking Skill Book")]
+    [LocDisplayName("Eco+ Glassworking Skill Book")]
     [Ecopedia("Items", "Skill Books", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     public partial class GlassworkingSkillBook : SkillBook<GlassworkingSkill, GlassworkingSkillScroll> {}
 
     [Serialized]
-    [LocDisplayName("Glassworking Skill Scroll")]
+    [LocDisplayName("Eco+ Glassworking Skill Scroll")]
     public partial class GlassworkingSkillScroll : SkillScroll<GlassworkingSkill, GlassworkingSkillBook> {}
 
 
@@ -90,7 +90,7 @@ namespace Eco.Mods.TechTree
             var recipe = new Recipe();
             recipe.Init(
                 "Glassworking",  //noloc
-                Localizer.DoStr("Glassworking Skill Scroll"),
+                Localizer.DoStr("Eco+ Glassworking Skill Scroll"),
                 new List<IngredientElement>
                 {
                     new IngredientElement(typeof(GeologyResearchPaperBasicItem), 100, typeof(MasonrySkill)),
@@ -106,7 +106,7 @@ namespace Eco.Mods.TechTree
             this.LaborInCalories = CreateLaborInCaloriesValue(1, typeof(MasonrySkill));
             this.CraftMinutes = CreateCraftTimeValue(typeof(GlassworkingSkillBookRecipe), 15, typeof(MasonrySkill));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Glassworking Skill Scroll"), typeof(GlassworkingSkillBookRecipe));
+            this.Initialize(Localizer.DoStr("Eco+ Glassworking Skill Scroll"), typeof(GlassworkingSkillBookRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(ResearchTableObject), this);
         }

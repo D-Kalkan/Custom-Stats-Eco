@@ -73,12 +73,12 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Industry Skill Book")]
+    [LocDisplayName("Eco+ Industry Skill Book")]
     [Ecopedia("Items", "Skill Books", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     public partial class IndustrySkillBook : SkillBook<IndustrySkill, IndustrySkillScroll> {}
 
     [Serialized]
-    [LocDisplayName("Industry Skill Scroll")]
+    [LocDisplayName("Eco+ Industry Skill Scroll")]
     public partial class IndustrySkillScroll : SkillScroll<IndustrySkill, IndustrySkillBook> {}
 
 
@@ -90,7 +90,7 @@ namespace Eco.Mods.TechTree
             var recipe = new Recipe();
             recipe.Init(
                 "Industry",  //noloc
-                Localizer.DoStr("Industry Skill Scroll"),
+                Localizer.DoStr("Eco+ Industry Skill Scroll"),
                 new List<IngredientElement>
                 {
                     new IngredientElement(typeof(EngineeringResearchPaperAdvancedItem), 100, typeof(MechanicsSkill)),
@@ -108,7 +108,7 @@ namespace Eco.Mods.TechTree
             this.LaborInCalories = CreateLaborInCaloriesValue(1, typeof(MechanicsSkill));
             this.CraftMinutes = CreateCraftTimeValue(typeof(IndustrySkillBookRecipe), 30, typeof(MechanicsSkill));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Industry Skill Scroll"), typeof(IndustrySkillBookRecipe));
+            this.Initialize(Localizer.DoStr("Eco+ Industry Skill Scroll"), typeof(IndustrySkillBookRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(ResearchTableObject), this);
         }

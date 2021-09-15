@@ -73,12 +73,12 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Baking Skill Book")]
+    [LocDisplayName("Eco+ Baking Skill Book")]
     [Ecopedia("Items", "Skill Books", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     public partial class BakingSkillBook : SkillBook<BakingSkill, BakingSkillScroll> {}
 
     [Serialized]
-    [LocDisplayName("Baking Skill Scroll")]
+    [LocDisplayName("Eco+ Baking Skill Scroll")]
     public partial class BakingSkillScroll : SkillScroll<BakingSkill, BakingSkillBook> {}
 
 
@@ -90,12 +90,12 @@ namespace Eco.Mods.TechTree
             var recipe = new Recipe();
             recipe.Init(
                 "Baking",  //noloc
-                Localizer.DoStr("Baking Skill Scroll"),
+                Localizer.DoStr("Eco+ Baking Skill Scroll"),
                 new List<IngredientElement>
                 {
                     new IngredientElement(typeof(CulinaryResearchPaperBasicItem), 100, typeof(CampfireCookingSkill)),
                     new IngredientElement(typeof(MetallurgyResearchPaperBasicItem), 50, typeof(CampfireCookingSkill)),
-                    new IngredientElement("Basic Research", 100, typeof(CampfireCookingSkill)), //noloc
+                    new IngredientElement(typeof(DendrologyResearchPaperBasicItem), 100, typeof(LoggingSkill)), //noloc ??
                 },
                 new List<CraftingElement>
                 {
@@ -105,7 +105,7 @@ namespace Eco.Mods.TechTree
             this.LaborInCalories = CreateLaborInCaloriesValue(1, typeof(CampfireCookingSkill));
             this.CraftMinutes = CreateCraftTimeValue(typeof(BakingSkillBookRecipe), 15, typeof(CampfireCookingSkill));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Baking Skill Scroll"), typeof(BakingSkillBookRecipe));
+            this.Initialize(Localizer.DoStr("Eco+ Baking Skill Scroll"), typeof(BakingSkillBookRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(ResearchTableObject), this);
         }

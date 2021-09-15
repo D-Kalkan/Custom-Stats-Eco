@@ -73,12 +73,12 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Advanced Smelting Skill Book")]
+    [LocDisplayName("Eco+ Advanced Smelting Skill Book")]
     [Ecopedia("Items", "Skill Books", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     public partial class AdvancedSmeltingSkillBook : SkillBook<AdvancedSmeltingSkill, AdvancedSmeltingSkillScroll> {}
 
     [Serialized]
-    [LocDisplayName("Advanced Smelting Skill Scroll")]
+    [LocDisplayName("Eco+ Advanced Smelting Skill Scroll")]
     public partial class AdvancedSmeltingSkillScroll : SkillScroll<AdvancedSmeltingSkill, AdvancedSmeltingSkillBook> {}
 
 
@@ -90,12 +90,12 @@ namespace Eco.Mods.TechTree
             var recipe = new Recipe();
             recipe.Init(
                 "AdvancedSmelting",  //noloc
-                Localizer.DoStr("Advanced Smelting Skill Scroll"),
+                Localizer.DoStr("Eco+ Advanced Smelting Skill Scroll"),
                 new List<IngredientElement>
                 {
                     new IngredientElement(typeof(MetallurgyResearchPaperBasicItem), 200, typeof(SmeltingSkill)),
                     new IngredientElement(typeof(MetallurgyResearchPaperAdvancedItem), 200, typeof(SmeltingSkill)),
-                    new IngredientElement("Basic Research", 100, typeof(SmeltingSkill)), //noloc
+                    new IngredientElement(typeof(GeologyResearchPaperBasicItem), 100, typeof(PotterySkill)), //noloc  ????
                 },
                 new List<CraftingElement>
                 {
@@ -105,7 +105,7 @@ namespace Eco.Mods.TechTree
             this.LaborInCalories = CreateLaborInCaloriesValue(1, typeof(SmeltingSkill));
             this.CraftMinutes = CreateCraftTimeValue(typeof(AdvancedSmeltingSkillBookRecipe), 30, typeof(SmeltingSkill));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Advanced Smelting Skill Scroll"), typeof(AdvancedSmeltingSkillBookRecipe));
+            this.Initialize(Localizer.DoStr("Eco+ Advanced Smelting Skill Scroll"), typeof(AdvancedSmeltingSkillBookRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(ResearchTableObject), this);
         }
