@@ -93,17 +93,17 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Eco+ Advanced Smelting Skill Scroll"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(MetallurgyResearchPaperBasicItem), 200, typeof(SmeltingSkill)),
                     new IngredientElement(typeof(MetallurgyResearchPaperAdvancedItem), 200, typeof(SmeltingSkill)),
-                    new IngredientElement(typeof(GeologyResearchPaperBasicItem), 100, typeof(PotterySkill)), //noloc  ????
+                    new IngredientElement(typeof(MetallurgyResearchPaperBasicItem), 200, typeof(SmeltingSkill)),
+                    new IngredientElement(typeof(GeologyResearchPaperBasicItem), 100, typeof(SmeltingSkill)),
                 },
                 new List<CraftingElement>
                 {
                     new CraftingElement<AdvancedSmeltingSkillScroll>(10)
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(1, typeof(SmeltingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(AdvancedSmeltingSkillBookRecipe), 30, typeof(SmeltingSkill));
+            this.LaborInCalories = CreateLaborInCaloriesValue(1);
+            this.CraftMinutes = CreateCraftTimeValue(2f);
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Eco+ Advanced Smelting Skill Scroll"), typeof(AdvancedSmeltingSkillBookRecipe));
             this.ModsPostInitialize();

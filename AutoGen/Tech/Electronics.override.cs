@@ -93,20 +93,21 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Eco+ Electronics Skill Scroll"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(MetallurgyResearchPaperAdvancedItem), 100, typeof(MechanicsSkill)),
                     new IngredientElement(typeof(EngineeringResearchPaperModernItem), 100, typeof(MechanicsSkill)),
+                    new IngredientElement(typeof(GeologyResearchPaperModernItem), 200, typeof(MechanicsSkill)),
                     new IngredientElement(typeof(MetallurgyResearchPaperModernItem), 200, typeof(MechanicsSkill)),
-                    new IngredientElement("Basic Research", 300, typeof(MechanicsSkill)), //noloc
-                    new IngredientElement("Advanced Research", 200, typeof(MechanicsSkill)), //noloc
-                    new IngredientElement("Modern Research", 200, typeof(MechanicsSkill)), //noloc
+                    new IngredientElement(typeof(MetallurgyResearchPaperAdvancedItem), 100, typeof(MechanicsSkill)),
+                    new IngredientElement(typeof(GeologyResearchPaperAdvancedItem), 200, typeof(MechanicsSkill)), 
+                    new IngredientElement(typeof(MetallurgyResearchPaperBasicItem), 100, typeof(MechanicsSkill)), 
+                    new IngredientElement(typeof(GeologyResearchPaperBasicItem), 100, typeof(MechanicsSkill)), 
                 },
                 new List<CraftingElement>
                 {
                     new CraftingElement<ElectronicsSkillScroll>(10)
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(1, typeof(MechanicsSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(ElectronicsSkillBookRecipe), 30, typeof(MechanicsSkill));
+            this.LaborInCalories = CreateLaborInCaloriesValue(1);
+            this.CraftMinutes = CreateCraftTimeValue(2f);
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Eco+ Electronics Skill Scroll"), typeof(ElectronicsSkillBookRecipe));
             this.ModsPostInitialize();

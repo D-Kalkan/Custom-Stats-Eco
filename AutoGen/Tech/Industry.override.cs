@@ -93,20 +93,20 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Eco+ Industry Skill Scroll"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(EngineeringResearchPaperAdvancedItem), 100, typeof(MechanicsSkill)),
                     new IngredientElement(typeof(EngineeringResearchPaperModernItem), 200, typeof(MechanicsSkill)),
                     new IngredientElement(typeof(MetallurgyResearchPaperModernItem), 200, typeof(MechanicsSkill)),
-                    new IngredientElement("Basic Research", 300, typeof(MechanicsSkill)), //noloc
-                    new IngredientElement("Advanced Research", 200, typeof(MechanicsSkill)), //noloc
-                    new IngredientElement("Modern Research", 100, typeof(MechanicsSkill)), //noloc
+                    new IngredientElement(typeof(GeologyResearchPaperModernItem), 100, typeof(MechanicsSkill)),
+                    new IngredientElement(typeof(EngineeringResearchPaperAdvancedItem), 100, typeof(MechanicsSkill)),
+                    new IngredientElement(typeof(GeologyResearchPaperAdvancedItem), 200, typeof(MechanicsSkill)),
+                    new IngredientElement(typeof(MetallurgyResearchPaperBasicItem), 300, typeof(MechanicsSkill)),
                 },
                 new List<CraftingElement>
                 {
                     new CraftingElement<IndustrySkillScroll>(10)
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(1, typeof(MechanicsSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(IndustrySkillBookRecipe), 30, typeof(MechanicsSkill));
+            this.LaborInCalories = CreateLaborInCaloriesValue(1);
+            this.CraftMinutes = CreateCraftTimeValue(2f);
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Eco+ Industry Skill Scroll"), typeof(IndustrySkillBookRecipe));
             this.ModsPostInitialize();

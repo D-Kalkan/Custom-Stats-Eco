@@ -96,17 +96,17 @@ namespace Eco.Mods.TechTree
                     new IngredientElement(typeof(CulinaryResearchPaperAdvancedItem), 200, typeof(BakingSkill)),
                     new IngredientElement(typeof(DendrologyResearchPaperModernItem), 100, typeof(BakingSkill)),
                     new IngredientElement(typeof(GeologyResearchPaperModernItem), 100, typeof(BakingSkill)),
-                    new IngredientElement(typeof(GeologyResearchPaperBasicItem), 300, typeof(BakingSkill)), //noloc
-                    new IngredientElement(typeof(DendrologyResearchPaperAdvancedItem), 100, typeof(CarpentrySkill)), //noloc ??
-                    new IngredientElement(typeof(AgricultureResearchPaperAdvancedItem), 100, typeof(MechanicsSkill)), //noloc ??
+                    new IngredientElement(typeof(GeologyResearchPaperBasicItem), 300, typeof(BakingSkill)),
+                    new IngredientElement(typeof(DendrologyResearchPaperAdvancedItem), 100, typeof(BakingSkill)),
+                    new IngredientElement(typeof(AgricultureResearchPaperAdvancedItem), 100, typeof(BakingSkill)),
                 },
                 new List<CraftingElement>
                 {
                     new CraftingElement<AdvancedBakingSkillScroll>(10)
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(1, typeof(BakingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(AdvancedBakingSkillBookRecipe), 30, typeof(BakingSkill));
+            this.LaborInCalories = CreateLaborInCaloriesValue(1);
+            this.CraftMinutes = CreateCraftTimeValue(2f);
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Eco+ Advanced Baking Skill Scroll"), typeof(AdvancedBakingSkillBookRecipe));
             this.ModsPostInitialize();

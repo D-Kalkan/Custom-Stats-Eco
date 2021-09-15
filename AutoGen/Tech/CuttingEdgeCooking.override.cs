@@ -93,20 +93,21 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Eco+ Cutting Edge Cooking Skill BScrollook"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(CulinaryResearchPaperAdvancedItem), 200, typeof(AdvancedCookingSkill)),
                     new IngredientElement(typeof(CulinaryResearchPaperModernItem), 200, typeof(AdvancedCookingSkill)),
                     new IngredientElement(typeof(MetallurgyResearchPaperModernItem), 100, typeof(AdvancedCookingSkill)),
                     new IngredientElement(typeof(AgricultureResearchPaperModernItem), 100, typeof(AdvancedCookingSkill)),
-                    new IngredientElement("Basic Research", 300, typeof(AdvancedCookingSkill)), //noloc
-                    new IngredientElement("Advanced Research", 100, typeof(AdvancedCookingSkill)), //noloc
+                    new IngredientElement(typeof(CulinaryResearchPaperAdvancedItem), 200, typeof(AdvancedCookingSkill)),
+                    new IngredientElement(typeof(DendrologyResearchPaperAdvancedItem), 100, typeof(AdvancedCookingSkill)),
+                    new IngredientElement(typeof(DendrologyResearchPaperBasicItem), 200, typeof(AdvancedCookingSkill)),
+
                 },
                 new List<CraftingElement>
                 {
                     new CraftingElement<CuttingEdgeCookingSkillScroll>(10)
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(1, typeof(AdvancedCookingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(CuttingEdgeCookingSkillBookRecipe), 60, typeof(AdvancedCookingSkill));
+            this.LaborInCalories = CreateLaborInCaloriesValue(1);
+            this.CraftMinutes = CreateCraftTimeValue(2f);
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Eco+ Cutting Edge Cooking Skill Scroll"), typeof(CuttingEdgeCookingSkillBookRecipe));
             this.ModsPostInitialize();

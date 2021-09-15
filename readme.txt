@@ -1,5 +1,5 @@
 
-Place file directory into 
+Place the AutoGen file into 
 Eco\Eco_Data\Server\Mods\UserCode
 
 

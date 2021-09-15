@@ -93,20 +93,20 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Eco+ Advanced Masonry Skill Scroll"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(GeologyResearchPaperAdvancedItem), 200, typeof(PotterySkill)),
                     new IngredientElement(typeof(GeologyResearchPaperModernItem), 100, typeof(PotterySkill)),
                     new IngredientElement(typeof(MetallurgyResearchPaperModernItem), 100, typeof(PotterySkill)),
                     new IngredientElement(typeof(EngineeringResearchPaperModernItem), 100, typeof(PotterySkill)),
-                    new IngredientElement(typeof(GeologyResearchPaperBasicItem), 300, typeof(PotterySkill)), //noloc 
-                    new IngredientElement(typeof(DendrologyResearchPaperAdvancedItem), 100, typeof(PotterySkill)), //noloc
+                    new IngredientElement(typeof(GeologyResearchPaperAdvancedItem), 200, typeof(PotterySkill)),
+                    new IngredientElement(typeof(DendrologyResearchPaperAdvancedItem), 100, typeof(PotterySkill)),
+                    new IngredientElement(typeof(GeologyResearchPaperBasicItem), 300, typeof(PotterySkill)), 
                 },
                 new List<CraftingElement>
                 {
                     new CraftingElement<AdvancedMasonrySkillScroll>(10)
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(1, typeof(PotterySkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(AdvancedMasonrySkillBookRecipe), 30, typeof(PotterySkill));
+            this.LaborInCalories = CreateLaborInCaloriesValue(1);
+            this.CraftMinutes = CreateCraftTimeValue(2f);
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Eco+ Advanced Masonry Skill Scroll"), typeof(AdvancedMasonrySkillBookRecipe));
             this.ModsPostInitialize();

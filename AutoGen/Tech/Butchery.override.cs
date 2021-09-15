@@ -100,8 +100,8 @@ namespace Eco.Mods.TechTree
                     new CraftingElement<ButcherySkillScroll>(10)
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(1, typeof(HuntingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(ButcherySkillBookRecipe), 5, typeof(HuntingSkill));
+            this.LaborInCalories = CreateLaborInCaloriesValue(1);
+            this.CraftMinutes = CreateCraftTimeValue(2f);
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Eco+ Butchery Skill Scroll"), typeof(ButcherySkillBookRecipe));
             this.ModsPostInitialize();

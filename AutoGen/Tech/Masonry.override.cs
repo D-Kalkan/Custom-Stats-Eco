@@ -100,8 +100,8 @@ namespace Eco.Mods.TechTree
                     new CraftingElement<MasonrySkillScroll>(10)
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(1, typeof(MiningSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(MasonrySkillBookRecipe), 5, typeof(MiningSkill));
+            this.LaborInCalories = CreateLaborInCaloriesValue(1);
+            this.CraftMinutes = CreateCraftTimeValue(2f);
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Eco+ Masonry Skill Scroll"), typeof(MasonrySkillBookRecipe));
             this.ModsPostInitialize();

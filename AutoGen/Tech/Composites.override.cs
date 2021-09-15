@@ -93,20 +93,21 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Eco+ Composites Skill Scroll"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(DendrologyResearchPaperAdvancedItem), 200, typeof(CarpentrySkill)),
                     new IngredientElement(typeof(DendrologyResearchPaperModernItem), 100, typeof(CarpentrySkill)),
                     new IngredientElement(typeof(MetallurgyResearchPaperModernItem), 100, typeof(CarpentrySkill)),
                     new IngredientElement(typeof(EngineeringResearchPaperModernItem), 100, typeof(CarpentrySkill)),
-                    new IngredientElement("Basic Research", 300, typeof(CarpentrySkill)), //noloc
-                    new IngredientElement("Advanced Research", 100, typeof(CarpentrySkill)), //noloc
+                    new IngredientElement(typeof(DendrologyResearchPaperAdvancedItem), 200, typeof(CarpentrySkill)),
+                    new IngredientElement(typeof(MetallurgyResearchPaperAdvancedItem), 100, typeof(CarpentrySkill)),
+                    new IngredientElement(typeof(DendrologyResearchPaperBasicItem), 200, typeof(CarpentrySkill)),
+
                 },
                 new List<CraftingElement>
                 {
                     new CraftingElement<CompositesSkillScroll>(10)
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(1, typeof(CarpentrySkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(CompositesSkillBookRecipe), 30, typeof(CarpentrySkill));
+            this.LaborInCalories = CreateLaborInCaloriesValue(1);
+            this.CraftMinutes = CreateCraftTimeValue(2f);
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Eco+ Composites Skill Scroll"), typeof(CompositesSkillBookRecipe));
             this.ModsPostInitialize();

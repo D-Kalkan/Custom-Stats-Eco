@@ -101,8 +101,8 @@ namespace Eco.Mods.TechTree
                     new CraftingElement<FarmingSkillScroll>(10)
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(1, typeof(GatheringSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(FarmingSkillBookRecipe), 5, typeof(GatheringSkill));
+            this.LaborInCalories = CreateLaborInCaloriesValue(1);
+            this.CraftMinutes = CreateCraftTimeValue(2f);
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Eco+ Farming Skill Scroll"), typeof(FarmingSkillBookRecipe));
             this.ModsPostInitialize();

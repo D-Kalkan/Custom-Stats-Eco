@@ -94,15 +94,15 @@ namespace Eco.Mods.TechTree
                 new List<IngredientElement>
                 {
                     new IngredientElement(typeof(AgricultureResearchPaperAdvancedItem), 30, typeof(FarmingSkill)),
-                    new IngredientElement("Basic Research", 50, typeof(FarmingSkill)), //noloc
+                    new IngredientElement(typeof(DendrologyResearchPaperBasicItem), 50, typeof(FarmingSkill)),
                 },
                 new List<CraftingElement>
                 {
                     new CraftingElement<FertilizersSkillScroll>(10)
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(1, typeof(FarmingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(FertilizersSkillBookRecipe), 5, typeof(FarmingSkill));
+            this.LaborInCalories = CreateLaborInCaloriesValue(1);
+            this.CraftMinutes = CreateCraftTimeValue(2f);
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Eco+ Fertilizers Skill Scroll"), typeof(FertilizersSkillBookRecipe));
             this.ModsPostInitialize();

@@ -105,8 +105,8 @@ namespace Eco.Mods.TechTree
                     new CraftingElement<OilDrillingSkillScroll>(10)
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(1, typeof(MechanicsSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(OilDrillingSkillBookRecipe), 30, typeof(MechanicsSkill));
+            this.LaborInCalories = CreateLaborInCaloriesValue(1);
+            this.CraftMinutes = CreateCraftTimeValue(2f);
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Eco+ Oil Drilling Skill Scroll"), typeof(OilDrillingSkillBookRecipe));
             this.ModsPostInitialize();
