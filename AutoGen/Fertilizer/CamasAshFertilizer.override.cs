@@ -34,7 +34,7 @@ namespace Eco.Mods.TechTree
                 new List<IngredientElement>
                 {
                     new IngredientElement(typeof(FiberFillerItem), 1, typeof(FertilizersSkill), typeof(FertilizersLavishResourcesTalent)),
-                    new IngredientElement(typeof(CamasBulbItem), 10, typeof(FertilizersSkill), typeof(FertilizersLavishResourcesTalent)),
+                    new IngredientElement(typeof(CamasBulbItem), 2, typeof(FertilizersSkill), typeof(FertilizersLavishResourcesTalent)),
                 },
                 new List<CraftingElement>
                 {
