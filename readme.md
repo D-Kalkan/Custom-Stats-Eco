@@ -4,7 +4,7 @@ Eco Plus Stats
 [![Join the chat at https://discord.gg/dC5KftVjCC](https://discordapp.com/api/guilds/873178918302146600/widget.png)](https://discord.gg/dC5KftVjCC)
 [![GitHub Release](https://img.shields.io/github/v/release/D-Kalkan/Custom-Stats-Eco.svg)](https://github.com/D-Kalkan/Custom-Stats-Eco/releases)
 
-[![Twitch](https://img.shields.io/twitch/status/saltemike?style=social)](https://www.youtube.com/c/SaltEMike)
+[![Twitch](https://img.shields.io/twitch/status/saltemike?style=social)](https://www.twitch.tv/saltemike)
 [![Youtube](https://img.shields.io/youtube/channel/views/UCOblfLLbNni0_VUeGWhiKDw?style=social)](https://www.youtube.com/c/SaltEMike)
 
 ## Description ##
