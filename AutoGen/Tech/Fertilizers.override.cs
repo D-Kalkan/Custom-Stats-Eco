@@ -29,14 +29,14 @@ namespace Eco.Mods.TechTree
 
     /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
     [Serialized]
-    [LocDisplayName("Tailoring")]
-    [Ecopedia("Professions", "Tailor", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    [RequiresSkill(typeof(TailorSkill), 0), Tag("Tailor Specialty"), Tier(2)]
+    [LocDisplayName("Fertilizers")]
+    [Ecopedia("Professions", "Farmer", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [RequiresSkill(typeof(FarmerSkill), 0), Tag("Farmer Specialty"), Tier(2)]
     [Tag("Specialty")]
     [Tag("Teachable")]
-    public partial class TailoringSkill : Skill
+    public partial class FertilizersSkill : Skill
     {
-        public override LocString DisplayDescription { get { return Localizer.DoStr("Creating new clothes and setting trends. Levels up by crafting related recipes."); } }
+        public override LocString DisplayDescription { get { return Localizer.DoStr("Adding additional nutrients to the soil can improve farming yield or, if overdone, ruin it. Levels up by crafting related recipes."); } }
 
         public override void OnLevelUp(User user)
         {
@@ -45,7 +45,7 @@ namespace Eco.Mods.TechTree
 
 
         public static MultiplicativeStrategy MultiplicativeStrategy =
-            new MultiplicativeStrategy(new float[] {
+            new MultiplicativeStrategy(new float[] { 
                 1,
                 1 - 0.2f,
                 1 - 0.25f,
@@ -58,7 +58,7 @@ namespace Eco.Mods.TechTree
         public override MultiplicativeStrategy MultiStrategy => MultiplicativeStrategy;
 
         public static AdditiveStrategy AdditiveStrategy =
-            new AdditiveStrategy(new float[] {
+            new AdditiveStrategy(new float[] { 
                 0,
                 0.5f,
                 0.55f,
@@ -74,38 +74,38 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Tailoring Skill Book")]
+    [LocDisplayName("Fertilizers Skill Book")]
     [Ecopedia("Items", "Skill Books", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    public partial class TailoringSkillBook : SkillBook<TailoringSkill, TailoringSkillScroll> {}
+    public partial class FertilizersSkillBook : SkillBook<FertilizersSkill, FertilizersSkillScroll> {}
 
     [Serialized]
-    [LocDisplayName("Tailoring Skill Scroll")]
-    public partial class TailoringSkillScroll : SkillScroll<TailoringSkill, TailoringSkillBook> {}
+    [LocDisplayName("Fertilizers Skill Scroll")]
+    public partial class FertilizersSkillScroll : SkillScroll<FertilizersSkill, FertilizersSkillBook> {}
 
 
     [RequiresSkill(typeof(FarmingSkill), 0)]
-    public partial class TailoringSkillBookRecipe : RecipeFamily
+    public partial class FertilizersSkillBookRecipe : RecipeFamily
     {
-        public TailoringSkillBookRecipe()
+        public FertilizersSkillBookRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "Tailoring",  //noloc
-                Localizer.DoStr("Tailoring Skill Scroll"),
+                "Fertilizers",  //noloc
+                Localizer.DoStr("Fertilizers Skill Scroll"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(GatheringResearchPaperBasicItem), 5, typeof(FarmingSkill)),
+                    new IngredientElement(typeof(AgricultureResearchPaperAdvancedItem), 3, typeof(FarmingSkill)),
                     new IngredientElement("Basic Research", 5, typeof(FarmingSkill)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<TailoringSkillScroll>()
+                    new CraftingElement<FertilizersSkillScroll>()
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.LaborInCalories = CreateLaborInCaloriesValue(600, typeof(FarmingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(TailoringSkillBookRecipe), 5, typeof(FarmingSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(FertilizersSkillBookRecipe), 5, typeof(FarmingSkill));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Tailoring Skill Scroll"), typeof(TailoringSkillBookRecipe));
+            this.Initialize(Localizer.DoStr("Fertilizers Skill Scroll"), typeof(FertilizersSkillBookRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(ResearchTableObject), this);
         }

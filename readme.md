@@ -13,6 +13,13 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 
 ### Main Features ###
 
+
+* Combined Hunting with Butchery
+* Combined Farming with Gathering
+* Paper Milling, Butchery & Gathering Skills Hidden
+* Set all stone age tech to create 1 scroll
+* Added the ability for arrastra to break down all stone types
+
 * White Tiger contributed the calorie and recipe changes to food. (All are much harsher)
 * All skill book recipes replaced to make 10 skill scrolls and are x10 the material cost
 * Rebalanced the material cost of all skill scroll recipies to use a wider range of research papers

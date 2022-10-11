@@ -62,7 +62,7 @@ public static class PlayerDefaults
             typeof(MiningSkill),
             typeof(ChefSkill),
             typeof(FarmerSkill),
-            //typeof(FarmingSkill),
+            typeof(FarmingSkill),
             typeof(GatheringSkill),
             typeof(CampfireCookingSkill),
             typeof(HunterSkill),

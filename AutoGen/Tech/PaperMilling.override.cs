@@ -29,14 +29,14 @@ namespace Eco.Mods.TechTree
 
     /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
     [Serialized]
-    [LocDisplayName("Tailoring")]
-    [Ecopedia("Professions", "Tailor", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    [RequiresSkill(typeof(TailorSkill), 0), Tag("Tailor Specialty"), Tier(2)]
+    [LocDisplayName("Paper Milling")]
+    [Ecopedia("Professions", "Carpenter", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [RequiresSkill(typeof(TailoringSkill), 0), Tag("Carpenter Specialty"), Tier(3)]
     [Tag("Specialty")]
     [Tag("Teachable")]
-    public partial class TailoringSkill : Skill
+    public partial class PaperMillingSkill : Skill
     {
-        public override LocString DisplayDescription { get { return Localizer.DoStr("Creating new clothes and setting trends. Levels up by crafting related recipes."); } }
+        public override LocString DisplayDescription { get { return Localizer.DoStr("Paper to carry the written word. Or used to stuff in bookshelves. Levels up by crafting related recipes."); } }
 
         public override void OnLevelUp(User user)
         {
@@ -45,7 +45,7 @@ namespace Eco.Mods.TechTree
 
 
         public static MultiplicativeStrategy MultiplicativeStrategy =
-            new MultiplicativeStrategy(new float[] {
+            new MultiplicativeStrategy(new float[] { 
                 1,
                 1 - 0.2f,
                 1 - 0.25f,
@@ -58,7 +58,7 @@ namespace Eco.Mods.TechTree
         public override MultiplicativeStrategy MultiStrategy => MultiplicativeStrategy;
 
         public static AdditiveStrategy AdditiveStrategy =
-            new AdditiveStrategy(new float[] {
+            new AdditiveStrategy(new float[] { 
                 0,
                 0.5f,
                 0.55f,
@@ -70,44 +70,44 @@ namespace Eco.Mods.TechTree
             });
         public override AdditiveStrategy AddStrategy => AdditiveStrategy;
         public override int MaxLevel { get { return 7; } }
-        public override int Tier { get { return 2; } }
+        public override int Tier { get { return 3; } }
     }
 
     [Serialized]
-    [LocDisplayName("Tailoring Skill Book")]
+    [LocDisplayName("Paper Milling Skill Book")]
     [Ecopedia("Items", "Skill Books", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    public partial class TailoringSkillBook : SkillBook<TailoringSkill, TailoringSkillScroll> {}
+    public partial class PaperMillingSkillBook : SkillBook<PaperMillingSkill, PaperMillingSkillScroll> {}
 
     [Serialized]
-    [LocDisplayName("Tailoring Skill Scroll")]
-    public partial class TailoringSkillScroll : SkillScroll<TailoringSkill, TailoringSkillBook> {}
+    [LocDisplayName("Paper Milling Skill Scroll")]
+    public partial class PaperMillingSkillScroll : SkillScroll<PaperMillingSkill, PaperMillingSkillBook> {}
 
 
-    [RequiresSkill(typeof(FarmingSkill), 0)]
-    public partial class TailoringSkillBookRecipe : RecipeFamily
+    [RequiresSkill(typeof(CarpentrySkill), 0)]
+    public partial class PaperMillingSkillBookRecipe : RecipeFamily
     {
-        public TailoringSkillBookRecipe()
+        public PaperMillingSkillBookRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "Tailoring",  //noloc
-                Localizer.DoStr("Tailoring Skill Scroll"),
+                "PaperMilling",  //noloc
+                Localizer.DoStr("Paper Milling Skill Book"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(GatheringResearchPaperBasicItem), 5, typeof(FarmingSkill)),
-                    new IngredientElement("Basic Research", 5, typeof(FarmingSkill)), //noloc
+                    new IngredientElement(typeof(DendrologyResearchPaperAdvancedItem), 5, typeof(CarpentrySkill)),
+                    new IngredientElement("Basic Research", 5, typeof(CarpentrySkill)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<TailoringSkillScroll>()
+                    new CraftingElement<PaperMillingSkillBook>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(600, typeof(FarmingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(TailoringSkillBookRecipe), 5, typeof(FarmingSkill));
+            this.LaborInCalories = CreateLaborInCaloriesValue(2400, typeof(CarpentrySkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(PaperMillingSkillBookRecipe), 15, typeof(CarpentrySkill));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Tailoring Skill Scroll"), typeof(TailoringSkillBookRecipe));
+            this.Initialize(Localizer.DoStr("Paper Milling Skill Book"), typeof(PaperMillingSkillBookRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(ResearchTableObject), this);
+            CraftingComponent.AddRecipe(typeof(LaboratoryObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>

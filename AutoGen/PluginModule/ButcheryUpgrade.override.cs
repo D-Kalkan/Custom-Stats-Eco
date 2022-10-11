@@ -26,8 +26,6 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Pipes;
     using Eco.Core.Controller;
 
-    /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
-
     [RequiresSkill(typeof(HuntingSkill), 7)]
     public partial class ButcheryUpgradeRecipe : RecipeFamily
     {
@@ -64,7 +62,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Butchery Upgrade")]
     [Weight(1)]
-    [Ecopedia("Upgrade Modules", "Specialty Upgrades", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]                                                                      //_If_EcopediaPage_
+    [Ecopedia("Upgrade Modules", "Specialty Upgrades", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]                //_If_EcopediaPage_
     [Tag("Upgrade", 1)]
     public partial class ButcheryUpgradeItem :
         EfficiencyModule
