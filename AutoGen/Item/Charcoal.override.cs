@@ -67,7 +67,7 @@ namespace Eco.Mods.TechTree
     [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Coal", 1)]
     [Tag("Burnable Fuel", 1)]
-    [Tag("Steam Engine Fuel", 1)]
+    [Tag("Charcoal", 1)]
     public partial class CharcoalItem : Item
     {
         public override LocString DisplayDescription { get { return Localizer.DoStr("A black residue, consisting of carbon and any remaining ash."); } }

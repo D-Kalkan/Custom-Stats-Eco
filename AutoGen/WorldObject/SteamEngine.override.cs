@@ -62,7 +62,7 @@ namespace Eco.Mods.TechTree
         public virtual Type RepresentedItemType => typeof(SteamEngineItem);
         public override LocString DisplayName => Localizer.DoStr("Steam Engine");
         public override TableTextureMode TableTexture => TableTextureMode.Metal;
-        private static string[] fuelTagList = new[] { "Steam Engine Fuel" }; //noloc
+        private static string[] fuelTagList = new[] { "Charcoal" }; //noloc
 
         protected override void Initialize()
         {

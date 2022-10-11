@@ -25,6 +25,7 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 * Lowered the glassworking level requirement for Advanced Upgrade 2 from 4 to 3
 * Powered Carts are now crafted at Level 3 Basic Engineering
 * Moved all governemnt admin related objects to be crafted on the captiol
+* Reduced sand cost for glass by 1
 
 ### Changes brought forward from previous season ###
 * Added the ability for arrastras to break down all stone types

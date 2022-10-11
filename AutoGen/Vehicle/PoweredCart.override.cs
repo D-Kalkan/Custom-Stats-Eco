@@ -98,7 +98,7 @@ namespace Eco.Mods.TechTree
 
         private static string[] fuelTagList = new string[]
         {
-            "Burnable Fuel",
+            "Charcoal",
         };
 
         private PoweredCartObject() { }
