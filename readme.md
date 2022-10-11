@@ -13,7 +13,6 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 
 ### Main Features ###
 
-
 * Combined Hunting with Butchery
 * Combined Farming with Gathering
 * Paper Milling, Butchery & Gathering Skills Hidden
@@ -24,6 +23,8 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 * Steam Engines only accept charcoal as fuel
 * Lowered the effectiveness of all upgrade modules to 5%, 12.5%, 20%, 25% and 30%
 * Lowered the glassworking level requirement for Advanced Upgrade 2 from 4 to 3
+* Powered Carts are now crafted at Level 3 Basic Engineering
+* Moved all governemnt admin related objects to be crafted on the captiol
 
 ### Changes brought forward from previous season ###
 * Added the ability for arrastras to break down all stone types
