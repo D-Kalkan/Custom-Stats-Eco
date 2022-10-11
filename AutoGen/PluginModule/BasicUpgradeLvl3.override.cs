@@ -26,31 +26,33 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Pipes;
     using Eco.Core.Controller;
 
-    [RequiresSkill(typeof(HuntingSkill), 7)]
-    public partial class ButcheryUpgradeRecipe : RecipeFamily
+    [RequiresSkill(typeof(CarpentrySkill), 5)]
+    public partial class BasicUpgradeLvl3Recipe : RecipeFamily
     {
-        public ButcheryUpgradeRecipe()
+        public BasicUpgradeLvl3Recipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "ButcheryUpgrade",  //noloc
-                Localizer.DoStr("Butchery Upgrade"),
+                "BasicUpgradeLvl3",  //noloc
+                Localizer.DoStr("Basic Upgrade 3"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(BasicUpgradeLvl4Item), 1, true),
+                    new IngredientElement(typeof(PlantFibersItem), 80, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
+                    new IngredientElement("WoodBoard", 20, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
+                    new IngredientElement(typeof(BasicUpgradeLvl2Item), 1, true),
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<ButcheryUpgradeItem>()
+                    new CraftingElement<BasicUpgradeLvl3Item>()
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 4;
-            this.LaborInCalories = CreateLaborInCaloriesValue(3000, typeof(HuntingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(ButcheryUpgradeRecipe), 10, typeof(HuntingSkill), typeof(ButcheryFocusedSpeedTalent), typeof(ButcheryParallelSpeedTalent));
+            this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(CarpentrySkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(BasicUpgradeLvl3Recipe), 6, typeof(CarpentrySkill), typeof(CarpentryFocusedSpeedTalent), typeof(CarpentryParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Butchery Upgrade"), typeof(ButcheryUpgradeRecipe));
+            this.Initialize(Localizer.DoStr("Basic Upgrade 3"), typeof(BasicUpgradeLvl3Recipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(ButcheryTableObject), this);
+            CraftingComponent.AddRecipe(typeof(CarpentryTableObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
@@ -60,20 +62,20 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Butchery Upgrade")]
+    [LocDisplayName("Basic Upgrade 3")]
     [Weight(1)]
-    [Ecopedia("Upgrade Modules", "Specialty Upgrades", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]                //_If_EcopediaPage_
+    [Ecopedia("Upgrade Modules", "Basic Upgrades", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]                                                                      //_If_EcopediaPage_
     [Tag("Upgrade", 1)]
-    public partial class ButcheryUpgradeItem :
+    [Tag("BasicUpgrade", 1)]
+    public partial class BasicUpgradeLvl3Item :
         EfficiencyModule
     {
-        public override LocString DisplayDescription { get { return Localizer.DoStr("Basic Upgrade that greatly increases efficiency when crafting Butchery recipes."); } }
+        public override LocString DisplayNamePlural { get { return Localizer.DoStr("Basic Upgrade 3"); } }
+        public override LocString DisplayDescription { get { return Localizer.DoStr("Basic Upgrade that increases crafting efficiency."); } }
 
-        public ButcheryUpgradeItem() : base(
+        public BasicUpgradeLvl3Item() : base(
             ModuleTypes.ResourceEfficiency | ModuleTypes.SpeedEfficiency,
-            0.75f,
-            typeof(HuntingSkill),
-            0.7f
+            0.8f         
         ) { }
     }
 }

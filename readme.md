@@ -17,13 +17,17 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 * Combined Hunting with Butchery
 * Combined Farming with Gathering
 * Paper Milling, Butchery & Gathering Skills Hidden
+* Farming no longer has to be researched and is baseline
 * Set all Stone Age Tech to create 1 scroll
-* Added the ability for arrastras to break down all stone types
 * Moved Transmission Poles to the Carpentry skill
-* Moved Iron Barrels to the Pottery skill
 * Iron Barrels now require One Iron Plate instead of One Iron Bar
 * Steam Engines only accept charcoal as fuel
+* Lowered the effectiveness of all upgrade modules to 5%, 12.5%, 20%, 25% and 30%
+* Lowered the glassworking level requirement for Advanced Upgrade 2 from 4 to 3
 
+### Changes brought forward from previous season ###
+* Added the ability for arrastras to break down all stone types
+* Moved Iron Barrels to the Pottery skill
 
 ## Installation Instructions ##
 

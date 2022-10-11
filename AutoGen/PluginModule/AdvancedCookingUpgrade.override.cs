@@ -26,31 +26,33 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Pipes;
     using Eco.Core.Controller;
 
-    [RequiresSkill(typeof(HuntingSkill), 7)]
-    public partial class ButcheryUpgradeRecipe : RecipeFamily
+    /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
+
+    [RequiresSkill(typeof(AdvancedCookingSkill), 7)]
+    public partial class AdvancedCookingUpgradeRecipe : RecipeFamily
     {
-        public ButcheryUpgradeRecipe()
+        public AdvancedCookingUpgradeRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "ButcheryUpgrade",  //noloc
-                Localizer.DoStr("Butchery Upgrade"),
+                "AdvancedCookingUpgrade",  //noloc
+                Localizer.DoStr("Advanced Cooking Upgrade"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(BasicUpgradeLvl4Item), 1, true),
+                    new IngredientElement(typeof(AdvancedUpgradeLvl4Item), 1, true),
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<ButcheryUpgradeItem>()
+                    new CraftingElement<AdvancedCookingUpgradeItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 4;
-            this.LaborInCalories = CreateLaborInCaloriesValue(3000, typeof(HuntingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(ButcheryUpgradeRecipe), 10, typeof(HuntingSkill), typeof(ButcheryFocusedSpeedTalent), typeof(ButcheryParallelSpeedTalent));
+            this.LaborInCalories = CreateLaborInCaloriesValue(6000, typeof(AdvancedCookingSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(AdvancedCookingUpgradeRecipe), 15, typeof(AdvancedCookingSkill), typeof(AdvancedCookingFocusedSpeedTalent), typeof(AdvancedCookingParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Butchery Upgrade"), typeof(ButcheryUpgradeRecipe));
+            this.Initialize(Localizer.DoStr("Advanced Cooking Upgrade"), typeof(AdvancedCookingUpgradeRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(ButcheryTableObject), this);
+            CraftingComponent.AddRecipe(typeof(KitchenObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
@@ -60,20 +62,20 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Butchery Upgrade")]
+    [LocDisplayName("Advanced Cooking Upgrade")]
     [Weight(1)]
-    [Ecopedia("Upgrade Modules", "Specialty Upgrades", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]                //_If_EcopediaPage_
+    [Ecopedia("Upgrade Modules", "Specialty Upgrades", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]                                                                      //_If_EcopediaPage_
     [Tag("Upgrade", 1)]
-    public partial class ButcheryUpgradeItem :
+    public partial class AdvancedCookingUpgradeItem :
         EfficiencyModule
     {
-        public override LocString DisplayDescription { get { return Localizer.DoStr("Basic Upgrade that greatly increases efficiency when crafting Butchery recipes."); } }
+        public override LocString DisplayDescription { get { return Localizer.DoStr("Advanced Upgrade that greatly increases efficiency when crafting Advanced Cooking recipes."); } }
 
-        public ButcheryUpgradeItem() : base(
+        public AdvancedCookingUpgradeItem() : base(
             ModuleTypes.ResourceEfficiency | ModuleTypes.SpeedEfficiency,
             0.75f,
-            typeof(HuntingSkill),
-            0.7f
+            typeof(AdvancedCookingSkill),
+            0.7f         
         ) { }
     }
 }

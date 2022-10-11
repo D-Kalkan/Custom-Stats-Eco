@@ -26,31 +26,33 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Pipes;
     using Eco.Core.Controller;
 
-    [RequiresSkill(typeof(HuntingSkill), 7)]
-    public partial class ButcheryUpgradeRecipe : RecipeFamily
+    [RequiresSkill(typeof(SmeltingSkill), 5)]
+    public partial class AdvancedUpgradeLvl3Recipe : RecipeFamily
     {
-        public ButcheryUpgradeRecipe()
+        public AdvancedUpgradeLvl3Recipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "ButcheryUpgrade",  //noloc
-                Localizer.DoStr("Butchery Upgrade"),
+                "AdvancedUpgradeLvl3",  //noloc
+                Localizer.DoStr("Advanced Upgrade 3"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(BasicUpgradeLvl4Item), 1, true),
+                    new IngredientElement(typeof(NailItem), 10, typeof(SmeltingSkill), typeof(SmeltingLavishResourcesTalent)),
+                    new IngredientElement(typeof(IronBarItem), 6, typeof(SmeltingSkill), typeof(SmeltingLavishResourcesTalent)),
+                    new IngredientElement(typeof(AdvancedUpgradeLvl2Item), 1, true),
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<ButcheryUpgradeItem>()
+                    new CraftingElement<AdvancedUpgradeLvl3Item>()
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 4;
-            this.LaborInCalories = CreateLaborInCaloriesValue(3000, typeof(HuntingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(ButcheryUpgradeRecipe), 10, typeof(HuntingSkill), typeof(ButcheryFocusedSpeedTalent), typeof(ButcheryParallelSpeedTalent));
+            this.LaborInCalories = CreateLaborInCaloriesValue(90, typeof(SmeltingSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(AdvancedUpgradeLvl3Recipe), 9, typeof(SmeltingSkill), typeof(SmeltingFocusedSpeedTalent), typeof(SmeltingParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Butchery Upgrade"), typeof(ButcheryUpgradeRecipe));
+            this.Initialize(Localizer.DoStr("Advanced Upgrade 3"), typeof(AdvancedUpgradeLvl3Recipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(ButcheryTableObject), this);
+            CraftingComponent.AddRecipe(typeof(AnvilObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
@@ -60,20 +62,20 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Butchery Upgrade")]
+    [LocDisplayName("Advanced Upgrade 3")]
     [Weight(1)]
-    [Ecopedia("Upgrade Modules", "Specialty Upgrades", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]                //_If_EcopediaPage_
+    [Ecopedia("Upgrade Modules", "Advanced Upgrades", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]                                                                      //_If_EcopediaPage_
     [Tag("Upgrade", 1)]
-    public partial class ButcheryUpgradeItem :
+    [Tag("AdvancedUpgrade", 1)]
+    public partial class AdvancedUpgradeLvl3Item :
         EfficiencyModule
     {
-        public override LocString DisplayDescription { get { return Localizer.DoStr("Basic Upgrade that greatly increases efficiency when crafting Butchery recipes."); } }
+        public override LocString DisplayNamePlural { get { return Localizer.DoStr("Advanced Upgrade 3"); } }
+        public override LocString DisplayDescription { get { return Localizer.DoStr("Advanced Upgrade that increases crafting efficiency."); } }
 
-        public ButcheryUpgradeItem() : base(
+        public AdvancedUpgradeLvl3Item() : base(
             ModuleTypes.ResourceEfficiency | ModuleTypes.SpeedEfficiency,
-            0.75f,
-            typeof(HuntingSkill),
-            0.7f
+            0.8f         
         ) { }
     }
 }

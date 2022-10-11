@@ -26,31 +26,33 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Pipes;
     using Eco.Core.Controller;
 
-    [RequiresSkill(typeof(HuntingSkill), 7)]
-    public partial class ButcheryUpgradeRecipe : RecipeFamily
+    /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
+
+    [RequiresSkill(typeof(CampfireCookingSkill), 7)]
+    public partial class CampfireCookingUpgradeRecipe : RecipeFamily
     {
-        public ButcheryUpgradeRecipe()
+        public CampfireCookingUpgradeRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "ButcheryUpgrade",  //noloc
-                Localizer.DoStr("Butchery Upgrade"),
+                "CampfireCookingUpgrade",  //noloc
+                Localizer.DoStr("Campfire Cooking Upgrade"),
                 new List<IngredientElement>
                 {
                     new IngredientElement(typeof(BasicUpgradeLvl4Item), 1, true),
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<ButcheryUpgradeItem>()
+                    new CraftingElement<CampfireCookingUpgradeItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 4;
-            this.LaborInCalories = CreateLaborInCaloriesValue(3000, typeof(HuntingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(ButcheryUpgradeRecipe), 10, typeof(HuntingSkill), typeof(ButcheryFocusedSpeedTalent), typeof(ButcheryParallelSpeedTalent));
+            this.LaborInCalories = CreateLaborInCaloriesValue(3000, typeof(CampfireCookingSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(CampfireCookingUpgradeRecipe), 10, typeof(CampfireCookingSkill), typeof(CampfireCookingFocusedSpeedTalent), typeof(CampfireCookingParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Butchery Upgrade"), typeof(ButcheryUpgradeRecipe));
+            this.Initialize(Localizer.DoStr("Campfire Cooking Upgrade"), typeof(CampfireCookingUpgradeRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(ButcheryTableObject), this);
+            CraftingComponent.AddRecipe(typeof(CampfireObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
@@ -60,20 +62,20 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Butchery Upgrade")]
+    [LocDisplayName("Campfire Cooking Upgrade")]
     [Weight(1)]
-    [Ecopedia("Upgrade Modules", "Specialty Upgrades", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]                //_If_EcopediaPage_
+    [Ecopedia("Upgrade Modules", "Specialty Upgrades", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]                                                                      //_If_EcopediaPage_
     [Tag("Upgrade", 1)]
-    public partial class ButcheryUpgradeItem :
+    public partial class CampfireCookingUpgradeItem :
         EfficiencyModule
     {
-        public override LocString DisplayDescription { get { return Localizer.DoStr("Basic Upgrade that greatly increases efficiency when crafting Butchery recipes."); } }
+        public override LocString DisplayDescription { get { return Localizer.DoStr("Basic Upgrade that greatly increases efficiency when crafting Campfire Cooking recipes."); } }
 
-        public ButcheryUpgradeItem() : base(
+        public CampfireCookingUpgradeItem() : base(
             ModuleTypes.ResourceEfficiency | ModuleTypes.SpeedEfficiency,
             0.75f,
-            typeof(HuntingSkill),
-            0.7f
+            typeof(CampfireCookingSkill),
+            0.7f         
         ) { }
     }
 }
