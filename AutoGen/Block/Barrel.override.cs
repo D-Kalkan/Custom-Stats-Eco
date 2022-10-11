@@ -39,7 +39,7 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Barrel"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(IronBarItem), 1, typeof(PotterySkill), typeof(PotteryLavishResourcesTalent)),
+                    new IngredientElement(typeof(IronPlateItem), 1, typeof(PotterySkill), typeof(PotteryLavishResourcesTalent)),
                 },
                 new List<CraftingElement>
                 {

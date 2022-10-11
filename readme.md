@@ -19,8 +19,10 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 * Paper Milling, Butchery & Gathering Skills Hidden
 * Set all Stone Age Tech to create 1 scroll
 * Added the ability for arrastras to break down all stone types
-* Moved Iron Barrels to the Pottery skill
 * Moved Transmission Poles to the Carpentry skill
+* Moved Iron Barrels to the Pottery skill
+* Iron Barrels now require One Iron Plate instead of One Iron Bar
+* Steam Engines only accept charcoal as fuel
 
 
 ## Installation Instructions ##
