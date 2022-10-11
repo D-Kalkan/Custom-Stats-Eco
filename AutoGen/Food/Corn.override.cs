@@ -9,11 +9,13 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Players;
     using Eco.Shared.Localization;
     using Eco.Shared.Serialization;
+    using Eco.Shared.Utils;
+    using Eco.Core.Controller;
 
     [Serialized]
     [LocDisplayName("Corn")]
     [Weight(10)]
-    [Yield(typeof(CornItem), typeof(GatheringSkill), new float[] {1f, 1.4f, 1.5f, 1.6f, 1.7f, 1.8f, 1.9f, 2.0f})]
+    [Yield(typeof(CornItem), typeof(FarmingSkill), new float[] {1f, 1.4f, 1.5f, 1.6f, 1.7f, 1.8f, 1.9f, 2.0f})]
     [Crop]
     [Tag("Crop", 1)]
     [Tag("Harvestable", 1)]
@@ -24,9 +26,10 @@ namespace Eco.Mods.TechTree
     {
         public override LocString DisplayNamePlural     => Localizer.DoStr("Corn");
         public override LocString DisplayDescription    => Localizer.DoStr("A warmly colored kernel studded vegetable.");
-        
-        public override float Calories                  => 7;
+
+        public override float Calories                  => 230;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 4, Fat = 0, Protein = 1, Vitamins = 3};
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(120);
     }
 
 }

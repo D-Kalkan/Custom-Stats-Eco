@@ -9,11 +9,13 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Players;
     using Eco.Shared.Localization;
     using Eco.Shared.Serialization;
+    using Eco.Shared.Utils;
+    using Eco.Core.Controller;
 
     [Serialized]
     [LocDisplayName("Cookeina Mushrooms")]
     [Weight(10)]
-    [Yield(typeof(CookeinaMushroomsItem), typeof(GatheringSkill), new float[] {1f, 1.4f, 1.5f, 1.6f, 1.7f, 1.8f, 1.9f, 2.0f})]
+    [Yield(typeof(CookeinaMushroomsItem), typeof(FarmingSkill), new float[] {1f, 1.4f, 1.5f, 1.6f, 1.7f, 1.8f, 1.9f, 2.0f})]
     [Crop]
     [Tag("Crop", 1)]
     [Tag("Harvestable", 1)]
@@ -22,10 +24,11 @@ namespace Eco.Mods.TechTree
     [Ecopedia("Food", "Produce", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     public partial class CookeinaMushroomsItem : FoodItem
     {
-        public override LocString DisplayDescription    => Localizer.DoStr("Tiny Cup Mushrooms");
-        
-        public override float Calories                  => 10;
+        public override LocString DisplayDescription    => Localizer.DoStr("Tiny Cup Mushrooms.");
+
+        public override float Calories                  => 200;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 2, Fat = 1, Protein = 4, Vitamins = 1};
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(120);
     }
 
 }

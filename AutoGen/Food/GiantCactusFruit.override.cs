@@ -9,11 +9,13 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Players;
     using Eco.Shared.Localization;
     using Eco.Shared.Serialization;
+    using Eco.Shared.Utils;
+    using Eco.Core.Controller;
 
     [Serialized]
     [LocDisplayName("Giant Cactus Fruit")]
     [Weight(10)]
-    [Yield(typeof(GiantCactusFruitItem), typeof(GatheringSkill), new float[] {1f, 1.4f, 1.5f, 1.6f, 1.7f, 1.8f, 1.9f, 2.0f})]
+    [Yield(typeof(GiantCactusFruitItem), typeof(FarmingSkill), new float[] {1f, 1.4f, 1.5f, 1.6f, 1.7f, 1.8f, 1.9f, 2.0f})]
     [Crop]
     [Tag("Crop", 1)]
     [Tag("Harvestable", 1)]
@@ -23,9 +25,10 @@ namespace Eco.Mods.TechTree
     public partial class GiantCactusFruitItem : FoodItem
     {
         public override LocString DisplayDescription    => Localizer.DoStr("A bulbous fruit that used to top Saguaro cacti.");
-        
-        public override float Calories                  => 10;
+
+        public override float Calories                  => 100;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 2, Fat = 2, Protein = 0, Vitamins = 4};
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(120);
     }
 
 }

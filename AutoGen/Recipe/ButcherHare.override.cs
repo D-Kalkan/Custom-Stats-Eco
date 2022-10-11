@@ -16,10 +16,11 @@ namespace Eco.Mods.TechTree
     using Eco.World.Blocks;
     using Gameplay.Systems.TextLinks;
     using Eco.Shared.Localization;
+    using Eco.Core.Controller;
 
     /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
 
-    [RequiresSkill(typeof(ButcherySkill), 1)]
+    [RequiresSkill(typeof(HuntingSkill), 1)]
     public partial class ButcherHareRecipe : RecipeFamily
     {
         public ButcherHareRecipe()
@@ -30,7 +31,7 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Butcher Hare"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(HareCarcassItem), 1, typeof(ButcherySkill), typeof(ButcheryLavishResourcesTalent)),
+                    new IngredientElement(typeof(HareCarcassItem), 1, typeof(HuntingSkill), typeof(ButcheryLavishResourcesTalent)),
                 },
                 new List<CraftingElement>
                 {
@@ -40,8 +41,8 @@ namespace Eco.Mods.TechTree
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 1;
-            this.LaborInCalories = CreateLaborInCaloriesValue(40, typeof(ButcherySkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(ButcherHareRecipe), 0.5f, typeof(ButcherySkill), typeof(ButcheryFocusedSpeedTalent), typeof(ButcheryParallelSpeedTalent));
+            this.LaborInCalories = CreateLaborInCaloriesValue(25, typeof(HuntingSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(ButcherHareRecipe), 0.5f, typeof(HuntingSkill), typeof(ButcheryFocusedSpeedTalent), typeof(ButcheryParallelSpeedTalent));
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Butcher Hare"), typeof(ButcherHareRecipe));
             this.ModsPostInitialize();

@@ -13,6 +13,8 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Systems.TextLinks;
     using Eco.Shared.Localization;
     using Eco.Shared.Serialization;
+    using Eco.Shared.Utils;
+    using Eco.Core.Controller;
 
     [Serialized]
     [LocDisplayName("Raw Bacon")]
@@ -22,13 +24,14 @@ namespace Eco.Mods.TechTree
     {
         public override LocString DisplayNamePlural     => Localizer.DoStr("Raw Bacon");
         public override LocString DisplayDescription    => Localizer.DoStr("A fatty cut of meat that happens to be inexplicably tastier than other cuts.");
-        
-        public override float Calories                  => 600;
-        public override Nutrients Nutrition             => new Nutrients() { Carbs = 0, Fat = 6, Protein = 2, Vitamins = 0};
+
+        public override float Calories                  => 200;
+        public override Nutrients Nutrition             => new Nutrients() { Carbs = 0, Fat = 9, Protein = 3, Vitamins = 0};
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(96);
     }
 
 
-    [RequiresSkill(typeof(ButcherySkill), 2)]
+    [RequiresSkill(typeof(HuntingSkill), 3)]
     public partial class RawBaconRecipe : RecipeFamily
     {
         public RawBaconRecipe()
@@ -39,7 +42,7 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Raw Bacon"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(RawMeatItem), 6, typeof(ButcherySkill), typeof(ButcheryLavishResourcesTalent)),
+                    new IngredientElement(typeof(RawMeatItem), 3, typeof(HuntingSkill), typeof(ButcheryLavishResourcesTalent)),
                 },
                 new List<CraftingElement>
                 {
@@ -48,8 +51,8 @@ namespace Eco.Mods.TechTree
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 1;
-            this.LaborInCalories = CreateLaborInCaloriesValue(20, typeof(ButcherySkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(RawBaconRecipe), 0.8f, typeof(ButcherySkill), typeof(ButcheryFocusedSpeedTalent), typeof(ButcheryParallelSpeedTalent));
+            this.LaborInCalories = CreateLaborInCaloriesValue(15, typeof(HuntingSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(RawBaconRecipe), 0.8f, typeof(HuntingSkill), typeof(ButcheryFocusedSpeedTalent), typeof(ButcheryParallelSpeedTalent));
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Raw Bacon"), typeof(RawBaconRecipe));
             this.ModsPostInitialize();

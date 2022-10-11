@@ -9,11 +9,13 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Players;
     using Eco.Shared.Localization;
     using Eco.Shared.Serialization;
+    using Eco.Shared.Utils;
+    using Eco.Core.Controller;
 
     [Serialized]
     [LocDisplayName("Taro Root")]
     [Weight(10)]
-    [Yield(typeof(TaroRootItem), typeof(GatheringSkill), new float[] {1f, 1.4f, 1.5f, 1.6f, 1.7f, 1.8f, 1.9f, 2.0f})]
+    [Yield(typeof(TaroRootItem), typeof(FarmingSkill), new float[] {1f, 1.4f, 1.5f, 1.6f, 1.7f, 1.8f, 1.9f, 2.0f})]
     [Crop]
     [Tag("Crop", 1)]
     [Tag("Harvestable", 1)]
@@ -23,10 +25,11 @@ namespace Eco.Mods.TechTree
     [Ecopedia("Food", "Produce", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     public partial class TaroRootItem : FoodItem
     {
-        public override LocString DisplayDescription    => Localizer.DoStr("Colocasia esculenta");
-        
-        public override float Calories                  => 7;
+        public override LocString DisplayDescription    => Localizer.DoStr("Colocasia esculenta.");
+
+        public override float Calories                  => 250;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 6, Fat = 0, Protein = 1, Vitamins = 1};
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(120);
     }
 
 }

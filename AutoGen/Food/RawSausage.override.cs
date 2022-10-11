@@ -13,6 +13,8 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Systems.TextLinks;
     using Eco.Shared.Localization;
     using Eco.Shared.Serialization;
+    using Eco.Shared.Utils;
+    using Eco.Core.Controller;
 
     [Serialized]
     [LocDisplayName("Raw Sausage")]
@@ -21,13 +23,14 @@ namespace Eco.Mods.TechTree
     public partial class RawSausageItem : FoodItem
     {
         public override LocString DisplayDescription    => Localizer.DoStr("Ground meat stuffed into an intestine casing.");
-        
+
         public override float Calories                  => 500;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 0, Fat = 8, Protein = 4, Vitamins = 0};
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(96);
     }
 
 
-    [RequiresSkill(typeof(ButcherySkill), 1)]
+    [RequiresSkill(typeof(HuntingSkill), 2)]
     public partial class RawSausageRecipe : RecipeFamily
     {
         public RawSausageRecipe()
@@ -38,17 +41,16 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Raw Sausage"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(ScrapMeatItem), 3, typeof(ButcherySkill), typeof(ButcheryLavishResourcesTalent)),
+                    new IngredientElement(typeof(ScrapMeatItem), 3, typeof(HuntingSkill), typeof(ButcheryLavishResourcesTalent)),
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<RawSausageItem>(1),
-                    new CraftingElement<TallowItem>(1),
+                    new CraftingElement<RawSausageItem>(1)
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 1;
-            this.LaborInCalories = CreateLaborInCaloriesValue(20, typeof(ButcherySkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(RawSausageRecipe), 0.8f, typeof(ButcherySkill), typeof(ButcheryFocusedSpeedTalent), typeof(ButcheryParallelSpeedTalent));
+            this.LaborInCalories = CreateLaborInCaloriesValue(15, typeof(HuntingSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(RawSausageRecipe), 0.8f, typeof(HuntingSkill), typeof(ButcheryFocusedSpeedTalent), typeof(ButcheryParallelSpeedTalent));
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Raw Sausage"), typeof(RawSausageRecipe));
             this.ModsPostInitialize();

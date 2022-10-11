@@ -9,11 +9,13 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Players;
     using Eco.Shared.Localization;
     using Eco.Shared.Serialization;
+    using Eco.Shared.Utils;
+    using Eco.Core.Controller;
 
     [Serialized]
     [LocDisplayName("Beet")]
     [Weight(10)]
-    [Yield(typeof(BeetItem), typeof(GatheringSkill), new float[] {1f, 1.4f, 1.5f, 1.6f, 1.7f, 1.8f, 1.9f, 2.0f})]
+    [Yield(typeof(BeetItem), typeof(FarmingSkill), new float[] {1f, 1.4f, 1.5f, 1.6f, 1.7f, 1.8f, 1.9f, 2.0f})]
     [Crop]
     [Tag("Crop", 1)]
     [Tag("Harvestable", 1)]
@@ -24,9 +26,10 @@ namespace Eco.Mods.TechTree
     public partial class BeetItem : FoodItem
     {
         public override LocString DisplayDescription    => Localizer.DoStr("A brilliantly colored bulb with an earthy sweetness.");
-        
-        public override float Calories                  => 7;
+
+        public override float Calories                  => 230;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 2, Fat = 2, Protein = 0, Vitamins = 4};
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(120);
     }
 
 }

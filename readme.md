@@ -22,7 +22,7 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 
 ## Installation Instructions ##
 
-Place the AutoGen folder into the server directory 
+Place the the files into the server directory 
 
 		Eco\Eco_Data\Server\Mods\UserCode
 

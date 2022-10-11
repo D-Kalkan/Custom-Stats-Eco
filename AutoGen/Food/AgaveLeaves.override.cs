@@ -9,11 +9,13 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Players;
     using Eco.Shared.Localization;
     using Eco.Shared.Serialization;
+    using Eco.Shared.Utils;
+    using Eco.Core.Controller;
 
     [Serialized]
     [LocDisplayName("Agave Leaves")]
     [Weight(10)]
-    [Yield(typeof(AgaveLeavesItem), typeof(GatheringSkill), new float[] {1f, 1.4f, 1.5f, 1.6f, 1.7f, 1.8f, 1.9f, 2.0f})]
+    [Yield(typeof(AgaveLeavesItem), typeof(FarmingSkill), new float[] {1f, 1.4f, 1.5f, 1.6f, 1.7f, 1.8f, 1.9f, 2.0f})]
     [Crop]
     [Tag("Crop", 1)]
     [Tag("Harvestable", 1)]
@@ -23,9 +25,10 @@ namespace Eco.Mods.TechTree
     public partial class AgaveLeavesItem : FoodItem
     {
         public override LocString DisplayDescription    => Localizer.DoStr("The succulent leaves of the agave plant can be cooked to make a nice meal.");
-        
-        public override float Calories                  => 7;
-        public override Nutrients Nutrition             => new Nutrients() { Carbs = 3, Fat = 2, Protein = 1, Vitamins = 2};
+
+        public override float Calories                  => 200;
+        public override Nutrients Nutrition             => new Nutrients() { Carbs = 2, Fat = 1, Protein = 1, Vitamins = 4};
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(120);
     }
 
 }

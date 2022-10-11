@@ -9,11 +9,13 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Players;
     using Eco.Shared.Localization;
     using Eco.Shared.Serialization;
+    using Eco.Shared.Utils;
+    using Eco.Core.Controller;
 
     [Serialized]
     [LocDisplayName("Heart Of Palm")]
     [Weight(10)]
-    [Yield(typeof(HeartOfPalmItem), typeof(GatheringSkill), new float[] {1f, 1.4f, 1.5f, 1.6f, 1.7f, 1.8f, 1.9f, 2.0f})]
+    [Yield(typeof(HeartOfPalmItem), typeof(FarmingSkill), new float[] {1f, 1.4f, 1.5f, 1.6f, 1.7f, 1.8f, 1.9f, 2.0f})]
     [Crop]
     [Tag("Crop", 1)]
     [Tag("Harvestable", 1)]
@@ -24,9 +26,10 @@ namespace Eco.Mods.TechTree
     {
         public override LocString DisplayNamePlural     => Localizer.DoStr("Hearts Of Palm");
         public override LocString DisplayDescription    => Localizer.DoStr("Collected from the inner core and growing bud of a palm tree.");
-        
-        public override float Calories                  => 10;
+
+        public override float Calories                  => 100;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 4, Fat = 0, Protein = 2, Vitamins = 2};
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(120);
     }
 
 }

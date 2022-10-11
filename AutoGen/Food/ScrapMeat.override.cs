@@ -13,6 +13,8 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Systems.TextLinks;
     using Eco.Shared.Localization;
     using Eco.Shared.Serialization;
+    using Eco.Shared.Utils;
+    using Eco.Core.Controller;
 
     [Serialized]
     [LocDisplayName("Scrap Meat")]
@@ -22,13 +24,14 @@ namespace Eco.Mods.TechTree
     {
         public override LocString DisplayNamePlural     => Localizer.DoStr("Scrap Meat");
         public override LocString DisplayDescription    => Localizer.DoStr("Chunks of extra meat.");
-        
-        public override float Calories                  => 180;
-        public override Nutrients Nutrition             => new Nutrients() { Carbs = 0, Fat = 4, Protein = 4, Vitamins = 0};
+
+        public override float Calories                  => 50;
+        public override Nutrients Nutrition             => new Nutrients() { Carbs = 0, Fat = 5, Protein = 5, Vitamins = 0};
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(96);
     }
 
 
-    [RequiresSkill(typeof(ButcherySkill), 1)]
+    [RequiresSkill(typeof(HuntingSkill), 1)]
     public partial class ScrapMeatRecipe : RecipeFamily
     {
         public ScrapMeatRecipe()
@@ -39,7 +42,7 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Scrap Meat"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(RawMeatItem), 2, typeof(ButcherySkill), typeof(ButcheryLavishResourcesTalent)),
+                    new IngredientElement(typeof(RawMeatItem), 1, typeof(HuntingSkill), typeof(ButcheryLavishResourcesTalent)),
                 },
                 new List<CraftingElement>
                 {
@@ -47,8 +50,8 @@ namespace Eco.Mods.TechTree
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 1;
-            this.LaborInCalories = CreateLaborInCaloriesValue(20, typeof(ButcherySkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(ScrapMeatRecipe), 0.5f, typeof(ButcherySkill), typeof(ButcheryFocusedSpeedTalent), typeof(ButcheryParallelSpeedTalent));
+            this.LaborInCalories = CreateLaborInCaloriesValue(15, typeof(HuntingSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(ScrapMeatRecipe), 0.5f, typeof(HuntingSkill), typeof(ButcheryFocusedSpeedTalent), typeof(ButcheryParallelSpeedTalent));
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Scrap Meat"), typeof(ScrapMeatRecipe));
             this.ModsPostInitialize();

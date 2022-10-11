@@ -9,11 +9,13 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Players;
     using Eco.Shared.Localization;
     using Eco.Shared.Serialization;
+    using Eco.Shared.Utils;
+    using Eco.Core.Controller;
 
     [Serialized]
     [LocDisplayName("Pineapple")]
     [Weight(10)]
-    [Yield(typeof(PineappleItem), typeof(GatheringSkill), new float[] {1f, 1.4f, 1.5f, 1.6f, 1.7f, 1.8f, 1.9f, 2.0f})]
+    [Yield(typeof(PineappleItem), typeof(FarmingSkill), new float[] {1f, 1.4f, 1.5f, 1.6f, 1.7f, 1.8f, 1.9f, 2.0f})]
     [Crop]
     [Tag("Crop", 1)]
     [Tag("Harvestable", 1)]
@@ -22,10 +24,11 @@ namespace Eco.Mods.TechTree
     [Ecopedia("Food", "Produce", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     public partial class PineappleItem : FoodItem
     {
-        public override LocString DisplayDescription    => Localizer.DoStr("Nice fresh Pineapple");
-        
-        public override float Calories                  => 20;
+        public override LocString DisplayDescription    => Localizer.DoStr("Nice fresh Pineapple.");
+
+        public override float Calories                  => 200;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 6, Fat = 0, Protein = 0, Vitamins = 2};
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(120);
     }
 
 }

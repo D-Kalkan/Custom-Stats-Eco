@@ -13,6 +13,8 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Systems.TextLinks;
     using Eco.Shared.Localization;
     using Eco.Shared.Serialization;
+    using Eco.Shared.Utils;
+    using Eco.Core.Controller;
 
     [Serialized]
     [LocDisplayName("Prime Cut")]
@@ -21,13 +23,14 @@ namespace Eco.Mods.TechTree
     public partial class PrimeCutItem : FoodItem
     {
         public override LocString DisplayDescription    => Localizer.DoStr("A perfectly marbled piece of meat.");
-        
-        public override float Calories                  => 960;
-        public override Nutrients Nutrition             => new Nutrients() { Carbs = 0, Fat = 3, Protein = 7, Vitamins = 0};
+
+        public override float Calories                  => 600;
+        public override Nutrients Nutrition             => new Nutrients() { Carbs = 0, Fat = 4, Protein = 9, Vitamins = 0};
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(72);
     }
 
 
-    [RequiresSkill(typeof(ButcherySkill), 3)]
+    [RequiresSkill(typeof(HuntingSkill), 6)]
     public partial class PrimeCutRecipe : RecipeFamily
     {
         public PrimeCutRecipe()
@@ -38,7 +41,7 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Prime Cut"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(RawMeatItem), 16, typeof(ButcherySkill), typeof(ButcheryLavishResourcesTalent)),
+                    new IngredientElement(typeof(RawMeatItem), 16, typeof(HuntingSkill), typeof(ButcheryLavishResourcesTalent)),
                 },
                 new List<CraftingElement>
                 {
@@ -46,8 +49,8 @@ namespace Eco.Mods.TechTree
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 1;
-            this.LaborInCalories = CreateLaborInCaloriesValue(20, typeof(ButcherySkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(PrimeCutRecipe), 0.8f, typeof(ButcherySkill), typeof(ButcheryFocusedSpeedTalent), typeof(ButcheryParallelSpeedTalent));
+            this.LaborInCalories = CreateLaborInCaloriesValue(15, typeof(HuntingSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(PrimeCutRecipe), 0.8f, typeof(HuntingSkill), typeof(ButcheryFocusedSpeedTalent), typeof(ButcheryParallelSpeedTalent));
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Prime Cut"), typeof(PrimeCutRecipe));
             this.ModsPostInitialize();
