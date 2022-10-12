@@ -26,6 +26,8 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 * Powered Carts are now crafted at Level 3 Basic Engineering
 * Moved all governemnt admin related objects to be crafted on the captiol
 * Reduced sand cost for glass by 1
+* Added ceramic tag to Square Pot, Round Pot & Bricks
+* Substrates now require 4 ceramic
 
 ### Changes brought forward from previous season ###
 * Added the ability for arrastras to break down all stone types
