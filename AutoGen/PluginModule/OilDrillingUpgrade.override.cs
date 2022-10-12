@@ -26,8 +26,6 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Pipes;
     using Eco.Core.Controller;
 
-    /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
-
     [RequiresSkill(typeof(OilDrillingSkill), 7)]
     public partial class OilDrillingUpgradeRecipe : RecipeFamily
     {
@@ -73,7 +71,7 @@ namespace Eco.Mods.TechTree
 
         public OilDrillingUpgradeItem() : base(
             ModuleTypes.ResourceEfficiency | ModuleTypes.SpeedEfficiency,
-            0.75f,
+            0.7f + 0.05f,
             typeof(OilDrillingSkill),
             0.7f         
         ) { }

@@ -62,7 +62,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Butchery Upgrade")]
     [Weight(1)]
-    [Ecopedia("Upgrade Modules", "Specialty Upgrades", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]                //_If_EcopediaPage_
+    [Ecopedia("Upgrade Modules", "Specialty Upgrades", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]                                                                      //_If_EcopediaPage_
     [Tag("Upgrade", 1)]
     public partial class ButcheryUpgradeItem :
         EfficiencyModule
@@ -71,7 +71,7 @@ namespace Eco.Mods.TechTree
 
         public ButcheryUpgradeItem() : base(
             ModuleTypes.ResourceEfficiency | ModuleTypes.SpeedEfficiency,
-            0.75f,
+            0.7f + 0.05f,
             typeof(HuntingSkill),
             0.7f
         ) { }

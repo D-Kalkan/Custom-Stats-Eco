@@ -26,8 +26,6 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Pipes;
     using Eco.Core.Controller;
 
-    /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
-
     [RequiresSkill(typeof(MiningSkill), 7)]
     public partial class MiningBasicUpgradeRecipe : RecipeFamily
     {
@@ -73,7 +71,7 @@ namespace Eco.Mods.TechTree
 
         public MiningBasicUpgradeItem() : base(
             ModuleTypes.ResourceEfficiency | ModuleTypes.SpeedEfficiency,
-            0.75f,
+            0.7f + 0.05f,
             typeof(MiningSkill),
             0.7f         
         ) { }

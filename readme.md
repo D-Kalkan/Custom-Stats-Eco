@@ -4,9 +4,6 @@ Eco Plus Stats
 [![Join the chat at https://discord.gg/dC5KftVjCC](https://discordapp.com/api/guilds/873178918302146600/widget.png)](https://discord.gg/dC5KftVjCC)
 [![GitHub Release](https://img.shields.io/github/v/release/D-Kalkan/Custom-Stats-Eco.svg)](https://github.com/D-Kalkan/Custom-Stats-Eco/releases)
 
-[![Twitch](https://img.shields.io/twitch/status/saltemike?style=social)](https://www.twitch.tv/saltemike)
-[![Youtube](https://img.shields.io/youtube/channel/views/UCOblfLLbNni0_VUeGWhiKDw?style=social)](https://www.youtube.com/c/SaltEMike)
-
 ## Description ##
 
 This is a series of modifications made to the Eco+ Server files to facilitate a series of more strict game style we aim to support for the server.
@@ -28,6 +25,11 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 * Reduced sand cost for glass by 1
 * Added ceramic tag to Square Pot, Round Pot & Bricks
 * Substrates now require 4 ceramic
+
+
+
+Half XP requirement for glassworking
+Industry xp requirement dropped by 1/3
 
 ### Changes brought forward from previous season ###
 * Added the ability for arrastras to break down all stone types
