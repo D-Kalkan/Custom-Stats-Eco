@@ -88,7 +88,6 @@ namespace Eco.Mods.TechTree
         [Serialized, SyncToView, TooltipChildren, NewTooltipChildren] public object PersistentData { get; set; }
     }
 
-    [RequiresSkill(typeof(SmeltingSkill), 4)]
     public partial class CurrencyExchangeRecipe : RecipeFamily
     {
         public CurrencyExchangeRecipe()
@@ -99,10 +98,10 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Currency Exchange"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(GoldBarItem), 12, typeof(SmeltingSkill), typeof(SmeltingLavishResourcesTalent)),
-                    new IngredientElement(typeof(BrickItem), 16, typeof(SmeltingSkill), typeof(SmeltingLavishResourcesTalent)),
-                    new IngredientElement(typeof(IronBarItem), 16, typeof(SmeltingSkill), typeof(SmeltingLavishResourcesTalent)),
-                    new IngredientElement("Lumber", 40, typeof(SmeltingSkill), typeof(SmeltingLavishResourcesTalent)), //noloc
+                    new IngredientElement(typeof(GoldBarItem), 12),
+                    new IngredientElement(typeof(BrickItem), 16),
+                    new IngredientElement(typeof(IronBarItem), 16),
+                    new IngredientElement("Lumber", 40), //noloc
                 },
                 new List<CraftingElement>
                 {

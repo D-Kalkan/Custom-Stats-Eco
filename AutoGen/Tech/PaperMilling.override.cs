@@ -32,6 +32,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Paper Milling")]
     [Ecopedia("Professions", "Carpenter", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [RequiresSkill(typeof(TailoringSkill), 0), Tag("Carpenter Specialty"), Tier(3)]
+    [Category("Hidden"), Tag("NotInBrowser")]
     [Tag("Specialty")]
     [Tag("Teachable")]
     public partial class PaperMillingSkill : Skill
@@ -75,11 +76,13 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Paper Milling Skill Book")]
+    [Category("Hidden"), Tag("NotInBrowser")]
     [Ecopedia("Items", "Skill Books", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     public partial class PaperMillingSkillBook : SkillBook<PaperMillingSkill, PaperMillingSkillScroll> {}
 
     [Serialized]
     [LocDisplayName("Paper Milling Skill Scroll")]
+    [Category("Hidden"), Tag("NotInBrowser")]
     public partial class PaperMillingSkillScroll : SkillScroll<PaperMillingSkill, PaperMillingSkillBook> {}
 
 
@@ -107,7 +110,7 @@ namespace Eco.Mods.TechTree
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Paper Milling Skill Book"), typeof(PaperMillingSkillBookRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(LaboratoryObject), this);
+            CraftingComponent.AddRecipe(typeof(CapitolObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>

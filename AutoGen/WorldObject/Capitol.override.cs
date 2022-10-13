@@ -89,35 +89,4 @@ namespace Eco.Mods.TechTree
 
         [Serialized, SyncToView, TooltipChildren, NewTooltipChildren] public object PersistentData { get; set; }
     }
-
-    public partial class CapitolRecipe : RecipeFamily
-    {
-        public CapitolRecipe()
-        {
-            var recipe = new Recipe();
-            recipe.Init(
-                "Capitol",  //noloc
-                Localizer.DoStr("Capitol"),
-                new List<IngredientElement>
-                {
-                    new IngredientElement("HewnLog", 30), //noloc
-                },
-                new List<CraftingElement>
-                {
-                    new CraftingElement<CapitolItem>()
-                });
-            this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(1200);
-            this.CraftMinutes = CreateCraftTimeValue(5);
-            this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Capitol"), typeof(CapitolRecipe));
-            this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(CapitolObject), this);
-        }
-
-        /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
-        partial void ModsPreInitialize();
-        /// <summary>Hook for mods to customize RecipeFamily after initialization, but before registration. You can change skill requirements here.</summary>
-        partial void ModsPostInitialize();
-    }
 }

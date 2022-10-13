@@ -21,13 +21,14 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 * Lowered the effectiveness of all upgrade modules to 5%, 12.5%, 20%, 25% and 30%
 * Lowered the glassworking level requirement for Advanced Upgrade 2 from 4 to 3
 * Powered Carts are now crafted at Level 3 Basic Engineering
-* Moved all governemnt admin related objects to be crafted on the captiol
+* Moved all governemnt & Admin related objects to the captiol
 * Reduced sand cost for glass by 1
 * Added ceramic tag to Square Pot & Round Pot
 * Substrates now require 1 ceramic
 * Square Pot & Round Pot cost 1 less clay to craft
 * Digging and Building awards self improvement XP
 * Charcoal recipe reduced to 3 logs from 7 and outputs 2 charcoal from 1
+* Tailors can now craft land claim papers for 50 paper and 4 gold wire
 
 
 ### Changes brought forward from previous season ###

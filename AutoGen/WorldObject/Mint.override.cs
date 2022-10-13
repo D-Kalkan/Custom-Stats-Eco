@@ -88,7 +88,6 @@ namespace Eco.Mods.TechTree
         [Serialized, SyncToView, TooltipChildren, NewTooltipChildren] public object PersistentData { get; set; }
     }
 
-    [RequiresSkill(typeof(SmeltingSkill), 4)]
     public partial class MintRecipe : RecipeFamily
     {
         public MintRecipe()
@@ -99,9 +98,9 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Mint"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(BrickItem), 16, typeof(SmeltingSkill), typeof(SmeltingLavishResourcesTalent)),
-                    new IngredientElement(typeof(GoldBarItem), 8, typeof(SmeltingSkill), typeof(SmeltingLavishResourcesTalent)),
-                    new IngredientElement("Lumber", 30, typeof(SmeltingSkill), typeof(SmeltingLavishResourcesTalent)), //noloc
+                    new IngredientElement(typeof(BrickItem), 16),
+                    new IngredientElement(typeof(GoldBarItem), 8),
+                    new IngredientElement("Lumber", 30), //noloc
                 },
                 new List<CraftingElement>
                 {

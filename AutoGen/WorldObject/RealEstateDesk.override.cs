@@ -87,7 +87,6 @@ namespace Eco.Mods.TechTree
 
     }
 
-    [RequiresSkill(typeof(CarpentrySkill), 4)]
     public partial class RealEstateDeskRecipe : RecipeFamily
     {
         public RealEstateDeskRecipe()
@@ -98,9 +97,9 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Real Estate Desk"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(PlantFibersItem), 40, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
-                    new IngredientElement("HewnLog", 15, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
-                    new IngredientElement("WoodBoard", 10, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
+                    new IngredientElement(typeof(PlantFibersItem), 40),
+                    new IngredientElement("HewnLog", 15), //noloc
+                    new IngredientElement("WoodBoard", 10), //noloc
                 },
                 new List<CraftingElement>
                 {
