@@ -78,7 +78,6 @@ namespace Eco.Mods.TechTree
     [Weight(10000)]
     [Ecopedia("Blocks", "Building Materials", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Constructable", 1)]
-    [Tag("Ceramic", 1)]
     [Tier(2)]
     public partial class BrickItem :
  

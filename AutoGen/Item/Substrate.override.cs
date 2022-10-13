@@ -39,7 +39,7 @@ namespace Eco.Mods.TechTree
                 {
                     new IngredientElement(typeof(FiberglassItem), 4, typeof(ElectronicsSkill), typeof(ElectronicsLavishResourcesTalent)),
                     new IngredientElement(typeof(EpoxyItem), 4, typeof(ElectronicsSkill), typeof(ElectronicsLavishResourcesTalent)),
-                    new IngredientElement("Ceramic", 4, typeof(ElectronicsSkill), typeof(ElectronicsLavishResourcesTalent)),
+                    new IngredientElement("Ceramic", 1, typeof(ElectronicsSkill), typeof(ElectronicsLavishResourcesTalent)),
                 },
                 new List<CraftingElement>
                 {
