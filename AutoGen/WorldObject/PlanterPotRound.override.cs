@@ -108,7 +108,7 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Round Pot"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(ClayItem), 4, typeof(PotterySkill), typeof(PotteryLavishResourcesTalent)),
+                    new IngredientElement(typeof(ClayItem), 3, typeof(PotterySkill), typeof(PotteryLavishResourcesTalent)),
                 },
                 new List<CraftingElement>
                 {
