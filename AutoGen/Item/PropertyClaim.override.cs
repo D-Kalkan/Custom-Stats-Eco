@@ -25,32 +25,32 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Pipes;
     using Eco.Core.Controller;
 
-
-    [RequiresSkill(typeof(TailoringSkill), 1)]
-    public partial class PaperRecipe : RecipeFamily
+    [RequiresSkill(typeof(TailoringSkill), 4)]
+    public partial class PropertyClaimRecipe : RecipeFamily
     {
-        public PaperRecipe()
+        public PropertyClaimRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "Paper",  //noloc
-                Localizer.DoStr("Paper"),
+                "Land Claim Paper",  //noloc
+                Localizer.DoStr("Land Claim Paper"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(CelluloseFiberItem), 1, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
+                    new IngredientElement(typeof(PaperItem), 50, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
+                    new IngredientElement(typeof(GoldWiringItem), 4, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<PaperItem>()
+                    new CraftingElement<PropertyClaimItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.ExperienceOnCraft = 1;
-            this.LaborInCalories = CreateLaborInCaloriesValue(20, typeof(TailoringSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(PaperRecipe), 0.1f, typeof(TailoringSkill), typeof(TailoringFocusedSpeedTalent), typeof(TailoringParallelSpeedTalent));
+            this.ExperienceOnCraft = 2;
+            this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(TailoringSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(PropertyClaimRecipe), 2, typeof(TailoringSkill), typeof(TailoringFocusedSpeedTalent), typeof(TailoringParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Paper"), typeof(PaperRecipe));
+            this.Initialize(Localizer.DoStr("Land Claim Paper"), typeof(PropertyClaimRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(CarpentryTableObject), this);
+            CraftingComponent.AddRecipe(typeof(ElectronicsAssemblyObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
@@ -59,16 +59,4 @@ namespace Eco.Mods.TechTree
         partial void ModsPostInitialize();
     }
 
-    /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
-    [Serialized]
-    [LocDisplayName("Paper")]
-    [Weight(100)]
-    [Fuel(100)][Tag("Fuel")]
-    [Tag("Currency")][Currency]
-    [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    [Tag("Burnable Fuel", 1)]
-    public partial class PaperItem : Item
-    {
-        public override LocString DisplayDescription { get { return Localizer.DoStr("It's paper."); } }
-    }
 }
