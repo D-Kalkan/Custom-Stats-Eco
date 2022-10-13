@@ -26,7 +26,6 @@ namespace Eco.Mods.TechTree
     using Eco.Core.Controller;
 
     ///changing gathering skill to farming skill crashes the server when it starts initializing skills
-    [RequiresSkill(typeof(GatheringSkill), 0)]
     public partial class GatheringResearchPaperBasicRecipe : RecipeFamily
     {
         public GatheringResearchPaperBasicRecipe()
