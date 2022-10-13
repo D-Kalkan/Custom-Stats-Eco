@@ -37,11 +37,11 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Charcoal"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement("Wood", 7, typeof(LoggingSkill)), //noloc
+                    new IngredientElement("Wood", 3, typeof(LoggingSkill)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<CharcoalItem>()
+                    new CraftingElement<CharcoalItem>(2)
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 1;

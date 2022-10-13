@@ -27,6 +27,7 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 * Substrates now require 1 ceramic
 * Square Pot & Round Pot cost 1 less clay to craft
 * Digging and Building awards self improvement XP
+* Charcoal recipe reduced to 3 logs from 7 and outputs 2 charcoal from 1
 
 
 ### Changes brought forward from previous season ###
