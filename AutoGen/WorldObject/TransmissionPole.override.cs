@@ -94,7 +94,7 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Transmission Pole"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(SteelBarItem), 8, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
+                    new IngredientElement(typeof(IronBarItem), 8, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
                     new IngredientElement(typeof(CopperWiringItem), 14, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
                     new IngredientElement("Lumber", 10, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
                 },
