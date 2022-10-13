@@ -25,12 +25,14 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 * Reduced sand cost for glass by 1
 * Added ceramic tag to Square Pot & Round Pot
 * Substrates now require 1 ceramic
+* Square Pot & Round Pot cost 1 less clay to craft
 * Digging and Building awards self improvement XP
 
 
 ### Changes brought forward from previous season ###
 * Added the ability for arrastras to break down all stone types
 * Moved Iron Barrels to the Pottery skill
+* Tailors now craft paper because of the removal of paper milling 
 
 ## Installation Instructions ##
 

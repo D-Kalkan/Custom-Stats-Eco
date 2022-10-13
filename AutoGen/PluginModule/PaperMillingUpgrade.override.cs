@@ -50,7 +50,7 @@ namespace Eco.Mods.TechTree
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Paper Milling Upgrade"), typeof(PaperMillingUpgradeRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(CarpentryTableObject), this);
+            CraftingComponent.AddRecipe(typeof(CapitolObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
@@ -61,6 +61,7 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Paper Milling Upgrade")]
+    [Category("Hidden"), Tag("NotInBrowser")]
     [Weight(1)]
     [Ecopedia("Upgrade Modules", "Specialty Upgrades", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]                                                                      //_If_EcopediaPage_
     [Tag("Upgrade", 1)]
