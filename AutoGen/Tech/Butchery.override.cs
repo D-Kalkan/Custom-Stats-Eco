@@ -75,15 +75,16 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Butchery Skill Book")]
+    [Category("Hidden"), Tag("NotInBrowser")]
     [Ecopedia("Items", "Skill Books", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     public partial class ButcherySkillBook : SkillBook<ButcherySkill, ButcherySkillScroll> {}
 
     [Serialized]
     [LocDisplayName("Butchery Skill Scroll")]
+    [Category("Hidden"), Tag("NotInBrowser")]
     public partial class ButcherySkillScroll : SkillScroll<ButcherySkill, ButcherySkillBook> {}
 
 
-    [RequiresSkill(typeof(HuntingSkill), 0)]
     public partial class ButcherySkillBookRecipe : RecipeFamily
     {
         public ButcherySkillBookRecipe()
@@ -94,19 +95,19 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Butchery Skill Book"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(CulinaryResearchPaperBasicItem), 3, typeof(HuntingSkill)),
+                    new IngredientElement(typeof(CulinaryResearchPaperBasicItem), 3),
                 },
                 new List<CraftingElement>
                 {
                     new CraftingElement<ButcherySkillBook>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(600, typeof(HuntingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(ButcherySkillBookRecipe), 5, typeof(HuntingSkill));
+            this.LaborInCalories = CreateLaborInCaloriesValue(600);
+            this.CraftMinutes = CreateCraftTimeValue(5);
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Butchery Skill Book"), typeof(ButcherySkillBookRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(ResearchTableObject), this);
+            CraftingComponent.AddRecipe(typeof(CapitolObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>

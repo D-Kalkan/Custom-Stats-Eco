@@ -29,15 +29,14 @@ namespace Eco.Mods.TechTree
 
     /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
     [Serialized]
-    [LocDisplayName("Paper Milling")]
-    [Ecopedia("Professions", "Carpenter", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    [RequiresSkill(typeof(TailoringSkill), 0), Tag("Carpenter Specialty"), Tier(3)]
-    [Category("Hidden"), Tag("NotInBrowser")]
+    [LocDisplayName("Farming")]
+    [Ecopedia("Professions", "Farmer", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [RequiresSkill(typeof(FarmerSkill), 0), Tag("Farmer Specialty"), Tier(2)]
     [Tag("Specialty")]
     [Tag("Teachable")]
-    public partial class PaperMillingSkill : Skill
+    public partial class FarmingSkill : Skill
     {
-        public override LocString DisplayDescription { get { return Localizer.DoStr("Paper to carry the written word. Or used to stuff in bookshelves. Levels up by crafting related recipes."); } }
+        public override LocString DisplayDescription { get { return Localizer.DoStr("The art of planting and cultivating flora. Levels up by crafting related recipes and using the hoe."); } }
 
         public override void OnLevelUp(User user)
         {
@@ -71,42 +70,43 @@ namespace Eco.Mods.TechTree
             });
         public override AdditiveStrategy AddStrategy => AdditiveStrategy;
         public override int MaxLevel { get { return 7; } }
-        public override int Tier { get { return 3; } }
+        public override int Tier { get { return 2; } }
     }
 
     [Serialized]
-    [LocDisplayName("Paper Milling Skill Book")]
+    [LocDisplayName("Farming Skill Book")]
     [Category("Hidden"), Tag("NotInBrowser")]
     [Ecopedia("Items", "Skill Books", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    public partial class PaperMillingSkillBook : SkillBook<PaperMillingSkill, PaperMillingSkillScroll> {}
+    public partial class FarmingSkillBook : SkillBook<FarmingSkill, FarmingSkillScroll> {}
 
     [Serialized]
-    [LocDisplayName("Paper Milling Skill Scroll")]
+    [LocDisplayName("Farming Skill Scroll")]
     [Category("Hidden"), Tag("NotInBrowser")]
-    public partial class PaperMillingSkillScroll : SkillScroll<PaperMillingSkill, PaperMillingSkillBook> {}
+    public partial class FarmingSkillScroll : SkillScroll<FarmingSkill, FarmingSkillBook> {}
 
-    public partial class PaperMillingSkillBookRecipe : RecipeFamily
+
+    public partial class FarmingSkillBookRecipe : RecipeFamily
     {
-        public PaperMillingSkillBookRecipe()
+        public FarmingSkillBookRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "PaperMilling",  //noloc
-                Localizer.DoStr("Paper Milling Skill Book"),
+                "Farming",  //noloc
+                Localizer.DoStr("Farming Skill Book"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(DendrologyResearchPaperAdvancedItem), 5),
-                    new IngredientElement("Basic Research", 5), //noloc
+                    new IngredientElement(typeof(GatheringResearchPaperBasicItem), 2),
+                    new IngredientElement(typeof(GeologyResearchPaperBasicItem), 1),
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<PaperMillingSkillBook>()
+                    new CraftingElement<FarmingSkillBook>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(2400);
-            this.CraftMinutes = CreateCraftTimeValue(15);
+            this.LaborInCalories = CreateLaborInCaloriesValue(300);
+            this.CraftMinutes = CreateCraftTimeValue(5);
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Paper Milling Skill Book"), typeof(PaperMillingSkillBookRecipe));
+            this.Initialize(Localizer.DoStr("Farming Skill Book"), typeof(FarmingSkillBookRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(CapitolObject), this);
         }

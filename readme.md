@@ -12,7 +12,6 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 
 * Combined Hunting with Butchery
 * Combined Farming with Gathering
-* Paper Milling, Butchery & Gathering Skills Hidden
 * Farming no longer has to be researched and is baseline
 * Set all Stone Age Tech to create 1 scroll
 * Moved Transmission Poles to the Carpentry skill
@@ -34,6 +33,7 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 ### Changes brought forward from previous season ###
 * Added the ability for arrastras to break down all stone types
 * Moved Iron Barrels to the Pottery skill
+* Paper Milling skill removed
 * Tailors now craft paper because of the removal of paper milling 
 
 ## Installation Instructions ##
