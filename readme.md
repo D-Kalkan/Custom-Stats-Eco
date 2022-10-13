@@ -27,10 +27,6 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 * Substrates now require 4 ceramic
 
 
-
-Half XP requirement for glassworking
-Industry xp requirement dropped by 1/3
-
 ### Changes brought forward from previous season ###
 * Added the ability for arrastras to break down all stone types
 * Moved Iron Barrels to the Pottery skill
