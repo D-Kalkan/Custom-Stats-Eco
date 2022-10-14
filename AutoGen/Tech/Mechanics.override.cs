@@ -110,10 +110,9 @@ namespace Eco.Mods.TechTree
                     new CraftingElement<MechanicsSkillScroll>(100)
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(1, typeof(BasicEngineeringSkill));
             this.CraftMinutes = CreateCraftTimeValue(1);
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Industrial Mechanics Research Project"), typeof(MechanicsSkillBookRecipe));
+            this.Initialize(Localizer.DoStr("Industrial Mechanics Research"), typeof(MechanicsSkillBookRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(LaboratoryObject), this);
         }

@@ -90,7 +90,7 @@ namespace Eco.Mods.TechTree
             var recipe = new Recipe();
             recipe.Init(
                 "Pottery",  //noloc
-                Localizer.DoStr("Pottery Research Project"),
+                Localizer.DoStr("Industrial Pottery Research Project"),
                 new List<IngredientElement>
                 {
                     new IngredientElement(typeof(GeologyResearchPaperBasicItem), 100, typeof(MasonrySkill)),
@@ -108,10 +108,9 @@ namespace Eco.Mods.TechTree
                     new CraftingElement<PotterySkillScroll>(100)
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(1, typeof(MasonrySkill));
             this.CraftMinutes = CreateCraftTimeValue(1);
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Pottery Research Project"), typeof(PotterySkillBookRecipe));
+            this.Initialize(Localizer.DoStr("Industrial Pottery Research"), typeof(PotterySkillBookRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(LaboratoryObject), this);
         }

@@ -29,14 +29,14 @@ namespace Eco.Mods.TechTree
 
     /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
     [Serialized]
-    [LocDisplayName("Advanced Smelting")]
-    [Ecopedia("Professions", "Smith", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    [RequiresSkill(typeof(SmithSkill), 0), Tag("Smith Specialty"), Tier(4)]
+    [LocDisplayName("Cutting Edge Cooking")]
+    [Ecopedia("Professions", "Chef", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [RequiresSkill(typeof(ChefSkill), 0), Tag("Chef Specialty"), Tier(5)]
     [Tag("Specialty")]
     [Tag("Teachable")]
-    public partial class AdvancedSmeltingSkill : Skill
+    public partial class CuttingEdgeCookingSkill : Skill
     {
-        public override LocString DisplayDescription { get { return Localizer.DoStr("Advanced smelting aids in the production of steel - a key ingredient in the progress of any group. Levels up by crafting advanced smelting recipes."); } }
+        public override LocString DisplayDescription { get { return Localizer.DoStr("Cutting edge cooking works with ingredients that don't quite sound like food but can potentially provide high calorie and nutrition. Levels up by crafting related recipes."); } }
 
         public override void OnLevelUp(User user)
         {
@@ -70,54 +70,50 @@ namespace Eco.Mods.TechTree
             });
         public override AdditiveStrategy AddStrategy => AdditiveStrategy;
         public override int MaxLevel { get { return 7; } }
-        public override int Tier { get { return 4; } }
+        public override int Tier { get { return 5; } }
     }
 
     [Serialized]
-    [LocDisplayName("Advanced Smelting Skill Book")]
+    [LocDisplayName("Cutting Edge Cooking Skill Book")]
+    [Category("Hidden"), Tag("NotInBrowser")]
     [Ecopedia("Items", "Skill Books", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    public partial class AdvancedSmeltingSkillBook : SkillBook<AdvancedSmeltingSkill, AdvancedSmeltingSkillScroll> {}
+    public partial class CuttingEdgeCookingSkillBook : SkillBook<CuttingEdgeCookingSkill, CuttingEdgeCookingSkillScroll> {}
 
     [Serialized]
-    [LocDisplayName("Advanced Smelting Skill Scroll")]
-    public partial class AdvancedSmeltingSkillScroll : SkillScroll<AdvancedSmeltingSkill, AdvancedSmeltingSkillBook> {}
+    [LocDisplayName("Cutting Edge Cooking Skill Scroll")]
+    [Category("Hidden"), Tag("NotInBrowser")]
+    public partial class CuttingEdgeCookingSkillScroll : SkillScroll<CuttingEdgeCookingSkill, CuttingEdgeCookingSkillBook> {}
 
 
-    public partial class AdvancedSmeltingSkillBookRecipe : RecipeFamily
+    [RequiresSkill(typeof(AdvancedCookingSkill), 1)]
+    public partial class CuttingEdgeCookingSkillBookRecipe : RecipeFamily
     {
-        public AdvancedSmeltingSkillBookRecipe()
+        public CuttingEdgeCookingSkillBookRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "AdvancedSmelting",  //noloc
-                Localizer.DoStr("Modern Advanced Smelting Research Project"),
+                "CuttingEdgeCooking",  //noloc
+                Localizer.DoStr("Cutting Edge Cooking Skill Book"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(CulinaryResearchPaperAdvancedItem), 50, typeof(SmeltingSkill)),
-                    new IngredientElement(typeof(CulinaryResearchPaperModernItem), 25, typeof(SmeltingSkill)),
-                    new IngredientElement(typeof(DendrologyResearchPaperAdvancedItem), 50, typeof(SmeltingSkill)),
-                    new IngredientElement(typeof(DendrologyResearchPaperModernItem), 100, typeof(SmeltingSkill)),
-                    new IngredientElement(typeof(GeologyResearchPaperAdvancedItem), 100, typeof(SmeltingSkill)),
-                    new IngredientElement(typeof(GeologyResearchPaperModernItem), 50, typeof(SmeltingSkill)),
-                    new IngredientElement(typeof(MetallurgyResearchPaperBasicItem), 300, typeof(SmeltingSkill)),
-                    new IngredientElement(typeof(MetallurgyResearchPaperAdvancedItem), 350, typeof(SmeltingSkill)),
-                    new IngredientElement(typeof(EngineeringResearchPaperAdvancedItem), 50, typeof(SmeltingSkill)),
-                    new IngredientElement(typeof(EngineeringResearchPaperModernItem), 50, typeof(SmeltingSkill)),
-                    new IngredientElement(typeof(AgricultureResearchPaperAdvancedItem), 50, typeof(SmeltingSkill)),
-                    new IngredientElement(typeof(AgricultureResearchPaperModernItem), 125, typeof(SmeltingSkill)),
-                    new IngredientElement(typeof(AdvancedBakingSkillScroll), 1, typeof(BasicEngineeringSkill)),
+                    new IngredientElement(typeof(CulinaryResearchPaperAdvancedItem), 20, typeof(AdvancedCookingSkill)),
+                    new IngredientElement(typeof(CulinaryResearchPaperModernItem), 20, typeof(AdvancedCookingSkill)),
+                    new IngredientElement(typeof(MetallurgyResearchPaperModernItem), 10, typeof(AdvancedCookingSkill)),
+                    new IngredientElement(typeof(AgricultureResearchPaperModernItem), 10, typeof(AdvancedCookingSkill)),
+                    new IngredientElement("Basic Research", 30, typeof(AdvancedCookingSkill)), //noloc
+                    new IngredientElement("Advanced Research", 10, typeof(AdvancedCookingSkill)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<AdvancedSmeltingSkillBook>(),
-                    new CraftingElement<AdvancedSmeltingSkillScroll>(100)
+                    new CraftingElement<CuttingEdgeCookingSkillBook>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.CraftMinutes = CreateCraftTimeValue(1);
+            this.LaborInCalories = CreateLaborInCaloriesValue(6000, typeof(AdvancedCookingSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(CuttingEdgeCookingSkillBookRecipe), 60, typeof(AdvancedCookingSkill));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Modern Advanced Smelting Research"), typeof(AdvancedSmeltingSkillBookRecipe));
+            this.Initialize(Localizer.DoStr("Cutting Edge Cooking Skill Book"), typeof(CuttingEdgeCookingSkillBookRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(LaboratoryObject), this);
+            CraftingComponent.AddRecipe(typeof(CapitolObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>

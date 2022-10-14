@@ -90,7 +90,7 @@ namespace Eco.Mods.TechTree
             var recipe = new Recipe();
             recipe.Init(
                 "AdvancedCooking",  //noloc
-                Localizer.DoStr("Modern Advanced Cooking"),
+                Localizer.DoStr("Modern Advanced Cooking Research Project"),
                 new List<IngredientElement>
                 {
                     new IngredientElement(typeof(CulinaryResearchPaperAdvancedItem), 400, typeof(CookingSkill)),
@@ -111,10 +111,9 @@ namespace Eco.Mods.TechTree
                     new CraftingElement<AdvancedCookingSkillScroll>(100)
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(1, typeof(CookingSkill));
             this.CraftMinutes = CreateCraftTimeValue(1);
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Modern Advanced Cooking"), typeof(AdvancedCookingSkillBookRecipe));
+            this.Initialize(Localizer.DoStr("Modern Advanced Cooking Research"), typeof(AdvancedCookingSkillBookRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(LaboratoryObject), this);
         }

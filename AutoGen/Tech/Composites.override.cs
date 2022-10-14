@@ -112,10 +112,9 @@ namespace Eco.Mods.TechTree
                     new CraftingElement<CompositesSkillScroll>(100)
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(1, typeof(CarpentrySkill));
             this.CraftMinutes = CreateCraftTimeValue(1);
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Modern Composites Research Project"), typeof(CompositesSkillBookRecipe));
+            this.Initialize(Localizer.DoStr("Modern Composites Research"), typeof(CompositesSkillBookRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(LaboratoryObject), this);
         }

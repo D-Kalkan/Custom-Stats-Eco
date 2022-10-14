@@ -112,10 +112,9 @@ namespace Eco.Mods.TechTree
                     new CraftingElement<AdvancedBakingSkillScroll>(100)
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(1, typeof(BakingSkill));
             this.CraftMinutes = CreateCraftTimeValue(1);
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Modern Advanced Baking Research Project"), typeof(AdvancedBakingSkillBookRecipe));
+            this.Initialize(Localizer.DoStr("Modern Advanced Baking Research"), typeof(AdvancedBakingSkillBookRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(LaboratoryObject), this);
         }

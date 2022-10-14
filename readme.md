@@ -28,6 +28,7 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 * Digging and Building awards self improvement XP
 * Charcoal recipe reduced to 3 logs from 7 and outputs 2 charcoal from 1
 * Tailors can now craft land claim papers for 50 paper and 4 gold wire
+* Expensive server wide research projects overhaul found on the laboratory 
 
 
 ### Changes brought forward from previous season ###
