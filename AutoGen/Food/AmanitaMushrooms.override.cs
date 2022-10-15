@@ -25,9 +25,9 @@ namespace Eco.Mods.TechTree
     {
         public override LocString DisplayDescription    => Localizer.DoStr("A potentially poisonous mushroom. It might not be wise to eat it raw, but it can be detoxified when prepared properly by a chef. Eat at your own risk!");
 
-        public override float Calories                  => -200;
+        public override float Calories                  => -20;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 0, Fat = 0, Protein = 0, Vitamins = 0};
-        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(120);
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(48);
     }
 
 }

@@ -24,9 +24,9 @@ namespace Eco.Mods.TechTree
     {
         public override LocString DisplayDescription    => Localizer.DoStr("A trussed roast tied and ready to be cooked.");
 
-        public override float Calories                  => 600;
+        public override float Calories                  => 60;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 0, Fat = 5, Protein = 6, Vitamins = 0};
-        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(96);
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(48);
     }
 
 

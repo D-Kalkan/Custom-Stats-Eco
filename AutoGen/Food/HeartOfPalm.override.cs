@@ -27,9 +27,9 @@ namespace Eco.Mods.TechTree
         public override LocString DisplayNamePlural     => Localizer.DoStr("Hearts Of Palm");
         public override LocString DisplayDescription    => Localizer.DoStr("Collected from the inner core and growing bud of a palm tree.");
 
-        public override float Calories                  => 100;
+        public override float Calories                  => 10;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 4, Fat = 0, Protein = 2, Vitamins = 2};
-        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(120);
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(48);
     }
 
 }

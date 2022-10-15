@@ -26,9 +26,9 @@ namespace Eco.Mods.TechTree
     {
         public override LocString DisplayDescription    => Localizer.DoStr("Intelligence is knowing this is a fruit; wisdom is not putting it in a fruit salad.");
 
-        public override float Calories                  => 240;
+        public override float Calories                  => 24;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 5, Fat = 0, Protein = 1, Vitamins = 2};
-        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(120);
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(48);
     }
 
 }

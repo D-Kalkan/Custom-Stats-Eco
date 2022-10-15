@@ -27,9 +27,9 @@ namespace Eco.Mods.TechTree
     {
         public override LocString DisplayDescription    => Localizer.DoStr("A brilliantly colored bulb with an earthy sweetness.");
 
-        public override float Calories                  => 230;
+        public override float Calories                  => 23;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 2, Fat = 2, Protein = 0, Vitamins = 4};
-        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(120);
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(48);
     }
 
 }

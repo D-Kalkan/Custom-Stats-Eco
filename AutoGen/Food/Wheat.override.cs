@@ -27,9 +27,9 @@ namespace Eco.Mods.TechTree
         public override LocString DisplayNamePlural     => Localizer.DoStr("Wheat");
         public override LocString DisplayDescription    => Localizer.DoStr("A common grain that is significantly more useful processed.");
 
-        public override float Calories                  => 150;
+        public override float Calories                  => 15;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 6, Fat = 0, Protein = 2, Vitamins = 0};
-        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(144);
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(48);
     }
 
 }

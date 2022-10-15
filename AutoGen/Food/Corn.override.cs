@@ -27,9 +27,9 @@ namespace Eco.Mods.TechTree
         public override LocString DisplayNamePlural     => Localizer.DoStr("Corn");
         public override LocString DisplayDescription    => Localizer.DoStr("A warmly colored kernel studded vegetable.");
 
-        public override float Calories                  => 230;
+        public override float Calories                  => 23;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 4, Fat = 0, Protein = 1, Vitamins = 3};
-        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(120);
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(48);
     }
 
 }

@@ -26,9 +26,9 @@ namespace Eco.Mods.TechTree
     {
         public override LocString DisplayDescription    => Localizer.DoStr("A succulent fruit coated in a rather terrifying array of spines.");
 
-        public override float Calories                  => 190;
+        public override float Calories                  => 19;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 2, Fat = 1, Protein = 1, Vitamins = 4};
-        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(120);
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(48);
     }
 
 }

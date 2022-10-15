@@ -44,9 +44,9 @@ namespace Eco.Mods.TechTree
         public override LocString DisplayDescription    => Localizer.DoStr("Plant to grow a camas plant.");
         public override LocString SpeciesName           => Localizer.DoStr("Camas");
 
-        public override float Calories                  => 150;
+        public override float Calories                  => 15;
         public override Nutrients Nutrition             => nutrition;
-        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(120);
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(48);
     }
 
 

@@ -27,7 +27,7 @@ namespace Eco.Mods.TechTree
 
         public override float Calories                  => 50;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 0, Fat = 5, Protein = 5, Vitamins = 0};
-        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(96);
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(48);
     }
 
 

@@ -29,9 +29,9 @@ namespace Eco.Mods.TechTree
     {
         public override LocString DisplayDescription    => Localizer.DoStr("The small sprouts from a grown bean plant.");
 
-        public override float Calories                  => 100;
+        public override float Calories                  => 10;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 2, Fat = 0, Protein = 1, Vitamins = 5};
-        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(120);
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(48);
     }
 
 

@@ -25,9 +25,9 @@ namespace Eco.Mods.TechTree
         public override LocString DisplayNamePlural     => Localizer.DoStr("Raw Bacon");
         public override LocString DisplayDescription    => Localizer.DoStr("A fatty cut of meat that happens to be inexplicably tastier than other cuts.");
 
-        public override float Calories                  => 200;
+        public override float Calories                  => 20;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 0, Fat = 9, Protein = 3, Vitamins = 0};
-        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(96);
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(48);
     }
 
 

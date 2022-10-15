@@ -26,9 +26,9 @@ namespace Eco.Mods.TechTree
     {
         public override LocString DisplayDescription    => Localizer.DoStr("The succulent leaves of the agave plant can be cooked to make a nice meal.");
 
-        public override float Calories                  => 200;
+        public override float Calories                  => 20;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 2, Fat = 1, Protein = 1, Vitamins = 4};
-        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(120);
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(48);
     }
 
 }

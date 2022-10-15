@@ -26,9 +26,9 @@ namespace Eco.Mods.TechTree
     {
         public override LocString DisplayDescription    => Localizer.DoStr("Nice fresh Pineapple.");
 
-        public override float Calories                  => 200;
+        public override float Calories                  => 20;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 6, Fat = 0, Protein = 0, Vitamins = 2};
-        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(120);
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(48);
     }
 
 }

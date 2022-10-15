@@ -26,9 +26,9 @@ namespace Eco.Mods.TechTree
     {
         public override LocString DisplayDescription    => Localizer.DoStr("A bitter, brightly colored shoot similar to asparagus.");
 
-        public override float Calories                  => 150;
+        public override float Calories                  => 15;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 3, Fat = 0, Protein = 1, Vitamins = 4};
-        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(120);
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(48);
     }
 
 }

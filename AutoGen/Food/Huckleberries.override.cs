@@ -27,9 +27,9 @@ namespace Eco.Mods.TechTree
         public override LocString DisplayNamePlural     => Localizer.DoStr("Huckleberries");
         public override LocString DisplayDescription    => Localizer.DoStr("A handfull of small wild berries. I'm your huckleberry.");
 
-        public override float Calories                  => 150;
+        public override float Calories                  => 15;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 2, Fat = 0, Protein = 0, Vitamins = 6};
-        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(120);
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(48);
     }
 
 }

@@ -25,9 +25,9 @@ namespace Eco.Mods.TechTree
         public override LocString DisplayNamePlural     => Localizer.DoStr("Prepared Meat");
         public override LocString DisplayDescription    => Localizer.DoStr("Carefully butchered meat, ready to cook.");
 
-        public override float Calories                  => 600;
+        public override float Calories                  => 60;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 0, Fat = 6, Protein = 4, Vitamins = 0};
-        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(72);
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(48);
     }
 
 
