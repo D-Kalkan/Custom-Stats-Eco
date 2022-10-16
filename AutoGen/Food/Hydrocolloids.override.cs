@@ -24,8 +24,8 @@ namespace Eco.Mods.TechTree
         {
             var recipe = new Recipe();
             recipe.Init(
-                "Creosote",  //noloc
-                Localizer.DoStr("Creosote"),
+                "Coke",  //noloc
+                Localizer.DoStr("Coke"),
                 new List<IngredientElement>
                 {
                     new IngredientElement(typeof(CharcoalItem), 1, typeof(MechanicsSkill), typeof(MechanicsLavishResourcesTalent)), //noloc
@@ -40,7 +40,7 @@ namespace Eco.Mods.TechTree
             this.LaborInCalories = CreateLaborInCaloriesValue(25, typeof(MechanicsSkill));
             this.CraftMinutes = CreateCraftTimeValue(typeof(HydrocolloidsRecipe), 0.5f, typeof(MechanicsSkill), typeof(MechanicsFocusedSpeedTalent), typeof(MechanicsParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Creosote"), typeof(HydrocolloidsRecipe));
+            this.Initialize(Localizer.DoStr("Coke"), typeof(HydrocolloidsRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(CementKilnObject), this);
         }
@@ -53,11 +53,11 @@ namespace Eco.Mods.TechTree
 
     /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
     [Serialized]
-    [LocDisplayName("Creosote")]
+    [LocDisplayName("Coke")]
     [Weight(1000)]
     [Fuel(20000)][Tag("Fuel")]
     [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    [Tag("Creosote", 1)]
+    [Tag("Coke", 1)]
     public partial class HydrocolloidsItem : Item
     {
         public override LocString DisplayDescription { get { return Localizer.DoStr("A black residue, consisting of carbon and any remaining ash."); } }

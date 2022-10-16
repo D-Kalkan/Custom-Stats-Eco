@@ -55,6 +55,7 @@ namespace Eco.Mods.TechTree
                     new IngredientElement(typeof(NylonFabricItem), 20, typeof(IndustrySkill)),
                     new IngredientElement(typeof(CombustionEngineItem), 1, true),
                     new IngredientElement(typeof(RubberWheelItem), 6, true),
+                    new IngredientElement(typeof(GlassItem), 40, typeof(MechanicsSkill), true),
                     new IngredientElement(typeof(RadiatorItem), 1, true),
                     new IngredientElement(typeof(SteelAxleItem), 2, true),
                 },

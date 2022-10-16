@@ -59,6 +59,6 @@ namespace Eco.Mods.TechTree
     [Tag("Diesel", 1)]
     public partial class LiquidNitrogenItem : Item
     {
-        public override LocString DisplayDescription { get { return Localizer.DoStr("A black residue, consisting of carbon and any remaining ash."); } }
+        public override LocString DisplayDescription { get { return Localizer.DoStr("A Yellow liquid, designed for use in a combustion engine without needing a spark."); } }
     }
 }
