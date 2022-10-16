@@ -31,7 +31,8 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Cutting Edge Cooking")]
     [Ecopedia("Professions", "Chef", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    [RequiresSkill(typeof(ChefSkill), 0), Tag("Chef Specialty"), Tier(5)]
+    [RequiresSkill(typeof(TailoringSkill), 0), Tag("Chef Specialty"), Tier(5)]
+    [Category("Hidden"), Tag("NotInBrowser")]
     [Tag("Specialty")]
     [Tag("Teachable")]
     public partial class CuttingEdgeCookingSkill : Skill
@@ -85,7 +86,6 @@ namespace Eco.Mods.TechTree
     public partial class CuttingEdgeCookingSkillScroll : SkillScroll<CuttingEdgeCookingSkill, CuttingEdgeCookingSkillBook> {}
 
 
-    [RequiresSkill(typeof(AdvancedCookingSkill), 1)]
     public partial class CuttingEdgeCookingSkillBookRecipe : RecipeFamily
     {
         public CuttingEdgeCookingSkillBookRecipe()
@@ -96,20 +96,20 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Cutting Edge Cooking Skill Book"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(CulinaryResearchPaperAdvancedItem), 20, typeof(AdvancedCookingSkill)),
-                    new IngredientElement(typeof(CulinaryResearchPaperModernItem), 20, typeof(AdvancedCookingSkill)),
-                    new IngredientElement(typeof(MetallurgyResearchPaperModernItem), 10, typeof(AdvancedCookingSkill)),
-                    new IngredientElement(typeof(AgricultureResearchPaperModernItem), 10, typeof(AdvancedCookingSkill)),
-                    new IngredientElement("Basic Research", 30, typeof(AdvancedCookingSkill)), //noloc
-                    new IngredientElement("Advanced Research", 10, typeof(AdvancedCookingSkill)), //noloc
+                    new IngredientElement(typeof(CulinaryResearchPaperAdvancedItem), 20),
+                    new IngredientElement(typeof(CulinaryResearchPaperModernItem), 20),
+                    new IngredientElement(typeof(MetallurgyResearchPaperModernItem), 10),
+                    new IngredientElement(typeof(AgricultureResearchPaperModernItem), 10),
+                    new IngredientElement("Basic Research", 30), //noloc
+                    new IngredientElement("Advanced Research", 10), //noloc
                 },
                 new List<CraftingElement>
                 {
                     new CraftingElement<CuttingEdgeCookingSkillBook>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(6000, typeof(AdvancedCookingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(CuttingEdgeCookingSkillBookRecipe), 60, typeof(AdvancedCookingSkill));
+            this.LaborInCalories = CreateLaborInCaloriesValue(6000);
+            this.CraftMinutes = CreateCraftTimeValue(60);
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Cutting Edge Cooking Skill Book"), typeof(CuttingEdgeCookingSkillBookRecipe));
             this.ModsPostInitialize();

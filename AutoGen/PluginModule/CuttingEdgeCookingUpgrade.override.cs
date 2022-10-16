@@ -26,41 +26,9 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Pipes;
     using Eco.Core.Controller;
 
-    [RequiresSkill(typeof(CuttingEdgeCookingSkill), 7)]
-    public partial class CuttingEdgeCookingUpgradeRecipe : RecipeFamily
-    {
-        public CuttingEdgeCookingUpgradeRecipe()
-        {
-            var recipe = new Recipe();
-            recipe.Init(
-                "CuttingEdgeCookingUpgrade",  //noloc
-                Localizer.DoStr("Cutting Edge Cooking Upgrade"),
-                new List<IngredientElement>
-                {
-                    new IngredientElement(typeof(ModernUpgradeLvl4Item), 1, true),
-                },
-                new List<CraftingElement>
-                {
-                    new CraftingElement<CuttingEdgeCookingUpgradeItem>()
-                });
-            this.Recipes = new List<Recipe> { recipe };
-            this.ExperienceOnCraft = 4;
-            this.LaborInCalories = CreateLaborInCaloriesValue(9000, typeof(CuttingEdgeCookingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(CuttingEdgeCookingUpgradeRecipe), 18, typeof(CuttingEdgeCookingSkill), typeof(CuttingEdgeCookingFocusedSpeedTalent), typeof(CuttingEdgeCookingParallelSpeedTalent));
-            this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Cutting Edge Cooking Upgrade"), typeof(CuttingEdgeCookingUpgradeRecipe));
-            this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(LaboratoryObject), this);
-        }
-
-        /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
-        partial void ModsPreInitialize();
-        /// <summary>Hook for mods to customize RecipeFamily after initialization, but before registration. You can change skill requirements here.</summary>
-        partial void ModsPostInitialize();
-    }
-
     [Serialized]
     [LocDisplayName("Cutting Edge Cooking Upgrade")]
+    [Category("Hidden"), Tag("NotInBrowser")]
     [Weight(1)]
     [Ecopedia("Upgrade Modules", "Specialty Upgrades", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]                                                                      //_If_EcopediaPage_
     [Tag("Upgrade", 1)]

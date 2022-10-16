@@ -8,10 +8,11 @@ Eco Plus Stats
 
 This is a series of modifications made to the Eco+ Server files to facilitate a series of more strict game style we aim to support for the server.
 
-### Main Features ###
+### New Features ###
 
 * Combined Hunting with Butchery
 * Combined Farming with Gathering
+* Removed the Cutting Edge Cooking Skill
 * Farming no longer has to be researched and is baseline
 * Set all Stone Age Tech to create 1 scroll
 * Moved Transmission Poles to the Carpentry skill
@@ -29,6 +30,10 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 * Charcoal recipe reduced to 3 logs from 7 and outputs 2 charcoal from 1
 * Tailors can now craft land claim papers for 50 paper and 4 gold wire
 * Expensive server wide research projects overhaul found on the laboratory 
+* Reduced Calories from raw food by 90%
+* Reduced raw food spoilage from roughly 5 to 2 days 
+* Added a New Fuel Creosote for Steam Trucks that only Mechanics Crafts
+* Added a New Fuel Diesel for Modern Trucks that only Industry Crafts
 
 
 ### Changes brought forward from previous season ###
