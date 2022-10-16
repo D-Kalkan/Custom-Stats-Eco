@@ -30,7 +30,7 @@ namespace Eco.Mods.TechTree
     }
 
 
-    [RequiresSkill(typeof(CuttingEdgeCookingSkill), 1)]
+    [RequiresSkill(typeof(MillingSkill), 1)]
     public partial class CornStarchRecipe : RecipeFamily
     {
         public CornStarchRecipe()
@@ -41,7 +41,7 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Corn Starch"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(CornItem), 10, typeof(CuttingEdgeCookingSkill), typeof(CuttingEdgeCookingLavishResourcesTalent)),
+                    new IngredientElement(typeof(CornItem), 10, typeof(MillingSkill), typeof(CuttingEdgeCookingLavishResourcesTalent)),
                 },
                 new List<CraftingElement>
                 {
@@ -49,12 +49,12 @@ namespace Eco.Mods.TechTree
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 1;
-            this.LaborInCalories = CreateLaborInCaloriesValue(15, typeof(CuttingEdgeCookingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(CornStarchRecipe), 8, typeof(CuttingEdgeCookingSkill), typeof(CuttingEdgeCookingFocusedSpeedTalent), typeof(CuttingEdgeCookingParallelSpeedTalent));
+            this.LaborInCalories = CreateLaborInCaloriesValue(15, typeof(MillingSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(CornStarchRecipe), 8, typeof(MillingSkill), typeof(CuttingEdgeCookingFocusedSpeedTalent), typeof(CuttingEdgeCookingParallelSpeedTalent));
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Corn Starch"), typeof(CornStarchRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(OilRefineryObject), this);
+            CraftingComponent.AddRecipe(typeof(MillObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>

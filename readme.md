@@ -32,10 +32,12 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 * Expensive server wide research projects overhaul found on the laboratory 
 * Reduced Calories from raw food by 90%
 * Reduced raw food spoilage from roughly 5 to 2 days 
-* Added a New Fuel Creosote for Steam Trucks that only Mechanics Crafts
-* Added a New Fuel Diesel for Modern Trucks that only Industry Crafts
+* Added a New Fuel Creosote for Steam Trucks 
+* Creosote is made by Mechanics on the cement Kiln
+* Added a New Fuel Diesel for Modern Trucks 
+* Diesel is made by Industry Crafts
 * Tallow Potential Energy Increased from 2k to 10k
-* Move Wheat & Corn Ethanol to Milling
+* Move Wheat Ethanol, Corn Ethanol and Corn Starch to Milling
 
 
 ### Changes brought forward from previous season ###
