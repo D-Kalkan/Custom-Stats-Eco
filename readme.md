@@ -34,6 +34,8 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 * Reduced raw food spoilage from roughly 5 to 2 days 
 * Added a New Fuel Creosote for Steam Trucks that only Mechanics Crafts
 * Added a New Fuel Diesel for Modern Trucks that only Industry Crafts
+* Tallow Potential Energy Increased from 2k to 10k
+* Move Wheat & Corn Ethanol to Milling
 
 
 ### Changes brought forward from previous season ###
