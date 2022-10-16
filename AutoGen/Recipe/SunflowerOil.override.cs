@@ -20,29 +20,29 @@ namespace Eco.Mods.TechTree
 
     /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
 
-    [RequiresSkill(typeof(MillingSkill), 6)]
-    public partial class CornEthanolRecipe : RecipeFamily
+    [RequiresSkill(typeof(MillingSkill), 4)]
+    public partial class SunflowerOilRecipe : RecipeFamily
     {
-        public CornEthanolRecipe()
+        public SunflowerOilRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "CornEthanol",  //noloc
-                Localizer.DoStr("Corn Ethanol"),
+                "SunflowerOil",  //noloc
+                Localizer.DoStr("Sunflower Oil"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(CornItem), 6, typeof(MillingSkill), typeof(CuttingEdgeCookingLavishResourcesTalent)),
+                    new IngredientElement(typeof(SunflowerSeedItem), 12, typeof(MillingSkill), typeof(MillingLavishResourcesTalent)),
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<EthanolItem>(1),
+                    new CraftingElement<OilItem>(2),
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 0.5f;
-            this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(MillingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(CornEthanolRecipe), 1, typeof(MillingSkill), typeof(CuttingEdgeCookingFocusedSpeedTalent), typeof(CuttingEdgeCookingParallelSpeedTalent));
+            this.LaborInCalories = CreateLaborInCaloriesValue(20, typeof(MillingSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(SunflowerOilRecipe), 0.8f, typeof(MillingSkill), typeof(MillingFocusedSpeedTalent), typeof(MillingParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Corn Ethanol"), typeof(CornEthanolRecipe));
+            this.Initialize(Localizer.DoStr("Sunflower Oil"), typeof(SunflowerOilRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(MillObject), this);
         }

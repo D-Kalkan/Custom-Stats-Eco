@@ -20,7 +20,7 @@ namespace Eco.Mods.TechTree
 
     /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
 
-    [RequiresSkill(typeof(MillingSkill), 0)]
+    [RequiresSkill(typeof(MillingSkill), 6)]
     public partial class WheatEthanolRecipe : RecipeFamily
     {
         public WheatEthanolRecipe()
@@ -31,7 +31,7 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Wheat Ethanol"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(WheatItem), 10, typeof(MillingSkill), typeof(CuttingEdgeCookingLavishResourcesTalent)),
+                    new IngredientElement(typeof(WheatItem), 6, typeof(MillingSkill), typeof(CuttingEdgeCookingLavishResourcesTalent)),
                 },
                 new List<CraftingElement>
                 {
