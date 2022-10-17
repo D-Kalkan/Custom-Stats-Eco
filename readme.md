@@ -38,6 +38,7 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 * Diesel is made by Industry Crafts
 * Tallow Potential Energy Increased from 2k to 10k
 * Move Wheat Ethanol, Corn Ethanol and Corn Starch to Milling
+* Added Extra Glass or pelt requirements to several recipes
 
 
 ### Changes brought forward from previous season ###

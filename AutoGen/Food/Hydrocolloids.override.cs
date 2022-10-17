@@ -60,6 +60,6 @@ namespace Eco.Mods.TechTree
     [Tag("Coke", 1)]
     public partial class HydrocolloidsItem : Item
     {
-        public override LocString DisplayDescription { get { return Localizer.DoStr("A black residue, consisting of carbon and any remaining ash."); } }
+        public override LocString DisplayDescription { get { return Localizer.DoStr("A porous grey material, consisting mostly of carbon and better than pepsi."); } }
     }
 }

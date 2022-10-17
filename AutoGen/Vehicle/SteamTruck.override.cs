@@ -54,8 +54,8 @@ namespace Eco.Mods.TechTree
                     new IngredientElement(typeof(IronPipeItem), 8, typeof(MechanicsSkill)),
                     new IngredientElement(typeof(ScrewsItem), 24, typeof(MechanicsSkill)),
                     new IngredientElement("Lumber", 30, typeof(MechanicsSkill)), //noloc
-                    new IngredientElement(typeof(LeatherHideItem), 20, typeof(MechanicsSkill), true),
-                    new IngredientElement(typeof(GlassItem), 20, typeof(MechanicsSkill), true),
+                    new IngredientElement(typeof(LeatherHideItem), 20, typeof(MechanicsSkill)),
+                    new IngredientElement(typeof(GlassItem), 20, typeof(MechanicsSkill)),                    
                     new IngredientElement(typeof(PortableSteamEngineItem), 1, true),
                     new IngredientElement(typeof(IronWheelItem), 4, true),
                     new IngredientElement(typeof(IronAxleItem), 2, true),
