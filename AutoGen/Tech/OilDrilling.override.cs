@@ -117,7 +117,7 @@ namespace Eco.Mods.TechTree
             this.Recipes = new List<Recipe> { recipe };
             this.CraftMinutes = CreateCraftTimeValue(1);
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Modern Oil Drilling Research"), typeof(OilDrillingSkillBookRecipe));
+            this.Initialize(Localizer.DoStr("Modern Research 8: Oil Drilling"), typeof(OilDrillingSkillBookRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(LaboratoryObject), this);
         }

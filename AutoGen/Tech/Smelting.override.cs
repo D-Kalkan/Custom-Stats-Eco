@@ -111,7 +111,7 @@ namespace Eco.Mods.TechTree
             this.Recipes = new List<Recipe> { recipe };
             this.CraftMinutes = CreateCraftTimeValue(1);
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Industrial Smelting Research"), typeof(SmeltingSkillBookRecipe));
+            this.Initialize(Localizer.DoStr("Industrial Research 4: Smelting"), typeof(SmeltingSkillBookRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(LaboratoryObject), this);
         }

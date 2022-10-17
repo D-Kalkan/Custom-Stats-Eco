@@ -100,7 +100,6 @@ namespace Eco.Mods.TechTree
                     new IngredientElement(typeof(GatheringResearchPaperBasicItem), 100, typeof(CampfireCookingSkill)),
                     new IngredientElement(typeof(DendrologyResearchPaperBasicItem), 50, typeof(CampfireCookingSkill)),
                     new IngredientElement(typeof(DendrologyResearchPaperAdvancedItem), 50, typeof(CampfireCookingSkill)),
-                    new IngredientElement(typeof(MillingSkillScroll), 1, typeof(CampfireCookingSkill)),
                 },
                 new List<CraftingElement>
                 {
@@ -110,7 +109,7 @@ namespace Eco.Mods.TechTree
             this.Recipes = new List<Recipe> { recipe };
             this.CraftMinutes = CreateCraftTimeValue(1);
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Industrial Baking Research"), typeof(BakingSkillBookRecipe));
+            this.Initialize(Localizer.DoStr("Industrial Research 1: Baking"), typeof(BakingSkillBookRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(LaboratoryObject), this);
         }

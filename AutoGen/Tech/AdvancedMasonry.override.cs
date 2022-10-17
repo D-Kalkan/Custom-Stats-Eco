@@ -115,7 +115,7 @@ namespace Eco.Mods.TechTree
             this.Recipes = new List<Recipe> { recipe };
             this.CraftMinutes = CreateCraftTimeValue(1);
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Modern Advanced Masonry Research"), typeof(AdvancedMasonrySkillBookRecipe));
+            this.Initialize(Localizer.DoStr("Modern Research 5: Advanced Masonry"), typeof(AdvancedMasonrySkillBookRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(LaboratoryObject), this);
         }
