@@ -26,34 +26,32 @@ namespace Eco.Mods.TechTree
     using Eco.Core.Controller;
 
 
-    [RequiresSkill(typeof(ElectronicsSkill), 1)]
-    public partial class SubstrateRecipe : RecipeFamily
+    [RequiresSkill(typeof(CarpentrySkill), 1)]
+    public partial class BoardRecipe : RecipeFamily
     {
-        public SubstrateRecipe()
+        public BoardRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "Substrate",  //noloc
-                Localizer.DoStr("Substrate"),
+                "Board",  //noloc
+                Localizer.DoStr("Board"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(FiberglassItem), 4, typeof(ElectronicsSkill), typeof(ElectronicsLavishResourcesTalent)),
-                    new IngredientElement(typeof(EpoxyItem), 4, typeof(ElectronicsSkill), typeof(ElectronicsLavishResourcesTalent)),
-                    new IngredientElement("Ceramic", 1, typeof(ElectronicsSkill), typeof(ElectronicsLavishResourcesTalent)),
+                    new IngredientElement("HewnLog", 1, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<SubstrateItem>(),
+                    new CraftingElement<BoardItem>(),
                     new CraftingElement<GarbageItem>(0.1f)
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.ExperienceOnCraft = 2;
-            this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(ElectronicsSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(SubstrateRecipe), 2, typeof(ElectronicsSkill), typeof(ElectronicsFocusedSpeedTalent), typeof(ElectronicsParallelSpeedTalent));
+            this.ExperienceOnCraft = 0.6f;
+            this.LaborInCalories = CreateLaborInCaloriesValue(25, typeof(CarpentrySkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(BoardRecipe), 0.2f, typeof(CarpentrySkill), typeof(CarpentryFocusedSpeedTalent), typeof(CarpentryParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Substrate"), typeof(SubstrateRecipe));
+            this.Initialize(Localizer.DoStr("Board"), typeof(BoardRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(ElectronicsAssemblyObject), this);
+            CraftingComponent.AddRecipe(typeof(CarpentryTableObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
@@ -64,11 +62,15 @@ namespace Eco.Mods.TechTree
 
     /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
     [Serialized]
-    [LocDisplayName("Substrate")]
-    [Weight(1000)]
+    [LocDisplayName("Board")]
+    [Weight(500)]
+    [Fuel(2000)][Tag("Fuel")]
+    [Tag("Currency")][Currency]
     [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    public partial class SubstrateItem : Item
+    [Tag("WoodBoard", 1)]
+    [Tag("Burnable Fuel", 1)]
+    public partial class BoardItem : Item
     {
-        public override LocString DisplayDescription { get { return Localizer.DoStr("The foundation material for complex electronics."); } }
+        public override LocString DisplayDescription { get { return Localizer.DoStr("A higher quality board used for long lasting furniture."); } }
     }
 }

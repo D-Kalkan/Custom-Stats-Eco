@@ -43,7 +43,8 @@ namespace Eco.Mods.TechTree
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<BrickItem>()
+                    new CraftingElement<BrickItem>(),
+                    new CraftingElement<GarbageItem>(0.1f)
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 1;

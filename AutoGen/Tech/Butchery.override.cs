@@ -95,7 +95,6 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Butchery Skill Book"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(CulinaryResearchPaperBasicItem), 3),
                 },
                 new List<CraftingElement>
                 {

@@ -26,34 +26,32 @@ namespace Eco.Mods.TechTree
     using Eco.Core.Controller;
 
 
-    [RequiresSkill(typeof(ElectronicsSkill), 1)]
-    public partial class SubstrateRecipe : RecipeFamily
+    [RequiresSkill(typeof(TailoringSkill), 1)]
+    public partial class CelluloseFiberRecipe : RecipeFamily
     {
-        public SubstrateRecipe()
+        public CelluloseFiberRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "Substrate",  //noloc
-                Localizer.DoStr("Substrate"),
+                "CelluloseFiber",  //noloc
+                Localizer.DoStr("Cellulose Fiber"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(FiberglassItem), 4, typeof(ElectronicsSkill), typeof(ElectronicsLavishResourcesTalent)),
-                    new IngredientElement(typeof(EpoxyItem), 4, typeof(ElectronicsSkill), typeof(ElectronicsLavishResourcesTalent)),
-                    new IngredientElement("Ceramic", 1, typeof(ElectronicsSkill), typeof(ElectronicsLavishResourcesTalent)),
+                    new IngredientElement("NaturalFiber", 20, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<SubstrateItem>(),
+                    new CraftingElement<CelluloseFiberItem>(),
                     new CraftingElement<GarbageItem>(0.1f)
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.ExperienceOnCraft = 2;
-            this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(ElectronicsSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(SubstrateRecipe), 2, typeof(ElectronicsSkill), typeof(ElectronicsFocusedSpeedTalent), typeof(ElectronicsParallelSpeedTalent));
+            this.ExperienceOnCraft = 0.5f;
+            this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(TailoringSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(CelluloseFiberRecipe), 1, typeof(TailoringSkill), typeof(TailoringFocusedSpeedTalent), typeof(TailoringParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Substrate"), typeof(SubstrateRecipe));
+            this.Initialize(Localizer.DoStr("Cellulose Fiber"), typeof(CelluloseFiberRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(ElectronicsAssemblyObject), this);
+            CraftingComponent.AddRecipe(typeof(TailoringTableObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
@@ -64,11 +62,11 @@ namespace Eco.Mods.TechTree
 
     /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
     [Serialized]
-    [LocDisplayName("Substrate")]
-    [Weight(1000)]
+    [LocDisplayName("Cellulose Fiber")]
+    [Weight(100)]
     [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    public partial class SubstrateItem : Item
+    public partial class CelluloseFiberItem : Item
     {
-        public override LocString DisplayDescription { get { return Localizer.DoStr("The foundation material for complex electronics."); } }
+        public override LocString DisplayDescription { get { return Localizer.DoStr("Created by taking pulped plants and extruding them similarly to synthetic fibers."); } }
     }
 }

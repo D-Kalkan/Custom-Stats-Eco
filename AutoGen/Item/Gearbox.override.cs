@@ -26,34 +26,34 @@ namespace Eco.Mods.TechTree
     using Eco.Core.Controller;
 
 
-    [RequiresSkill(typeof(ElectronicsSkill), 1)]
-    public partial class SubstrateRecipe : RecipeFamily
+    [RequiresModule(typeof(MachinistTableObject))]
+    [RequiresSkill(typeof(MechanicsSkill), 1)]
+    public partial class GearboxRecipe : RecipeFamily
     {
-        public SubstrateRecipe()
+        public GearboxRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "Substrate",  //noloc
-                Localizer.DoStr("Substrate"),
+                "Gearbox",  //noloc
+                Localizer.DoStr("Gearbox"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(FiberglassItem), 4, typeof(ElectronicsSkill), typeof(ElectronicsLavishResourcesTalent)),
-                    new IngredientElement(typeof(EpoxyItem), 4, typeof(ElectronicsSkill), typeof(ElectronicsLavishResourcesTalent)),
-                    new IngredientElement("Ceramic", 1, typeof(ElectronicsSkill), typeof(ElectronicsLavishResourcesTalent)),
+                    new IngredientElement(typeof(IronBarItem), 2, typeof(MechanicsSkill), typeof(MechanicsLavishResourcesTalent)),
+                    new IngredientElement(typeof(IronGearItem), 4, typeof(MechanicsSkill), typeof(MechanicsLavishResourcesTalent)),
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<SubstrateItem>(),
+                    new CraftingElement<GearboxItem>(),
                     new CraftingElement<GarbageItem>(0.1f)
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 2;
-            this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(ElectronicsSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(SubstrateRecipe), 2, typeof(ElectronicsSkill), typeof(ElectronicsFocusedSpeedTalent), typeof(ElectronicsParallelSpeedTalent));
+            this.LaborInCalories = CreateLaborInCaloriesValue(45, typeof(MechanicsSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(GearboxRecipe), 1.5f, typeof(MechanicsSkill), typeof(MechanicsFocusedSpeedTalent), typeof(MechanicsParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Substrate"), typeof(SubstrateRecipe));
+            this.Initialize(Localizer.DoStr("Gearbox"), typeof(GearboxRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(ElectronicsAssemblyObject), this);
+            CraftingComponent.AddRecipe(typeof(ShaperObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
@@ -64,11 +64,11 @@ namespace Eco.Mods.TechTree
 
     /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
     [Serialized]
-    [LocDisplayName("Substrate")]
-    [Weight(1000)]
+    [LocDisplayName("Gearbox")]
+    [Weight(500)]
     [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    public partial class SubstrateItem : Item
+    public partial class GearboxItem : Item
     {
-        public override LocString DisplayDescription { get { return Localizer.DoStr("The foundation material for complex electronics."); } }
+        public override LocString DisplayDescription { get { return Localizer.DoStr("Provides speed and torque conversions from a rotating power source to another device."); } }
     }
 }

@@ -96,12 +96,6 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Cutting Edge Cooking Skill Book"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(CulinaryResearchPaperAdvancedItem), 20),
-                    new IngredientElement(typeof(CulinaryResearchPaperModernItem), 20),
-                    new IngredientElement(typeof(MetallurgyResearchPaperModernItem), 10),
-                    new IngredientElement(typeof(AgricultureResearchPaperModernItem), 10),
-                    new IngredientElement("Basic Research", 30), //noloc
-                    new IngredientElement("Advanced Research", 10), //noloc
                 },
                 new List<CraftingElement>
                 {

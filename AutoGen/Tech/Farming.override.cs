@@ -95,8 +95,6 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Farming Skill Book"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(GatheringResearchPaperBasicItem), 2),
-                    new IngredientElement(typeof(GeologyResearchPaperBasicItem), 1),
                 },
                 new List<CraftingElement>
                 {

@@ -27,33 +27,33 @@ namespace Eco.Mods.TechTree
 
     /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
 
-    [RequiresSkill(typeof(GlassworkingSkill), 1)]
-    public partial class GlassRecipe : RecipeFamily
+    [RequiresSkill(typeof(MasonrySkill), 1)]
+    public partial class MortaredStoneRecipe : RecipeFamily
     {
-        public GlassRecipe()
+        public MortaredStoneRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "Glass",  //noloc
-                Localizer.DoStr("Glass"),
+                "MortaredStone",  //noloc
+                Localizer.DoStr("Mortared Stone"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(SandItem), 3, typeof(GlassworkingSkill), typeof(GlassworkingLavishResourcesTalent)),
-                    new IngredientElement(typeof(CrushedLimestoneItem), 1, true),
+                    new IngredientElement(typeof(MortarItem), 1, typeof(MasonrySkill), typeof(MasonryLavishResourcesTalent)),
+                    new IngredientElement("Rock", 4, typeof(MasonrySkill), typeof(MasonryLavishResourcesTalent)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<GlassItem>(),
+                    new CraftingElement<MortaredStoneItem>(),
                     new CraftingElement<GarbageItem>(0.1f)
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.ExperienceOnCraft = 1;
-            this.LaborInCalories = CreateLaborInCaloriesValue(30, typeof(GlassworkingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(GlassRecipe), 1.2f, typeof(GlassworkingSkill), typeof(GlassworkingFocusedSpeedTalent), typeof(GlassworkingParallelSpeedTalent));
+            this.ExperienceOnCraft = 0.5f;
+            this.LaborInCalories = CreateLaborInCaloriesValue(15, typeof(MasonrySkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(MortaredStoneRecipe), 0.16f, typeof(MasonrySkill), typeof(MasonryFocusedSpeedTalent), typeof(MasonryParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Glass"), typeof(GlassRecipe));
+            this.Initialize(Localizer.DoStr("Mortared Stone"), typeof(MortaredStoneRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(KilnObject), this);
+            CraftingComponent.AddRecipe(typeof(MasonryTableObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
@@ -64,44 +64,42 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [Solid, Wall, Constructed,BuildRoomMaterialOption]
-    [BlockTier(2)]
-    [DoesntEncase]
-    [RequiresSkill(typeof(GlassworkingSkill), 1)]
-    public partial class GlassBlock :
+    [BlockTier(1)]
+    [RequiresSkill(typeof(MasonrySkill), 1)]
+    public partial class MortaredStoneBlock :
         Block
         , IRepresentsItem
     {
-        public virtual Type RepresentedItemType { get { return typeof(GlassItem); } }
+        public virtual Type RepresentedItemType { get { return typeof(MortaredStoneItem); } }
     }
 
     [Serialized]
-    [LocDisplayName("Glass")]
-    [MaxStackSize(20)]
+    [LocDisplayName("Mortared Stone")]
+    [MaxStackSize(15)]
     [Weight(10000)]
     [Ecopedia("Blocks", "Building Materials", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Tag("MortaredStone", 1)]
     [Tag("Constructable", 1)]
-    [Tier(2)]
-    public partial class GlassItem :
+    [Tier(1)]
+    public partial class MortaredStoneItem :
  
-    BlockItem<GlassBlock>
+    BlockItem<MortaredStoneBlock>
     {
-        public override LocString DisplayNamePlural { get { return Localizer.DoStr("Glass"); } }
-        public override LocString DisplayDescription { get { return Localizer.DoStr("A transparent, solid material useful for more than just windows."); } }
+        public override LocString DisplayNamePlural { get { return Localizer.DoStr("Mortared Stone"); } }
+        public override LocString DisplayDescription { get { return Localizer.DoStr("Old stone"); } }
 
         public override bool CanStickToWalls { get { return false; } }
 
         private static Type[] blockTypes = new Type[] {
-            typeof(GlassStacked1Block),
-            typeof(GlassStacked2Block),
-            typeof(GlassStacked3Block),
-            typeof(GlassStacked4Block)
+            typeof(MortaredStoneStacked1Block),
+            typeof(MortaredStoneStacked2Block),
+            typeof(MortaredStoneStacked3Block)
         };
         
         public override Type[] BlockTypes { get { return blockTypes; } }
     }
 
-    [Serialized, Solid] public class GlassStacked1Block : PickupableBlock { }
-    [Serialized, Solid] public class GlassStacked2Block : PickupableBlock { }
-    [Serialized, Solid] public class GlassStacked3Block : PickupableBlock { }
-    [Serialized, Solid,Wall] public class GlassStacked4Block : PickupableBlock { } //Only a wall if it's all 4 Glass
+    [Serialized, Solid] public class MortaredStoneStacked1Block : PickupableBlock { }
+    [Serialized, Solid] public class MortaredStoneStacked2Block : PickupableBlock { }
+    [Serialized, Solid,Wall] public class MortaredStoneStacked3Block : PickupableBlock { } //Only a wall if it's all 4 MortaredStone
 }

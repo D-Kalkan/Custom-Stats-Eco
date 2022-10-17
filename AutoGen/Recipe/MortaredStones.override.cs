@@ -20,33 +20,31 @@ namespace Eco.Mods.TechTree
 
     /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
 
-    [RequiresSkill(typeof(GlassworkingSkill), 6)]
-    public partial class QuicklimeGlassRecipe : RecipeFamily
+    public partial class MortaredStonesRecipe : RecipeFamily
     {
-        public QuicklimeGlassRecipe()
+        public MortaredStonesRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "QuicklimeGlass",  //noloc
-                Localizer.DoStr("Quicklime Glass"),
+                "MortaredStones",  //noloc
+                Localizer.DoStr("Mortared Stones"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(SandItem), 2, typeof(GlassworkingSkill), typeof(GlassworkingLavishResourcesTalent)),
-                    new IngredientElement(typeof(QuicklimeItem), 2, typeof(GlassworkingSkill), typeof(GlassworkingLavishResourcesTalent)),
+                    new IngredientElement(typeof(MortarItem), 1),
+                    new IngredientElement("Rock", 6), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<GlassItem>(1),
+                    new CraftingElement<MortaredStoneItem>(1),
                     new CraftingElement<GarbageItem>(0.1f)
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.ExperienceOnCraft = 1;
-            this.LaborInCalories = CreateLaborInCaloriesValue(45, typeof(GlassworkingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(QuicklimeGlassRecipe), 1, typeof(GlassworkingSkill), typeof(GlassworkingFocusedSpeedTalent), typeof(GlassworkingParallelSpeedTalent));
+            this.LaborInCalories = CreateLaborInCaloriesValue(20);
+            this.CraftMinutes = CreateCraftTimeValue(0.16f);
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Quicklime Glass"), typeof(QuicklimeGlassRecipe));
+            this.Initialize(Localizer.DoStr("Mortared Stones"), typeof(MortaredStonesRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(KilnObject), this);
+            CraftingComponent.AddRecipe(typeof(WorkbenchObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
