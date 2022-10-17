@@ -14,6 +14,7 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 * Combined Farming with Gathering
 * Removed the Cutting Edge Cooking Skill
 * Farming no longer has to be researched and is baseline
+* Reduced XP needed to level Industry and Glassworking
 * Set all Stone Age Tech to create 1 scroll
 * Moved Transmission Poles to the Carpentry skill
 * Iron Barrels now require One Iron Plate instead of One Iron Bar
