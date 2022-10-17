@@ -54,9 +54,10 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Diesel")]
     [Weight(1000)]
-    [Fuel(100000)][Tag("Fuel")]
+    [Fuel(120000)][Tag("Fuel")]
     [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Diesel", 1)]
+    [Tag("Liquid Fuel", 1)]
     public partial class LiquidNitrogenItem : Item
     {
         public override LocString DisplayDescription { get { return Localizer.DoStr("A Yellow liquid, designed for use in a combustion engine without needing a spark."); } }

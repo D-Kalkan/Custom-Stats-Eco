@@ -55,8 +55,10 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Coke")]
     [Weight(1000)]
-    [Fuel(20000)][Tag("Fuel")]
+    [Fuel(25000)][Tag("Fuel")]
     [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Tag("Coal", 1)]
+    [Tag("Burnable Fuel", 1)]
     [Tag("Coke", 1)]
     public partial class HydrocolloidsItem : Item
     {
