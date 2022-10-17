@@ -25,14 +25,14 @@ namespace Eco.Mods.TechTree
     using Eco.Core.Controller;
 
 
-    public partial class StoneHammerRecipe : RecipeFamily
+    public partial class StonePickaxeRecipe : RecipeFamily
     {
-        public StoneHammerRecipe()
+        public StonePickaxeRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "StoneHammer",  //noloc
-                Localizer.DoStr("Stone Hammer"),
+                "StonePickaxe",  //noloc
+                Localizer.DoStr("Stone Pickaxe"),
                 new List<IngredientElement>
                 {
                     new IngredientElement("Wood", 4), //noloc
@@ -40,13 +40,13 @@ namespace Eco.Mods.TechTree
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<StoneHammerItem>()
+                    new CraftingElement<StonePickaxeItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.LaborInCalories = CreateLaborInCaloriesValue(10);
             this.CraftMinutes = CreateCraftTimeValue(0.5f);
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Stone Hammer"), typeof(StoneHammerRecipe));
+            this.Initialize(Localizer.DoStr("Stone Pickaxe"), typeof(StonePickaxeRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(ToolBenchObject), this);
         }
@@ -58,30 +58,31 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Stone Hammer")]
+    [LocDisplayName("Stone Pickaxe")]
     [Tier(1)]
     [Weight(1000)]
     [Category("Tool")]
     [Tag("Tool", 1)]
     [Tag("Primitive Recyclable Tool", 1)]
     [Ecopedia("Items", "Tools", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    public partial class StoneHammerItem : HammerItem
+    public partial class StonePickaxeItem : PickaxeItem
     {
                                                                                                                                                                                                                                            // Static values
-        private static IDynamicValue caloriesBurn           = new MultiDynamicValue(MultiDynamicOps.Multiply, new TalentModifiedValue(typeof(StoneHammerItem), typeof(ToolEfficiencyTalent)), CreateCalorieValue(10, typeof(SelfImprovementSkill), typeof(StoneHammerItem)));
-        private static IDynamicValue exp                    = new ConstantValue(0.05f);
-        private static IDynamicValue tier                   = new ConstantValue(1);
+        private static IDynamicValue caloriesBurn           = new MultiDynamicValue(MultiDynamicOps.Multiply, new TalentModifiedValue(typeof(StonePickaxeItem), typeof(MiningToolEfficiencyTalent)), CreateCalorieValue(20, typeof(MiningSkill), typeof(StonePickaxeItem)));
+        private static IDynamicValue exp                    = new ConstantValue(0.1f);
+        private static IDynamicValue tier                   = new MultiDynamicValue(MultiDynamicOps.Sum, new ConstantValue(1), new TalentModifiedValue(typeof(StonePickaxeItem), typeof(MiningToolStrengthTalent), 0));
         private static IDynamicValue skilledRepairCost      = new ConstantValue(5);
-
+         
 
         // Tool overrides
 
-        public override Type ExperienceSkill            => typeof(SelfImprovementSkill);
-        public override IDynamicValue ExperienceRate    => exp;
         public override IDynamicValue CaloriesBurn      => caloriesBurn;
+        public override float Damage                    => 1;
+        public override Type ExperienceSkill            => typeof(MiningSkill);
+        public override IDynamicValue ExperienceRate    => exp;
         public override IDynamicValue Tier              => tier;
         public override IDynamicValue SkilledRepairCost => skilledRepairCost;
-        public override float DurabilityRate            => DurabilityMax / 250f;
+        public override float DurabilityRate            => DurabilityMax / 100f;
         public override Item RepairItem                 => Item.Get<Item>();
         public override Tag RepairTag                   => TagManager.Tag("Rock");
         public override int FullRepairAmount            => 5;

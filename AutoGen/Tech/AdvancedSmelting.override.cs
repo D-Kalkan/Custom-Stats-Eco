@@ -105,7 +105,7 @@ namespace Eco.Mods.TechTree
                     new IngredientElement(typeof(EngineeringResearchPaperModernItem), 50, typeof(SmeltingSkill)),
                     new IngredientElement(typeof(AgricultureResearchPaperAdvancedItem), 50, typeof(SmeltingSkill)),
                     new IngredientElement(typeof(AgricultureResearchPaperModernItem), 125, typeof(SmeltingSkill)),
-                    new IngredientElement(typeof(AdvancedCookingSkillScroll), 1, typeof(BasicEngineeringSkill)),
+                    new IngredientElement(typeof(AdvancedBakingSkillScroll), 1, typeof(BasicEngineeringSkill)),
                 },
                 new List<CraftingElement>
                 {
