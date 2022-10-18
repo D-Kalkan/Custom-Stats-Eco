@@ -16,7 +16,7 @@ namespace Eco.Mods.TechTree
     using Eco.Shared.Utils;
     using Eco.Core.Controller;
 
-    [RequiresSkill(typeof(IndustrySkill), 1)]
+    [RequiresSkill(typeof(IndustrySkill), 3)]
     public partial class LiquidNitrogenRecipe : RecipeFamily
     {
         public LiquidNitrogenRecipe()

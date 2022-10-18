@@ -1,22 +1,60 @@
 Eco Plus Stats 
 -----------------
 
-[![Join the chat at https://discord.gg/dC5KftVjCC](https://discordapp.com/api/guilds/873178918302146600/widget.png)](https://discord.gg/dC5KftVjCC)
+[![Discord](https://discordapp.com/api/guilds/873178918302146600/widget.png)](https://discord.gg/dC5KftVjCC)
 [![GitHub Release](https://img.shields.io/github/v/release/D-Kalkan/Custom-Stats-Eco.svg)](https://github.com/D-Kalkan/Custom-Stats-Eco/releases)
 
 ## Description ##
 
-This is a series of modifications made to the Eco+ Server files to facilitate a series of more strict game style we aim to support for the server.
+This is a series of modifications made to the Eco+ Server files to facilitate a series of more strict game style we aim to support for the server.<br>
 
-### New Features ###
+## Main Features ##
+
+* Overhauled the fertilizer skill into a recycling profession
+* Overhauled the self improvement skill
+* Combined Hunting with Butchery
+* Combined Farming with Gathering
+* New fuel coke for the steam truck crafted by Mechanics
+* New fuel diesel for the truck that crafted by Industry
+* Reduced the effectiveness of upgrade modules
+* Overhauled research to be completed by the enitre server
+* Mass produced items create garbage as an additional minor output
+* A wide range of balance changes touching almost every profession notably: 
+
+	Tailors can now craft land claim papers at end game <br>
+	Pottery can craft Iron Barrels <br>
+	Carpentry can craft transmission poles <br>
+	Electronics require ceramics <br>
+
+
+
+## Installation Instructions ##
+
+Place the the files into the server directory 
+
+		Eco\Eco_Data\Server\Mods\UserCode
+
+## License ##
+
+The Eco+ Custom Stats mod is released to the Public Domain. This means you can do whatever you want with this code without so much as crediting us.
+
+That said, it will be appreciated if you do attribute the work!
+
+
+
+
+### Change Notes ###
 
 * Combined Hunting with Butchery
 * Combined Farming with Gathering
 * Removed the Cutting Edge Cooking Skill
+* Removed the Paper Milling skill
+* Tailors now craft paper because of the removal of paper milling 
 * Farming no longer has to be researched and is baseline
 * Reduced XP needed to level Industry and Glassworking
 * Set all Stone Age Tech to create 1 scroll
-* Moved Transmission Poles to the Carpentry skill
+* Moved Iron Barrels to the Pottery skill
+* Moved Transmission Poles to the Carpentry skill 
 * Iron Barrels now require One Iron Plate instead of One Iron Bar
 * Steam Engines only accept charcoal as fuel
 * Lowered the effectiveness of all upgrade modules to 5%, 12.5%, 20%, 25% and 30%
@@ -41,22 +79,5 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 * Move Wheat Ethanol, Corn Ethanol and Corn Starch to Milling
 * Added Extra Glass or pelt requirements to several recipes
 * Most mass produced Items now also produce a little bit of garbage
-
-
-### Changes brought forward from previous season ###
+* Added a recycleable tag to all relevant tools and furnature 
 * Added the ability for arrastras to break down all stone types
-* Moved Iron Barrels to the Pottery skill
-* Paper Milling skill removed
-* Tailors now craft paper because of the removal of paper milling 
-
-## Installation Instructions ##
-
-Place the the files into the server directory 
-
-		Eco\Eco_Data\Server\Mods\UserCode
-
-## License ##
-
-The Eco+ Custom Stats mod is released to the Public Domain. This means you can do whatever you want with this code without so much as crediting us.
-
-That said, it will be appreciated if you do attribute the work!
