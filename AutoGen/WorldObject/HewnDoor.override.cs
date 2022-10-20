@@ -42,17 +42,20 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [RequireComponent(typeof(PropertyAuthComponent))]
-    [RequireComponent(typeof(LinkComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
-    public partial class TinyStockpileObject : WorldObject, IRepresentsItem
+    public partial class HewnDoorObject : DoorObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(TinyStockpileItem);
-        public override LocString DisplayName => Localizer.DoStr("Tiny Stockpile");
+        public virtual Type RepresentedItemType => typeof(HewnDoorItem);
+        public override LocString DisplayName => Localizer.DoStr("Hewn Door");
         public override TableTextureMode TableTexture => TableTextureMode.Wood;
+        public override bool HasTier => true;
+        public override int Tier => 1;
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
+            base.Initialize();
+
             this.ModsPostInitialize();
         }
 
@@ -68,13 +71,13 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Tiny Stockpile")]
-    [Ecopedia("Crafted Objects", "Storage", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    [Tag("Primitive Recyclable Tool", 1)]
-    public partial class TinyStockpileItem : WorldObjectItem<TinyStockpileObject>
+    [LocDisplayName("Hewn Door")]
+    [Tier(1)]
+    [Ecopedia("Housing Objects", "Doors", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    public partial class HewnDoorItem : WorldObjectItem<HewnDoorObject>
     {
         
-        public override LocString DisplayDescription => Localizer.DoStr("Designates a 2x3x2 area as storage for large items.");
+        public override LocString DisplayDescription => Localizer.DoStr("A door made from roughly hewn logs.");
 
 
         public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
@@ -83,29 +86,31 @@ namespace Eco.Mods.TechTree
 
     }
 
-    public partial class TinyStockpileRecipe : RecipeFamily
+    [RequiresSkill(typeof(CarpentrySkill), 1)]
+    public partial class HewnDoorRecipe : RecipeFamily
     {
-        public TinyStockpileRecipe()
+        public HewnDoorRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "TinyStockpile",  //noloc
-                Localizer.DoStr("Tiny Stockpile"),
+                "HewnDoor",  //noloc
+                Localizer.DoStr("Hewn Door"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement("Wood", 5), //noloc
+                    new IngredientElement("HewnLog", 8, true), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<TinyStockpileItem>()
+                    new CraftingElement<HewnDoorItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(5);
-            this.CraftMinutes = CreateCraftTimeValue(0.5f);
+            this.ExperienceOnCraft = 0.5f;
+            this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(CarpentrySkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(HewnDoorRecipe), 1, typeof(CarpentrySkill), typeof(CarpentryFocusedSpeedTalent), typeof(CarpentryParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Tiny Stockpile"), typeof(TinyStockpileRecipe));
+            this.Initialize(Localizer.DoStr("Hewn Door"), typeof(HewnDoorRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(WorkbenchObject), this);
+            CraftingComponent.AddRecipe(typeof(CarpentryTableObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>

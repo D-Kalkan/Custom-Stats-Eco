@@ -42,17 +42,17 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [RequireComponent(typeof(PropertyAuthComponent))]
-    [RequireComponent(typeof(LinkComponent))]
-    [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
-    public partial class TinyStockpileObject : WorldObject, IRepresentsItem
+    [RequireComponent(typeof(CustomTextComponent))]
+    public partial class SmallHangingMortaredStoneSignObject : WorldObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(TinyStockpileItem);
-        public override LocString DisplayName => Localizer.DoStr("Tiny Stockpile");
-        public override TableTextureMode TableTexture => TableTextureMode.Wood;
+        public virtual Type RepresentedItemType => typeof(SmallHangingMortaredStoneSignItem);
+        public override LocString DisplayName => Localizer.DoStr("Small Hanging Mortared Stone Sign");
+        public override TableTextureMode TableTexture => TableTextureMode.Stone;
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
+            this.GetComponent<CustomTextComponent>().Initialize(700);
             this.ModsPostInitialize();
         }
 
@@ -68,44 +68,43 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Tiny Stockpile")]
-    [Ecopedia("Crafted Objects", "Storage", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    [Tag("Primitive Recyclable Tool", 1)]
-    public partial class TinyStockpileItem : WorldObjectItem<TinyStockpileObject>
+    [LocDisplayName("Small Hanging Mortared Stone Sign")]
+    [Ecopedia("Crafted Objects", "Signs", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    public partial class SmallHangingMortaredStoneSignItem : WorldObjectItem<SmallHangingMortaredStoneSignObject>, IPersistentData
     {
         
-        public override LocString DisplayDescription => Localizer.DoStr("Designates a 2x3x2 area as storage for large items.");
+        public override LocString DisplayDescription => Localizer.DoStr("A small sign for all of your smaller text needs!");
 
 
-        public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
-                    | DirectionAxisFlags.Down
-                ;
 
+        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren] public object PersistentData { get; set; }
     }
 
-    public partial class TinyStockpileRecipe : RecipeFamily
+    [RequiresSkill(typeof(MasonrySkill), 1)]
+    public partial class SmallHangingMortaredStoneSignRecipe : RecipeFamily
     {
-        public TinyStockpileRecipe()
+        public SmallHangingMortaredStoneSignRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "TinyStockpile",  //noloc
-                Localizer.DoStr("Tiny Stockpile"),
+                "SmallHangingMortaredStoneSign",  //noloc
+                Localizer.DoStr("Small Hanging Mortared Stone Sign"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement("Wood", 5), //noloc
+                    new IngredientElement("MortaredStone", 6, typeof(MasonrySkill), typeof(MasonryLavishResourcesTalent)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<TinyStockpileItem>()
+                    new CraftingElement<SmallHangingMortaredStoneSignItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(5);
-            this.CraftMinutes = CreateCraftTimeValue(0.5f);
+            this.ExperienceOnCraft = 1;
+            this.LaborInCalories = CreateLaborInCaloriesValue(25, typeof(MasonrySkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(SmallHangingMortaredStoneSignRecipe), 5, typeof(MasonrySkill), typeof(MasonryFocusedSpeedTalent), typeof(MasonryParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Tiny Stockpile"), typeof(TinyStockpileRecipe));
+            this.Initialize(Localizer.DoStr("Small Hanging Mortared Stone Sign"), typeof(SmallHangingMortaredStoneSignRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(WorkbenchObject), this);
+            CraftingComponent.AddRecipe(typeof(MasonryTableObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>

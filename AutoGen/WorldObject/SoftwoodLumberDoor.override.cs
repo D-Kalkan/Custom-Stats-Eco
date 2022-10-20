@@ -42,17 +42,20 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [RequireComponent(typeof(PropertyAuthComponent))]
-    [RequireComponent(typeof(LinkComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
-    public partial class TinyStockpileObject : WorldObject, IRepresentsItem
+    public partial class SoftwoodLumberDoorObject : DoorObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(TinyStockpileItem);
-        public override LocString DisplayName => Localizer.DoStr("Tiny Stockpile");
+        public virtual Type RepresentedItemType => typeof(SoftwoodLumberDoorItem);
+        public override LocString DisplayName => Localizer.DoStr("Softwood Lumber Door");
         public override TableTextureMode TableTexture => TableTextureMode.Wood;
+        public override bool HasTier => true;
+        public override int Tier => 2;
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
+            base.Initialize();
+
             this.ModsPostInitialize();
         }
 
@@ -68,13 +71,13 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Tiny Stockpile")]
-    [Ecopedia("Crafted Objects", "Storage", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    [Tag("Primitive Recyclable Tool", 1)]
-    public partial class TinyStockpileItem : WorldObjectItem<TinyStockpileObject>
+    [LocDisplayName("Softwood Lumber Door")]
+    [Tier(2)]
+    [Ecopedia("Housing Objects", "Doors", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    public partial class SoftwoodLumberDoorItem : WorldObjectItem<SoftwoodLumberDoorObject>
     {
         
-        public override LocString DisplayDescription => Localizer.DoStr("Designates a 2x3x2 area as storage for large items.");
+        public override LocString DisplayDescription => Localizer.DoStr("A door made from finely cut lumber.");
 
 
         public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
@@ -83,33 +86,28 @@ namespace Eco.Mods.TechTree
 
     }
 
-    public partial class TinyStockpileRecipe : RecipeFamily
+    [RequiresSkill(typeof(CarpentrySkill), 5)]
+    [ForceCreateView]
+    public partial class SoftwoodLumberDoorRecipe : Recipe
     {
-        public TinyStockpileRecipe()
+        public SoftwoodLumberDoorRecipe()
         {
-            var recipe = new Recipe();
-            recipe.Init(
-                "TinyStockpile",  //noloc
-                Localizer.DoStr("Tiny Stockpile"),
+            this.Init(
+                "SoftwoodLumberDoor",  //noloc
+                Localizer.DoStr("Softwood Lumber Door"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement("Wood", 5), //noloc
+                    new IngredientElement(typeof(SoftwoodLumberItem), 6, true),
+                    new IngredientElement("WoodBoard", 12, true), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<TinyStockpileItem>()
+                    new CraftingElement<SoftwoodLumberDoorItem>()
                 });
-            this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(5);
-            this.CraftMinutes = CreateCraftTimeValue(0.5f);
-            this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Tiny Stockpile"), typeof(TinyStockpileRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(WorkbenchObject), this);
+            CraftingComponent.AddTagProduct(typeof(SawmillObject), typeof(LumberDoorRecipe), this);
         }
 
-        /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
-        partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize RecipeFamily after initialization, but before registration. You can change skill requirements here.</summary>
         partial void ModsPostInitialize();
     }

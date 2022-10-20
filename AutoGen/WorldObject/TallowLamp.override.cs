@@ -39,20 +39,28 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Civics.Objects;
     using Eco.Gameplay.Systems.NewTooltip;
     using Eco.Core.Controller;
+    using static Eco.Gameplay.Housing.PropertyValues.HomeFurnishingValue;
 
     [Serialized]
+    [RequireComponent(typeof(OnOffComponent))]
     [RequireComponent(typeof(PropertyAuthComponent))]
     [RequireComponent(typeof(LinkComponent))]
+    [RequireComponent(typeof(FuelSupplyComponent))]
+    [RequireComponent(typeof(FuelConsumptionComponent))]
+    [RequireComponent(typeof(HousingComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
-    public partial class TinyStockpileObject : WorldObject, IRepresentsItem
+    public partial class TallowLampObject : WorldObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(TinyStockpileItem);
-        public override LocString DisplayName => Localizer.DoStr("Tiny Stockpile");
-        public override TableTextureMode TableTexture => TableTextureMode.Wood;
+        public virtual Type RepresentedItemType => typeof(TallowLampItem);
+        public override LocString DisplayName => Localizer.DoStr("Tallow Lamp");
+        private static string[] fuelTagList = new[] { "Fat" }; //noloc
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
+            this.GetComponent<FuelSupplyComponent>().Initialize(2, fuelTagList);
+            this.GetComponent<FuelConsumptionComponent>().Initialize(0.2f);
+            this.GetComponent<HousingComponent>().HomeValue = TallowLampItem.homeValue;
             this.ModsPostInitialize();
         }
 
@@ -68,44 +76,57 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Tiny Stockpile")]
-    [Ecopedia("Crafted Objects", "Storage", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    [Tag("Primitive Recyclable Tool", 1)]
-    public partial class TinyStockpileItem : WorldObjectItem<TinyStockpileObject>
+    [LocDisplayName("Tallow Lamp")]
+    [Ecopedia("Housing Objects", "Lights", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Tag("Housing", 1)]
+    public partial class TallowLampItem : WorldObjectItem<TallowLampObject>
     {
         
-        public override LocString DisplayDescription => Localizer.DoStr("Designates a 2x3x2 area as storage for large items.");
+        public override LocString DisplayDescription => Localizer.DoStr("A pottery lamp. Fuel with tallow.");
 
 
         public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
                     | DirectionAxisFlags.Down
                 ;
+        public override HomeFurnishingValue HomeValue => homeValue;
+        public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
+        {
+            Category                 = RoomCategory.General,
+            SkillValue               = 1.2f,
+            TypeForRoomLimit         = Localizer.DoStr("Lights"),
+            DiminishingReturnPercent = 0.7f
+        };
 
+        [Tooltip(7)] private LocString PowerConsumptionTooltip => Localizer.Do($"Consumes: {Text.Info(0.2f)}w of {new HeatPower().Name} power from fuel");
     }
 
-    public partial class TinyStockpileRecipe : RecipeFamily
+    [RequiresSkill(typeof(MasonrySkill), 2)]
+    public partial class TallowLampRecipe : RecipeFamily
     {
-        public TinyStockpileRecipe()
+        public TallowLampRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "TinyStockpile",  //noloc
-                Localizer.DoStr("Tiny Stockpile"),
+                "TallowLamp",  //noloc
+                Localizer.DoStr("Tallow Lamp"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement("Wood", 5), //noloc
+                    new IngredientElement(typeof(ClayItem), 4, typeof(MasonrySkill), typeof(MasonryLavishResourcesTalent)),
+                    new IngredientElement(typeof(TallowItem), 4, typeof(MasonrySkill), typeof(MasonryLavishResourcesTalent)),
+                    new IngredientElement(typeof(CottonThreadItem), 1, true),
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<TinyStockpileItem>()
+                    new CraftingElement<TallowLampItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(5);
-            this.CraftMinutes = CreateCraftTimeValue(0.5f);
+            this.ExperienceOnCraft = 2;
+            this.LaborInCalories = CreateLaborInCaloriesValue(50, typeof(MasonrySkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(TallowLampRecipe), 2, typeof(MasonrySkill), typeof(MasonryFocusedSpeedTalent), typeof(MasonryParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Tiny Stockpile"), typeof(TinyStockpileRecipe));
+            this.Initialize(Localizer.DoStr("Tallow Lamp"), typeof(TallowLampRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(WorkbenchObject), this);
+            CraftingComponent.AddRecipe(typeof(KilnObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>

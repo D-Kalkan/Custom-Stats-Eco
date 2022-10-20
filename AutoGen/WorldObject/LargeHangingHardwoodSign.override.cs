@@ -42,17 +42,17 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [RequireComponent(typeof(PropertyAuthComponent))]
-    [RequireComponent(typeof(LinkComponent))]
-    [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
-    public partial class TinyStockpileObject : WorldObject, IRepresentsItem
+    [RequireComponent(typeof(CustomTextComponent))]
+    public partial class LargeHangingHardwoodSignObject : WorldObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(TinyStockpileItem);
-        public override LocString DisplayName => Localizer.DoStr("Tiny Stockpile");
+        public virtual Type RepresentedItemType => typeof(LargeHangingHardwoodSignItem);
+        public override LocString DisplayName => Localizer.DoStr("Large Hanging Hardwood Sign");
         public override TableTextureMode TableTexture => TableTextureMode.Wood;
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
+            this.GetComponent<CustomTextComponent>().Initialize(700);
             this.ModsPostInitialize();
         }
 
@@ -68,48 +68,41 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Tiny Stockpile")]
-    [Ecopedia("Crafted Objects", "Storage", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    [Tag("Primitive Recyclable Tool", 1)]
-    public partial class TinyStockpileItem : WorldObjectItem<TinyStockpileObject>
+    [LocDisplayName("Large Hanging Hardwood Sign")]
+    [Ecopedia("Crafted Objects", "Signs", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    public partial class LargeHangingHardwoodSignItem : WorldObjectItem<LargeHangingHardwoodSignObject>, IPersistentData
     {
         
-        public override LocString DisplayDescription => Localizer.DoStr("Designates a 2x3x2 area as storage for large items.");
+        public override LocString DisplayDescription => Localizer.DoStr("A large sign for all of your larger text needs!");
 
 
-        public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
-                    | DirectionAxisFlags.Down
-                ;
 
+        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren] public object PersistentData { get; set; }
     }
 
-    public partial class TinyStockpileRecipe : RecipeFamily
+    [RequiresSkill(typeof(CarpentrySkill), 3)]
+    [ForceCreateView]
+    public partial class LargeHangingHardwoodSignRecipe : Recipe
     {
-        public TinyStockpileRecipe()
+        public LargeHangingHardwoodSignRecipe()
         {
-            var recipe = new Recipe();
-            recipe.Init(
-                "TinyStockpile",  //noloc
-                Localizer.DoStr("Tiny Stockpile"),
+            this.Init(
+                "LargeHangingHardwoodSign",  //noloc
+                Localizer.DoStr("Large Hanging Hardwood Sign"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement("Wood", 5), //noloc
+                    new IngredientElement(typeof(HardwoodBoardItem), 5, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
+                    new IngredientElement("HewnLog", 4, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
+                    new IngredientElement("Hardwood", 10, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<TinyStockpileItem>()
+                    new CraftingElement<LargeHangingHardwoodSignItem>()
                 });
-            this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(5);
-            this.CraftMinutes = CreateCraftTimeValue(0.5f);
-            this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Tiny Stockpile"), typeof(TinyStockpileRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(WorkbenchObject), this);
+            CraftingComponent.AddTagProduct(typeof(CarpentryTableObject), typeof(LargeHangingWoodSignRecipe), this);
         }
 
-        /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
-        partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize RecipeFamily after initialization, but before registration. You can change skill requirements here.</summary>
         partial void ModsPostInitialize();
     }

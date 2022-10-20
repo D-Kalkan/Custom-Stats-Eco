@@ -44,10 +44,10 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(PropertyAuthComponent))]
     [RequireComponent(typeof(LinkComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
-    public partial class TinyStockpileObject : WorldObject, IRepresentsItem
+    public partial class SmallStockpileObject : WorldObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(TinyStockpileItem);
-        public override LocString DisplayName => Localizer.DoStr("Tiny Stockpile");
+        public virtual Type RepresentedItemType => typeof(SmallStockpileItem);
+        public override LocString DisplayName => Localizer.DoStr("Small Stockpile");
         public override TableTextureMode TableTexture => TableTextureMode.Wood;
 
         protected override void Initialize()
@@ -68,13 +68,12 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Tiny Stockpile")]
+    [LocDisplayName("Small Stockpile")]
     [Ecopedia("Crafted Objects", "Storage", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    [Tag("Primitive Recyclable Tool", 1)]
-    public partial class TinyStockpileItem : WorldObjectItem<TinyStockpileObject>
+    public partial class SmallStockpileItem : WorldObjectItem<SmallStockpileObject>
     {
         
-        public override LocString DisplayDescription => Localizer.DoStr("Designates a 2x3x2 area as storage for large items.");
+        public override LocString DisplayDescription => Localizer.DoStr("Designates a 3x3x3 area as storage for large items.");
 
 
         public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
@@ -83,27 +82,27 @@ namespace Eco.Mods.TechTree
 
     }
 
-    public partial class TinyStockpileRecipe : RecipeFamily
+    public partial class SmallStockpileRecipe : RecipeFamily
     {
-        public TinyStockpileRecipe()
+        public SmallStockpileRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "TinyStockpile",  //noloc
-                Localizer.DoStr("Tiny Stockpile"),
+                "SmallStockpile",  //noloc
+                Localizer.DoStr("Small Stockpile"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement("Wood", 5), //noloc
+                    new IngredientElement("Wood", 10), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<TinyStockpileItem>()
+                    new CraftingElement<SmallStockpileItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(5);
+            this.LaborInCalories = CreateLaborInCaloriesValue(10);
             this.CraftMinutes = CreateCraftTimeValue(0.5f);
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Tiny Stockpile"), typeof(TinyStockpileRecipe));
+            this.Initialize(Localizer.DoStr("Small Stockpile"), typeof(SmallStockpileRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(WorkbenchObject), this);
         }
