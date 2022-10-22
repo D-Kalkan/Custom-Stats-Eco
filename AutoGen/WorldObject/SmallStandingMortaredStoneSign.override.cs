@@ -71,6 +71,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Small Standing Mortared Stone Sign")]
     [Ecopedia("Crafted Objects", "Signs", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Tag("Small Mortared Stone Furnishing", 1)]
     public partial class SmallStandingMortaredStoneSignItem : WorldObjectItem<SmallStandingMortaredStoneSignObject>, IPersistentData
     {
         

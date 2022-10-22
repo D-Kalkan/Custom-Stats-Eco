@@ -79,6 +79,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Tallow Lamp")]
     [Ecopedia("Housing Objects", "Lights", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Housing", 1)]
+    [Tag("Small Mortared Stone Furnishing", 1)]
     public partial class TallowLampItem : WorldObjectItem<TallowLampObject>
     {
         

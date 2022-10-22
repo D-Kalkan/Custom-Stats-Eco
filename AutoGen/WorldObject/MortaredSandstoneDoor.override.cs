@@ -74,6 +74,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Mortared Sandstone Door")]
     [Tier(1)]
     [Ecopedia("Housing Objects", "Doors", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Tag("Small Mortared Stone Furnishing", 1)]
     public partial class MortaredSandstoneDoorItem : WorldObjectItem<MortaredSandstoneDoorObject>
     {
         

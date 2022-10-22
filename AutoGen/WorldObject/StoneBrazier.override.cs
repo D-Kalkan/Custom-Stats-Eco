@@ -80,6 +80,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Stone Brazier")]
     [Ecopedia("Housing Objects", "Lights", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Housing", 1)]
+    [Tag("Small Mortared Stone Furnishing", 1)]
     public partial class StoneBrazierItem : WorldObjectItem<StoneBrazierObject>
     {
         
