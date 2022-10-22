@@ -45,16 +45,16 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(PropertyAuthComponent))]
     [RequireComponent(typeof(HousingComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
-    public partial class HardwoodLumberTableObject : WorldObject, IRepresentsItem
+    public partial class LumberTableObject : WorldObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(HardwoodLumberTableItem);
-        public override LocString DisplayName => Localizer.DoStr("Hardwood Lumber Table");
+        public virtual Type RepresentedItemType => typeof(LumberTableItem);
+        public override LocString DisplayName => Localizer.DoStr("Lumber Table");
         public override TableTextureMode TableTexture => TableTextureMode.Wood;
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
-            this.GetComponent<HousingComponent>().HomeValue = HardwoodLumberTableItem.homeValue;
+            this.GetComponent<HousingComponent>().HomeValue = LumberTableItem.homeValue;
             this.ModsPostInitialize();
         }
 
@@ -70,11 +70,11 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Hardwood Lumber Table")]
+    [LocDisplayName("Lumber Table")]
     [Ecopedia("Housing Objects", "Tables", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Housing", 1)]
     [Tag("Lumber Furnishing", 1)]
-    public partial class HardwoodLumberTableItem : WorldObjectItem<HardwoodLumberTableObject>
+    public partial class LumberTableItem : WorldObjectItem<LumberTableObject>
     {
         
         public override LocString DisplayDescription => Localizer.DoStr("A large lumber table for eating meals or getting some work done.");
@@ -95,27 +95,35 @@ namespace Eco.Mods.TechTree
     }
 
     [RequiresSkill(typeof(CarpentrySkill), 6)]
-    [ForceCreateView]
-    public partial class HardwoodLumberTableRecipe : Recipe
+    public partial class LumberTableRecipe : RecipeFamily
     {
-        public HardwoodLumberTableRecipe()
+        public LumberTableRecipe()
         {
-            this.Init(
-                "HardwoodLumberTable",  //noloc
-                Localizer.DoStr("Hardwood Lumber Table"),
+            var recipe = new Recipe();
+            recipe.Init(
+                "LumberTable",  //noloc
+                Localizer.DoStr("Lumber Table"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(HardwoodLumberItem), 18, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
                     new IngredientElement(typeof(NailItem), 8, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
+                    new IngredientElement("Lumber", 18, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<HardwoodLumberTableItem>()
+                    new CraftingElement<LumberTableItem>()
                 });
+            this.Recipes = new List<Recipe> { recipe };
+            this.ExperienceOnCraft = 3;
+            this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(CarpentrySkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(LumberTableRecipe), 4, typeof(CarpentrySkill), typeof(CarpentryFocusedSpeedTalent), typeof(CarpentryParallelSpeedTalent));
+            this.ModsPreInitialize();
+            this.Initialize(Localizer.DoStr("Lumber Table"), typeof(LumberTableRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddTagProduct(typeof(SawmillObject), typeof(LumberTableRecipe), this);
+            CraftingComponent.AddRecipe(typeof(SawmillObject), this);
         }
 
+        /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
+        partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize RecipeFamily after initialization, but before registration. You can change skill requirements here.</summary>
         partial void ModsPostInitialize();
     }

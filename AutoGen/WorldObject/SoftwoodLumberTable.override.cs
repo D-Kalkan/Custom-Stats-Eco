@@ -45,16 +45,16 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(PropertyAuthComponent))]
     [RequireComponent(typeof(HousingComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
-    public partial class HardwoodLumberTableObject : WorldObject, IRepresentsItem
+    public partial class SoftwoodLumberTableObject : WorldObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(HardwoodLumberTableItem);
-        public override LocString DisplayName => Localizer.DoStr("Hardwood Lumber Table");
+        public virtual Type RepresentedItemType => typeof(SoftwoodLumberTableItem);
+        public override LocString DisplayName => Localizer.DoStr("Softwood Lumber Table");
         public override TableTextureMode TableTexture => TableTextureMode.Wood;
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
-            this.GetComponent<HousingComponent>().HomeValue = HardwoodLumberTableItem.homeValue;
+            this.GetComponent<HousingComponent>().HomeValue = SoftwoodLumberTableItem.homeValue;
             this.ModsPostInitialize();
         }
 
@@ -70,11 +70,11 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Hardwood Lumber Table")]
+    [LocDisplayName("Softwood Lumber Table")]
     [Ecopedia("Housing Objects", "Tables", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Housing", 1)]
     [Tag("Lumber Furnishing", 1)]
-    public partial class HardwoodLumberTableItem : WorldObjectItem<HardwoodLumberTableObject>
+    public partial class SoftwoodLumberTableItem : WorldObjectItem<SoftwoodLumberTableObject>
     {
         
         public override LocString DisplayDescription => Localizer.DoStr("A large lumber table for eating meals or getting some work done.");
@@ -96,21 +96,21 @@ namespace Eco.Mods.TechTree
 
     [RequiresSkill(typeof(CarpentrySkill), 6)]
     [ForceCreateView]
-    public partial class HardwoodLumberTableRecipe : Recipe
+    public partial class SoftwoodLumberTableRecipe : Recipe
     {
-        public HardwoodLumberTableRecipe()
+        public SoftwoodLumberTableRecipe()
         {
             this.Init(
-                "HardwoodLumberTable",  //noloc
-                Localizer.DoStr("Hardwood Lumber Table"),
+                "SoftwoodLumberTable",  //noloc
+                Localizer.DoStr("Softwood Lumber Table"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(HardwoodLumberItem), 18, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
+                    new IngredientElement(typeof(SoftwoodLumberItem), 18, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
                     new IngredientElement(typeof(NailItem), 8, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<HardwoodLumberTableItem>()
+                    new CraftingElement<SoftwoodLumberTableItem>()
                 });
             this.ModsPostInitialize();
             CraftingComponent.AddTagProduct(typeof(SawmillObject), typeof(LumberTableRecipe), this);

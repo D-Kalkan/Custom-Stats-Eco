@@ -75,6 +75,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Couch")]
     [Ecopedia("Housing Objects", "Seating", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Housing", 1)]
+    [Tag("Lumber Furnishing", 1)]
     public partial class CouchItem : WorldObjectItem<CouchObject>
     {
         

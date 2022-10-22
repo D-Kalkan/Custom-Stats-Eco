@@ -43,18 +43,23 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [RequireComponent(typeof(PropertyAuthComponent))]
+    [RequireComponent(typeof(LinkComponent))]
     [RequireComponent(typeof(HousingComponent))]
+    [RequireComponent(typeof(PublicStorageComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
-    public partial class HardwoodLumberTableObject : WorldObject, IRepresentsItem
+    public partial class ShelfCabinetObject : WorldObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(HardwoodLumberTableItem);
-        public override LocString DisplayName => Localizer.DoStr("Hardwood Lumber Table");
+        public virtual Type RepresentedItemType => typeof(ShelfCabinetItem);
+        public override LocString DisplayName => Localizer.DoStr("Shelf Cabinet");
         public override TableTextureMode TableTexture => TableTextureMode.Wood;
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
-            this.GetComponent<HousingComponent>().HomeValue = HardwoodLumberTableItem.homeValue;
+            this.GetComponent<HousingComponent>().HomeValue = ShelfCabinetItem.homeValue;
+            var storage = this.GetComponent<PublicStorageComponent>();
+            storage.Initialize(8);
+            storage.Storage.AddInvRestriction(new NotCarriedRestriction()); // can't store block or large itemsa
             this.ModsPostInitialize();
         }
 
@@ -70,14 +75,14 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Hardwood Lumber Table")]
-    [Ecopedia("Housing Objects", "Tables", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [LocDisplayName("Shelf Cabinet")]
+    [Ecopedia("Housing Objects", "Decoration", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Housing", 1)]
     [Tag("Lumber Furnishing", 1)]
-    public partial class HardwoodLumberTableItem : WorldObjectItem<HardwoodLumberTableObject>
+    public partial class ShelfCabinetItem : WorldObjectItem<ShelfCabinetObject>
     {
         
-        public override LocString DisplayDescription => Localizer.DoStr("A large lumber table for eating meals or getting some work done.");
+        public override LocString DisplayDescription => Localizer.DoStr("When a shelf and a cabinet aren't enough individually.");
 
 
         public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
@@ -88,34 +93,42 @@ namespace Eco.Mods.TechTree
         {
             Category                 = RoomCategory.General,
             SkillValue               = 2,
-            TypeForRoomLimit         = Localizer.DoStr("Table"),
-            DiminishingReturnPercent = 0.6f
+            TypeForRoomLimit         = Localizer.DoStr("Shelves"),
+            DiminishingReturnPercent = 0.5f
         };
 
     }
 
-    [RequiresSkill(typeof(CarpentrySkill), 6)]
-    [ForceCreateView]
-    public partial class HardwoodLumberTableRecipe : Recipe
+    [RequiresSkill(typeof(CarpentrySkill), 5)]
+    public partial class ShelfCabinetRecipe : RecipeFamily
     {
-        public HardwoodLumberTableRecipe()
+        public ShelfCabinetRecipe()
         {
-            this.Init(
-                "HardwoodLumberTable",  //noloc
-                Localizer.DoStr("Hardwood Lumber Table"),
+            var recipe = new Recipe();
+            recipe.Init(
+                "ShelfCabinet",  //noloc
+                Localizer.DoStr("Shelf Cabinet"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(HardwoodLumberItem), 18, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
-                    new IngredientElement(typeof(NailItem), 8, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
+                    new IngredientElement("Lumber", 14, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
+                    new IngredientElement("WoodBoard", 16, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<HardwoodLumberTableItem>()
+                    new CraftingElement<ShelfCabinetItem>()
                 });
+            this.Recipes = new List<Recipe> { recipe };
+            this.ExperienceOnCraft = 5;
+            this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(CarpentrySkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(ShelfCabinetRecipe), 2, typeof(CarpentrySkill), typeof(CarpentryFocusedSpeedTalent), typeof(CarpentryParallelSpeedTalent));
+            this.ModsPreInitialize();
+            this.Initialize(Localizer.DoStr("Shelf Cabinet"), typeof(ShelfCabinetRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddTagProduct(typeof(SawmillObject), typeof(LumberTableRecipe), this);
+            CraftingComponent.AddRecipe(typeof(SawmillObject), this);
         }
 
+        /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
+        partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize RecipeFamily after initialization, but before registration. You can change skill requirements here.</summary>
         partial void ModsPostInitialize();
     }

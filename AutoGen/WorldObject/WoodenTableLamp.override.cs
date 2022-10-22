@@ -42,19 +42,24 @@ namespace Eco.Mods.TechTree
     using static Eco.Gameplay.Housing.PropertyValues.HomeFurnishingValue;
 
     [Serialized]
+    [RequireComponent(typeof(OnOffComponent))]
     [RequireComponent(typeof(PropertyAuthComponent))]
+    [RequireComponent(typeof(PowerGridComponent))]
+    [RequireComponent(typeof(PowerConsumptionComponent))]
     [RequireComponent(typeof(HousingComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
-    public partial class HardwoodLumberTableObject : WorldObject, IRepresentsItem
+    public partial class WoodenTableLampObject : WorldObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(HardwoodLumberTableItem);
-        public override LocString DisplayName => Localizer.DoStr("Hardwood Lumber Table");
+        public virtual Type RepresentedItemType => typeof(WoodenTableLampItem);
+        public override LocString DisplayName => Localizer.DoStr("Wooden Table Lamp");
         public override TableTextureMode TableTexture => TableTextureMode.Wood;
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
-            this.GetComponent<HousingComponent>().HomeValue = HardwoodLumberTableItem.homeValue;
+            this.GetComponent<PowerConsumptionComponent>().Initialize(60);
+            this.GetComponent<PowerGridComponent>().Initialize(10, new ElectricPower());
+            this.GetComponent<HousingComponent>().HomeValue = WoodenTableLampItem.homeValue;
             this.ModsPostInitialize();
         }
 
@@ -70,14 +75,14 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Hardwood Lumber Table")]
-    [Ecopedia("Housing Objects", "Tables", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [LocDisplayName("Wooden Table Lamp")]
+    [Ecopedia("Housing Objects", "Lights", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Housing", 1)]
     [Tag("Lumber Furnishing", 1)]
-    public partial class HardwoodLumberTableItem : WorldObjectItem<HardwoodLumberTableObject>
+    public partial class WoodenTableLampItem : WorldObjectItem<WoodenTableLampObject>
     {
         
-        public override LocString DisplayDescription => Localizer.DoStr("A large lumber table for eating meals or getting some work done.");
+        public override LocString DisplayDescription => Localizer.DoStr("For late night studying. Or working. Or anything, really.");
 
 
         public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
@@ -88,34 +93,46 @@ namespace Eco.Mods.TechTree
         {
             Category                 = RoomCategory.General,
             SkillValue               = 2,
-            TypeForRoomLimit         = Localizer.DoStr("Table"),
-            DiminishingReturnPercent = 0.6f
+            TypeForRoomLimit         = Localizer.DoStr("Lights"),
+            DiminishingReturnPercent = 0.7f
         };
 
+        [Tooltip(7)] private LocString PowerConsumptionTooltip => Localizer.Do($"Consumes: {Text.Info(60)}w of {new ElectricPower().Name} power");
     }
 
     [RequiresSkill(typeof(CarpentrySkill), 6)]
-    [ForceCreateView]
-    public partial class HardwoodLumberTableRecipe : Recipe
+    public partial class WoodenTableLampRecipe : RecipeFamily
     {
-        public HardwoodLumberTableRecipe()
+        public WoodenTableLampRecipe()
         {
-            this.Init(
-                "HardwoodLumberTable",  //noloc
-                Localizer.DoStr("Hardwood Lumber Table"),
+            var recipe = new Recipe();
+            recipe.Init(
+                "WoodenTableLamp",  //noloc
+                Localizer.DoStr("Wooden Table Lamp"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(HardwoodLumberItem), 18, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
-                    new IngredientElement(typeof(NailItem), 8, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
+                    new IngredientElement(typeof(CopperWiringItem), 4, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
+                    new IngredientElement("Lumber", 10, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
+                    new IngredientElement("WoodBoard", 4, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
+                    new IngredientElement("Fabric", 6, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
+                    new IngredientElement(typeof(LightBulbItem), 1, true),
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<HardwoodLumberTableItem>()
+                    new CraftingElement<WoodenTableLampItem>()
                 });
+            this.Recipes = new List<Recipe> { recipe };
+            this.ExperienceOnCraft = 3;
+            this.LaborInCalories = CreateLaborInCaloriesValue(120, typeof(CarpentrySkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(WoodenTableLampRecipe), 4, typeof(CarpentrySkill), typeof(CarpentryFocusedSpeedTalent), typeof(CarpentryParallelSpeedTalent));
+            this.ModsPreInitialize();
+            this.Initialize(Localizer.DoStr("Wooden Table Lamp"), typeof(WoodenTableLampRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddTagProduct(typeof(SawmillObject), typeof(LumberTableRecipe), this);
+            CraftingComponent.AddRecipe(typeof(SawmillObject), this);
         }
 
+        /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
+        partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize RecipeFamily after initialization, but before registration. You can change skill requirements here.</summary>
         partial void ModsPostInitialize();
     }

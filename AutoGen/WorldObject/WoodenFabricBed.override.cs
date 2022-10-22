@@ -77,6 +77,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Wooden Fabric Bed")]
     [Ecopedia("Housing Objects", "Bedroom", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Housing", 1)]
+    [Tag("Lumber Furnishing", 1)]
     public partial class WoodenFabricBedItem : WorldObjectItem<WoodenFabricBedObject>
     {
         

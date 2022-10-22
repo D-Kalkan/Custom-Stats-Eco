@@ -39,22 +39,22 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Civics.Objects;
     using Eco.Gameplay.Systems.NewTooltip;
     using Eco.Core.Controller;
-    using static Eco.Gameplay.Housing.PropertyValues.HomeFurnishingValue;
 
     [Serialized]
+    [RequireComponent(typeof(OnOffComponent))]
     [RequireComponent(typeof(PropertyAuthComponent))]
-    [RequireComponent(typeof(HousingComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
-    public partial class HardwoodLumberTableObject : WorldObject, IRepresentsItem
+    public partial class LargeLumberDoorObject : WorldObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(HardwoodLumberTableItem);
-        public override LocString DisplayName => Localizer.DoStr("Hardwood Lumber Table");
+        public virtual Type RepresentedItemType => typeof(LargeLumberDoorItem);
+        public override LocString DisplayName => Localizer.DoStr("Large Lumber Door");
         public override TableTextureMode TableTexture => TableTextureMode.Wood;
+        public override bool HasTier => true;
+        public override int Tier => 2;
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
-            this.GetComponent<HousingComponent>().HomeValue = HardwoodLumberTableItem.homeValue;
             this.ModsPostInitialize();
         }
 
@@ -70,52 +70,52 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Hardwood Lumber Table")]
-    [Ecopedia("Housing Objects", "Tables", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    [Tag("Housing", 1)]
+    [LocDisplayName("Large Lumber Door")]
+    [Tier(2)]
+    [Ecopedia("Housing Objects", "Doors", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Lumber Furnishing", 1)]
-    public partial class HardwoodLumberTableItem : WorldObjectItem<HardwoodLumberTableObject>
+    public partial class LargeLumberDoorItem : WorldObjectItem<LargeLumberDoorObject>
     {
         
-        public override LocString DisplayDescription => Localizer.DoStr("A large lumber table for eating meals or getting some work done.");
+        public override LocString DisplayDescription => Localizer.DoStr("A large lumber door allowing moderate sized vehicles through..");
 
 
         public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
                     | DirectionAxisFlags.Down
                 ;
-        public override HomeFurnishingValue HomeValue => homeValue;
-        public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
-        {
-            Category                 = RoomCategory.General,
-            SkillValue               = 2,
-            TypeForRoomLimit         = Localizer.DoStr("Table"),
-            DiminishingReturnPercent = 0.6f
-        };
 
     }
 
-    [RequiresSkill(typeof(CarpentrySkill), 6)]
-    [ForceCreateView]
-    public partial class HardwoodLumberTableRecipe : Recipe
+    [RequiresSkill(typeof(CarpentrySkill), 5)]
+    public partial class LargeLumberDoorRecipe : RecipeFamily
     {
-        public HardwoodLumberTableRecipe()
+        public LargeLumberDoorRecipe()
         {
-            this.Init(
-                "HardwoodLumberTable",  //noloc
-                Localizer.DoStr("Hardwood Lumber Table"),
+            var recipe = new Recipe();
+            recipe.Init(
+                "LargeLumberDoor",  //noloc
+                Localizer.DoStr("Large Lumber Door"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(HardwoodLumberItem), 18, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
-                    new IngredientElement(typeof(NailItem), 8, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
+                    new IngredientElement("Lumber", 20, true), //noloc
+                    new IngredientElement("WoodBoard", 30, true), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<HardwoodLumberTableItem>()
+                    new CraftingElement<LargeLumberDoorItem>()
                 });
+            this.Recipes = new List<Recipe> { recipe };
+            this.ExperienceOnCraft = 1.5f;
+            this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(CarpentrySkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(LargeLumberDoorRecipe), 8, typeof(CarpentrySkill), typeof(CarpentryFocusedSpeedTalent), typeof(CarpentryParallelSpeedTalent));
+            this.ModsPreInitialize();
+            this.Initialize(Localizer.DoStr("Large Lumber Door"), typeof(LargeLumberDoorRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddTagProduct(typeof(SawmillObject), typeof(LumberTableRecipe), this);
+            CraftingComponent.AddRecipe(typeof(SawmillObject), this);
         }
 
+        /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
+        partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize RecipeFamily after initialization, but before registration. You can change skill requirements here.</summary>
         partial void ModsPostInitialize();
     }
