@@ -71,6 +71,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Small Standing Hardwood Sign")]
     [Ecopedia("Crafted Objects", "Signs", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Tag("Small Hewn Furnishing", 1)]
     public partial class SmallStandingHardwoodSignItem : WorldObjectItem<SmallStandingHardwoodSignObject>, IPersistentData
     {
         

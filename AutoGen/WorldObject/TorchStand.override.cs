@@ -80,6 +80,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Torch Stand")]
     [Ecopedia("Housing Objects", "Lights", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Housing", 1)]
+    [Tag("Small Hewn Furnishing", 1)]
     public partial class TorchStandItem : WorldObjectItem<TorchStandObject>
     {
         

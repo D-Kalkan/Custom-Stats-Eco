@@ -70,6 +70,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Large Hanging Ceiba Sign")]
     [Ecopedia("Crafted Objects", "Signs", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Tag("Small Hewn Furnishing", 1)]
     public partial class LargeHangingCeibaSignItem : WorldObjectItem<LargeHangingCeibaSignObject>, IPersistentData
     {
         

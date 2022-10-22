@@ -74,6 +74,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Hewn Softwood Door")]
     [Tier(1)]
     [Ecopedia("Housing Objects", "Doors", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Tag("Small Hewn Furnishing", 1)]
     public partial class HewnSoftwoodDoorItem : WorldObjectItem<HewnSoftwoodDoorObject>
     {
         
