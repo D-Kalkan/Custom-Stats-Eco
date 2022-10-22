@@ -39,22 +39,26 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Civics.Objects;
     using Eco.Gameplay.Systems.NewTooltip;
     using Eco.Core.Controller;
-    using static Eco.Gameplay.Housing.PropertyValues.HomeFurnishingValue;
 
     [Serialized]
+    [RequireComponent(typeof(OnOffComponent))]
     [RequireComponent(typeof(PropertyAuthComponent))]
-    [RequireComponent(typeof(HousingComponent))]
+    [RequireComponent(typeof(MinimapComponent))]
+    [RequireComponent(typeof(LinkComponent))]
+    [RequireComponent(typeof(CraftingComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
-    public partial class SmallBathMatObject : WorldObject, IRepresentsItem
+    [RequireComponent(typeof(BedComponent))]
+    public partial class CampsiteObject : WorldObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(SmallBathMatItem);
-        public override LocString DisplayName => Localizer.DoStr("Small Bath Mat");
+        public virtual Type RepresentedItemType => typeof(CampsiteItem);
+        public override LocString DisplayName => Localizer.DoStr("Campsite");
         public override TableTextureMode TableTexture => TableTextureMode.Canvas;
+        public override LocString PickupConfirmation => GetComponent<BedComponent>().BedPickupConfirmation();
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
-            this.GetComponent<HousingComponent>().HomeValue = SmallBathMatItem.homeValue;
+            this.GetComponent<MinimapComponent>().Initialize(Localizer.DoStr("Misc"));
             this.ModsPostInitialize();
         }
 
@@ -70,56 +74,49 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Small Bath Mat")]
-    [Ecopedia("Housing Objects", "Washroom", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    [Tag("Housing", 1)]
+    [LocDisplayName("Campsite")]
+    [Ecopedia("Work Stations", "Craft Tables", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Fabric", 1)]
-    public partial class SmallBathMatItem : WorldObjectItem<SmallBathMatObject>
+    [StartsDiscovered]
+    public partial class CampsiteItem : WorldObjectItem<CampsiteObject>, IPersistentData
     {
         
-        public override LocString DisplayDescription => Localizer.DoStr("A small bath mat when a normal rug does not cover your bathroom needs.");
+        public override LocString DisplayDescription => Localizer.DoStr("A campsite.");
 
 
         public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
                     | DirectionAxisFlags.Down
                 ;
-        public override HomeFurnishingValue HomeValue => homeValue;
-        public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
-        {
-            Category                 = RoomCategory.Bathroom,
-            SkillValue               = 1,
-            TypeForRoomLimit         = Localizer.DoStr("Rug"),
-            DiminishingReturnPercent = 0.5f
-        };
 
+        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren] public object PersistentData { get; set; }
     }
 
-    [RequiresSkill(typeof(TailoringSkill), 3)]
-    public partial class SmallBathMatRecipe : RecipeFamily
+    [RequiresSkill(typeof(TailoringSkill), 0)]
+    public partial class CampsiteRecipe : RecipeFamily
     {
-        public SmallBathMatRecipe()
+        public CampsiteRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "SmallBathMat",  //noloc
-                Localizer.DoStr("Small Bath Mat"),
+                "Campsite",  //noloc
+                Localizer.DoStr("Campsite"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(CelluloseFiberItem), 10, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
-                    new IngredientElement(typeof(CottonFabricItem), 20, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
+                    new IngredientElement("Wood", 20, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)), //noloc
+                    new IngredientElement("Fabric", 24, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<SmallBathMatItem>()
+                    new CraftingElement<CampsiteItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 1;
-            this.LaborInCalories = CreateLaborInCaloriesValue(30, typeof(TailoringSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(SmallBathMatRecipe), 4, typeof(TailoringSkill), typeof(TailoringFocusedSpeedTalent), typeof(TailoringParallelSpeedTalent));
+            this.LaborInCalories = CreateLaborInCaloriesValue(15, typeof(TailoringSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(CampsiteRecipe), 2, typeof(TailoringSkill), typeof(TailoringFocusedSpeedTalent), typeof(TailoringParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Small Bath Mat"), typeof(SmallBathMatRecipe));
+            this.Initialize(Localizer.DoStr("Campsite"), typeof(CampsiteRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(LoomObject), this);
+            CraftingComponent.AddRecipe(typeof(TailoringTableObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>

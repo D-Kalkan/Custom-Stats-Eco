@@ -45,16 +45,16 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(PropertyAuthComponent))]
     [RequireComponent(typeof(HousingComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
-    public partial class SmallBathMatObject : WorldObject, IRepresentsItem
+    public partial class RugMediumObject : WorldObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(SmallBathMatItem);
-        public override LocString DisplayName => Localizer.DoStr("Small Bath Mat");
+        public virtual Type RepresentedItemType => typeof(RugMediumItem);
+        public override LocString DisplayName => Localizer.DoStr("Rug Medium");
         public override TableTextureMode TableTexture => TableTextureMode.Canvas;
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
-            this.GetComponent<HousingComponent>().HomeValue = SmallBathMatItem.homeValue;
+            this.GetComponent<HousingComponent>().HomeValue = RugMediumItem.homeValue;
             this.ModsPostInitialize();
         }
 
@@ -70,14 +70,15 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Small Bath Mat")]
-    [Ecopedia("Housing Objects", "Washroom", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [LocDisplayName("Rug Medium")]
+    [Ecopedia("Housing Objects", "Decoration", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Housing", 1)]
     [Tag("Fabric", 1)]
-    public partial class SmallBathMatItem : WorldObjectItem<SmallBathMatObject>
+    public partial class RugMediumItem : WorldObjectItem<RugMediumObject>
     {
         
-        public override LocString DisplayDescription => Localizer.DoStr("A small bath mat when a normal rug does not cover your bathroom needs.");
+        public override LocString DisplayDescription => Localizer.DoStr("A medium rug for medium uses.");
+        public override LocString DisplayNamePlural => Localizer.DoStr("Medium Rugs");
 
 
         public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
@@ -86,7 +87,7 @@ namespace Eco.Mods.TechTree
         public override HomeFurnishingValue HomeValue => homeValue;
         public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
         {
-            Category                 = RoomCategory.Bathroom,
+            Category                 = RoomCategory.General,
             SkillValue               = 1,
             TypeForRoomLimit         = Localizer.DoStr("Rug"),
             DiminishingReturnPercent = 0.5f
@@ -95,31 +96,33 @@ namespace Eco.Mods.TechTree
     }
 
     [RequiresSkill(typeof(TailoringSkill), 3)]
-    public partial class SmallBathMatRecipe : RecipeFamily
+    public partial class RugMediumRecipe : RecipeFamily
     {
-        public SmallBathMatRecipe()
+        public RugMediumRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "SmallBathMat",  //noloc
-                Localizer.DoStr("Small Bath Mat"),
+                "RugMedium",  //noloc
+                Localizer.DoStr("Rug Medium"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(CelluloseFiberItem), 10, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
-                    new IngredientElement(typeof(CottonFabricItem), 20, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
+                    new IngredientElement(typeof(CelluloseFiberItem), 5, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
+                    new IngredientElement(typeof(WoolYarnItem), 20, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
+                    new IngredientElement("Fabric", 10, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<SmallBathMatItem>()
+                    new CraftingElement<RugMediumItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.ExperienceOnCraft = 1;
-            this.LaborInCalories = CreateLaborInCaloriesValue(30, typeof(TailoringSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(SmallBathMatRecipe), 4, typeof(TailoringSkill), typeof(TailoringFocusedSpeedTalent), typeof(TailoringParallelSpeedTalent));
+            this.ExperienceOnCraft = 2;
+            this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(TailoringSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(RugMediumRecipe), 6, typeof(TailoringSkill), typeof(TailoringFocusedSpeedTalent), typeof(TailoringParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Small Bath Mat"), typeof(SmallBathMatRecipe));
+            this.Initialize(Localizer.DoStr("Rug Medium"), typeof(RugMediumRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(LoomObject), this);
+            CraftingComponent.AddRecipe(typeof(AutomaticLoomObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>

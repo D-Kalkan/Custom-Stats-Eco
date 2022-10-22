@@ -45,16 +45,16 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(PropertyAuthComponent))]
     [RequireComponent(typeof(HousingComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
-    public partial class SmallBathMatObject : WorldObject, IRepresentsItem
+    public partial class TowelRackObject : WorldObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(SmallBathMatItem);
-        public override LocString DisplayName => Localizer.DoStr("Small Bath Mat");
-        public override TableTextureMode TableTexture => TableTextureMode.Canvas;
+        public virtual Type RepresentedItemType => typeof(TowelRackItem);
+        public override LocString DisplayName => Localizer.DoStr("Towel Rack");
+        public override TableTextureMode TableTexture => TableTextureMode.Wood;
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
-            this.GetComponent<HousingComponent>().HomeValue = SmallBathMatItem.homeValue;
+            this.GetComponent<HousingComponent>().HomeValue = TowelRackItem.homeValue;
             this.ModsPostInitialize();
         }
 
@@ -70,14 +70,14 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Small Bath Mat")]
+    [LocDisplayName("Towel Rack")]
     [Ecopedia("Housing Objects", "Washroom", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Housing", 1)]
     [Tag("Fabric", 1)]
-    public partial class SmallBathMatItem : WorldObjectItem<SmallBathMatObject>
+    public partial class TowelRackItem : WorldObjectItem<TowelRackObject>
     {
         
-        public override LocString DisplayDescription => Localizer.DoStr("A small bath mat when a normal rug does not cover your bathroom needs.");
+        public override LocString DisplayDescription => Localizer.DoStr("A wooden hanging rack designed for towels.");
 
 
         public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
@@ -87,39 +87,39 @@ namespace Eco.Mods.TechTree
         public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
         {
             Category                 = RoomCategory.Bathroom,
-            SkillValue               = 1,
-            TypeForRoomLimit         = Localizer.DoStr("Rug"),
-            DiminishingReturnPercent = 0.5f
+            SkillValue               = 1.5f,
+            TypeForRoomLimit         = Localizer.DoStr("Hanger"),
+            DiminishingReturnPercent = 0.1f
         };
 
     }
 
-    [RequiresSkill(typeof(TailoringSkill), 3)]
-    public partial class SmallBathMatRecipe : RecipeFamily
+    [RequiresSkill(typeof(CarpentrySkill), 4)]
+    public partial class TowelRackRecipe : RecipeFamily
     {
-        public SmallBathMatRecipe()
+        public TowelRackRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "SmallBathMat",  //noloc
-                Localizer.DoStr("Small Bath Mat"),
+                "TowelRack",  //noloc
+                Localizer.DoStr("Towel Rack"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(CelluloseFiberItem), 10, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
-                    new IngredientElement(typeof(CottonFabricItem), 20, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
+                    new IngredientElement(typeof(CottonFabricItem), 40, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
+                    new IngredientElement("Lumber", 5, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<SmallBathMatItem>()
+                    new CraftingElement<TowelRackItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.ExperienceOnCraft = 1;
-            this.LaborInCalories = CreateLaborInCaloriesValue(30, typeof(TailoringSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(SmallBathMatRecipe), 4, typeof(TailoringSkill), typeof(TailoringFocusedSpeedTalent), typeof(TailoringParallelSpeedTalent));
+            this.ExperienceOnCraft = 2;
+            this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(CarpentrySkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(TowelRackRecipe), 4, typeof(CarpentrySkill), typeof(CarpentryFocusedSpeedTalent), typeof(CarpentryParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Small Bath Mat"), typeof(SmallBathMatRecipe));
+            this.Initialize(Localizer.DoStr("Towel Rack"), typeof(TowelRackRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(LoomObject), this);
+            CraftingComponent.AddRecipe(typeof(CarpentryTableObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>

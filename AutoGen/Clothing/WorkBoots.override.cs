@@ -24,50 +24,51 @@ namespace Eco.Mods.TechTree
     using Eco.Core.Controller;
     
     [Serialized]
-    [LocDisplayName("Big Backpack")]
+    [LocDisplayName("Work Boots")]
     [Weight(100)]
     [Tag("Clothes", 1)]
     [Tag("Fabric", 1)]
     [Ecopedia("Items", "Clothing", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    public partial class BigBackpackItem :
+    public partial class WorkBootsItem :
         ClothingItem
     {
-        public override LocString DisplayDescription  { get { return Localizer.DoStr("A survival backpack that offers more support than the basic backpack.\n\n(Increases max carry weight by 10 kg)"); } }
-        public override string Slot             { get { return ClothingSlots.Back; } }
+        public override LocString DisplayDescription  { get { return Localizer.DoStr("Boots designed to be rugged and reduce muscle strain while working.\n\n(Decreases calories consumed when using tools by 10\u0025)"); } }
+        public override string Slot             { get { return ClothingSlots.Shoes; } }
         public override bool Starter            { get { return false ; } }
 
         private static Dictionary<UserStatType, float> flatStats = new Dictionary<UserStatType, float>()
         {
-            { UserStatType.MaxCarryWeight, 10000 },
+            { UserStatType.CalorieRate, -0.1f },
         };
         public override Dictionary<UserStatType, float> GetFlatStats() { return flatStats; }
     }
     
 
-    [RequiresSkill(typeof(TailoringSkill), 2)]
-    public partial class BigBackpackRecipe : RecipeFamily
+    [RequiresSkill(typeof(TailoringSkill), 3)]
+    public partial class WorkBootsRecipe : RecipeFamily
     {
-        public BigBackpackRecipe()
+        public WorkBootsRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "BigBackpack",  //noloc
-                Localizer.DoStr("Big Backpack"),
+                "WorkBoots",  //noloc
+                Localizer.DoStr("Work Boots"),
                 new List<IngredientElement>
                 {
+                    new IngredientElement(typeof(CelluloseFiberItem), 10, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
                     new IngredientElement(typeof(LeatherHideItem), 20, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
                     new IngredientElement("Fabric", 20, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<BigBackpackItem>()
+                    new CraftingElement<WorkBootsItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 3;
             this.LaborInCalories = CreateLaborInCaloriesValue(600, typeof(TailoringSkill));
             this.CraftMinutes = CreateCraftTimeValue(1);
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Big Backpack"), typeof(BigBackpackRecipe));
+            this.Initialize(Localizer.DoStr("Work Boots"), typeof(WorkBootsRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(TailoringTableObject), this);
         }
