@@ -24,46 +24,50 @@ namespace Eco.Mods.TechTree
     using Eco.Core.Controller;
     
     [Serialized]
-    [LocDisplayName("Gigot Sleeve Shirt")]
-    [StartsDiscovered]
+    [LocDisplayName("Running Shoes")]
     [Weight(100)]
     [Tag("Clothes", 1)]
     [Tag("Small Fabric", 1)]
     [Ecopedia("Items", "Clothing", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    public partial class GigotSleeveShirtItem :
+    public partial class RunningShoesItem :
         ClothingItem
     {
-        public override LocString DisplayDescription  { get { return Localizer.DoStr("Cool piratey shirt that makes your biceps look bigger than they really are."); } }
-        public override string Slot             { get { return ClothingSlots.Shirt; } }
-        public override bool Starter            { get { return true ; } }
+        public override LocString DisplayDescription  { get { return Localizer.DoStr("Light weight shoes designed to make you run faster.\n\n(Increases movement speed)"); } }
+        public override string Slot             { get { return ClothingSlots.Shoes; } }
+        public override bool Starter            { get { return false ; } }
 
+        private static Dictionary<UserStatType, float> flatStats = new Dictionary<UserStatType, float>()
+        {
+            { UserStatType.MovementSpeed, 0.5f },
+        };
+        public override Dictionary<UserStatType, float> GetFlatStats() { return flatStats; }
     }
     
 
-    [RequiresSkill(typeof(TailoringSkill), 1)]
-    public partial class GigotSleeveShirtRecipe : RecipeFamily
+    [RequiresSkill(typeof(TailoringSkill), 2)]
+    public partial class RunningShoesRecipe : RecipeFamily
     {
-        public GigotSleeveShirtRecipe()
+        public RunningShoesRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "GigotSleeveShirt",  //noloc
-                Localizer.DoStr("Gigot Sleeve Shirt"),
+                "RunningShoes",  //noloc
+                Localizer.DoStr("Running Shoes"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(PlantFibersItem), 30, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
-                    new IngredientElement("Fabric", 7, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)), //noloc
+                    new IngredientElement(typeof(LeatherHideItem), 10, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
+                    new IngredientElement("Fabric", 5, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<GigotSleeveShirtItem>()
+                    new CraftingElement<RunningShoesItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 3;
-            this.LaborInCalories = CreateLaborInCaloriesValue(40, typeof(TailoringSkill));
+            this.LaborInCalories = CreateLaborInCaloriesValue(600, typeof(TailoringSkill));
             this.CraftMinutes = CreateCraftTimeValue(1);
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Gigot Sleeve Shirt"), typeof(GigotSleeveShirtRecipe));
+            this.Initialize(Localizer.DoStr("Running Shoes"), typeof(RunningShoesRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(TailoringTableObject), this);
         }

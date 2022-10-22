@@ -24,46 +24,46 @@ namespace Eco.Mods.TechTree
     using Eco.Core.Controller;
     
     [Serialized]
-    [LocDisplayName("Gigot Sleeve Shirt")]
+    [LocDisplayName("Shorts")]
     [StartsDiscovered]
     [Weight(100)]
     [Tag("Clothes", 1)]
     [Tag("Small Fabric", 1)]
     [Ecopedia("Items", "Clothing", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    public partial class GigotSleeveShirtItem :
+    public partial class ShortsItem :
         ClothingItem
     {
-        public override LocString DisplayDescription  { get { return Localizer.DoStr("Cool piratey shirt that makes your biceps look bigger than they really are."); } }
-        public override string Slot             { get { return ClothingSlots.Shirt; } }
+        public override LocString DisplayDescription  { get { return Localizer.DoStr("Cargo shorts that are ideal for exploring the great outdoors. More practical than elegant."); } }
+        public override string Slot             { get { return ClothingSlots.Pants; } }
         public override bool Starter            { get { return true ; } }
 
     }
     
 
     [RequiresSkill(typeof(TailoringSkill), 1)]
-    public partial class GigotSleeveShirtRecipe : RecipeFamily
+    public partial class ShortsRecipe : RecipeFamily
     {
-        public GigotSleeveShirtRecipe()
+        public ShortsRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "GigotSleeveShirt",  //noloc
-                Localizer.DoStr("Gigot Sleeve Shirt"),
+                "Shorts",  //noloc
+                Localizer.DoStr("Shorts"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(PlantFibersItem), 30, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
-                    new IngredientElement("Fabric", 7, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)), //noloc
+                    new IngredientElement(typeof(LeatherHideItem), 4, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
+                    new IngredientElement("Fabric", 5, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<GigotSleeveShirtItem>()
+                    new CraftingElement<ShortsItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 3;
             this.LaborInCalories = CreateLaborInCaloriesValue(40, typeof(TailoringSkill));
             this.CraftMinutes = CreateCraftTimeValue(1);
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Gigot Sleeve Shirt"), typeof(GigotSleeveShirtRecipe));
+            this.Initialize(Localizer.DoStr("Shorts"), typeof(ShortsRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(TailoringTableObject), this);
         }
