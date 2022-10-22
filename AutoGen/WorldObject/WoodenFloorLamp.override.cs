@@ -39,20 +39,27 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Civics.Objects;
     using Eco.Gameplay.Systems.NewTooltip;
     using Eco.Core.Controller;
+    using static Eco.Gameplay.Housing.PropertyValues.HomeFurnishingValue;
 
     [Serialized]
+    [RequireComponent(typeof(OnOffComponent))]
     [RequireComponent(typeof(PropertyAuthComponent))]
-    [RequireComponent(typeof(CustomTextComponent))]
-    public partial class LargeHangingLumberSignObject : WorldObject, IRepresentsItem
+    [RequireComponent(typeof(PowerGridComponent))]
+    [RequireComponent(typeof(PowerConsumptionComponent))]
+    [RequireComponent(typeof(HousingComponent))]
+    [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
+    public partial class WoodenFloorLampObject : WorldObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(LargeHangingLumberSignItem);
-        public override LocString DisplayName => Localizer.DoStr("Large Hanging Lumber Sign");
+        public virtual Type RepresentedItemType => typeof(WoodenFloorLampItem);
+        public override LocString DisplayName => Localizer.DoStr("Wooden Floor Lamp");
         public override TableTextureMode TableTexture => TableTextureMode.Wood;
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
-            this.GetComponent<CustomTextComponent>().Initialize(700);
+            this.GetComponent<PowerConsumptionComponent>().Initialize(60);
+            this.GetComponent<PowerGridComponent>().Initialize(10, new ElectricPower());
+            this.GetComponent<HousingComponent>().HomeValue = WoodenFloorLampItem.homeValue;
             this.ModsPostInitialize();
         }
 
@@ -68,43 +75,58 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Large Hanging Lumber Sign")]
-    [Ecopedia("Crafted Objects", "Signs", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [LocDisplayName("Wooden Floor Lamp")]
+    [Ecopedia("Housing Objects", "Lights", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Tag("Housing", 1)]
     [Tag("Small Lumber Furnishing", 1)]
-    public partial class LargeHangingLumberSignItem : WorldObjectItem<LargeHangingLumberSignObject>, IPersistentData
+    public partial class WoodenFloorLampItem : WorldObjectItem<WoodenFloorLampObject>
     {
         
-        public override LocString DisplayDescription => Localizer.DoStr("A large sign for all your large text needs!");
+        public override LocString DisplayDescription => Localizer.DoStr("A more modern way to light up a room. This time from the floor.");
 
 
+        public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
+                    | DirectionAxisFlags.Down
+                ;
+        public override HomeFurnishingValue HomeValue => homeValue;
+        public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
+        {
+            Category                 = RoomCategory.General,
+            SkillValue               = 2,
+            TypeForRoomLimit         = Localizer.DoStr("Lights"),
+            DiminishingReturnPercent = 0.7f
+        };
 
-        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren] public object PersistentData { get; set; }
+        [Tooltip(7)] private LocString PowerConsumptionTooltip => Localizer.Do($"Consumes: {Text.Info(60)}w of {new ElectricPower().Name} power");
     }
 
-    [RequiresSkill(typeof(CarpentrySkill), 6)]
-    public partial class LargeHangingLumberSignRecipe : RecipeFamily
+    [RequiresSkill(typeof(CarpentrySkill), 5)]
+    public partial class WoodenFloorLampRecipe : RecipeFamily
     {
-        public LargeHangingLumberSignRecipe()
+        public WoodenFloorLampRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "LargeHangingLumberSign",  //noloc
-                Localizer.DoStr("Large Hanging Lumber Sign"),
+                "WoodenFloorLamp",  //noloc
+                Localizer.DoStr("Wooden Floor Lamp"),
                 new List<IngredientElement>
                 {
+                    new IngredientElement(typeof(CopperWiringItem), 4, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
                     new IngredientElement("Lumber", 8, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
                     new IngredientElement("WoodBoard", 10, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
+                    new IngredientElement("Fabric", 8, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
+                    new IngredientElement(typeof(LightBulbItem), 1, true),
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<LargeHangingLumberSignItem>()
+                    new CraftingElement<WoodenFloorLampItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 3;
             this.LaborInCalories = CreateLaborInCaloriesValue(120, typeof(CarpentrySkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(LargeHangingLumberSignRecipe), 5, typeof(CarpentrySkill), typeof(CarpentryFocusedSpeedTalent), typeof(CarpentryParallelSpeedTalent));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(WoodenFloorLampRecipe), 4, typeof(CarpentrySkill), typeof(CarpentryFocusedSpeedTalent), typeof(CarpentryParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Large Hanging Lumber Sign"), typeof(LargeHangingLumberSignRecipe));
+            this.Initialize(Localizer.DoStr("Wooden Floor Lamp"), typeof(WoodenFloorLampRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(SawmillObject), this);
         }

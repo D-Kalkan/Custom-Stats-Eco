@@ -74,6 +74,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Lumber Door")]
     [Tier(2)]
     [Ecopedia("Housing Objects", "Doors", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Tag("Small Lumber Furnishing", 1)]
     public partial class LumberDoorItem : WorldObjectItem<LumberDoorObject>
     {
         

@@ -39,20 +39,27 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Civics.Objects;
     using Eco.Gameplay.Systems.NewTooltip;
     using Eco.Core.Controller;
+    using static Eco.Gameplay.Housing.PropertyValues.HomeFurnishingValue;
 
     [Serialized]
     [RequireComponent(typeof(PropertyAuthComponent))]
-    [RequireComponent(typeof(CustomTextComponent))]
-    public partial class LargeHangingLumberSignObject : WorldObject, IRepresentsItem
+    [RequireComponent(typeof(LinkComponent))]
+    [RequireComponent(typeof(HousingComponent))]
+    [RequireComponent(typeof(PublicStorageComponent))]
+    [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
+    public partial class LumberDresserObject : WorldObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(LargeHangingLumberSignItem);
-        public override LocString DisplayName => Localizer.DoStr("Large Hanging Lumber Sign");
+        public virtual Type RepresentedItemType => typeof(LumberDresserItem);
+        public override LocString DisplayName => Localizer.DoStr("Lumber Dresser");
         public override TableTextureMode TableTexture => TableTextureMode.Wood;
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
-            this.GetComponent<CustomTextComponent>().Initialize(700);
+            this.GetComponent<HousingComponent>().HomeValue = LumberDresserItem.homeValue;
+            var storage = this.GetComponent<PublicStorageComponent>();
+            storage.Initialize(16);
+            storage.Storage.AddInvRestriction(new NotCarriedRestriction()); // can't store block or large itemsa
             this.ModsPostInitialize();
         }
 
@@ -68,43 +75,55 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Large Hanging Lumber Sign")]
-    [Ecopedia("Crafted Objects", "Signs", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [LocDisplayName("Lumber Dresser")]
+    [Ecopedia("Housing Objects", "Bedroom", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Tag("Housing", 1)]
     [Tag("Small Lumber Furnishing", 1)]
-    public partial class LargeHangingLumberSignItem : WorldObjectItem<LargeHangingLumberSignObject>, IPersistentData
+    public partial class LumberDresserItem : WorldObjectItem<LumberDresserObject>
     {
         
-        public override LocString DisplayDescription => Localizer.DoStr("A large sign for all your large text needs!");
+        public override LocString DisplayDescription => Localizer.DoStr("A lumber dresser that lets you store your clothing and quickly switch between a designated outfit and whatever you are currently wearing.");
 
 
+        public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
+                    | DirectionAxisFlags.Down
+                ;
+        public override HomeFurnishingValue HomeValue => homeValue;
+        public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
+        {
+            Category                 = RoomCategory.Bedroom,
+            SkillValue               = 1.5f,
+            TypeForRoomLimit         = Localizer.DoStr("Dresser"),
+            DiminishingReturnPercent = 0.6f
+        };
 
-        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren] public object PersistentData { get; set; }
     }
 
-    [RequiresSkill(typeof(CarpentrySkill), 6)]
-    public partial class LargeHangingLumberSignRecipe : RecipeFamily
+    [RequiresSkill(typeof(CarpentrySkill), 5)]
+    public partial class LumberDresserRecipe : RecipeFamily
     {
-        public LargeHangingLumberSignRecipe()
+        public LumberDresserRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "LargeHangingLumberSign",  //noloc
-                Localizer.DoStr("Large Hanging Lumber Sign"),
+                "LumberDresser",  //noloc
+                Localizer.DoStr("Lumber Dresser"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement("Lumber", 8, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
-                    new IngredientElement("WoodBoard", 10, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
+                    new IngredientElement(typeof(NailItem), 8, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
+                    new IngredientElement("Lumber", 6, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
+                    new IngredientElement("WoodBoard", 8, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<LargeHangingLumberSignItem>()
+                    new CraftingElement<LumberDresserItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.ExperienceOnCraft = 3;
-            this.LaborInCalories = CreateLaborInCaloriesValue(120, typeof(CarpentrySkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(LargeHangingLumberSignRecipe), 5, typeof(CarpentrySkill), typeof(CarpentryFocusedSpeedTalent), typeof(CarpentryParallelSpeedTalent));
+            this.ExperienceOnCraft = 2;
+            this.LaborInCalories = CreateLaborInCaloriesValue(180, typeof(CarpentrySkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(LumberDresserRecipe), 4, typeof(CarpentrySkill), typeof(CarpentryFocusedSpeedTalent), typeof(CarpentryParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Large Hanging Lumber Sign"), typeof(LargeHangingLumberSignRecipe));
+            this.Initialize(Localizer.DoStr("Lumber Dresser"), typeof(LumberDresserRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(SawmillObject), this);
         }

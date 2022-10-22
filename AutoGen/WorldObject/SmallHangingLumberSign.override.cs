@@ -70,6 +70,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Small Hanging Lumber Sign")]
     [Ecopedia("Crafted Objects", "Signs", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Tag("Small Lumber Furnishing", 1)]
     public partial class SmallHangingLumberSignItem : WorldObjectItem<SmallHangingLumberSignObject>, IPersistentData
     {
         
