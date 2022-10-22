@@ -73,6 +73,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Washboard")]
     [Ecopedia("Housing Objects", "Washroom", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Housing", 1)]
+    [Tag("Hewn Furnishing", 1)]
     public partial class WashboardItem : WorldObjectItem<WashboardObject>
     {
         
@@ -104,7 +105,7 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Washboard"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement("WoodBoard", 20, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)), //noloc
+                    new IngredientElement("WoodBoard", 30, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)), //noloc
                 },
                 new List<CraftingElement>
                 {

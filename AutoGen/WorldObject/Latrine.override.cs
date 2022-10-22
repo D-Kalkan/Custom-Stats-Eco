@@ -46,16 +46,16 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(HousingComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
     [RequireComponent(typeof(MountComponent))]
-    public partial class PaddedChairObject : WorldObject, IRepresentsItem
+    public partial class LatrineObject : WorldObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(PaddedChairItem);
-        public override LocString DisplayName => Localizer.DoStr("Padded Chair");
+        public virtual Type RepresentedItemType => typeof(LatrineItem);
+        public override LocString DisplayName => Localizer.DoStr("Wooden Latrine");
         public override TableTextureMode TableTexture => TableTextureMode.Wood;
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
-            this.GetComponent<HousingComponent>().HomeValue = PaddedChairItem.homeValue;
+            this.GetComponent<HousingComponent>().HomeValue = LatrineItem.homeValue;
             this.GetComponent<MountComponent>().Initialize(1);
             this.ModsPostInitialize();
         }
@@ -72,14 +72,14 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Padded Chair")]
-    [Ecopedia("Housing Objects", "Seating", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [LocDisplayName("Wooden Latrine")]
+    [Ecopedia("Housing Objects", "Washroom", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Housing", 1)]
     [Tag("Hewn Furnishing", 1)]
-    public partial class PaddedChairItem : WorldObjectItem<PaddedChairObject>
+    public partial class LatrineItem : WorldObjectItem<LatrineObject>
     {
         
-        public override LocString DisplayDescription => Localizer.DoStr("A comfy chair to rest in.");
+        public override LocString DisplayDescription => Localizer.DoStr("A wooden potty.");
 
 
         public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
@@ -88,42 +88,40 @@ namespace Eco.Mods.TechTree
         public override HomeFurnishingValue HomeValue => homeValue;
         public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
         {
-            Category                 = RoomCategory.LivingRoom,
+            Category                 = RoomCategory.Bathroom,
             SkillValue               = 1.5f,
-            TypeForRoomLimit         = Localizer.DoStr("Seating"),
-            DiminishingReturnPercent = 0.8f
+            TypeForRoomLimit         = Localizer.DoStr("Toilet"),
+            DiminishingReturnPercent = 0.1f
         };
 
     }
 
-    [RequiresSkill(typeof(TailoringSkill), 1)]
-    public partial class PaddedChairRecipe : RecipeFamily
+    [RequiresSkill(typeof(CarpentrySkill), 2)]
+    public partial class LatrineRecipe : RecipeFamily
     {
-        public PaddedChairRecipe()
+        public LatrineRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "PaddedChair",  //noloc
-                Localizer.DoStr("Padded Chair"),
+                "Latrine",  //noloc
+                Localizer.DoStr("Wooden Latrine"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement("HewnLog", 10, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)), //noloc
-                    new IngredientElement("WoodBoard", 20, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)), //noloc
-                    new IngredientElement("Fabric", 10, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)), //noloc
-                    new IngredientElement(typeof(FurPeltItem), 8, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
+                    new IngredientElement("HewnLog", 5, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
+                    new IngredientElement("WoodBoard", 20, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<PaddedChairItem>()
+                    new CraftingElement<LatrineItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.ExperienceOnCraft = 1;
-            this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(TailoringSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(PaddedChairRecipe), 8, typeof(TailoringSkill), typeof(TailoringFocusedSpeedTalent), typeof(TailoringParallelSpeedTalent));
+            this.ExperienceOnCraft = 2;
+            this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(CarpentrySkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(LatrineRecipe), 4, typeof(CarpentrySkill), typeof(CarpentryFocusedSpeedTalent), typeof(CarpentryParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Padded Chair"), typeof(PaddedChairRecipe));
+            this.Initialize(Localizer.DoStr("Wooden Latrine"), typeof(LatrineRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(TailoringTableObject), this);
+            CraftingComponent.AddRecipe(typeof(CarpentryTableObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>

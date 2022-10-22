@@ -45,17 +45,19 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(PropertyAuthComponent))]
     [RequireComponent(typeof(HousingComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
+    [RequireComponent(typeof(BedComponent))]
     [RequireComponent(typeof(MountComponent))]
-    public partial class PaddedChairObject : WorldObject, IRepresentsItem
+    public partial class WoodenStrawBedObject : WorldObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(PaddedChairItem);
-        public override LocString DisplayName => Localizer.DoStr("Padded Chair");
+        public virtual Type RepresentedItemType => typeof(WoodenStrawBedItem);
+        public override LocString DisplayName => Localizer.DoStr("Wooden Straw Bed");
         public override TableTextureMode TableTexture => TableTextureMode.Wood;
+        public override LocString PickupConfirmation => GetComponent<BedComponent>().BedPickupConfirmation();
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
-            this.GetComponent<HousingComponent>().HomeValue = PaddedChairItem.homeValue;
+            this.GetComponent<HousingComponent>().HomeValue = WoodenStrawBedItem.homeValue;
             this.GetComponent<MountComponent>().Initialize(1);
             this.ModsPostInitialize();
         }
@@ -72,14 +74,14 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Padded Chair")]
-    [Ecopedia("Housing Objects", "Seating", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [LocDisplayName("Wooden Straw Bed")]
+    [Ecopedia("Housing Objects", "Bedroom", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Housing", 1)]
     [Tag("Hewn Furnishing", 1)]
-    public partial class PaddedChairItem : WorldObjectItem<PaddedChairObject>
+    public partial class WoodenStrawBedItem : WorldObjectItem<WoodenStrawBedObject>
     {
         
-        public override LocString DisplayDescription => Localizer.DoStr("A comfy chair to rest in.");
+        public override LocString DisplayDescription => Localizer.DoStr("A nice, scratchy and horrible uncomfortable bed. But at least it keeps you off the ground.");
 
 
         public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
@@ -88,42 +90,41 @@ namespace Eco.Mods.TechTree
         public override HomeFurnishingValue HomeValue => homeValue;
         public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
         {
-            Category                 = RoomCategory.LivingRoom,
-            SkillValue               = 1.5f,
-            TypeForRoomLimit         = Localizer.DoStr("Seating"),
-            DiminishingReturnPercent = 0.8f
+            Category                 = RoomCategory.Bedroom,
+            SkillValue               = 2,
+            TypeForRoomLimit         = Localizer.DoStr("Bed"),
+            DiminishingReturnPercent = 0.4f
         };
 
     }
 
-    [RequiresSkill(typeof(TailoringSkill), 1)]
-    public partial class PaddedChairRecipe : RecipeFamily
+    [RequiresSkill(typeof(CarpentrySkill), 1)]
+    public partial class WoodenStrawBedRecipe : RecipeFamily
     {
-        public PaddedChairRecipe()
+        public WoodenStrawBedRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "PaddedChair",  //noloc
-                Localizer.DoStr("Padded Chair"),
+                "WoodenStrawBed",  //noloc
+                Localizer.DoStr("Wooden Straw Bed"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement("HewnLog", 10, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)), //noloc
-                    new IngredientElement("WoodBoard", 20, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)), //noloc
-                    new IngredientElement("Fabric", 10, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)), //noloc
-                    new IngredientElement(typeof(FurPeltItem), 8, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
+                    new IngredientElement(typeof(PlantFibersItem), 40, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
+                    new IngredientElement("HewnLog", 15, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
+                    new IngredientElement("WoodBoard", 15, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<PaddedChairItem>()
+                    new CraftingElement<WoodenStrawBedItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.ExperienceOnCraft = 1;
-            this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(TailoringSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(PaddedChairRecipe), 8, typeof(TailoringSkill), typeof(TailoringFocusedSpeedTalent), typeof(TailoringParallelSpeedTalent));
+            this.ExperienceOnCraft = 2;
+            this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(CarpentrySkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(WoodenStrawBedRecipe), 2, typeof(CarpentrySkill), typeof(CarpentryFocusedSpeedTalent), typeof(CarpentryParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Padded Chair"), typeof(PaddedChairRecipe));
+            this.Initialize(Localizer.DoStr("Wooden Straw Bed"), typeof(WoodenStrawBedRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(TailoringTableObject), this);
+            CraftingComponent.AddRecipe(typeof(CarpentryTableObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>

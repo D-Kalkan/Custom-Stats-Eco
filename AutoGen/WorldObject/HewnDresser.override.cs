@@ -43,20 +43,23 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [RequireComponent(typeof(PropertyAuthComponent))]
+    [RequireComponent(typeof(LinkComponent))]
     [RequireComponent(typeof(HousingComponent))]
+    [RequireComponent(typeof(PublicStorageComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
-    [RequireComponent(typeof(MountComponent))]
-    public partial class PaddedChairObject : WorldObject, IRepresentsItem
+    public partial class HewnDresserObject : WorldObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(PaddedChairItem);
-        public override LocString DisplayName => Localizer.DoStr("Padded Chair");
+        public virtual Type RepresentedItemType => typeof(HewnDresserItem);
+        public override LocString DisplayName => Localizer.DoStr("Hewn Dresser");
         public override TableTextureMode TableTexture => TableTextureMode.Wood;
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
-            this.GetComponent<HousingComponent>().HomeValue = PaddedChairItem.homeValue;
-            this.GetComponent<MountComponent>().Initialize(1);
+            this.GetComponent<HousingComponent>().HomeValue = HewnDresserItem.homeValue;
+            var storage = this.GetComponent<PublicStorageComponent>();
+            storage.Initialize(16);
+            storage.Storage.AddInvRestriction(new NotCarriedRestriction()); // can't store block or large itemsa
             this.ModsPostInitialize();
         }
 
@@ -72,14 +75,14 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Padded Chair")]
-    [Ecopedia("Housing Objects", "Seating", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [LocDisplayName("Hewn Dresser")]
+    [Ecopedia("Housing Objects", "Bedroom", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Housing", 1)]
     [Tag("Hewn Furnishing", 1)]
-    public partial class PaddedChairItem : WorldObjectItem<PaddedChairObject>
+    public partial class HewnDresserItem : WorldObjectItem<HewnDresserObject>
     {
         
-        public override LocString DisplayDescription => Localizer.DoStr("A comfy chair to rest in.");
+        public override LocString DisplayDescription => Localizer.DoStr("A rough hewn wooden dresser that lets you store your clothing and quickly switch between a designated outfit and whatever you are currently wearing.");
 
 
         public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
@@ -88,42 +91,40 @@ namespace Eco.Mods.TechTree
         public override HomeFurnishingValue HomeValue => homeValue;
         public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
         {
-            Category                 = RoomCategory.LivingRoom,
-            SkillValue               = 1.5f,
-            TypeForRoomLimit         = Localizer.DoStr("Seating"),
-            DiminishingReturnPercent = 0.8f
+            Category                 = RoomCategory.Bedroom,
+            SkillValue               = 0.5f,
+            TypeForRoomLimit         = Localizer.DoStr("Dresser"),
+            DiminishingReturnPercent = 0.6f
         };
 
     }
 
-    [RequiresSkill(typeof(TailoringSkill), 1)]
-    public partial class PaddedChairRecipe : RecipeFamily
+    [RequiresSkill(typeof(CarpentrySkill), 3)]
+    public partial class HewnDresserRecipe : RecipeFamily
     {
-        public PaddedChairRecipe()
+        public HewnDresserRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "PaddedChair",  //noloc
-                Localizer.DoStr("Padded Chair"),
+                "HewnDresser",  //noloc
+                Localizer.DoStr("Hewn Dresser"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement("HewnLog", 10, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)), //noloc
-                    new IngredientElement("WoodBoard", 20, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)), //noloc
-                    new IngredientElement("Fabric", 10, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)), //noloc
-                    new IngredientElement(typeof(FurPeltItem), 8, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
+                    new IngredientElement("HewnLog", 18, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
+                    new IngredientElement("WoodBoard", 6, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<PaddedChairItem>()
+                    new CraftingElement<HewnDresserItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.ExperienceOnCraft = 1;
-            this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(TailoringSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(PaddedChairRecipe), 8, typeof(TailoringSkill), typeof(TailoringFocusedSpeedTalent), typeof(TailoringParallelSpeedTalent));
+            this.ExperienceOnCraft = 2;
+            this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(CarpentrySkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(HewnDresserRecipe), 4, typeof(CarpentrySkill), typeof(CarpentryFocusedSpeedTalent), typeof(CarpentryParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Padded Chair"), typeof(PaddedChairRecipe));
+            this.Initialize(Localizer.DoStr("Hewn Dresser"), typeof(HewnDresserRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(TailoringTableObject), this);
+            CraftingComponent.AddRecipe(typeof(CarpentryTableObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>

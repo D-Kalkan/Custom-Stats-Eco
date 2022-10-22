@@ -46,16 +46,16 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(HousingComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
     [RequireComponent(typeof(MountComponent))]
-    public partial class PaddedChairObject : WorldObject, IRepresentsItem
+    public partial class HewnBenchObject : WorldObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(PaddedChairItem);
-        public override LocString DisplayName => Localizer.DoStr("Padded Chair");
+        public virtual Type RepresentedItemType => typeof(HewnBenchItem);
+        public override LocString DisplayName => Localizer.DoStr("Hewn Bench");
         public override TableTextureMode TableTexture => TableTextureMode.Wood;
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
-            this.GetComponent<HousingComponent>().HomeValue = PaddedChairItem.homeValue;
+            this.GetComponent<HousingComponent>().HomeValue = HewnBenchItem.homeValue;
             this.GetComponent<MountComponent>().Initialize(1);
             this.ModsPostInitialize();
         }
@@ -72,14 +72,14 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Padded Chair")]
+    [LocDisplayName("Hewn Bench")]
     [Ecopedia("Housing Objects", "Seating", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Housing", 1)]
     [Tag("Hewn Furnishing", 1)]
-    public partial class PaddedChairItem : WorldObjectItem<PaddedChairObject>
+    public partial class HewnBenchItem : WorldObjectItem<HewnBenchObject>
     {
         
-        public override LocString DisplayDescription => Localizer.DoStr("A comfy chair to rest in.");
+        public override LocString DisplayDescription => Localizer.DoStr("A basic wooden bench.");
 
 
         public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
@@ -88,42 +88,40 @@ namespace Eco.Mods.TechTree
         public override HomeFurnishingValue HomeValue => homeValue;
         public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
         {
-            Category                 = RoomCategory.LivingRoom,
-            SkillValue               = 1.5f,
+            Category                 = RoomCategory.General,
+            SkillValue               = 1,
             TypeForRoomLimit         = Localizer.DoStr("Seating"),
-            DiminishingReturnPercent = 0.8f
+            DiminishingReturnPercent = 0.5f
         };
 
     }
 
-    [RequiresSkill(typeof(TailoringSkill), 1)]
-    public partial class PaddedChairRecipe : RecipeFamily
+    [RequiresSkill(typeof(CarpentrySkill), 2)]
+    public partial class HewnBenchRecipe : RecipeFamily
     {
-        public PaddedChairRecipe()
+        public HewnBenchRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "PaddedChair",  //noloc
-                Localizer.DoStr("Padded Chair"),
+                "HewnBench",  //noloc
+                Localizer.DoStr("Hewn Bench"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement("HewnLog", 10, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)), //noloc
-                    new IngredientElement("WoodBoard", 20, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)), //noloc
-                    new IngredientElement("Fabric", 10, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)), //noloc
-                    new IngredientElement(typeof(FurPeltItem), 8, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
+                    new IngredientElement("HewnLog", 18, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
+                    new IngredientElement("WoodBoard", 6, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<PaddedChairItem>()
+                    new CraftingElement<HewnBenchItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.ExperienceOnCraft = 1;
-            this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(TailoringSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(PaddedChairRecipe), 8, typeof(TailoringSkill), typeof(TailoringFocusedSpeedTalent), typeof(TailoringParallelSpeedTalent));
+            this.ExperienceOnCraft = 3;
+            this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(CarpentrySkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(HewnBenchRecipe), 4, typeof(CarpentrySkill), typeof(CarpentryFocusedSpeedTalent), typeof(CarpentryParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Padded Chair"), typeof(PaddedChairRecipe));
+            this.Initialize(Localizer.DoStr("Hewn Bench"), typeof(HewnBenchRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(TailoringTableObject), this);
+            CraftingComponent.AddRecipe(typeof(CarpentryTableObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
