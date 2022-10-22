@@ -36,7 +36,7 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Land Claim Stake"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement("Wood", 10), //noloc
+                    new IngredientElement("Wood", 12), //noloc
                 },
                 new List<CraftingElement>
                 {
