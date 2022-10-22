@@ -25,28 +25,28 @@ namespace Eco.Mods.TechTree
     using Eco.Core.Controller;
 
 
-    public partial class StonePickaxeRecipe : RecipeFamily
+    public partial class WoodenBowRecipe : RecipeFamily
     {
-        public StonePickaxeRecipe()
+        public WoodenBowRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "StonePickaxe",  //noloc
-                Localizer.DoStr("Stone Pickaxe"),
+                "WoodenBow",  //noloc
+                Localizer.DoStr("Wooden Bow"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement("Wood", 4), //noloc
-                    new IngredientElement("Rock", 10), //noloc
+                    new IngredientElement(typeof(PlantFibersItem), 30),
+                    new IngredientElement("Wood", 16), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<StonePickaxeItem>()
+                    new CraftingElement<WoodenBowItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.LaborInCalories = CreateLaborInCaloriesValue(10);
             this.CraftMinutes = CreateCraftTimeValue(0.5f);
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Stone Pickaxe"), typeof(StonePickaxeRecipe));
+            this.Initialize(Localizer.DoStr("Wooden Bow"), typeof(WoodenBowRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(ToolBenchObject), this);
         }
@@ -58,33 +58,35 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Stone Pickaxe")]
+    [LocDisplayName("Wooden Bow")]
     [Tier(1)]
     [Weight(1000)]
     [Category("Tool")]
     [Tag("Tool", 1)]
     [Tag("Primitive Tool", 1)]
     [Ecopedia("Items", "Tools", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    public partial class StonePickaxeItem : PickaxeItem
+    public partial class WoodenBowItem : BowItem
     {
                                                                                                                                                                                                                                            // Static values
-        private static IDynamicValue caloriesBurn           = new MultiDynamicValue(MultiDynamicOps.Multiply, new TalentModifiedValue(typeof(StonePickaxeItem), typeof(MiningToolEfficiencyTalent)), CreateCalorieValue(20, typeof(MiningSkill), typeof(StonePickaxeItem)));
-        private static IDynamicValue exp                    = new ConstantValue(0.1f);
-        private static IDynamicValue tier                   = new MultiDynamicValue(MultiDynamicOps.Sum, new ConstantValue(1), new TalentModifiedValue(typeof(StonePickaxeItem), typeof(MiningToolStrengthTalent), 0));
+        private static IDynamicValue caloriesBurn           = new MultiDynamicValue(MultiDynamicOps.Multiply, new TalentModifiedValue(typeof(WoodenBowItem), typeof(ToolEfficiencyTalent)), CreateCalorieValue(20, typeof(HuntingSkill), typeof(WoodenBowItem)));
+        private static IDynamicValue damage                 = new MultiDynamicValue(MultiDynamicOps.Sum, new TalentModifiedValue(typeof(WoodenBowItem), typeof(HuntingPowerShotTalent), 0), CreateDamageValue(1, typeof(HuntingSkill), typeof(WoodenBowItem)));
+        private static IDynamicValue exp                    = new ConstantValue(1);
+        private static IDynamicValue tier                   = new ConstantValue(1);
         private static IDynamicValue skilledRepairCost      = new ConstantValue(5);
          
 
         // Tool overrides
 
+        public override LocString DisplayDescription    => Localizer.DoStr("A primitive ranged weapon for hunting. Requires arrows to fire.");
         public override IDynamicValue CaloriesBurn      => caloriesBurn;
-        public override float Damage                    => 1;
-        public override Type ExperienceSkill            => typeof(MiningSkill);
+        public override IDynamicValue Damage            => damage;
+        public override Type ExperienceSkill            => typeof(HuntingSkill);
         public override IDynamicValue ExperienceRate    => exp;
         public override IDynamicValue Tier              => tier;
         public override IDynamicValue SkilledRepairCost => skilledRepairCost;
         public override float DurabilityRate            => DurabilityMax / 100f;
         public override Item RepairItem                 => Item.Get<Item>();
-        public override Tag RepairTag                   => TagManager.Tag("Rock");
+        public override Tag RepairTag                   => TagManager.Tag("Wood");
         public override int FullRepairAmount            => 5;
     }
 }

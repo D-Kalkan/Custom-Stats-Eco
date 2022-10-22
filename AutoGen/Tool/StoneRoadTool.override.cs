@@ -25,32 +25,32 @@ namespace Eco.Mods.TechTree
     using Eco.Core.Controller;
 
 
-    [RequiresSkill(typeof(SmeltingSkill), 1)]
-    public partial class IronMacheteRecipe : RecipeFamily
+    [RequiresSkill(typeof(BasicEngineeringSkill), 1)]
+    public partial class StoneRoadToolRecipe : RecipeFamily
     {
-        public IronMacheteRecipe()
+        public StoneRoadToolRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "IronMachete",  //noloc
-                Localizer.DoStr("Iron Machete"),
+                "StoneRoadTool",  //noloc
+                Localizer.DoStr("Stone Road Tool"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(IronBarItem), 4, typeof(SmeltingSkill), typeof(SmeltingLavishResourcesTalent)),
-                    new IngredientElement("WoodBoard", 4, typeof(SmeltingSkill), typeof(SmeltingLavishResourcesTalent)), //noloc
+                    new IngredientElement("Wood", 4, typeof(BasicEngineeringSkill), typeof(BasicEngineeringLavishResourcesTalent)), //noloc
+                    new IngredientElement("Rock", 10, typeof(BasicEngineeringSkill), typeof(BasicEngineeringLavishResourcesTalent)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<IronMacheteItem>()
+                    new CraftingElement<StoneRoadToolItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 0.1f;
-            this.LaborInCalories = CreateLaborInCaloriesValue(250, typeof(SmeltingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(IronMacheteRecipe), 0.5f, typeof(SmeltingSkill), typeof(SmeltingFocusedSpeedTalent), typeof(SmeltingParallelSpeedTalent));
+            this.LaborInCalories = CreateLaborInCaloriesValue(10, typeof(BasicEngineeringSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(StoneRoadToolRecipe), 0.5f, typeof(BasicEngineeringSkill), typeof(BasicEngineeringFocusedSpeedTalent), typeof(BasicEngineeringParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Iron Machete"), typeof(IronMacheteRecipe));
+            this.Initialize(Localizer.DoStr("Stone Road Tool"), typeof(StoneRoadToolRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(AnvilObject), this);
+            CraftingComponent.AddRecipe(typeof(ToolBenchObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
@@ -60,33 +60,34 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Iron Machete")]
-    [Tier(2)]
-    [RepairRequiresSkill(typeof(SmeltingSkill), 0)]
+    [LocDisplayName("Stone Road Tool")]
+    [Tier(1)]
+    [RepairRequiresSkill(typeof(BasicEngineeringSkill), 0)]
     [Weight(1000)]
     [Category("Tool")]
     [Tag("Tool", 1)]
-    [Tag("Iron Tool", 1)]
+    [Tag("Primitive Tool", 1)]
     [Ecopedia("Items", "Tools", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    public partial class IronMacheteItem : MacheteItem
+    public partial class StoneRoadToolItem : RoadToolItem
     {
                                                                                                                                                                                                                                            // Static values
-        private static IDynamicValue caloriesBurn           = new MultiDynamicValue(MultiDynamicOps.Multiply, new TalentModifiedValue(typeof(IronMacheteItem), typeof(GatheringToolEfficiencyTalent)), CreateCalorieValue(17, typeof(FarmingSkill), typeof(IronMacheteItem)));
+        private static IDynamicValue caloriesBurn           = new MultiDynamicValue(MultiDynamicOps.Multiply, new TalentModifiedValue(typeof(StoneRoadToolItem), typeof(ToolEfficiencyTalent)), CreateCalorieValue(20, typeof(BasicEngineeringSkill), typeof(StoneRoadToolItem)));
         private static IDynamicValue exp                    = new ConstantValue(0.1f);
-        private static IDynamicValue tier                   = new MultiDynamicValue(MultiDynamicOps.Sum, new ConstantValue(2), new TalentModifiedValue(typeof(IronMacheteItem), typeof(GatheringToolStrengthTalent), 0));
-        private static SkillModifiedValue skilledRepairCost = new SkillModifiedValue(4, SmeltingSkill.MultiplicativeStrategy, typeof(SmeltingSkill), Localizer.DoStr("repair cost"), DynamicValueType.Efficiency);
-
+        private static IDynamicValue tier                   = new ConstantValue(1);
+        private static SkillModifiedValue skilledRepairCost = new SkillModifiedValue(5, BasicEngineeringSkill.MultiplicativeStrategy, typeof(BasicEngineeringSkill), Localizer.DoStr("repair cost"), DynamicValueType.Efficiency);
+         
 
         // Tool overrides
 
-        public override LocString DisplayDescription    => Localizer.DoStr("A machete used to quickly clear plants.");
+        public override LocString DisplayDescription    => Localizer.DoStr("A tool for tamping dirt into roads.");
         public override IDynamicValue CaloriesBurn      => caloriesBurn;
-        public override Type ExperienceSkill            => typeof(FarmingSkill);
+        public override Type ExperienceSkill            => typeof(BasicEngineeringSkill);
         public override IDynamicValue ExperienceRate    => exp;
         public override IDynamicValue Tier              => tier;
         public override IDynamicValue SkilledRepairCost => skilledRepairCost;
-        public override float DurabilityRate            => DurabilityMax / 500f;
-        public override Item RepairItem                 => Item.Get<IronBarItem>();
-        public override int FullRepairAmount            => 4;
+        public override float DurabilityRate            => DurabilityMax / 100f;
+        public override Item RepairItem                 => Item.Get<Item>();
+        public override Tag RepairTag                   => TagManager.Tag("Rock");
+        public override int FullRepairAmount            => 5;
     }
 }

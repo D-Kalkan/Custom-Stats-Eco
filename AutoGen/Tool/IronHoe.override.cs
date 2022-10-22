@@ -26,14 +26,14 @@ namespace Eco.Mods.TechTree
 
 
     [RequiresSkill(typeof(SmeltingSkill), 1)]
-    public partial class IronMacheteRecipe : RecipeFamily
+    public partial class IronHoeRecipe : RecipeFamily
     {
-        public IronMacheteRecipe()
+        public IronHoeRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "IronMachete",  //noloc
-                Localizer.DoStr("Iron Machete"),
+                "IronHoe",  //noloc
+                Localizer.DoStr("Iron Hoe"),
                 new List<IngredientElement>
                 {
                     new IngredientElement(typeof(IronBarItem), 4, typeof(SmeltingSkill), typeof(SmeltingLavishResourcesTalent)),
@@ -41,14 +41,14 @@ namespace Eco.Mods.TechTree
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<IronMacheteItem>()
+                    new CraftingElement<IronHoeItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 0.1f;
             this.LaborInCalories = CreateLaborInCaloriesValue(250, typeof(SmeltingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(IronMacheteRecipe), 0.5f, typeof(SmeltingSkill), typeof(SmeltingFocusedSpeedTalent), typeof(SmeltingParallelSpeedTalent));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(IronHoeRecipe), 0.5f, typeof(SmeltingSkill), typeof(SmeltingFocusedSpeedTalent), typeof(SmeltingParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Iron Machete"), typeof(IronMacheteRecipe));
+            this.Initialize(Localizer.DoStr("Iron Hoe"), typeof(IronHoeRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(AnvilObject), this);
         }
@@ -60,7 +60,7 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Iron Machete")]
+    [LocDisplayName("Iron Hoe")]
     [Tier(2)]
     [RepairRequiresSkill(typeof(SmeltingSkill), 0)]
     [Weight(1000)]
@@ -68,24 +68,23 @@ namespace Eco.Mods.TechTree
     [Tag("Tool", 1)]
     [Tag("Iron Tool", 1)]
     [Ecopedia("Items", "Tools", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    public partial class IronMacheteItem : MacheteItem
+    public partial class IronHoeItem : HoeItem
     {
                                                                                                                                                                                                                                            // Static values
-        private static IDynamicValue caloriesBurn           = new MultiDynamicValue(MultiDynamicOps.Multiply, new TalentModifiedValue(typeof(IronMacheteItem), typeof(GatheringToolEfficiencyTalent)), CreateCalorieValue(17, typeof(FarmingSkill), typeof(IronMacheteItem)));
+        private static IDynamicValue caloriesBurn           = new MultiDynamicValue(MultiDynamicOps.Multiply, new TalentModifiedValue(typeof(IronHoeItem), typeof(ToolEfficiencyTalent)), CreateCalorieValue(17, typeof(FarmingSkill), typeof(IronHoeItem)));
         private static IDynamicValue exp                    = new ConstantValue(0.1f);
-        private static IDynamicValue tier                   = new MultiDynamicValue(MultiDynamicOps.Sum, new ConstantValue(2), new TalentModifiedValue(typeof(IronMacheteItem), typeof(GatheringToolStrengthTalent), 0));
+        private static IDynamicValue tier                   = new ConstantValue(2);
         private static SkillModifiedValue skilledRepairCost = new SkillModifiedValue(4, SmeltingSkill.MultiplicativeStrategy, typeof(SmeltingSkill), Localizer.DoStr("repair cost"), DynamicValueType.Efficiency);
-
+         
 
         // Tool overrides
 
-        public override LocString DisplayDescription    => Localizer.DoStr("A machete used to quickly clear plants.");
         public override IDynamicValue CaloriesBurn      => caloriesBurn;
         public override Type ExperienceSkill            => typeof(FarmingSkill);
         public override IDynamicValue ExperienceRate    => exp;
         public override IDynamicValue Tier              => tier;
         public override IDynamicValue SkilledRepairCost => skilledRepairCost;
-        public override float DurabilityRate            => DurabilityMax / 500f;
+        public override float DurabilityRate            => DurabilityMax / 300f;
         public override Item RepairItem                 => Item.Get<IronBarItem>();
         public override int FullRepairAmount            => 4;
     }

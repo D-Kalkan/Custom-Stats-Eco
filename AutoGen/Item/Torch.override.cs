@@ -64,7 +64,7 @@ namespace Eco.Mods.TechTree
     [Fuel(8000)][Tag("Fuel")]
     [Ecopedia("Items", "Tools", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Torch", 1)]
-    [Tag("Primitive Recyclable Tool", 1)]
+    [Tag("Primitive Tool", 1)]
     public partial class TorchItem : ToolItem
     {
         public override LocString DisplayDescription { get { return Localizer.DoStr("A little bit of light to help beat back the night."); } }

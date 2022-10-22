@@ -25,30 +25,31 @@ namespace Eco.Mods.TechTree
     using Eco.Core.Controller;
 
 
-    [RequiresSkill(typeof(SmeltingSkill), 1)]
-    public partial class IronMacheteRecipe : RecipeFamily
+    [RequiresSkill(typeof(SmeltingSkill), 2)]
+    public partial class RecurveBowRecipe : RecipeFamily
     {
-        public IronMacheteRecipe()
+        public RecurveBowRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "IronMachete",  //noloc
-                Localizer.DoStr("Iron Machete"),
+                "RecurveBow",  //noloc
+                Localizer.DoStr("Recurve Bow"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(IronBarItem), 4, typeof(SmeltingSkill), typeof(SmeltingLavishResourcesTalent)),
-                    new IngredientElement("WoodBoard", 4, typeof(SmeltingSkill), typeof(SmeltingLavishResourcesTalent)), //noloc
+                    new IngredientElement(typeof(IronBarItem), 10, typeof(SmeltingSkill), typeof(SmeltingLavishResourcesTalent)),
+                    new IngredientElement(typeof(CelluloseFiberItem), 10, typeof(SmeltingSkill), typeof(SmeltingLavishResourcesTalent)),
+                    new IngredientElement("Lumber", 5, typeof(SmeltingSkill), typeof(SmeltingLavishResourcesTalent)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<IronMacheteItem>()
+                    new CraftingElement<RecurveBowItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.ExperienceOnCraft = 0.1f;
+            this.ExperienceOnCraft = 1;
             this.LaborInCalories = CreateLaborInCaloriesValue(250, typeof(SmeltingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(IronMacheteRecipe), 0.5f, typeof(SmeltingSkill), typeof(SmeltingFocusedSpeedTalent), typeof(SmeltingParallelSpeedTalent));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(RecurveBowRecipe), 0.5f, typeof(SmeltingSkill), typeof(SmeltingFocusedSpeedTalent), typeof(SmeltingParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Iron Machete"), typeof(IronMacheteRecipe));
+            this.Initialize(Localizer.DoStr("Recurve Bow"), typeof(RecurveBowRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(AnvilObject), this);
         }
@@ -60,32 +61,34 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Iron Machete")]
-    [Tier(2)]
+    [LocDisplayName("Recurve Bow")]
+    [Tier(3)]
     [RepairRequiresSkill(typeof(SmeltingSkill), 0)]
     [Weight(1000)]
     [Category("Tool")]
     [Tag("Tool", 1)]
     [Tag("Iron Tool", 1)]
     [Ecopedia("Items", "Tools", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    public partial class IronMacheteItem : MacheteItem
+    public partial class RecurveBowItem : BowItem
     {
                                                                                                                                                                                                                                            // Static values
-        private static IDynamicValue caloriesBurn           = new MultiDynamicValue(MultiDynamicOps.Multiply, new TalentModifiedValue(typeof(IronMacheteItem), typeof(GatheringToolEfficiencyTalent)), CreateCalorieValue(17, typeof(FarmingSkill), typeof(IronMacheteItem)));
-        private static IDynamicValue exp                    = new ConstantValue(0.1f);
-        private static IDynamicValue tier                   = new MultiDynamicValue(MultiDynamicOps.Sum, new ConstantValue(2), new TalentModifiedValue(typeof(IronMacheteItem), typeof(GatheringToolStrengthTalent), 0));
+        private static IDynamicValue caloriesBurn           = new MultiDynamicValue(MultiDynamicOps.Multiply, new TalentModifiedValue(typeof(RecurveBowItem), typeof(ToolEfficiencyTalent)), CreateCalorieValue(10, typeof(HuntingSkill), typeof(RecurveBowItem)));
+        private static IDynamicValue damage                 = new MultiDynamicValue(MultiDynamicOps.Sum, new TalentModifiedValue(typeof(RecurveBowItem), typeof(HuntingPowerShotTalent), 0), CreateDamageValue(1.2f, typeof(HuntingSkill), typeof(RecurveBowItem)));
+        private static IDynamicValue exp                    = new ConstantValue(1);
+        private static IDynamicValue tier                   = new ConstantValue(3);
         private static SkillModifiedValue skilledRepairCost = new SkillModifiedValue(4, SmeltingSkill.MultiplicativeStrategy, typeof(SmeltingSkill), Localizer.DoStr("repair cost"), DynamicValueType.Efficiency);
-
+         
 
         // Tool overrides
 
-        public override LocString DisplayDescription    => Localizer.DoStr("A machete used to quickly clear plants.");
+        public override LocString DisplayDescription    => Localizer.DoStr("A recurve bow that shoots faster and more powerful than a traditional wooden bow. Requires arrows to fire.");
         public override IDynamicValue CaloriesBurn      => caloriesBurn;
-        public override Type ExperienceSkill            => typeof(FarmingSkill);
+        public override IDynamicValue Damage            => damage;
+        public override Type ExperienceSkill            => typeof(HuntingSkill);
         public override IDynamicValue ExperienceRate    => exp;
         public override IDynamicValue Tier              => tier;
         public override IDynamicValue SkilledRepairCost => skilledRepairCost;
-        public override float DurabilityRate            => DurabilityMax / 500f;
+        public override float DurabilityRate            => DurabilityMax / 1000f;
         public override Item RepairItem                 => Item.Get<IronBarItem>();
         public override int FullRepairAmount            => 4;
     }

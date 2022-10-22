@@ -25,30 +25,30 @@ namespace Eco.Mods.TechTree
     using Eco.Core.Controller;
 
 
-    [RequiresSkill(typeof(SmeltingSkill), 1)]
-    public partial class IronMacheteRecipe : RecipeFamily
+    [RequiresSkill(typeof(AdvancedSmeltingSkill), 1)]
+    public partial class SteelHoeRecipe : RecipeFamily
     {
-        public IronMacheteRecipe()
+        public SteelHoeRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "IronMachete",  //noloc
-                Localizer.DoStr("Iron Machete"),
+                "SteelHoe",  //noloc
+                Localizer.DoStr("Steel Hoe"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(IronBarItem), 4, typeof(SmeltingSkill), typeof(SmeltingLavishResourcesTalent)),
-                    new IngredientElement("WoodBoard", 4, typeof(SmeltingSkill), typeof(SmeltingLavishResourcesTalent)), //noloc
+                    new IngredientElement(typeof(SteelBarItem), 10, typeof(AdvancedSmeltingSkill), typeof(AdvancedSmeltingLavishResourcesTalent)),
+                    new IngredientElement("Lumber", 5, typeof(AdvancedSmeltingSkill), typeof(AdvancedSmeltingLavishResourcesTalent)), //noloc
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<IronMacheteItem>()
+                    new CraftingElement<SteelHoeItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 0.1f;
-            this.LaborInCalories = CreateLaborInCaloriesValue(250, typeof(SmeltingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(IronMacheteRecipe), 0.5f, typeof(SmeltingSkill), typeof(SmeltingFocusedSpeedTalent), typeof(SmeltingParallelSpeedTalent));
+            this.LaborInCalories = CreateLaborInCaloriesValue(250, typeof(AdvancedSmeltingSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(SteelHoeRecipe), 0.5f, typeof(AdvancedSmeltingSkill), typeof(AdvancedSmeltingFocusedSpeedTalent), typeof(AdvancedSmeltingParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Iron Machete"), typeof(IronMacheteRecipe));
+            this.Initialize(Localizer.DoStr("Steel Hoe"), typeof(SteelHoeRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(AnvilObject), this);
         }
@@ -60,33 +60,37 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Iron Machete")]
-    [Tier(2)]
-    [RepairRequiresSkill(typeof(SmeltingSkill), 0)]
+    [LocDisplayName("Steel Hoe")]
+    [Tier(3)]
+    [RepairRequiresSkill(typeof(AdvancedSmeltingSkill), 0)]
     [Weight(1000)]
     [Category("Tool")]
     [Tag("Tool", 1)]
-    [Tag("Iron Tool", 1)]
+    [Tag("Steel Tool", 1)]
     [Ecopedia("Items", "Tools", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    public partial class IronMacheteItem : MacheteItem
+    public partial class SteelHoeItem : HoeItem
     {
                                                                                                                                                                                                                                            // Static values
-        private static IDynamicValue caloriesBurn           = new MultiDynamicValue(MultiDynamicOps.Multiply, new TalentModifiedValue(typeof(IronMacheteItem), typeof(GatheringToolEfficiencyTalent)), CreateCalorieValue(17, typeof(FarmingSkill), typeof(IronMacheteItem)));
+        private static IDynamicValue caloriesBurn           = new MultiDynamicValue(MultiDynamicOps.Multiply, new TalentModifiedValue(typeof(SteelHoeItem), typeof(ToolEfficiencyTalent)), CreateCalorieValue(15, typeof(FarmingSkill), typeof(SteelHoeItem)));
         private static IDynamicValue exp                    = new ConstantValue(0.1f);
-        private static IDynamicValue tier                   = new MultiDynamicValue(MultiDynamicOps.Sum, new ConstantValue(2), new TalentModifiedValue(typeof(IronMacheteItem), typeof(GatheringToolStrengthTalent), 0));
-        private static SkillModifiedValue skilledRepairCost = new SkillModifiedValue(4, SmeltingSkill.MultiplicativeStrategy, typeof(SmeltingSkill), Localizer.DoStr("repair cost"), DynamicValueType.Efficiency);
-
+        private static IDynamicValue tier                   = new ConstantValue(3);
+        private static SkillModifiedValue skilledRepairCost = new SkillModifiedValue(8, AdvancedSmeltingSkill.MultiplicativeStrategy, typeof(AdvancedSmeltingSkill), Localizer.DoStr("repair cost"), DynamicValueType.Efficiency);
+         
+        private static Vector2i[] areaBlocks = new Vector2i[]
+        {
+            new Vector2i(0, 1), 
+        };
 
         // Tool overrides
 
-        public override LocString DisplayDescription    => Localizer.DoStr("A machete used to quickly clear plants.");
         public override IDynamicValue CaloriesBurn      => caloriesBurn;
         public override Type ExperienceSkill            => typeof(FarmingSkill);
         public override IDynamicValue ExperienceRate    => exp;
         public override IDynamicValue Tier              => tier;
         public override IDynamicValue SkilledRepairCost => skilledRepairCost;
-        public override float DurabilityRate            => DurabilityMax / 500f;
-        public override Item RepairItem                 => Item.Get<IronBarItem>();
-        public override int FullRepairAmount            => 4;
+        public override float DurabilityRate            => DurabilityMax / 750f;
+        public override Item RepairItem                 => Item.Get<SteelBarItem>();
+        public override int FullRepairAmount            => 8;
+        public override Vector2i[] AreaBlocks           => areaBlocks;
     }
 }

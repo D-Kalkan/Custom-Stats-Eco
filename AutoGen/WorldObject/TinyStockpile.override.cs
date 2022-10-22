@@ -70,7 +70,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Tiny Stockpile")]
     [Ecopedia("Crafted Objects", "Storage", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    [Tag("Primitive Recyclable Tool", 1)]
+    [Tag("Primitive Tool", 1)]
     public partial class TinyStockpileItem : WorldObjectItem<TinyStockpileObject>
     {
         

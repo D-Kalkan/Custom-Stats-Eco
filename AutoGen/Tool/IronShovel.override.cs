@@ -66,6 +66,7 @@ namespace Eco.Mods.TechTree
     [Weight(1000)]
     [Category("Tool")]
     [Tag("Tool", 1)]
+    [Tag("Iron Tool", 1)]
     [Ecopedia("Items", "Tools", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     public partial class IronShovelItem : ShovelItem
     {
