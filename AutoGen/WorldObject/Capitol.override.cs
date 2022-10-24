@@ -44,7 +44,6 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(PropertyAuthComponent))]
     [RequireComponent(typeof(MinimapComponent))]
     [RequireComponent(typeof(LinkComponent))]
-    [RequireComponent(typeof(CraftingComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
     [RequireComponent(typeof(RoomRequirementsComponent))]
     [RequireRoomContainment]

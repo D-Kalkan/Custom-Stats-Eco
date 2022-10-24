@@ -41,23 +41,33 @@ namespace Eco.Mods.TechTree
     using Eco.Core.Controller;
 
     [Serialized]
+    [RequireComponent(typeof(OnOffComponent))]
     [RequireComponent(typeof(PropertyAuthComponent))]
     [RequireComponent(typeof(MinimapComponent))]
+    [RequireComponent(typeof(LinkComponent))]
+    [RequireComponent(typeof(CraftingComponent))]
+    [RequireComponent(typeof(PowerGridComponent))]
+    [RequireComponent(typeof(PowerConsumptionComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
+    [RequireComponent(typeof(LiquidConverterComponent))]
+    [RequireComponent(typeof(PluginModulesComponent))]
     [RequireComponent(typeof(RoomRequirementsComponent))]
     [RequireRoomContainment]
-    [RequireRoomVolume(45)]
-    [RequireRoomMaterialTier(1.5f)]
-    public partial class CurrencyExchangeObject : WorldObject, IRepresentsItem
+    [RequireRoomVolume(25)]
+    [RequireRoomMaterialTier(2.8f, typeof(CuttingEdgeCookingLavishReqTalent), typeof(CuttingEdgeCookingFrugalReqTalent))]
+    public partial class LaboratoryObject : WorldObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(CurrencyExchangeItem);
-        public override LocString DisplayName => Localizer.DoStr("Currency Exchange");
-        public override TableTextureMode TableTexture => TableTextureMode.Wood;
+        public virtual Type RepresentedItemType => typeof(LaboratoryItem);
+        public override LocString DisplayName => Localizer.DoStr("Laboratory");
+        public override TableTextureMode TableTexture => TableTextureMode.Stone;
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
-            this.GetComponent<MinimapComponent>().Initialize(Localizer.DoStr("Economy"));
+            this.GetComponent<MinimapComponent>().Initialize(Localizer.DoStr("Cooking"));
+            this.GetComponent<PowerConsumptionComponent>().Initialize(250);
+            this.GetComponent<PowerGridComponent>().Initialize(10, new ElectricPower());
+            this.GetComponent<LiquidConverterComponent>().Setup(typeof(WaterItem), typeof(SewageItem), this.GetOccupancyType(BlockOccupancyType.WaterInputPort), this.GetOccupancyType(BlockOccupancyType.SewageOutputPort), 0.3f, 0.9f);
             this.ModsPostInitialize();
         }
 
@@ -73,22 +83,24 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Currency Exchange")]
-    [Ecopedia("Work Stations", "Economic", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    public partial class CurrencyExchangeItem : WorldObjectItem<CurrencyExchangeObject>, IPersistentData
+    [LocDisplayName("Laboratory")]
+    [Ecopedia("Work Stations", "Researching", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [AllowPluginModules(Tags = new[] { "ModernUpgrade" }, ItemTypes = new[] { typeof(CuttingEdgeCookingUpgradeItem) })] //noloc
+    public partial class LaboratoryItem : WorldObjectItem<LaboratoryObject>, IPersistentData
     {
         
-        public override LocString DisplayDescription => Localizer.DoStr("Allows players to exchange currency.");
+        public override LocString DisplayDescription => Localizer.DoStr("For researching the science side of cooking. Science rules!");
 
 
         public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
                     | DirectionAxisFlags.Down
                 ;
 
+        [Tooltip(7)] private LocString PowerConsumptionTooltip => Localizer.Do($"Consumes: {Text.Info(250)}w of {new ElectricPower().Name} power");
         [Serialized, SyncToView, TooltipChildren, NewTooltipChildren] public object PersistentData { get; set; }
     }
 
-    public partial class CurrencyExchangeRecipe : RecipeFamily
+    public partial class LaboratoryRecipe : RecipeFamily
     {
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
         partial void ModsPreInitialize();

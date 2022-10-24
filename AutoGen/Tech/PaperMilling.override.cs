@@ -95,8 +95,6 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Paper Milling Skill Book"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(DendrologyResearchPaperAdvancedItem), 5),
-                    new IngredientElement("Basic Research", 5), //noloc
                 },
                 new List<CraftingElement>
                 {

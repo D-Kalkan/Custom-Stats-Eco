@@ -90,32 +90,6 @@ namespace Eco.Mods.TechTree
 
     public partial class RegistrarRecipe : RecipeFamily
     {
-        public RegistrarRecipe()
-        {
-            var recipe = new Recipe();
-            recipe.Init(
-                "Registrar",  //noloc
-                Localizer.DoStr("Registrar"),
-                new List<IngredientElement>
-                {
-                    new IngredientElement(typeof(IronBarItem), 20, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
-                    new IngredientElement("Lumber", 16, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
-                    new IngredientElement("WoodBoard", 10, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
-                },
-                new List<CraftingElement>
-                {
-                    new CraftingElement<RegistrarItem>()
-                });
-            this.Recipes = new List<Recipe> { recipe };
-            this.ExperienceOnCraft = 10;
-            this.LaborInCalories = CreateLaborInCaloriesValue(150, typeof(CarpentrySkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(RegistrarRecipe), 25, typeof(CarpentrySkill), typeof(CarpentryFocusedSpeedTalent), typeof(CarpentryParallelSpeedTalent));
-            this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Registrar"), typeof(RegistrarRecipe));
-            this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(CapitolObject), this);
-        }
-
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
         partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize RecipeFamily after initialization, but before registration. You can change skill requirements here.</summary>

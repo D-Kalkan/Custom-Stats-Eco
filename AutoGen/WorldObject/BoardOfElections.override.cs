@@ -47,17 +47,19 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(RoomRequirementsComponent))]
     [RequireRoomContainment]
     [RequireRoomVolume(45)]
-    [RequireRoomMaterialTier(1.5f)]
-    public partial class CurrencyExchangeObject : WorldObject, IRepresentsItem
+    [RequireRoomMaterialTier(1)]
+    public partial class BoardOfElectionsObject : CivicObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(CurrencyExchangeItem);
-        public override LocString DisplayName => Localizer.DoStr("Currency Exchange");
+        public virtual Type RepresentedItemType => typeof(BoardOfElectionsItem);
+        public override LocString DisplayName => Localizer.DoStr("Board Of Elections");
         public override TableTextureMode TableTexture => TableTextureMode.Wood;
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
-            this.GetComponent<MinimapComponent>().Initialize(Localizer.DoStr("Economy"));
+            base.Initialize();
+
+            this.GetComponent<MinimapComponent>().Initialize(Localizer.DoStr("Civics"));
             this.ModsPostInitialize();
         }
 
@@ -73,12 +75,12 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Currency Exchange")]
-    [Ecopedia("Work Stations", "Economic", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    public partial class CurrencyExchangeItem : WorldObjectItem<CurrencyExchangeObject>, IPersistentData
+    [LocDisplayName("Board Of Elections")]
+    [Ecopedia("Work Stations", "Government", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    public partial class BoardOfElectionsItem : WorldObjectItem<BoardOfElectionsObject>, IPersistentData
     {
         
-        public override LocString DisplayDescription => Localizer.DoStr("Allows players to exchange currency.");
+        public override LocString DisplayDescription => Localizer.DoStr("A building for deciding voting procedures.");
 
 
         public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
@@ -88,7 +90,7 @@ namespace Eco.Mods.TechTree
         [Serialized, SyncToView, TooltipChildren, NewTooltipChildren] public object PersistentData { get; set; }
     }
 
-    public partial class CurrencyExchangeRecipe : RecipeFamily
+    public partial class BoardOfElectionsRecipe : RecipeFamily
     {
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
         partial void ModsPreInitialize();

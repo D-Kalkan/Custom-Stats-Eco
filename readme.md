@@ -14,13 +14,12 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 * Overhauled the self improvement skill
 * Combined Hunting with Butchery
 * Combined Farming with Gathering
-* New fuel coke for the steam truck crafted by Mechanics
-* New fuel diesel for the truck that crafted by Industry
+* New fuel coke for steam vehicles crafted by Mechanics
+* New fuel diesel for modern vehicles crafted by Industry
 * Reduced the effectiveness of upgrade modules
 * Overhauled research to be completed by the enitre server
 * Mass produced items create garbage as an additional minor output
 * A wide range of balance changes touching almost every profession notably: 
-
 	Tailors can now craft land claim papers at end game <br>
 	Pottery can craft Iron Barrels <br>
 	Carpentry can craft transmission poles <br>
@@ -60,7 +59,7 @@ That said, it will be appreciated if you do attribute the work!
 * Lowered the effectiveness of all upgrade modules to 5%, 12.5%, 20%, 25% and 30%
 * Lowered the glassworking level requirement for Advanced Upgrade 2 from 4 to 3
 * Powered Carts are now crafted at Level 3 Basic Engineering
-* Moved all governemnt & Admin related objects to the captiol
+* Removed ability to craft all government & Admin related tables
 * Reduced sand cost for glass by 1
 * Added ceramic tag to Square Pot & Round Pot
 * Substrates now require 1 ceramic

@@ -89,32 +89,6 @@ namespace Eco.Mods.TechTree
 
     public partial class RealEstateDeskRecipe : RecipeFamily
     {
-        public RealEstateDeskRecipe()
-        {
-            var recipe = new Recipe();
-            recipe.Init(
-                "RealEstateDesk",  //noloc
-                Localizer.DoStr("Real Estate Desk"),
-                new List<IngredientElement>
-                {
-                    new IngredientElement(typeof(PlantFibersItem), 40),
-                    new IngredientElement("HewnLog", 15), //noloc
-                    new IngredientElement("WoodBoard", 10), //noloc
-                },
-                new List<CraftingElement>
-                {
-                    new CraftingElement<RealEstateDeskItem>()
-                });
-            this.Recipes = new List<Recipe> { recipe };
-            this.ExperienceOnCraft = 5;
-            this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(CarpentrySkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(RealEstateDeskRecipe), 2, typeof(CarpentrySkill), typeof(CarpentryFocusedSpeedTalent), typeof(CarpentryParallelSpeedTalent));
-            this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Real Estate Desk"), typeof(RealEstateDeskRecipe));
-            this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(CapitolObject), this);
-        }
-
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
         partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize RecipeFamily after initialization, but before registration. You can change skill requirements here.</summary>

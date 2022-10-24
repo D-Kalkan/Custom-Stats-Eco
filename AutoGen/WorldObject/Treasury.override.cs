@@ -90,32 +90,6 @@ namespace Eco.Mods.TechTree
 
     public partial class TreasuryRecipe : RecipeFamily
     {
-        public TreasuryRecipe()
-        {
-            var recipe = new Recipe();
-            recipe.Init(
-                "Treasury",  //noloc
-                Localizer.DoStr("Treasury"),
-                new List<IngredientElement>
-                {
-                    new IngredientElement(typeof(BrickItem), 16),
-                    new IngredientElement(typeof(GoldBarItem), 12),
-                    new IngredientElement("Lumber", 60), //noloc
-                },
-                new List<CraftingElement>
-                {
-                    new CraftingElement<TreasuryItem>()
-                });
-            this.Recipes = new List<Recipe> { recipe };
-            this.ExperienceOnCraft = 20;
-            this.LaborInCalories = CreateLaborInCaloriesValue(1500, typeof(SmeltingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(TreasuryRecipe), 25, typeof(SmeltingSkill), typeof(SmeltingFocusedSpeedTalent), typeof(SmeltingParallelSpeedTalent));
-            this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Treasury"), typeof(TreasuryRecipe));
-            this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(CapitolObject), this);
-        }
-
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
         partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize RecipeFamily after initialization, but before registration. You can change skill requirements here.</summary>

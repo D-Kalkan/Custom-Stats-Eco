@@ -42,22 +42,15 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [RequireComponent(typeof(PropertyAuthComponent))]
-    [RequireComponent(typeof(MinimapComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
-    [RequireComponent(typeof(RoomRequirementsComponent))]
-    [RequireRoomContainment]
-    [RequireRoomVolume(45)]
-    [RequireRoomMaterialTier(1.5f)]
-    public partial class CurrencyExchangeObject : WorldObject, IRepresentsItem
+    public partial class PaperMachineObject : WorldObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(CurrencyExchangeItem);
-        public override LocString DisplayName => Localizer.DoStr("Currency Exchange");
-        public override TableTextureMode TableTexture => TableTextureMode.Wood;
+        public virtual Type RepresentedItemType => typeof(PaperMachineItem);
+        public override LocString DisplayName => Localizer.DoStr("Paper Machine");
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
-            this.GetComponent<MinimapComponent>().Initialize(Localizer.DoStr("Economy"));
             this.ModsPostInitialize();
         }
 
@@ -73,26 +66,17 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Currency Exchange")]
-    [Ecopedia("Work Stations", "Economic", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    public partial class CurrencyExchangeItem : WorldObjectItem<CurrencyExchangeObject>, IPersistentData
+    [LocDisplayName("Paper Machine")]
+    [Category("Hidden"), Tag("NotInBrowser")]
+    public partial class PaperMachineItem : WorldObjectItem<PaperMachineObject>
     {
         
-        public override LocString DisplayDescription => Localizer.DoStr("Allows players to exchange currency.");
+        public override LocString DisplayDescription => Localizer.DoStr("");
 
 
         public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
                     | DirectionAxisFlags.Down
                 ;
 
-        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren] public object PersistentData { get; set; }
-    }
-
-    public partial class CurrencyExchangeRecipe : RecipeFamily
-    {
-        /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
-        partial void ModsPreInitialize();
-        /// <summary>Hook for mods to customize RecipeFamily after initialization, but before registration. You can change skill requirements here.</summary>
-        partial void ModsPostInitialize();
     }
 }
