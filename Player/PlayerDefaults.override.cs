@@ -39,8 +39,8 @@ public static class PlayerDefaults
             { typeof(StoneHammerItem), 1 },
             { typeof(StonePickaxeItem), 1 },
             { typeof(TorchItem), 1 },
-            { typeof(TomatoItem), 20 },
-            { typeof(RawFishItem), 20 },
+            { typeof(CharredTomatoItem), 100 },
+            { typeof(CharredFishItem), 100 },
         };
     }
     public static IEnumerable<Type> GetSkillsForcedToLevelUp()
