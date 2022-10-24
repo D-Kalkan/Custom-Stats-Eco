@@ -1,4 +1,4 @@
-﻿// Copyright (c) Strange Loop Games. All rights reserved.
+// Copyright (c) Strange Loop Games. All rights reserved.
 // See LICENSE file in the project root for full license information.
 
 using System;
@@ -77,14 +77,14 @@ public static class PlayerDefaults
         {
             UserStatType.MaxCalories, new MultiDynamicValue(MultiDynamicOps.Sum,
                 new MultiDynamicValue(MultiDynamicOps.Multiply,
-                    CreateSmv(0f,  new BonusUnitsDecoratorStrategy(SelfImprovementSkill.AdditiveStrategy, "cal", (float val) => val/2f), typeof(SelfImprovementSkill), Localizer.DoStr("stomach capacity"), DynamicValueType.Misc),
+                    CreateSmv(0f,  new BonusUnitsDecoratorStrategy(SelfImprovementSkill.AdditiveStrategy, "cal", (float val) => val/1f), typeof(SelfImprovementSkill), Localizer.DoStr("stomach capacity"), DynamicValueType.Misc),
                     new ConstantValue(0.5f)),
                     new TalentModifiedValue(typeof(UserStatType), typeof(SelfImprovementGluttonTalent), 0),
                 new ConstantValue(3000))
         },
         {
             UserStatType.MaxCarryWeight, new MultiDynamicValue(MultiDynamicOps.Sum,
-                CreateSmv(0f, new BonusUnitsDecoratorStrategy(SelfImprovementSkill.AdditiveStrategy, "kg", (float val) => val/1000f), typeof(SelfImprovementSkill), Localizer.DoStr("carry weight"), DynamicValueType.Misc),
+                CreateSmv(0f, new BonusUnitsDecoratorStrategy(SelfImprovementSkill.AdditiveStrategy, "kg", (float val) => val/80f), typeof(SelfImprovementSkill), Localizer.DoStr("carry weight"), DynamicValueType.Misc),
                 new TalentModifiedValue(typeof(UserStatType), typeof(SelfImprovementDeeperPocketsTalent), 0),
                 new ConstantValue(ToolbarBackpackInventory.DefaultWeightLimit))
         },
