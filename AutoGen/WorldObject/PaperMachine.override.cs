@@ -39,10 +39,16 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Civics.Objects;
     using Eco.Gameplay.Systems.NewTooltip;
     using Eco.Core.Controller;
+    using static Eco.Gameplay.Housing.PropertyValues.HomeFurnishingValue;
 
     [Serialized]
+    [RequireComponent(typeof(OnOffComponent))]
     [RequireComponent(typeof(PropertyAuthComponent))]
+    [RequireComponent(typeof(MinimapComponent))]
+    [RequireComponent(typeof(LinkComponent))]
+    [RequireComponent(typeof(CraftingComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
+    [RequireComponent(typeof(PluginModulesComponent))]
     public partial class PaperMachineObject : WorldObject, IRepresentsItem
     {
         public virtual Type RepresentedItemType => typeof(PaperMachineItem);
