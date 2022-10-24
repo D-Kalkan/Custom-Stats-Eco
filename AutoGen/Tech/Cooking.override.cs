@@ -99,7 +99,7 @@ namespace Eco.Mods.TechTree
                     new IngredientElement(typeof(GatheringResearchPaperBasicItem), 50, typeof(CampfireCookingSkill)),
                     new IngredientElement(typeof(DendrologyResearchPaperBasicItem), 50, typeof(CampfireCookingSkill)),
                     new IngredientElement(typeof(DendrologyResearchPaperAdvancedItem), 50, typeof(CampfireCookingSkill)),
-                    new IngredientElement(typeof(SmeltingSkill), 1, typeof(CampfireCookingSkill)),
+                    new IngredientElement(typeof(SmeltingSkillScroll), 1, typeof(CampfireCookingSkill)),
                 },
                 new List<CraftingElement>
                 {
