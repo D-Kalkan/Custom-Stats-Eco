@@ -20,31 +20,31 @@ namespace Eco.Mods.TechTree
 
     /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
 
-    [RequiresSkill(typeof(FertilizersSkill), 4)]
-    public partial class CrushedStoneRampRecipe : RecipeFamily
+    [RequiresSkill(typeof(FertilizersSkill), 5)]
+    public partial class CrushStoneFurnishingLv3Recipe : RecipeFamily
     {
-        public CrushedStoneRampRecipe()
+        public CrushStoneFurnishingLv3Recipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "CrushedStoneRamp",  //noloc
-                Localizer.DoStr("Crushed Stone Ramp Lv2"),
+                "CrushedMixedRock",  //noloc
+                Localizer.DoStr("Crushed Stone Furnishing Lv3"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(StoneRampItem), 2, true),
+                    new IngredientElement("Mortared Stone Furnishing", 1, true),
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<CrushedMixedRockItem>(1),
+                    new CraftingElement<CrushedMixedRockItem>(4),
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 0.5f;
-            this.LaborInCalories = CreateLaborInCaloriesValue(120, typeof(MiningSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(CrushedStoneRampRecipe), 0.5f, typeof(MiningSkill));
+            this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(FertilizersSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(CrushStoneFurnishingLv3Recipe), 0.5f, typeof(FertilizersSkill));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Crushed Stone Ramp Lv2"), typeof(CrushedStoneRampRecipe));
+            this.Initialize(Localizer.DoStr("Crushed Stone Furnishing Lv3"), typeof(CrushStoneFurnishingLv3Recipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(StampMillObject), this);
+            CraftingComponent.AddRecipe(typeof(JawCrusherObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>

@@ -20,31 +20,31 @@ namespace Eco.Mods.TechTree
 
     /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
 
-    [RequiresSkill(typeof(FertilizersSkill), 4)]
-    public partial class CrushedStoneRampRecipe : RecipeFamily
+    [RequiresSkill(typeof(FertilizersSkill), 2)]
+    public partial class HewnDismantleRecipe : RecipeFamily
     {
-        public CrushedStoneRampRecipe()
+        public HewnDismantleRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "CrushedStoneRamp",  //noloc
-                Localizer.DoStr("Crushed Stone Ramp Lv2"),
+                "HewnLog",  //noloc
+                Localizer.DoStr("Dismantled Hewn Furnishing"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(StoneRampItem), 2, true),
+                    new IngredientElement("Hewn Furnishing", 1, true),
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<CrushedMixedRockItem>(1),
+                    new CraftingElement<HewnLogItem>(5),
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 0.5f;
-            this.LaborInCalories = CreateLaborInCaloriesValue(120, typeof(MiningSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(CrushedStoneRampRecipe), 0.5f, typeof(MiningSkill));
+            this.LaborInCalories = CreateLaborInCaloriesValue(120, typeof(FertilizersSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(HewnDismantleRecipe), 0.5f, typeof(FertilizersSkill));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Crushed Stone Ramp Lv2"), typeof(CrushedStoneRampRecipe));
+            this.Initialize(Localizer.DoStr("Dismantled Hewn Furnishing"), typeof(HewnDismantleRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(StampMillObject), this);
+            CraftingComponent.AddRecipe(typeof(SawmillObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>

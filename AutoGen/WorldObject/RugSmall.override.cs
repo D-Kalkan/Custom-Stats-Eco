@@ -73,7 +73,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Rug Small")]
     [Ecopedia("Housing Objects", "Decoration", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Housing", 1)]
-    [Tag("Small Fabric", 1)]
+    [Tag("Small Textile", 1)]
     public partial class RugSmallItem : WorldObjectItem<RugSmallObject>
     {
         

@@ -73,7 +73,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Small Bath Mat")]
     [Ecopedia("Housing Objects", "Washroom", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     [Tag("Housing", 1)]
-    [Tag("Fabric", 1)]
+    [Tag("Textile", 1)]
     public partial class SmallBathMatItem : WorldObjectItem<SmallBathMatObject>
     {
         

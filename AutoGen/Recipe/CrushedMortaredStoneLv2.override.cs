@@ -20,7 +20,7 @@ namespace Eco.Mods.TechTree
 
     /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
 
-    [RequiresSkill(typeof(FertilizersSkill), 6)]
+    [RequiresSkill(typeof(FertilizersSkill), 5)]
     public partial class CrushedMortaredStoneLv2Recipe : RecipeFamily
     {
         public CrushedMortaredStoneLv2Recipe()
@@ -28,7 +28,7 @@ namespace Eco.Mods.TechTree
             var recipe = new Recipe();
             recipe.Init(
                 "CrushedMortaredStoneLv2",  //noloc
-                Localizer.DoStr("Crushed Mortared Stone Lv2"),
+                Localizer.DoStr("Crushed Mortared Stone Lv3"),
                 new List<IngredientElement>
                 {
                     new IngredientElement("MortaredStone", 20, true), //noloc
@@ -42,7 +42,7 @@ namespace Eco.Mods.TechTree
             this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(MiningSkill));
             this.CraftMinutes = CreateCraftTimeValue(typeof(CrushedMortaredStoneLv2Recipe), 0.2f, typeof(MiningSkill));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Crushed Mortared Stone Lv2"), typeof(CrushedMortaredStoneLv2Recipe));
+            this.Initialize(Localizer.DoStr("Crushed Mortared Stone Lv3"), typeof(CrushedMortaredStoneLv2Recipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(JawCrusherObject), this);
         }

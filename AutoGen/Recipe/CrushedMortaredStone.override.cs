@@ -20,7 +20,7 @@ namespace Eco.Mods.TechTree
 
     /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
 
-    [RequiresSkill(typeof(FertilizersSkill), 4)]
+    [RequiresSkill(typeof(FertilizersSkill), 3)]
     public partial class CrushedMortaredStoneRecipe : RecipeFamily
     {
         public CrushedMortaredStoneRecipe()
@@ -28,7 +28,7 @@ namespace Eco.Mods.TechTree
             var recipe = new Recipe();
             recipe.Init(
                 "CrushedMortaredStone",  //noloc
-                Localizer.DoStr("Crushed Mortared Stone"),
+                Localizer.DoStr("Crushed Mortared Stone Lv2"),
                 new List<IngredientElement>
                 {
                     new IngredientElement("MortaredStone", 12, true), //noloc
@@ -42,7 +42,7 @@ namespace Eco.Mods.TechTree
             this.LaborInCalories = CreateLaborInCaloriesValue(120, typeof(MiningSkill));
             this.CraftMinutes = CreateCraftTimeValue(typeof(CrushedMortaredStoneRecipe), 0.5f, typeof(MiningSkill));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Crushed Mortared Stone"), typeof(CrushedMortaredStoneRecipe));
+            this.Initialize(Localizer.DoStr("Crushed Mortared Stone Lv2"), typeof(CrushedMortaredStoneRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(StampMillObject), this);
         }

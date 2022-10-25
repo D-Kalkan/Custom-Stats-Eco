@@ -76,7 +76,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Campsite")]
     [Ecopedia("Work Stations", "Craft Tables", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    [Tag("Fabric", 1)]
+    [Tag("Textile", 1)]
     [StartsDiscovered]
     public partial class CampsiteItem : WorldObjectItem<CampsiteObject>, IPersistentData
     {

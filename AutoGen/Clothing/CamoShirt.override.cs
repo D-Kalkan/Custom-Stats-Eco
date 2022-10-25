@@ -27,7 +27,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Camo Shirt")]
     [Weight(100)]
     [Tag("Clothes", 1)]
-    [Tag("Fabric", 1)]
+    [Tag("Textile", 1)]
     [Ecopedia("Items", "Clothing", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     public partial class CamoShirtItem :
         ClothingItem

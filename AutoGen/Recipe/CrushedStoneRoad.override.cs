@@ -28,7 +28,7 @@ namespace Eco.Mods.TechTree
             var recipe = new Recipe();
             recipe.Init(
                 "CrushedStoneRoad",  //noloc
-                Localizer.DoStr("Crushed Stone Road"),
+                Localizer.DoStr("Crushed Stone Road Lv2"),
                 new List<IngredientElement>
                 {
                     new IngredientElement(typeof(StoneRoadItem), 5, true),
@@ -42,7 +42,7 @@ namespace Eco.Mods.TechTree
             this.LaborInCalories = CreateLaborInCaloriesValue(120, typeof(MiningSkill));
             this.CraftMinutes = CreateCraftTimeValue(typeof(CrushedStoneRoadRecipe), 0.5f, typeof(MiningSkill));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Crushed Stone Road"), typeof(CrushedStoneRoadRecipe));
+            this.Initialize(Localizer.DoStr("Crushed Stone Road Lv2"), typeof(CrushedStoneRoadRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(StampMillObject), this);
         }

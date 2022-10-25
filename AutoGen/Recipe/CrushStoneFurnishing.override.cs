@@ -20,29 +20,29 @@ namespace Eco.Mods.TechTree
 
     /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
 
-    [RequiresSkill(typeof(FertilizersSkill), 4)]
-    public partial class CrushedStoneRampRecipe : RecipeFamily
+    [RequiresSkill(typeof(FertilizersSkill), 3)]
+    public partial class CrushStoneFurnishingRecipe : RecipeFamily
     {
-        public CrushedStoneRampRecipe()
+        public CrushStoneFurnishingRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "CrushedStoneRamp",  //noloc
-                Localizer.DoStr("Crushed Stone Ramp Lv2"),
+                "CrushedMixedRock",  //noloc
+                Localizer.DoStr("Crushed Stone Furnishing Lv2"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(StoneRampItem), 2, true),
+                    new IngredientElement("Mortared Stone Furnishing", 1, true),
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<CrushedMixedRockItem>(1),
+                    new CraftingElement<CrushedMixedRockItem>(4),
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 0.5f;
-            this.LaborInCalories = CreateLaborInCaloriesValue(120, typeof(MiningSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(CrushedStoneRampRecipe), 0.5f, typeof(MiningSkill));
+            this.LaborInCalories = CreateLaborInCaloriesValue(120, typeof(FertilizersSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(CrushStoneFurnishingRecipe), 0.5f, typeof(FertilizersSkill));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Crushed Stone Ramp Lv2"), typeof(CrushedStoneRampRecipe));
+            this.Initialize(Localizer.DoStr("Crushed Stone Furnishing Lv2"), typeof(CrushStoneFurnishingRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(StampMillObject), this);
         }

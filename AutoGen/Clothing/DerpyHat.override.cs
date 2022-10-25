@@ -28,7 +28,7 @@ namespace Eco.Mods.TechTree
     [StartsDiscovered]
     [Weight(100)]
     [Tag("Clothes", 1)]
-    [Tag("Small Fabric", 1)]
+    [Tag("Small Textile", 1)]
     [Ecopedia("Items", "Clothing", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     public partial class DerpyHatItem :
         ClothingItem

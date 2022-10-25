@@ -28,7 +28,7 @@ namespace Eco.Mods.TechTree
             var recipe = new Recipe();
             recipe.Init(
                 "CrushedStoneRampLv2",  //noloc
-                Localizer.DoStr("Crushed Stone Ramp Lv2"),
+                Localizer.DoStr("Crushed Stone Ramp Lv3"),
                 new List<IngredientElement>
                 {
                     new IngredientElement(typeof(StoneRampItem), 2, true),
@@ -42,7 +42,7 @@ namespace Eco.Mods.TechTree
             this.LaborInCalories = CreateLaborInCaloriesValue(60, typeof(MiningSkill));
             this.CraftMinutes = CreateCraftTimeValue(typeof(CrushedStoneRampLv2Recipe), 0.2f, typeof(MiningSkill));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Crushed Stone Ramp Lv2"), typeof(CrushedStoneRampLv2Recipe));
+            this.Initialize(Localizer.DoStr("Crushed Stone Ramp Lv3"), typeof(CrushedStoneRampLv2Recipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(JawCrusherObject), this);
         }
