@@ -47,16 +47,28 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(MinimapComponent))]
     [RequireComponent(typeof(LinkComponent))]
     [RequireComponent(typeof(CraftingComponent))]
+    [RequireComponent(typeof(PowerGridComponent))]
+    [RequireComponent(typeof(PowerConsumptionComponent))]
+    [RequireComponent(typeof(HousingComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
     [RequireComponent(typeof(PluginModulesComponent))]
+    [RequireComponent(typeof(RoomRequirementsComponent))]
+    [RequireRoomContainment]
+    [RequireRoomVolume(45)]
+    [RequireRoomMaterialTier(2.7f, typeof(FertilizersLavishReqTalent), typeof(FertilizersFrugalReqTalent))]
     public partial class PaperMachineObject : WorldObject, IRepresentsItem
     {
         public virtual Type RepresentedItemType => typeof(PaperMachineItem);
-        public override LocString DisplayName => Localizer.DoStr("Paper Machine");
+        public override LocString DisplayName => Localizer.DoStr("Recycling Machine");
+        public override TableTextureMode TableTexture => TableTextureMode.Metal;
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
+            this.GetComponent<MinimapComponent>().Initialize(Localizer.DoStr("Crafting"));
+            this.GetComponent<PowerConsumptionComponent>().Initialize(100);
+            this.GetComponent<PowerGridComponent>().Initialize(10, new ElectricPower());
+            this.GetComponent<HousingComponent>().HomeValue = ElectricLatheItem.homeValue;
             this.ModsPostInitialize();
         }
 
@@ -71,18 +83,63 @@ namespace Eco.Mods.TechTree
         partial void ModsPostInitialize();
     }
 
+
     [Serialized]
-    [LocDisplayName("Paper Machine")]
-    [Category("Hidden"), Tag("NotInBrowser")]
-    public partial class PaperMachineItem : WorldObjectItem<PaperMachineObject>
+    [LocDisplayName("Recycling Machine")]
+    [Ecopedia("Work Stations", "Craft Tables", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [AllowPluginModules(Tags = new[] { "ModernUpgrade" }, ItemTypes = new[] { typeof(IndustryUpgradeItem) })] //noloc
+    public partial class PaperMachineItem : WorldObjectItem<PaperMachineObject>, IPersistentData
     {
-        
-        public override LocString DisplayDescription => Localizer.DoStr("");
+        public override LocString DisplayDescription => Localizer.DoStr("An electric powered machine that has a spinning blade to craft a variety of metal products.");
 
 
         public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
                     | DirectionAxisFlags.Down
                 ;
 
+        public override HomeFurnishingValue HomeValue => homeValue;
+        public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
+        {
+            Category                 = RoomCategory.Industrial,
+            TypeForRoomLimit         = Localizer.DoStr(""),
+        };
+
+        [Tooltip(7)] private LocString PowerConsumptionTooltip => Localizer.Do($"Consumes: {Text.Info(100)}w of {new ElectricPower().Name} power");
+        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren] public object PersistentData { get; set; }
+    }
+
+    [RequiresSkill(typeof(IndustrySkill), 2)]
+    public partial class PaperMachineRecipe : RecipeFamily
+    {
+        public PaperMachineRecipe()
+        {
+            var recipe = new Recipe();
+            recipe.Init(
+                "RecyclingMachine",  //noloc
+                Localizer.DoStr("Recycling Machine"),
+                new List<IngredientElement>
+                {
+                    new IngredientElement(typeof(SteelGearItem), 5, typeof(IndustrySkill), typeof(FertilizersLavishResourcesTalent)),
+                    new IngredientElement(typeof(SteelPlateItem), 12, typeof(IndustrySkill), typeof(FertilizersLavishResourcesTalent)),
+                    new IngredientElement(typeof(BasicCircuitItem), 10, typeof(IndustrySkill), typeof(FertilizersLavishResourcesTalent)),
+                },
+                new List<CraftingElement>
+                {
+                    new CraftingElement<PaperMachineItem>()
+                });
+            this.Recipes = new List<Recipe> { recipe };
+            this.ExperienceOnCraft = 20;
+            this.LaborInCalories = CreateLaborInCaloriesValue(600, typeof(IndustrySkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(PaperMachineRecipe), 8, typeof(IndustrySkill), typeof(IndustryFocusedSpeedTalent), typeof(IndustryParallelSpeedTalent));
+            this.ModsPreInitialize();
+            this.Initialize(Localizer.DoStr("Recycling Machine"), typeof(PaperMachineRecipe));
+            this.ModsPostInitialize();
+            CraftingComponent.AddRecipe(typeof(ElectricMachinistTableObject), this);
+        }
+
+        /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
+        partial void ModsPreInitialize();
+        /// <summary>Hook for mods to customize RecipeFamily after initialization, but before registration. You can change skill requirements here.</summary>
+        partial void ModsPostInitialize();
     }
 }
