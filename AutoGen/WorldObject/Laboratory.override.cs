@@ -46,15 +46,7 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(MinimapComponent))]
     [RequireComponent(typeof(LinkComponent))]
     [RequireComponent(typeof(CraftingComponent))]
-    [RequireComponent(typeof(PowerGridComponent))]
-    [RequireComponent(typeof(PowerConsumptionComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
-    [RequireComponent(typeof(LiquidConverterComponent))]
-    [RequireComponent(typeof(PluginModulesComponent))]
-    [RequireComponent(typeof(RoomRequirementsComponent))]
-    [RequireRoomContainment]
-    [RequireRoomVolume(25)]
-    [RequireRoomMaterialTier(2.8f, typeof(CuttingEdgeCookingLavishReqTalent), typeof(CuttingEdgeCookingFrugalReqTalent))]
     public partial class LaboratoryObject : WorldObject, IRepresentsItem
     {
         public virtual Type RepresentedItemType => typeof(LaboratoryItem);
@@ -64,10 +56,7 @@ namespace Eco.Mods.TechTree
         protected override void Initialize()
         {
             this.ModsPreInitialize();
-            this.GetComponent<MinimapComponent>().Initialize(Localizer.DoStr("Cooking"));
-            this.GetComponent<PowerConsumptionComponent>().Initialize(250);
-            this.GetComponent<PowerGridComponent>().Initialize(10, new ElectricPower());
-            this.GetComponent<LiquidConverterComponent>().Setup(typeof(WaterItem), typeof(SewageItem), this.GetOccupancyType(BlockOccupancyType.WaterInputPort), this.GetOccupancyType(BlockOccupancyType.SewageOutputPort), 0.3f, 0.9f);
+            this.GetComponent<MinimapComponent>().Initialize(Localizer.DoStr("Research"));
             this.ModsPostInitialize();
         }
 
@@ -85,7 +74,6 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Laboratory")]
     [Ecopedia("Work Stations", "Researching", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    [AllowPluginModules(Tags = new[] { "ModernUpgrade" }, ItemTypes = new[] { typeof(CuttingEdgeCookingUpgradeItem) })] //noloc
     public partial class LaboratoryItem : WorldObjectItem<LaboratoryObject>, IPersistentData
     {
         
@@ -96,7 +84,6 @@ namespace Eco.Mods.TechTree
                     | DirectionAxisFlags.Down
                 ;
 
-        [Tooltip(7)] private LocString PowerConsumptionTooltip => Localizer.Do($"Consumes: {Text.Info(250)}w of {new ElectricPower().Name} power");
         [Serialized, SyncToView, TooltipChildren, NewTooltipChildren] public object PersistentData { get; set; }
     }
 
