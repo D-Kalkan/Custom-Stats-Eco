@@ -77,6 +77,7 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Compost Bin")]
+    [Weight(5000)]
     [Ecopedia("Crafted Objects", "Storage", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     public partial class DumpsterCompostItem : WorldObjectItem<DumpsterCompostObject>
     {
