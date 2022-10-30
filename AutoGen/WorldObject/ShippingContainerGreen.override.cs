@@ -71,7 +71,7 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Shipping Container Green")]
+    [LocDisplayName("Green Shipping Container")]
     [Ecopedia("Crafted Objects", "Storage", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     public partial class ShippingContainerGreenItem : WorldObjectItem<ShippingContainerGreenObject>
     {
