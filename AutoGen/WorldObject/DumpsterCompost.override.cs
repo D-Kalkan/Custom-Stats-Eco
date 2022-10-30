@@ -90,7 +90,7 @@ namespace Eco.Mods.TechTree
 
     }
 
-    [RequiresSkill(typeof(AdvancedSmeltingSkill), 2)]
+    [RequiresSkill(typeof(SmeltingSkill), 2)]
     public partial class DumpsterCompostRecipe : RecipeFamily
     {
         public DumpsterCompostRecipe()
@@ -101,7 +101,8 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Compost Bin"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(CorrugatedSteelItem), 20, typeof(AdvancedSmeltingSkill), typeof(AdvancedSmeltingLavishResourcesTalent)),
+                    new IngredientElement(typeof(IronPlateItem), 20, typeof(SmeltingSkill), typeof(SmeltingLavishResourcesTalent)),
+                    new IngredientElement(typeof(ScrewsItem), 16, typeof(SmeltingSkill), typeof(SmeltingLavishResourcesTalent)),
                 },
                 new List<CraftingElement>
                 {
@@ -109,8 +110,8 @@ namespace Eco.Mods.TechTree
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 20;
-            this.LaborInCalories = CreateLaborInCaloriesValue(340, typeof(AdvancedSmeltingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(DumpsterCompostRecipe), 8, typeof(AdvancedSmeltingSkill), typeof(AdvancedSmeltingFocusedSpeedTalent), typeof(AdvancedSmeltingParallelSpeedTalent));
+            this.LaborInCalories = CreateLaborInCaloriesValue(340, typeof(SmeltingSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(DumpsterCompostRecipe), 8, typeof(SmeltingSkill), typeof(SmeltingFocusedSpeedTalent), typeof(SmeltingParallelSpeedTalent));
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Compost Bin"), typeof(DumpsterCompostRecipe));
             this.ModsPostInitialize();
