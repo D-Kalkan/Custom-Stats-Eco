@@ -94,7 +94,7 @@ namespace Eco.Mods.TechTree
                 new List<IngredientElement>
                 {
                     new IngredientElement(typeof(CulinaryResearchPaperAdvancedItem), 200, typeof(MechanicsSkill)),
-                    new IngredientElement(typeof(CulinaryResearchPaperModernItem), 50, typeof(MechanicsSkill)),
+                    new IngredientElement(typeof(CulinaryResearchPaperModernItem), 100, typeof(MechanicsSkill)),
                     new IngredientElement(typeof(DendrologyResearchPaperAdvancedItem), 200, typeof(MechanicsSkill)),
                     new IngredientElement(typeof(DendrologyResearchPaperModernItem), 100, typeof(MechanicsSkill)),
                     new IngredientElement(typeof(GeologyResearchPaperAdvancedItem), 100, typeof(MechanicsSkill)),
