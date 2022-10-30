@@ -28,7 +28,7 @@ namespace Eco.Mods.TechTree
             var recipe = new Recipe();
             recipe.Init(
                 "CulinaryResearchPaperAdvancedMeat",  //noloc
-                Localizer.DoStr("Culinary Research Paper Advanced Meat"),
+                Localizer.DoStr("Culinary Research Paper Advanced Cooking"),
                 new List<IngredientElement>
                 {
                     new IngredientElement(typeof(BakedMeatItem), 20, typeof(CookingSkill), typeof(CookingLavishResourcesTalent)),
@@ -43,7 +43,7 @@ namespace Eco.Mods.TechTree
             this.LaborInCalories = CreateLaborInCaloriesValue(120, typeof(CookingSkill));
             this.CraftMinutes = CreateCraftTimeValue(typeof(CulinaryResearchPaperAdvancedMeatRecipe), 1, typeof(CookingSkill), typeof(CookingFocusedSpeedTalent), typeof(CookingParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Culinary Research Paper Advanced Meat"), typeof(CulinaryResearchPaperAdvancedMeatRecipe));
+            this.Initialize(Localizer.DoStr("Culinary Research Paper Advanced Cooking"), typeof(CulinaryResearchPaperAdvancedMeatRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(ResearchTableObject), this);
         }
