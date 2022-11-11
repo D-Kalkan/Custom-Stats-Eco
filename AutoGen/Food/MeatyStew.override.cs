@@ -18,7 +18,7 @@ namespace Eco.Mods.TechTree
 
     /// <summary>
     /// <para>
-    /// Server side food item definition for the "JungleCampfireStew" item. 
+    /// Server side food item definition for the "MeatyStew" item. 
     /// This object inherits the FoodItem base class to allow for consumption mechanics.
     /// </para>
     /// <para>More information about FoodItem objects can be found at https://docs.play.eco/api/server/eco.gameplay/Eco.Gameplay.Items.FoodItem.html</para>
@@ -28,19 +28,19 @@ namespace Eco.Mods.TechTree
     /// If you wish to modify this class, please create a new partial class or follow the instructions in the "UserCode" folder to override the entire file.
     /// </remarks>
     [Serialized] // Tells the save/load system this object needs to be serialized. 
-    [LocDisplayName("Jungle Campfire Stew")] // Defines the localized name of the item.
-    [Weight(500)] // Defines how heavy the JungleCampfireStew is.
+    [LocDisplayName("Meaty Stew")] // Defines the localized name of the item.
+    [Weight(500)] // Defines how heavy the MeatyStew is.
     [Ecopedia("Food", "Campfire", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    public partial class JungleCampfireStewItem : FoodItem
+    public partial class MeatyStewItem : FoodItem
     {
 
         /// <summary>The tooltip description for the food item.</summary>
-        public override LocString DisplayDescription    => Localizer.DoStr("A thick stew chock-full of meat and charred vegetables. A surprisingly good combination.");
+        public override LocString DisplayDescription    => Localizer.DoStr("A thick meaty stew. A great source of protein.");
 
         /// <summary>The amount of calories awarded for eating the food item.</summary>
         public override float Calories                  => 1100;
         /// <summary>The nutritional value of the food item.</summary>
-        public override Nutrients Nutrition             => new Nutrients() { Carbs = 6, Fat = 11, Protein = 8, Vitamins = 3};
+        public override Nutrients Nutrition             => new Nutrients() { Carbs = 4, Fat = 10, Protein = 13, Vitamins = 1};
 
         /// <summary>Defines the default time it takes for this item to spoil. This value can be modified by the inventory this item currently resides in.</summary>
         protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(24);
@@ -48,31 +48,30 @@ namespace Eco.Mods.TechTree
 
 
     /// <summary>
-    /// <para>Server side recipe definition for "JungleCampfireStew".</para>
+    /// <para>Server side recipe definition for "MeatyStew".</para>
     /// <para>More information about RecipeFamily objects can be found at https://docs.play.eco/api/server/eco.gameplay/Eco.Gameplay.Items.RecipeFamily.html</para>
     /// </summary>
     /// <remarks>
     /// This is an auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization. 
     /// If you wish to modify this class, please create a new partial class or follow the instructions in the "UserCode" folder to override the entire file.
     /// </remarks>
-    [RequiresSkill(typeof(CampfireCookingSkill), 4)]
-    public partial class JungleCampfireStewRecipe : RecipeFamily
+    [RequiresSkill(typeof(CampfireCookingSkill), 3)]
+    public partial class MeatyStewRecipe : RecipeFamily
     {
-        public JungleCampfireStewRecipe()
+        public MeatyStewRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                name: "JungleCampfireStew",  //noloc
-                displayName: Localizer.DoStr("Jungle Campfire Stew"),
+                name: "MeatyStew",  //noloc
+                displayName: Localizer.DoStr("Meaty Stew"),
 
                 // Defines the ingredients needed to craft this recipe. An ingredient items takes the following inputs
                 // type of the item, the amount of the item, the skill required, and the talent used.
                 ingredients: new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(PapayaItem), 5.4, typeof(CampfireCookingSkill), typeof(CampfireCookingLavishResourcesTalent)),
+                    new IngredientElement(typeof(CharredMeatItem), 2, typeof(CampfireCookingSkill), typeof(CampfireCookingLavishResourcesTalent)),
                     new IngredientElement(typeof(ScrapMeatItem), 1, typeof(CampfireCookingSkill), typeof(CampfireCookingLavishResourcesTalent)),
                     new IngredientElement("Fat", 1, typeof(CampfireCookingSkill), typeof(CampfireCookingLavishResourcesTalent)), //noloc
-                    new IngredientElement("Fungus", 3, typeof(CampfireCookingSkill), typeof(CampfireCookingLavishResourcesTalent)), //noloc
                 },
 
                 // Define our recipe output items.
@@ -80,7 +79,7 @@ namespace Eco.Mods.TechTree
                 // to create.
                 items: new List<CraftingElement>
                 {
-                    new CraftingElement<JungleCampfireStewItem>(1)
+                    new CraftingElement<MeatyStewItem>(1)
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 1; // Defines how much experience is gained when crafted.
@@ -89,11 +88,11 @@ namespace Eco.Mods.TechTree
             this.LaborInCalories = CreateLaborInCaloriesValue(15, typeof(CampfireCookingSkill));
 
             // Defines our crafting time for the recipe
-            this.CraftMinutes = CreateCraftTimeValue(beneficiary: typeof(JungleCampfireStewRecipe), start: 1, skillType: typeof(CampfireCookingSkill), typeof(CampfireCookingFocusedSpeedTalent), typeof(CampfireCookingParallelSpeedTalent));
+            this.CraftMinutes = CreateCraftTimeValue(beneficiary: typeof(MeatyStewRecipe), start: 1, skillType: typeof(CampfireCookingSkill), typeof(CampfireCookingFocusedSpeedTalent), typeof(CampfireCookingParallelSpeedTalent));
 
-            // Perform pre/post initialization for user mods and initialize our recipe instance with the display name "Jungle Campfire Stew"
+            // Perform pre/post initialization for user mods and initialize our recipe instance with the display name "Meaty Stew"
             this.ModsPreInitialize();
-            this.Initialize(displayText: Localizer.DoStr("Jungle Campfire Stew"), recipeType: typeof(JungleCampfireStewRecipe));
+            this.Initialize(displayText: Localizer.DoStr("Meaty Stew"), recipeType: typeof(MeatyStewRecipe));
             this.ModsPostInitialize();
 
             // Register our RecipeFamily instance with the crafting system so it can be crafted.

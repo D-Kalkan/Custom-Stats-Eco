@@ -44,7 +44,7 @@ namespace Eco.Mods.TechTree
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 4, Fat = 2, Protein = 0, Vitamins = 6};
 
         /// <summary>Defines the default time it takes for this item to spoil. This value can be modified by the inventory this item currently resides in.</summary>
-        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(72);
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(24);
     }
 
 
