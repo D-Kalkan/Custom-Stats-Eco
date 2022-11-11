@@ -38,7 +38,7 @@ public static class PlayerDefaults
             { typeof(WoodenShovelItem), 1 },
             { typeof(StoneHammerItem), 1 },
             { typeof(StonePickaxeItem), 1 },
-            { typeof(TorchItem), 1 },
+            { typeof(StoneRoadToolItem), 1 },
             { typeof(CharredTomatoItem), 100 },
             { typeof(CharredFishItem), 100 },
         };
