@@ -55,7 +55,7 @@ namespace Eco.Mods.TechTree
             this.ModsPreInitialize();
             var storage = this.GetComponent<PublicStorageComponent>();
             storage.Initialize(64);
-            storage.Storage.AddInvRestriction(new StackLimitRestriction(20));
+            storage.Storage.AddInvRestriction(new StackLimitRestriction(200));
             this.ModsPostInitialize();
         }
 
