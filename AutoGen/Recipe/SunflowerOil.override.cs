@@ -31,7 +31,7 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Sunflower Oil"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(SunflowerSeedItem), 12, typeof(MillingSkill), typeof(MillingLavishResourcesTalent)),
+                    new IngredientElement(typeof(SunflowerSeedItem), 24, typeof(MillingSkill), typeof(MillingLavishResourcesTalent)),
                 },
                 new List<CraftingElement>
                 {

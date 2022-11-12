@@ -29,7 +29,7 @@ namespace Eco.Mods.TechTree
         
         public override float Calories                  => 120;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 0, Fat = 15, Protein = 0, Vitamins = 0};
-        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(96);
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(36);
     }
 
 
@@ -44,7 +44,7 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Oil"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(CerealGermItem), 6, typeof(MillingSkill), typeof(MillingLavishResourcesTalent)),
+                    new IngredientElement(typeof(CerealGermItem), 12, typeof(MillingSkill), typeof(MillingLavishResourcesTalent)),
                 },
                 new List<CraftingElement>
                 {
