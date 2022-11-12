@@ -44,7 +44,7 @@ namespace Eco.Mods.TechTree
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Reclaimed Glass"), typeof(ReclaimedGlassRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(KilnObject), this);
+            CraftingComponent.AddRecipe(typeof(BloomeryObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
