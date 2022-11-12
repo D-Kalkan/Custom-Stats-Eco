@@ -69,7 +69,7 @@ namespace Eco.Mods.TechTree
                 // type of the item, the amount of the item, the skill required, and the talent used.
                 ingredients: new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(PapayaItem), 5.4, typeof(CampfireCookingSkill), typeof(CampfireCookingLavishResourcesTalent)),
+                    new IngredientElement(typeof(PapayaItem), 5.4f, typeof(CampfireCookingSkill), typeof(CampfireCookingLavishResourcesTalent)),
                     new IngredientElement(typeof(ScrapMeatItem), 1, typeof(CampfireCookingSkill), typeof(CampfireCookingLavishResourcesTalent)),
                     new IngredientElement("Fat", 1, typeof(CampfireCookingSkill), typeof(CampfireCookingLavishResourcesTalent)), //noloc
                     new IngredientElement("Fungus", 3, typeof(CampfireCookingSkill), typeof(CampfireCookingLavishResourcesTalent)), //noloc
