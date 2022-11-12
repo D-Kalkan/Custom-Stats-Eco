@@ -20,31 +20,31 @@ namespace Eco.Mods.TechTree
 
     /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
 
-    [RequiresSkill(typeof(FertilizersSkill), 4)]
-    public partial class ReclaimedGlassRecipe : RecipeFamily
+    [RequiresSkill(typeof(FertilizersSkill), 1)]
+    public partial class BurnedGarbageRecipe : RecipeFamily
     {
-        public ReclaimedGlassRecipe()
+        public BurnedGarbageRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "Glass",  //noloc
-                Localizer.DoStr("Reclaimed Glass"),
+                "BurnGarbage",  //noloc
+                Localizer.DoStr("Burned Garbage"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(GarbageItem), 100, true),
+                    new IngredientElement(typeof(GarbageItem), 20, true),
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<GlassItem>(1),
+                    new CraftingElement<CharcoalItem>(1),
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 0.5f;
-            this.LaborInCalories = CreateLaborInCaloriesValue(100, typeof(FertilizersSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(ReclaimedGlassRecipe), 0.5f, typeof(FertilizersSkill));
+            this.LaborInCalories = CreateLaborInCaloriesValue(25, typeof(FertilizersSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(BurnedGarbageRecipe), 0.5f, typeof(FertilizersSkill));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Reclaimed Glass"), typeof(ReclaimedGlassRecipe));
+            this.Initialize(Localizer.DoStr("Burned Garbage"), typeof(BurnedGarbageRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(BlastFurnaceObject), this);
+            CraftingComponent.AddRecipe(typeof(BloomeryObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>

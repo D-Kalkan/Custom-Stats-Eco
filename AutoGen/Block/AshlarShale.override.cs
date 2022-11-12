@@ -46,7 +46,7 @@ namespace Eco.Mods.TechTree
                 {
                     new CraftingElement<AshlarShaleItem>(),
                     new CraftingElement<CrushedShaleItem>(typeof(AdvancedMasonrySkill), 2, typeof(AdvancedMasonryLavishResourcesTalent)),
-                    new CraftingElement<GarbageItem>(0.1f)
+                    new CraftingElement<GarbageItem>(0.3f)
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 1.5f;

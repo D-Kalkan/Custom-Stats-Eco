@@ -43,7 +43,7 @@ namespace Eco.Mods.TechTree
                 {
                     new CraftingElement<PlasticItem>(2),
                     new CraftingElement<BarrelItem>(typeof(OilDrillingSkill), 3, typeof(OilDrillingLavishResourcesTalent)),
-                    new CraftingElement<GarbageItem>(0.1f)
+                    new CraftingElement<GarbageItem>(1)
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 1;

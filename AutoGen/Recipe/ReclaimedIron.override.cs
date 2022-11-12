@@ -35,8 +35,7 @@ namespace Eco.Mods.TechTree
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<IronBarItem>(2),
-                    new CraftingElement<HewnLogItem>(1),
+                    new CraftingElement<IronBarItem>(1),
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 0.5f;

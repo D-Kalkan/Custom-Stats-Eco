@@ -46,7 +46,7 @@ namespace Eco.Mods.TechTree
                 new List<CraftingElement>
                 {
                     new CraftingElement<CompositeRedwoodLumberItem>(),
-                    new CraftingElement<GarbageItem>(0.1f)
+                    new CraftingElement<GarbageItem>(0.3f)
                 });
             this.ModsPostInitialize();
             CraftingComponent.AddTagProduct(typeof(AdvancedCarpentryTableObject), typeof(CompositeLumberRecipe), this);

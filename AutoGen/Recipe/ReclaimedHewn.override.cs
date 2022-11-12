@@ -31,7 +31,7 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Reclaimed Hewn Log"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(GarbageItem), 50, true),
+                    new IngredientElement(typeof(GarbageItem), 30, true),
                 },
                 new List<CraftingElement>
                 {

@@ -31,7 +31,7 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Reclaimed Steel Bar"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(GarbageItem), 150, true),
+                    new IngredientElement(typeof(GarbageItem), 200, true),
                 },
                 new List<CraftingElement>
                 {
