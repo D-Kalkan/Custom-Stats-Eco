@@ -48,14 +48,15 @@ namespace Eco.Mods.TechTree
     public partial class DumpsterRecycleObject : WorldObject, IRepresentsItem
     {
         public virtual Type RepresentedItemType => typeof(DumpsterRecycleItem);
-        public override LocString DisplayName => Localizer.DoStr("Dumpster");
+        public override LocString DisplayName => Localizer.DoStr("Recycling Dumpster");
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
             var storage = this.GetComponent<PublicStorageComponent>();
-            storage.Initialize(64);
-            storage.Storage.AddInvRestriction(new StackLimitRestriction(200));
+            storage.Initialize(128);
+            storage.Storage.AddInvRestriction(new StackLimitRestriction(10));
+            storage.Storage.AddInvRestriction(new NotCarriedRestriction());
             this.ModsPostInitialize();
         }
 
@@ -76,7 +77,7 @@ namespace Eco.Mods.TechTree
     public partial class DumpsterRecycleItem : WorldObjectItem<DumpsterRecycleObject>
     {
         
-        public override LocString DisplayDescription => Localizer.DoStr("A Dumpster for all your garbage");
+        public override LocString DisplayDescription => Localizer.DoStr("A Dumpster for storing lots of different types of garbage you want to recycle");
 
 
         public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
@@ -96,7 +97,8 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Recycling Dumpster"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(CorrugatedSteelItem), 20, typeof(AdvancedSmeltingSkill), typeof(AdvancedSmeltingLavishResourcesTalent)),
+                    new IngredientElement(typeof(IronPlateItem), 18, typeof(SmeltingSkill), typeof(SmeltingLavishResourcesTalent)),
+                    new IngredientElement(typeof(ScrewsItem), 24, typeof(SmeltingSkill), typeof(SmeltingLavishResourcesTalent)),
                 },
                 new List<CraftingElement>
                 {
@@ -109,7 +111,7 @@ namespace Eco.Mods.TechTree
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Recycling Dumpster"), typeof(DumpsterRecycleRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(RollingMillObject), this);
+            CraftingComponent.AddRecipe(typeof(AssemblyLineObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>

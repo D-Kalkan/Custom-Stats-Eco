@@ -116,7 +116,7 @@ namespace Eco.Mods.TechTree
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Compost Bin"), typeof(DumpsterCompostRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(RollingMillObject), this);
+            CraftingComponent.AddRecipe(typeof(AssemblyLineObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
