@@ -71,7 +71,7 @@ namespace Eco.Mods.TechTree
                 {
                     new IngredientElement(typeof(FlourItem), 10, typeof(BakingSkill), typeof(BakingLavishResourcesTalent)),
                     new IngredientElement(typeof(ScrapMeatItem), 6, typeof(BakingSkill), typeof(BakingLavishResourcesTalent)),
-                    new IngredientElement("Fat", 2, typeof(BakingSkill), typeof(BakingLavishResourcesTalent)), //noloc
+                    new IngredientElement("Fat", 1, typeof(BakingSkill), typeof(BakingLavishResourcesTalent)), //noloc
                 },
 
                 // Define our recipe output items.

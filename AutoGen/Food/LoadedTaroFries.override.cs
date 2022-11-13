@@ -70,8 +70,8 @@ namespace Eco.Mods.TechTree
                 ingredients: new List<IngredientElement>
                 {
                     new IngredientElement(typeof(TaroFriesItem), 1, typeof(CookingSkill), typeof(CookingLavishResourcesTalent)),
-                    new IngredientElement(typeof(SunCheeseItem), 2, typeof(CookingSkill), typeof(CookingLavishResourcesTalent)),
-                    new IngredientElement(typeof(PreparedMeatItem), 2, typeof(CookingSkill), typeof(CookingLavishResourcesTalent)),
+                    new IngredientElement(typeof(SunCheeseItem), 1, typeof(CookingSkill), typeof(CookingLavishResourcesTalent)),
+                    new IngredientElement(typeof(PreparedMeatItem), 1, typeof(CookingSkill), typeof(CookingLavishResourcesTalent)),
                 },
 
                 // Define our recipe output items.
