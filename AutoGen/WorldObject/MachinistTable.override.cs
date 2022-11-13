@@ -47,28 +47,24 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(MinimapComponent))]
     [RequireComponent(typeof(LinkComponent))]
     [RequireComponent(typeof(CraftingComponent))]
-    [RequireComponent(typeof(PowerGridComponent))]
-    [RequireComponent(typeof(PowerConsumptionComponent))]
     [RequireComponent(typeof(HousingComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
     [RequireComponent(typeof(PluginModulesComponent))]
     [RequireComponent(typeof(RoomRequirementsComponent))]
     [RequireRoomContainment]
-    [RequireRoomVolume(45)]
-    [RequireRoomMaterialTier(2.7f, typeof(FertilizersLavishReqTalent), typeof(FertilizersFrugalReqTalent))]
-    public partial class PaperMachineObject : WorldObject, IRepresentsItem
+    [RequireRoomVolume(25)]
+    [RequireRoomMaterialTier(1.7f, typeof(MechanicsLavishReqTalent), typeof(MechanicsFrugalReqTalent))]
+    public partial class MachinistTableObject : WorldObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(PaperMachineItem);
-        public override LocString DisplayName => Localizer.DoStr("Recycling Machine");
-        public override TableTextureMode TableTexture => TableTextureMode.Metal;
+        public virtual Type RepresentedItemType => typeof(MachinistTableItem);
+        public override LocString DisplayName => Localizer.DoStr("Machinist Table");
+        public override TableTextureMode TableTexture => TableTextureMode.Wood;
 
         protected override void Initialize()
         {
             this.ModsPreInitialize();
             this.GetComponent<MinimapComponent>().Initialize(Localizer.DoStr("Crafting"));
-            this.GetComponent<PowerConsumptionComponent>().Initialize(100);
-            this.GetComponent<PowerGridComponent>().Initialize(10, new ElectricPower());
-            this.GetComponent<HousingComponent>().HomeValue = ElectricLatheItem.homeValue;
+            this.GetComponent<HousingComponent>().HomeValue = MachinistTableItem.homeValue;
             this.ModsPostInitialize();
         }
 
@@ -83,20 +79,19 @@ namespace Eco.Mods.TechTree
         partial void ModsPostInitialize();
     }
 
-
     [Serialized]
-    [LocDisplayName("Recycling Machine")]
+    [LocDisplayName("Machinist Table")]
     [Ecopedia("Work Stations", "Craft Tables", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
-    [AllowPluginModules(Tags = new[] { "BasicUpgrade" }, ItemTypes = new[] { typeof(FertilizersUpgradeItem) })] //noloc
-    public partial class PaperMachineItem : WorldObjectItem<PaperMachineObject>, IPersistentData
+    [AllowPluginModules(Tags = new[] { "AdvancedUpgrade" }, ItemTypes = new[] { typeof(MechanicsAdvancedUpgradeItem), typeof(CarpentryAdvancedUpgradeItem) })] //noloc
+    public partial class MachinistTableItem : ModuleItem<MachinistTableObject>, IPersistentData
     {
-        public override LocString DisplayDescription => Localizer.DoStr("An electric powered machine that has a spinning blade to craft a variety of metal products.");
+        
+        public override LocString DisplayDescription => Localizer.DoStr("A fancy tool bench that creates equally fancy toys.");
 
 
         public override DirectionAxisFlags RequiresSurfaceOnSides { get;} = 0
                     | DirectionAxisFlags.Down
                 ;
-
         public override HomeFurnishingValue HomeValue => homeValue;
         public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
         {
@@ -104,41 +99,64 @@ namespace Eco.Mods.TechTree
             TypeForRoomLimit         = Localizer.DoStr(""),
         };
 
-        [Tooltip(7)] private LocString PowerConsumptionTooltip => Localizer.Do($"Consumes: {Text.Info(100)}w of {new ElectricPower().Name} power");
         [Serialized, SyncToView, TooltipChildren, NewTooltipChildren] public object PersistentData { get; set; }
     }
 
-    [RequiresSkill(typeof(IndustrySkill), 2)]
-    public partial class PaperMachineRecipe : RecipeFamily
+    /// <summary>
+    /// <para>Server side recipe definition for "MachinistTable".</para>
+    /// <para>More information about RecipeFamily objects can be found at https://docs.play.eco/api/server/eco.gameplay/Eco.Gameplay.Items.RecipeFamily.html</para>
+    /// </summary>
+    /// <remarks>
+    /// This is an auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization. 
+    /// If you wish to modify this class, please create a new partial class or follow the instructions in the "UserCode" folder to override the entire file.
+    /// </remarks>
+    [RequiresSkill(typeof(CarpentrySkill), 1)]
+    public partial class MachinistTableRecipe : RecipeFamily
     {
-        public PaperMachineRecipe()
+        public MachinistTableRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "RecyclingMachine",  //noloc
-                Localizer.DoStr("Recycling Machine"),
-                new List<IngredientElement>
+                name: "MachinistTable",  //noloc
+                displayName: Localizer.DoStr("Machinist Table"),
+
+                // Defines the ingredients needed to craft this recipe. An ingredient items takes the following inputs
+                // type of the item, the amount of the item, the skill required, and the talent used.
+                ingredients: new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(SteelGearItem), 5, typeof(IndustrySkill), typeof(FertilizersLavishResourcesTalent)),
-                    new IngredientElement(typeof(SteelPlateItem), 12, typeof(IndustrySkill), typeof(FertilizersLavishResourcesTalent)),
-                    new IngredientElement(typeof(BasicCircuitItem), 10, typeof(IndustrySkill), typeof(FertilizersLavishResourcesTalent)),
+                    new IngredientElement(typeof(IronBarItem), 12, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
+                    new IngredientElement("Lumber", 12, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
+                    new IngredientElement("WoodBoard", 12, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
                 },
-                new List<CraftingElement>
+
+                // Define our recipe output items.
+                // For every output item there needs to be one CraftingElement entry with the type of the final item and the amount
+                // to create.
+                items: new List<CraftingElement>
                 {
-                    new CraftingElement<PaperMachineItem>()
+                    new CraftingElement<MachinistTableItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.ExperienceOnCraft = 20;
-            this.LaborInCalories = CreateLaborInCaloriesValue(600, typeof(IndustrySkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(PaperMachineRecipe), 8, typeof(IndustrySkill), typeof(IndustryFocusedSpeedTalent), typeof(IndustryParallelSpeedTalent));
+            this.ExperienceOnCraft = 10; // Defines how much experience is gained when crafted.
+            
+            // Defines the amount of labor required and the required skill to add labor
+            this.LaborInCalories = CreateLaborInCaloriesValue(300, typeof(CarpentrySkill));
+
+            // Defines our crafting time for the recipe
+            this.CraftMinutes = CreateCraftTimeValue(beneficiary: typeof(MachinistTableRecipe), start: 20, skillType: typeof(CarpentrySkill), typeof(CarpentryFocusedSpeedTalent), typeof(CarpentryParallelSpeedTalent));
+
+            // Perform pre/post initialization for user mods and initialize our recipe instance with the display name "Machinist Table"
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Recycling Machine"), typeof(PaperMachineRecipe));
+            this.Initialize(displayText: Localizer.DoStr("Machinist Table"), recipeType: typeof(MachinistTableRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(ElectricMachinistTableObject), this);
+
+            // Register our RecipeFamily instance with the crafting system so it can be crafted.
+            CraftingComponent.AddRecipe(tableType: typeof(SawmillObject), recipe: this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
         partial void ModsPreInitialize();
+
         /// <summary>Hook for mods to customize RecipeFamily after initialization, but before registration. You can change skill requirements here.</summary>
         partial void ModsPostInitialize();
     }

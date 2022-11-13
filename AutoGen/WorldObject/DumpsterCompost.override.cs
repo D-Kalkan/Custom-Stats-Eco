@@ -47,6 +47,7 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(CraftingComponent))]
     [RequireComponent(typeof(PublicStorageComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
+    [RequireComponent(typeof(PluginModulesComponent))]
     public partial class DumpsterCompostObject : WorldObject, IRepresentsItem
     {
         public virtual Type RepresentedItemType => typeof(DumpsterCompostItem);
@@ -79,6 +80,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Compost Bin")]
     [Weight(5000)]
     [Ecopedia("Crafted Objects", "Storage", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [AllowPluginModules(Tags = new[] { "BasicUpgrade" }, ItemTypes = new[] { typeof(FarmingUpgradeItem) })] //noloc
     public partial class DumpsterCompostItem : WorldObjectItem<DumpsterCompostObject>
     {
         
