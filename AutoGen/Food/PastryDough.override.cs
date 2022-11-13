@@ -70,7 +70,7 @@ namespace Eco.Mods.TechTree
                 ingredients: new List<IngredientElement>
                 {
                     new IngredientElement(typeof(FlourItem), 1, typeof(BakingSkill), typeof(BakingLavishResourcesTalent)),
-                    new IngredientElement(typeof(YeastItem), 0.5, typeof(BakingSkill), typeof(BakingLavishResourcesTalent)),
+                    new IngredientElement(typeof(YeastItem), 0.5f, typeof(BakingSkill), typeof(BakingLavishResourcesTalent)),
                     new IngredientElement("Fat", 1, typeof(BakingSkill), typeof(BakingLavishResourcesTalent)), //noloc
                 },
 
