@@ -44,10 +44,6 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(PropertyAuthComponent))]
     [RequireComponent(typeof(MinimapComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
-    [RequireComponent(typeof(RoomRequirementsComponent))]
-    [RequireRoomContainment]
-    [RequireRoomVolume(45)]
-    [RequireRoomMaterialTier(1.5f)]
     public partial class CurrencyExchangeObject : WorldObject, IRepresentsItem
     {
         public virtual Type RepresentedItemType => typeof(CurrencyExchangeItem);

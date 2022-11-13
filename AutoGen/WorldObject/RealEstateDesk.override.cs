@@ -44,10 +44,6 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(PropertyAuthComponent))]
     [RequireComponent(typeof(MinimapComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
-    [RequireComponent(typeof(RoomRequirementsComponent))]
-    [RequireRoomContainment]
-    [RequireRoomVolume(25)]
-    [RequireRoomMaterialTier(0.8f)]
     public partial class RealEstateDeskObject : WorldObject, IRepresentsItem
     {
         public virtual Type RepresentedItemType => typeof(RealEstateDeskItem);

@@ -44,10 +44,6 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(PropertyAuthComponent))]
     [RequireComponent(typeof(MinimapComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
-    [RequireComponent(typeof(RoomRequirementsComponent))]
-    [RequireRoomContainment]
-    [RequireRoomVolume(75)]
-    [RequireRoomMaterialTier(1)]
     public partial class GovernmentOfficeObject : CivicObject, IRepresentsItem
     {
         public virtual Type RepresentedItemType => typeof(GovernmentOfficeItem);
