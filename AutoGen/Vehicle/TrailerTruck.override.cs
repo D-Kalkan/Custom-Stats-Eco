@@ -31,6 +31,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Trailer Truck")]
     [Weight(50000)]
     [AirPollution(0.5f)]
+    [Ecopedia("Crafted Objects", "Vehicles", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     public partial class TrailerTruckItem : WorldObjectItem<TrailerTruckObject>, IPersistentData
     {
         public override LocString DisplayDescription { get { return Localizer.DoStr("Modern class J14 truck for hauling sizable loads."); } }
