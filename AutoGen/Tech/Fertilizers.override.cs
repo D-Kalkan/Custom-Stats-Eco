@@ -83,7 +83,6 @@ namespace Eco.Mods.TechTree
     public partial class FertilizersSkillScroll : SkillScroll<FertilizersSkill, FertilizersSkillBook> {}
 
 
-    [RequiresSkill(typeof(FarmingSkill), 0)]
     public partial class FertilizersSkillBookRecipe : RecipeFamily
     {
         public FertilizersSkillBookRecipe()

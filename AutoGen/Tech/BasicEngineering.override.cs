@@ -74,7 +74,7 @@ namespace Eco.Mods.TechTree
     }
 
     [Serialized]
-    [LocDisplayName("Basic Engineering Skill Book")]
+    [LocDisplayName("Basic Engineering Skill Scroll")]
     [Ecopedia("Items", "Skill Books", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
     public partial class BasicEngineeringSkillBook : SkillBook<BasicEngineeringSkill, BasicEngineeringSkillScroll> {}
 
@@ -83,7 +83,6 @@ namespace Eco.Mods.TechTree
     public partial class BasicEngineeringSkillScroll : SkillScroll<BasicEngineeringSkill, BasicEngineeringSkillBook> {}
 
 
-    [RequiresSkill(typeof(CarpentrySkill), 0)]
     public partial class BasicEngineeringSkillBookRecipe : RecipeFamily
     {
         public BasicEngineeringSkillBookRecipe()
@@ -102,10 +101,10 @@ namespace Eco.Mods.TechTree
                     new CraftingElement<BasicEngineeringSkillScroll>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(600, typeof(CarpentrySkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(BasicEngineeringSkillBookRecipe), 5, typeof(CarpentrySkill));
+            this.LaborInCalories = CreateLaborInCaloriesValue(600);
+            this.CraftMinutes = CreateCraftTimeValue(5);
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Basic Engineering Skill Book"), typeof(BasicEngineeringSkillBookRecipe));
+            this.Initialize(Localizer.DoStr("Basic Engineering Skill Scroll"), typeof(BasicEngineeringSkillBookRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(ResearchTableObject), this);
         }

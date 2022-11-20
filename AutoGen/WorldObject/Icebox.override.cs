@@ -102,7 +102,7 @@ namespace Eco.Mods.TechTree
 
     }
 
-    [RequiresSkill(typeof(CarpentrySkill), 5)]
+    [RequiresSkill(typeof(CarpentrySkill), 1)]
     public partial class IceboxRecipe : RecipeFamily
     {
         public IceboxRecipe()

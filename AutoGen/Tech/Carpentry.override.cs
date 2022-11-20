@@ -83,7 +83,6 @@ namespace Eco.Mods.TechTree
     public partial class CarpentrySkillScroll : SkillScroll<CarpentrySkill, CarpentrySkillBook> {}
 
 
-    [RequiresSkill(typeof(LoggingSkill), 0)]
     public partial class CarpentrySkillBookRecipe : RecipeFamily
     {
         public CarpentrySkillBookRecipe()
@@ -101,8 +100,8 @@ namespace Eco.Mods.TechTree
                     new CraftingElement<CarpentrySkillScroll>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(300, typeof(LoggingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(CarpentrySkillBookRecipe), 5, typeof(LoggingSkill));
+            this.LaborInCalories = CreateLaborInCaloriesValue(300);
+            this.CraftMinutes = CreateCraftTimeValue(5);
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Carpentry Skill Scroll"), typeof(CarpentrySkillBookRecipe));
             this.ModsPostInitialize();
