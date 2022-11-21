@@ -21,17 +21,17 @@ namespace Eco.Mods.TechTree
     /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
 
     [RequiresSkill(typeof(FarmingSkill), 1)]
-    public partial class CompostWasteRecipe : RecipeFamily
+    public partial class CompostSeedsRecipe : RecipeFamily
     {
-        public CompostWasteRecipe()
+        public CompostSeedsRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
                 "Compost",  //noloc
-                Localizer.DoStr("Composted Spoiled Food"),
+                Localizer.DoStr("Seed Compost"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(SpoiledFoodItem), 15, true),
+                    new IngredientElement("Seeds", 25, true),
                 },
                 new List<CraftingElement>
                 {
@@ -40,11 +40,11 @@ namespace Eco.Mods.TechTree
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 0.5f;
             this.LaborInCalories = CreateLaborInCaloriesValue(20, typeof(FarmingSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(CompostWasteRecipe), 0.5f, typeof(FarmingSkill));
+            this.CraftMinutes = CreateCraftTimeValue(typeof(CompostSeedsRecipe), 0.5f, typeof(FarmingSkill));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Composted Spoiled Food"), typeof(CompostWasteRecipe));
+            this.Initialize(Localizer.DoStr("Composted Spoiled Food"), typeof(CompostSeedsRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(DumpsterCompostObject), this);
+            CraftingComponent.AddRecipe(typeof(FarmersTableObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
