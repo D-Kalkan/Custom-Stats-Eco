@@ -31,7 +31,7 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Seed Compost"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement("Seeds", 25, true),
+                    new IngredientElement("Seeds", 17, typeof(FarmingSkill), typeof(FarmingLavishResourcesTalent)),
                 },
                 new List<CraftingElement>
                 {
