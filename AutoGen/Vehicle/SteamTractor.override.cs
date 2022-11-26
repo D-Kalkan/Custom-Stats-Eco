@@ -11,7 +11,9 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Components;
     using Eco.Gameplay.Components.Auth;
     using Eco.Gameplay.Components.VehicleModules;
+    using Eco.Gameplay.GameActions;
     using Eco.Gameplay.DynamicValues;
+    using Eco.Gameplay.Interactions;
     using Eco.Gameplay.Items;
     using Eco.Gameplay.Objects;
     using Eco.Gameplay.Players;
@@ -31,52 +33,127 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Steam Tractor")]
     [Weight(25000)]
     [AirPollution(0.05f)]
-    [Ecopedia("Crafted Objects", "Vehicles", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Crafted Objects", "Vehicles", createAsSubPage: true)]
     public partial class SteamTractorItem : WorldObjectItem<SteamTractorObject>, IPersistentData
     {
         public override LocString DisplayDescription { get { return Localizer.DoStr("A tractor powered through steam."); } }
-        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren] public object PersistentData { get; set; }
+        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren(CacheAs.Instance)] public object PersistentData { get; set; }
     }
 
-
+    /// <summary>
+    /// <para>Server side recipe definition for "SteamTractor".</para>
+    /// <para>More information about RecipeFamily objects can be found at https://docs.play.eco/api/server/eco.gameplay/Eco.Gameplay.Items.RecipeFamily.html</para>
+    /// </summary>
+    /// <remarks>
+    /// This is an auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization. 
+    /// If you wish to modify this class, please create a new partial class or follow the instructions in the "UserCode" folder to override the entire file.
+    /// </remarks>
     [RequiresSkill(typeof(MechanicsSkill), 2)]
+    [Ecopedia("Crafted Objects", "Vehicles", subPageName: "SteamTractor Item")]
     public partial class SteamTractorRecipe : RecipeFamily
     {
         public SteamTractorRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "SteamTractor",  //noloc
-                Localizer.DoStr("Steam Tractor"),
-                new List<IngredientElement>
+                name: "SteamTractor",  //noloc
+                displayName: Localizer.DoStr("Steam Tractor"),
+
+                // Defines the ingredients needed to craft this recipe. An ingredient items takes the following inputs
+                // type of the item, the amount of the item, the skill required, and the talent used.
+                ingredients: new List<IngredientElement>
                 {
                     new IngredientElement(typeof(IronPlateItem), 12, typeof(MechanicsSkill)),
                     new IngredientElement(typeof(IronPipeItem), 8, typeof(MechanicsSkill)),
                     new IngredientElement(typeof(ScrewsItem), 24, typeof(MechanicsSkill)),
+                    new IngredientElement(typeof(LeatherHideItem), 20, typeof(MechanicsSkill)),
                     new IngredientElement("Lumber", 30, typeof(MechanicsSkill)), //noloc
-                    new IngredientElement(typeof(LeatherHideItem), 20),
                     new IngredientElement(typeof(PortableSteamEngineItem), 1, true),
                     new IngredientElement(typeof(IronWheelItem), 4, true),
                     new IngredientElement(typeof(IronAxleItem), 2, true),
+                    new IngredientElement(typeof(LightBulbItem), 2, true),
                 },
-                new List<CraftingElement>
+
+                // Define our recipe output items.
+                // For every output item there needs to be one CraftingElement entry with the type of the final item and the amount
+                // to create.
+                items: new List<CraftingElement>
                 {
                     new CraftingElement<SteamTractorItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.ExperienceOnCraft = 25;
+            this.ExperienceOnCraft = 25; // Defines how much experience is gained when crafted.
+            
+            // Defines the amount of labor required and the required skill to add labor
             this.LaborInCalories = CreateLaborInCaloriesValue(1000, typeof(MechanicsSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(SteamTractorRecipe), 10, typeof(MechanicsSkill));
+
+            // Defines our crafting time for the recipe
+            this.CraftMinutes = CreateCraftTimeValue(beneficiary: typeof(SteamTractorRecipe), start: 10, skillType: typeof(MechanicsSkill));
+
+            // Perform pre/post initialization for user mods and initialize our recipe instance with the display name "Steam Tractor"
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Steam Tractor"), typeof(SteamTractorRecipe));
+            this.Initialize(displayText: Localizer.DoStr("Steam Tractor"), recipeType: typeof(SteamTractorRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(AssemblyLineObject), this);
+
+            // Register our RecipeFamily instance with the crafting system so it can be crafted.
+            CraftingComponent.AddRecipe(tableType: typeof(AssemblyLineObject), recipe: this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
         partial void ModsPreInitialize();
+
         /// <summary>Hook for mods to customize RecipeFamily after initialization, but before registration. You can change skill requirements here.</summary>
         partial void ModsPostInitialize();
     }
 
+    [Serialized]
+    [RequireComponent(typeof(StandaloneAuthComponent))]
+    [RequireComponent(typeof(FuelSupplyComponent))]
+    [RequireComponent(typeof(FuelConsumptionComponent))]
+    [RequireComponent(typeof(MovableLinkComponent))]
+    [RequireComponent(typeof(AirPollutionComponent))]
+    [RequireComponent(typeof(VehicleComponent))]
+    [RequireComponent(typeof(CustomTextComponent))]
+    [RequireComponent(typeof(ModularVehicleComponent))]
+    [RequireComponent(typeof(SelectionStorageComponent))]
+    [RequireComponent(typeof(MinimapComponent))]           
+    [Ecopedia("Crafted Objects", "Vehicles", subPageName: "SteamTractor Item")]
+    public partial class SteamTractorObject : PhysicsWorldObject, IRepresentsItem
+    {
+        static SteamTractorObject()
+        {
+            WorldObject.AddOccupancy<SteamTractorObject>(new List<BlockOccupancy>(0));
+        }
+        public override TableTextureMode TableTexture => TableTextureMode.Metal;
+        public override bool PlacesBlocks            => false;
+        public override LocString DisplayName { get { return Localizer.DoStr("Steam Tractor"); } }
+        public Type RepresentedItemType { get { return typeof(SteamTractorItem); } }
+
+        private static string[] fuelTagList = new string[]
+        {
+            "Coke",
+        };
+        private SteamTractorObject() { }
+        private static readonly Type[] SegmentTypeList = Array.Empty<Type>();
+        private static readonly Type[] AttachmentTypeList = new Type[]
+        {
+            typeof(SteamTractorPlowItem),
+            typeof(SteamTractorHarvesterItem),
+            typeof(SteamTractorSowerItem),
+        };
+        protected override void Initialize()
+        {
+            base.Initialize();         
+            this.GetComponent<CustomTextComponent>().Initialize(200);
+            this.GetComponent<FuelSupplyComponent>().Initialize(2, fuelTagList);
+            this.GetComponent<FuelConsumptionComponent>().Initialize(25);
+            this.GetComponent<AirPollutionComponent>().Initialize(0.05f);
+            this.GetComponent<VehicleComponent>().HumanPowered(2);
+            this.GetComponent<ModularVehicleComponent>().Initialize(0, 1, SegmentTypeList, AttachmentTypeList);
+            this.GetComponent<MinimapComponent>().InitAsMovable();
+            this.GetComponent<MinimapComponent>().SetCategory(Localizer.DoStr("Vehicles"));
+            this.GetComponent<VehicleComponent>().Initialize(9, 1);
+            this.GetComponent<SelectionStorageComponent>().CreateInventory(12, 2500000, VehicleUtilities.GetInventoryRestriction(this));
+        }
+    }
 }

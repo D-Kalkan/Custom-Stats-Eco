@@ -11,7 +11,9 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Components;
     using Eco.Gameplay.Components.Auth;
     using Eco.Gameplay.Components.VehicleModules;
+    using Eco.Gameplay.GameActions;
     using Eco.Gameplay.DynamicValues;
+    using Eco.Gameplay.Interactions;
     using Eco.Gameplay.Items;
     using Eco.Gameplay.Objects;
     using Eco.Gameplay.Players;
@@ -31,50 +33,75 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Truck")]
     [Weight(25000)]
     [AirPollution(0.5f)]
-    [Ecopedia("Crafted Objects", "Vehicles", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Crafted Objects", "Vehicles", createAsSubPage: true)]
     public partial class TruckItem : WorldObjectItem<TruckObject>, IPersistentData
     {
         public override LocString DisplayDescription { get { return Localizer.DoStr("Modern truck for hauling sizable loads."); } }
-        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren] public object PersistentData { get; set; }
+        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren(CacheAs.Instance)] public object PersistentData { get; set; }
     }
 
-
+    /// <summary>
+    /// <para>Server side recipe definition for "Truck".</para>
+    /// <para>More information about RecipeFamily objects can be found at https://docs.play.eco/api/server/eco.gameplay/Eco.Gameplay.Items.RecipeFamily.html</para>
+    /// </summary>
+    /// <remarks>
+    /// This is an auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization. 
+    /// If you wish to modify this class, please create a new partial class or follow the instructions in the "UserCode" folder to override the entire file.
+    /// </remarks>
     [RequiresSkill(typeof(IndustrySkill), 2)]
+    [Ecopedia("Crafted Objects", "Vehicles", subPageName: "Truck Item")]
     public partial class TruckRecipe : RecipeFamily
     {
         public TruckRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "Truck",  //noloc
-                Localizer.DoStr("Truck"),
-                new List<IngredientElement>
+                name: "Truck",  //noloc
+                displayName: Localizer.DoStr("Truck"),
+
+                // Defines the ingredients needed to craft this recipe. An ingredient items takes the following inputs
+                // type of the item, the amount of the item, the skill required, and the talent used.
+                ingredients: new List<IngredientElement>
                 {
                     new IngredientElement(typeof(GearboxItem), 4, typeof(IndustrySkill)),
                     new IngredientElement(typeof(SteelPlateItem), 20, typeof(IndustrySkill)),
                     new IngredientElement(typeof(NylonFabricItem), 20, typeof(IndustrySkill)),
-                    new IngredientElement(typeof(GlassItem), 40, typeof(IndustrySkill)),                    
+                    new IngredientElement(typeof(GlassItem), 40, typeof(IndustrySkill)),   
                     new IngredientElement(typeof(CombustionEngineItem), 1, true),
                     new IngredientElement(typeof(RubberWheelItem), 6, true),
                     new IngredientElement(typeof(RadiatorItem), 1, true),
                     new IngredientElement(typeof(SteelAxleItem), 2, true),
+                    new IngredientElement(typeof(LightBulbItem), 4, true),
                 },
-                new List<CraftingElement>
+
+                // Define our recipe output items.
+                // For every output item there needs to be one CraftingElement entry with the type of the final item and the amount
+                // to create.
+                items: new List<CraftingElement>
                 {
                     new CraftingElement<TruckItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.ExperienceOnCraft = 18;
+            this.ExperienceOnCraft = 18; // Defines how much experience is gained when crafted.
+            
+            // Defines the amount of labor required and the required skill to add labor
             this.LaborInCalories = CreateLaborInCaloriesValue(2000, typeof(IndustrySkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(TruckRecipe), 10, typeof(IndustrySkill));
+
+            // Defines our crafting time for the recipe
+            this.CraftMinutes = CreateCraftTimeValue(beneficiary: typeof(TruckRecipe), start: 10, skillType: typeof(IndustrySkill));
+
+            // Perform pre/post initialization for user mods and initialize our recipe instance with the display name "Truck"
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Truck"), typeof(TruckRecipe));
+            this.Initialize(displayText: Localizer.DoStr("Truck"), recipeType: typeof(TruckRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(RoboticAssemblyLineObject), this);
+
+            // Register our RecipeFamily instance with the crafting system so it can be crafted.
+            CraftingComponent.AddRecipe(tableType: typeof(RoboticAssemblyLineObject), recipe: this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
         partial void ModsPreInitialize();
+
         /// <summary>Hook for mods to customize RecipeFamily after initialization, but before registration. You can change skill requirements here.</summary>
         partial void ModsPostInitialize();
     }
@@ -84,20 +111,22 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(FuelSupplyComponent))]
     [RequireComponent(typeof(FuelConsumptionComponent))]
     [RequireComponent(typeof(PublicStorageComponent))]
+    [RequireComponent(typeof(TailingsReportComponent))]
     [RequireComponent(typeof(MovableLinkComponent))]
     [RequireComponent(typeof(AirPollutionComponent))]
     [RequireComponent(typeof(VehicleComponent))]
     [RequireComponent(typeof(CustomTextComponent))]
     [RequireComponent(typeof(ModularStockpileComponent))]
-    [RequireComponent(typeof(TailingsReportComponent))]
+    [RequireComponent(typeof(MinimapComponent))]           
+    [Ecopedia("Crafted Objects", "Vehicles", subPageName: "Truck Item")]
     public partial class TruckObject : PhysicsWorldObject, IRepresentsItem
     {
         static TruckObject()
         {
             WorldObject.AddOccupancy<TruckObject>(new List<BlockOccupancy>(0));
         }
-
         public override TableTextureMode TableTexture => TableTextureMode.Metal;
+        public override bool PlacesBlocks            => false;
         public override LocString DisplayName { get { return Localizer.DoStr("Truck"); } }
         public Type RepresentedItemType { get { return typeof(TruckItem); } }
 
@@ -105,20 +134,19 @@ namespace Eco.Mods.TechTree
         {
             "Diesel",
         };
-
         private TruckObject() { }
-
         protected override void Initialize()
         {
-            base.Initialize();
-            
+            base.Initialize();         
             this.GetComponent<CustomTextComponent>().Initialize(200);
-            this.GetComponent<PublicStorageComponent>().Initialize(36, 8000000);
             this.GetComponent<FuelSupplyComponent>().Initialize(2, fuelTagList);
             this.GetComponent<FuelConsumptionComponent>().Initialize(25);
             this.GetComponent<AirPollutionComponent>().Initialize(0.5f);
-            this.GetComponent<VehicleComponent>().Initialize(20, 2, 2);
             this.GetComponent<StockpileComponent>().Initialize(new Vector3i(2,2,3));
+            this.GetComponent<PublicStorageComponent>().Initialize(36, 8000000);
+            this.GetComponent<MinimapComponent>().InitAsMovable();
+            this.GetComponent<MinimapComponent>().SetCategory(Localizer.DoStr("Vehicles"));
+            this.GetComponent<VehicleComponent>().Initialize(20, 2,2);
         }
     }
 }

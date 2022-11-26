@@ -37,6 +37,7 @@ namespace Eco.Mods.TechTree
     using Eco.World.Blocks;
     using Eco.Gameplay.Housing.PropertyValues;
     using Eco.Gameplay.Civics.Objects;
+    using Eco.Gameplay.Settlements;
     using Eco.Gameplay.Systems.NewTooltip;
     using Eco.Core.Controller;
     using static Eco.Gameplay.Housing.PropertyValues.HomeFurnishingValue;
@@ -47,6 +48,7 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
     [RequireComponent(typeof(BedComponent))]
     [RequireComponent(typeof(MountComponent))]
+    [Ecopedia("Housing Objects", "Bedroom", subPageName: "CastIronBed Item")]
     public partial class CastIronBedObject : WorldObject, IRepresentsItem
     {
         public virtual Type RepresentedItemType => typeof(CastIronBedItem);
@@ -62,11 +64,6 @@ namespace Eco.Mods.TechTree
             this.ModsPostInitialize();
         }
 
-        public override void Destroy()
-        {
-            base.Destroy();
-        }
-
         /// <summary>Hook for mods to customize WorldObject before initialization. You can change housing values here.</summary>
         partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize WorldObject after initialization.</summary>
@@ -75,7 +72,7 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Cast Iron Bed")]
-    [Ecopedia("Housing Objects", "Bedroom", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Housing Objects", "Bedroom", createAsSubPage: true)]
     [Tag("Housing", 1)]
     public partial class CastIronBedItem : WorldObjectItem<CastIronBedObject>
     {
@@ -89,45 +86,70 @@ namespace Eco.Mods.TechTree
         public override HomeFurnishingValue HomeValue => homeValue;
         public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
         {
-            Category                 = RoomCategory.Bedroom,
-            SkillValue               = 3,
+            Category                 = HousingConfig.GetRoomCategory("Bedroom"),
+            HouseValue               = 4,
             TypeForRoomLimit         = Localizer.DoStr("Bed"),
             DiminishingReturnPercent = 0.3f
         };
 
     }
 
+    /// <summary>
+    /// <para>Server side recipe definition for "CastIronBed".</para>
+    /// <para>More information about RecipeFamily objects can be found at https://docs.play.eco/api/server/eco.gameplay/Eco.Gameplay.Items.RecipeFamily.html</para>
+    /// </summary>
+    /// <remarks>
+    /// This is an auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization. 
+    /// If you wish to modify this class, please create a new partial class or follow the instructions in the "UserCode" folder to override the entire file.
+    /// </remarks>
     [RequiresSkill(typeof(TailoringSkill), 6)]
+    [Ecopedia("Housing Objects", "Bedroom", subPageName: "CastIronBed Item")]
     public partial class CastIronBedRecipe : RecipeFamily
     {
         public CastIronBedRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "CastIronBed",  //noloc
-                Localizer.DoStr("Cast Iron Bed"),
-                new List<IngredientElement>
+                name: "CastIronBed",  //noloc
+                displayName: Localizer.DoStr("Cast Iron Bed"),
+
+                // Defines the ingredients needed to craft this recipe. An ingredient items takes the following inputs
+                // type of the item, the amount of the item, the skill required, and the talent used.
+                ingredients: new List<IngredientElement>
                 {
                     new IngredientElement(typeof(CottonFabricItem), 40, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
                     new IngredientElement(typeof(FurPeltItem), 20, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
                     new IngredientElement(typeof(IronBarItem), 16, typeof(TailoringSkill), typeof(TailoringLavishResourcesTalent)),
                 },
-                new List<CraftingElement>
+
+                // Define our recipe output items.
+                // For every output item there needs to be one CraftingElement entry with the type of the final item and the amount
+                // to create.
+                items: new List<CraftingElement>
                 {
                     new CraftingElement<CastIronBedItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.ExperienceOnCraft = 10;
+            this.ExperienceOnCraft = 10; // Defines how much experience is gained when crafted.
+            
+            // Defines the amount of labor required and the required skill to add labor
             this.LaborInCalories = CreateLaborInCaloriesValue(180, typeof(TailoringSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(CastIronBedRecipe), 6, typeof(TailoringSkill), typeof(TailoringFocusedSpeedTalent), typeof(TailoringParallelSpeedTalent));
+
+            // Defines our crafting time for the recipe
+            this.CraftMinutes = CreateCraftTimeValue(beneficiary: typeof(CastIronBedRecipe), start: 6, skillType: typeof(TailoringSkill), typeof(TailoringFocusedSpeedTalent), typeof(TailoringParallelSpeedTalent));
+
+            // Perform pre/post initialization for user mods and initialize our recipe instance with the display name "Cast Iron Bed"
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Cast Iron Bed"), typeof(CastIronBedRecipe));
+            this.Initialize(displayText: Localizer.DoStr("Cast Iron Bed"), recipeType: typeof(CastIronBedRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(TailoringTableObject), this);
+
+            // Register our RecipeFamily instance with the crafting system so it can be crafted.
+            CraftingComponent.AddRecipe(tableType: typeof(TailoringTableObject), recipe: this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
         partial void ModsPreInitialize();
+
         /// <summary>Hook for mods to customize RecipeFamily after initialization, but before registration. You can change skill requirements here.</summary>
         partial void ModsPostInitialize();
     }

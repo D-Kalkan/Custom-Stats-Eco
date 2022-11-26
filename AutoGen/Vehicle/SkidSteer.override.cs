@@ -28,45 +28,54 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Systems.Tooltip;
     using Eco.Gameplay.Systems.NewTooltip;
     using Eco.Core.Controller;
+    using Eco.World.Blocks;
+    using Eco.World;
+    using Vector3 = System.Numerics.Vector3;
 
     [Serialized]
-    [LocDisplayName("Powered Cart")]
-    [Weight(15000)]
-    [AirPollution(0.1f)]
+    [LocDisplayName("Skid Steer")]
+    [Weight(25000)]
+    [RequireComponent(typeof(VehicleToolComponent))]
+    [Tag("Excavation")]
+    [AirPollution(0.5f)]
     [Ecopedia("Crafted Objects", "Vehicles", createAsSubPage: true)]
-    public partial class PoweredCartItem : WorldObjectItem<PoweredCartObject>, IPersistentData
+    public partial class SkidSteerItem : WorldObjectItem<SkidSteerObject>, IPersistentData
     {
-        public override LocString DisplayDescription { get { return Localizer.DoStr("Large cart for hauling sizable loads."); } }
+        public override LocString DisplayDescription { get { return Localizer.DoStr("Small scale bucket loader. Great for flat to low slope excavation."); } }
         [Serialized, SyncToView, TooltipChildren, NewTooltipChildren(CacheAs.Instance)] public object PersistentData { get; set; }
     }
 
     /// <summary>
-    /// <para>Server side recipe definition for "PoweredCart".</para>
+    /// <para>Server side recipe definition for "SkidSteer".</para>
     /// <para>More information about RecipeFamily objects can be found at https://docs.play.eco/api/server/eco.gameplay/Eco.Gameplay.Items.RecipeFamily.html</para>
     /// </summary>
     /// <remarks>
     /// This is an auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization. 
     /// If you wish to modify this class, please create a new partial class or follow the instructions in the "UserCode" folder to override the entire file.
     /// </remarks>
-    [RequiresSkill(typeof(BasicEngineeringSkill), 3)]
-    [Ecopedia("Crafted Objects", "Vehicles", subPageName: "PoweredCart Item")]
-    public partial class PoweredCartRecipe : RecipeFamily
+    [RequiresSkill(typeof(IndustrySkill), 2)]
+    [Ecopedia("Crafted Objects", "Vehicles", subPageName: "SkidSteer Item")]
+    public partial class SkidSteerRecipe : RecipeFamily
     {
-        public PoweredCartRecipe()
+        public SkidSteerRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                name: "PoweredCart",  //noloc
-                displayName: Localizer.DoStr("Powered Cart"),
+                name: "SkidSteer",  //noloc
+                displayName: Localizer.DoStr("Skid Steer"),
 
                 // Defines the ingredients needed to craft this recipe. An ingredient items takes the following inputs
                 // type of the item, the amount of the item, the skill required, and the talent used.
                 ingredients: new List<IngredientElement>
                 {
-                    new IngredientElement("WoodBoard", 30, typeof(BasicEngineeringSkill)), //noloc
-                    new IngredientElement("Fabric", 20, typeof(BasicEngineeringSkill)), //noloc
-                    new IngredientElement(typeof(CastIronStoveItem), 1, true),
-                    new IngredientElement(typeof(IronWheelItem), 3, true),
+                    new IngredientElement(typeof(GearboxItem), 4, typeof(IndustrySkill)),
+                    new IngredientElement(typeof(SteelPlateItem), 16, typeof(IndustrySkill)),
+                    new IngredientElement(typeof(NylonFabricItem), 20, typeof(IndustrySkill)),
+                    new IngredientElement(typeof(AdvancedCombustionEngineItem), 1, true),
+                    new IngredientElement(typeof(RubberWheelItem), 4, true),
+                    new IngredientElement(typeof(RadiatorItem), 2, true),
+                    new IngredientElement(typeof(SteelAxleItem), 2, true),
+                    new IngredientElement(typeof(LightBulbItem), 4, true),
                 },
 
                 // Define our recipe output items.
@@ -74,24 +83,24 @@ namespace Eco.Mods.TechTree
                 // to create.
                 items: new List<CraftingElement>
                 {
-                    new CraftingElement<PoweredCartItem>()
+                    new CraftingElement<SkidSteerItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.ExperienceOnCraft = 20; // Defines how much experience is gained when crafted.
+            this.ExperienceOnCraft = 24; // Defines how much experience is gained when crafted.
             
             // Defines the amount of labor required and the required skill to add labor
-            this.LaborInCalories = CreateLaborInCaloriesValue(200, typeof(BasicEngineeringSkill));
+            this.LaborInCalories = CreateLaborInCaloriesValue(2500, typeof(IndustrySkill));
 
             // Defines our crafting time for the recipe
-            this.CraftMinutes = CreateCraftTimeValue(beneficiary: typeof(PoweredCartRecipe), start: 10, skillType: typeof(BasicEngineeringSkill));
+            this.CraftMinutes = CreateCraftTimeValue(beneficiary: typeof(SkidSteerRecipe), start: 10, skillType: typeof(IndustrySkill));
 
-            // Perform pre/post initialization for user mods and initialize our recipe instance with the display name "Powered Cart"
+            // Perform pre/post initialization for user mods and initialize our recipe instance with the display name "Skid Steer"
             this.ModsPreInitialize();
-            this.Initialize(displayText: Localizer.DoStr("Powered Cart"), recipeType: typeof(PoweredCartRecipe));
+            this.Initialize(displayText: Localizer.DoStr("Skid Steer"), recipeType: typeof(SkidSteerRecipe));
             this.ModsPostInitialize();
 
             // Register our RecipeFamily instance with the crafting system so it can be crafted.
-            CraftingComponent.AddRecipe(tableType: typeof(WainwrightTableObject), recipe: this);
+            CraftingComponent.AddRecipe(tableType: typeof(RoboticAssemblyLineObject), recipe: this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
@@ -105,41 +114,42 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(StandaloneAuthComponent))]
     [RequireComponent(typeof(FuelSupplyComponent))]
     [RequireComponent(typeof(FuelConsumptionComponent))]
-    [RequireComponent(typeof(PublicStorageComponent))]
-    [RequireComponent(typeof(TailingsReportComponent))]
     [RequireComponent(typeof(MovableLinkComponent))]
     [RequireComponent(typeof(AirPollutionComponent))]
     [RequireComponent(typeof(VehicleComponent))]
     [RequireComponent(typeof(CustomTextComponent))]
+    [RequireComponent(typeof(VehicleToolComponent))]
     [RequireComponent(typeof(MinimapComponent))]           
-    [Ecopedia("Crafted Objects", "Vehicles", subPageName: "PoweredCart Item")]
-    public partial class PoweredCartObject : PhysicsWorldObject, IRepresentsItem
+    [Ecopedia("Crafted Objects", "Vehicles", subPageName: "SkidSteer Item")]
+    public partial class SkidSteerObject : PhysicsWorldObject, IRepresentsItem
     {
-        static PoweredCartObject()
+        static SkidSteerObject()
         {
-            WorldObject.AddOccupancy<PoweredCartObject>(new List<BlockOccupancy>(0));
+            WorldObject.AddOccupancy<SkidSteerObject>(new List<BlockOccupancy>(0));
         }
         public override TableTextureMode TableTexture => TableTextureMode.Metal;
         public override bool PlacesBlocks            => false;
-        public override LocString DisplayName { get { return Localizer.DoStr("Powered Cart"); } }
-        public Type RepresentedItemType { get { return typeof(PoweredCartItem); } }
+        public override LocString DisplayName { get { return Localizer.DoStr("Skid Steer"); } }
+        public Type RepresentedItemType { get { return typeof(SkidSteerItem); } }
 
         private static string[] fuelTagList = new string[]
         {
-            "Charcoal",
+            "Diesel",
         };
-        private PoweredCartObject() { }
+        private SkidSteerObject() { }
         protected override void Initialize()
         {
             base.Initialize();         
             this.GetComponent<CustomTextComponent>().Initialize(200);
             this.GetComponent<FuelSupplyComponent>().Initialize(2, fuelTagList);
-            this.GetComponent<FuelConsumptionComponent>().Initialize(35);
-            this.GetComponent<AirPollutionComponent>().Initialize(0.1f);
-            this.GetComponent<PublicStorageComponent>().Initialize(18, 3500000);
+            this.GetComponent<FuelConsumptionComponent>().Initialize(45);
+            this.GetComponent<AirPollutionComponent>().Initialize(0.5f);
+            this.GetComponent<VehicleComponent>().HumanPowered(2);
+            this.GetComponent<VehicleToolComponent>().Initialize(5, 2800000, new DirtItem(),
+            100, 200, 0, VehicleUtilities.GetInventoryRestriction(this), toolOnMount:true);
             this.GetComponent<MinimapComponent>().InitAsMovable();
             this.GetComponent<MinimapComponent>().SetCategory(Localizer.DoStr("Vehicles"));
-            this.GetComponent<VehicleComponent>().Initialize(12, 1.5f,1);
+            this.GetComponent<VehicleComponent>().Initialize(16, 1);
         }
     }
 }

@@ -11,7 +11,9 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Components;
     using Eco.Gameplay.Components.Auth;
     using Eco.Gameplay.Components.VehicleModules;
+    using Eco.Gameplay.GameActions;
     using Eco.Gameplay.DynamicValues;
+    using Eco.Gameplay.Interactions;
     using Eco.Gameplay.Items;
     using Eco.Gameplay.Objects;
     using Eco.Gameplay.Players;
@@ -29,35 +31,35 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Trailer Truck")]
-    [Weight(50000)]
+    [Weight(25000)]
     [AirPollution(0.5f)]
-    [Ecopedia("Crafted Objects", "Vehicles", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Crafted Objects", "Vehicles", createAsSubPage: true)]
     public partial class TrailerTruckItem : WorldObjectItem<TrailerTruckObject>, IPersistentData
     {
-        public override LocString DisplayDescription { get { return Localizer.DoStr("Modern class J14 truck for hauling sizable loads."); } }
-        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren] public object PersistentData { get; set; }
+        public override LocString DisplayDescription { get { return Localizer.DoStr("Modern truck for hauling sizable loads."); } }
+        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren(CacheAs.Instance)] public object PersistentData { get; set; }
     }
-
 
     [Serialized]
     [RequireComponent(typeof(StandaloneAuthComponent))]
     [RequireComponent(typeof(FuelSupplyComponent))]
     [RequireComponent(typeof(FuelConsumptionComponent))]
     [RequireComponent(typeof(PublicStorageComponent))]
+    [RequireComponent(typeof(TailingsReportComponent))]
     [RequireComponent(typeof(MovableLinkComponent))]
     [RequireComponent(typeof(AirPollutionComponent))]
     [RequireComponent(typeof(VehicleComponent))]
     [RequireComponent(typeof(CustomTextComponent))]
     [RequireComponent(typeof(ModularStockpileComponent))]
-    [RequireComponent(typeof(TailingsReportComponent))]
+    [RequireComponent(typeof(MinimapComponent))]           
     public partial class TrailerTruckObject : PhysicsWorldObject, IRepresentsItem
     {
         static TrailerTruckObject()
         {
             WorldObject.AddOccupancy<TrailerTruckObject>(new List<BlockOccupancy>(0));
         }
-
         public override TableTextureMode TableTexture => TableTextureMode.Metal;
+        public override bool PlacesBlocks            => false;
         public override LocString DisplayName { get { return Localizer.DoStr("Trailer Truck"); } }
         public Type RepresentedItemType { get { return typeof(TrailerTruckItem); } }
 
@@ -65,20 +67,19 @@ namespace Eco.Mods.TechTree
         {
             "Diesel",
         };
-
         private TrailerTruckObject() { }
-
         protected override void Initialize()
         {
-            base.Initialize();
-            
+            base.Initialize();         
             this.GetComponent<CustomTextComponent>().Initialize(200);
-            this.GetComponent<PublicStorageComponent>().Initialize(40, 8000000);
             this.GetComponent<FuelSupplyComponent>().Initialize(2, fuelTagList);
             this.GetComponent<FuelConsumptionComponent>().Initialize(25);
             this.GetComponent<AirPollutionComponent>().Initialize(0.5f);
-            this.GetComponent<VehicleComponent>().Initialize(20, 2, 2);
             this.GetComponent<StockpileComponent>().Initialize(new Vector3i(2,2,3));
+            this.GetComponent<PublicStorageComponent>().Initialize(36, 8000000);
+            this.GetComponent<MinimapComponent>().InitAsMovable();
+            this.GetComponent<MinimapComponent>().SetCategory(Localizer.DoStr("Vehicles"));
+            this.GetComponent<VehicleComponent>().Initialize(20, 2,2);
         }
     }
 }
