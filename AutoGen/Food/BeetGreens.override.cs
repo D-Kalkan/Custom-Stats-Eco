@@ -21,7 +21,7 @@ namespace Eco.Mods.TechTree
     [Tag("Harvestable", 1)]
     [Tag("Greens", 1)]
     [Tag("Raw Food", 1)]
-    [Ecopedia("Food", "Produce", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Produce", createAsSubPage: true)]
     public partial class BeetGreensItem : FoodItem
     {
         public override LocString DisplayDescription    => Localizer.DoStr("The leafy greens from a beet with a distinctive red stem.");

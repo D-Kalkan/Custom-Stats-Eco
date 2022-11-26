@@ -32,7 +32,7 @@ namespace Eco.Mods.TechTree
     [Weight(300)] // Defines how heavy the CamasBulbBake is.
     [Tag("BakedVegetable", 1)]
     [Tag("BakedFood", 1)]
-    [Ecopedia("Food", "Baking", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Baking", createAsSubPage: true)]
     public partial class CamasBulbBakeItem : FoodItem
     {
 

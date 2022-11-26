@@ -55,7 +55,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Diesel")]
     [Weight(1000)]
     [Fuel(120000)][Tag("Fuel")]
-    [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Products", createAsSubPage: true)]
     [Tag("Diesel", 1)]
     [Tag("Liquid Fuel", 1)]
     public partial class LiquidNitrogenItem : Item

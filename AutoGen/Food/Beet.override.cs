@@ -22,7 +22,7 @@ namespace Eco.Mods.TechTree
     [Tag("Vegetable", 1)]
     [Tag("Root", 1)]
     [Tag("Raw Food", 1)]
-    [Ecopedia("Food", "Produce", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Produce", createAsSubPage: true)]
     public partial class BeetItem : FoodItem
     {
         public override LocString DisplayDescription    => Localizer.DoStr("A brilliantly colored bulb with an earthy sweetness.");

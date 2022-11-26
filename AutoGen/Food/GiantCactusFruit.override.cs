@@ -21,7 +21,7 @@ namespace Eco.Mods.TechTree
     [Tag("Harvestable", 1)]
     [Tag("Fruit", 1)]
     [Tag("Raw Food", 1)]
-    [Ecopedia("Food", "Produce", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Produce", createAsSubPage: true)]
     public partial class GiantCactusFruitItem : FoodItem
     {
         public override LocString DisplayDescription    => Localizer.DoStr("A bulbous fruit that used to top Saguaro cacti.");

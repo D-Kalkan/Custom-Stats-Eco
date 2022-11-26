@@ -19,7 +19,7 @@ namespace Eco.Mods.TechTree
     [Crop]
     [Tag("Crop", 1)]
     [Tag("Harvestable", 1)]
-    [Ecopedia("Food", "Produce", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Produce", createAsSubPage: true)]
     public partial class SunflowerItem : FoodItem
     {
         public override LocString DisplayDescription    => Localizer.DoStr("A plant whose seeds are quite versitile in their use further processed.");

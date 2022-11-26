@@ -63,11 +63,6 @@ namespace Eco.Mods.TechTree
             this.ModsPostInitialize();
         }
 
-        public override void Destroy()
-        {
-            base.Destroy();
-        }
-
         /// <summary>Hook for mods to customize WorldObject before initialization. You can change housing values here.</summary>
         partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize WorldObject after initialization.</summary>
@@ -76,7 +71,7 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Candle Stand")]
-    [Ecopedia("Housing Objects", "Lights", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Housing Objects", "Lights", createAsSubPage: true)]
     [Tag("Housing", 1)]
     [Tag("Metal Furnishing", 1)]
     public partial class CandleStandItem : WorldObjectItem<CandleStandObject>
@@ -92,7 +87,7 @@ namespace Eco.Mods.TechTree
         public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
         {
             Category                 = RoomCategory.General,
-            SkillValue               = 1.4f,
+            HouseValue               = 1.4f,
             TypeForRoomLimit         = Localizer.DoStr("Lights"),
             DiminishingReturnPercent = 0.7f
         };

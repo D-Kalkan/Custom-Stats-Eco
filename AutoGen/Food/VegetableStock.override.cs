@@ -30,7 +30,7 @@ namespace Eco.Mods.TechTree
     [Serialized] // Tells the save/load system this object needs to be serialized. 
     [LocDisplayName("Vegetable Stock")] // Defines the localized name of the item.
     [Weight(800)] // Defines how heavy the VegetableStock is.
-    [Ecopedia("Food", "Ingredients", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Ingredients", createAsSubPage: true)]
     public partial class VegetableStockItem : FoodItem
     {
 

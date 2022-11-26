@@ -65,7 +65,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Nylon")]
     [Weight(500)]
-    [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Products", createAsSubPage: true)]
     public partial class NylonItem : Item
     {
         public override LocString DisplayDescription { get { return Localizer.DoStr("Nylon is a synthetic polymer that can be used as a cheap alternative to more natural textiles. "); } }

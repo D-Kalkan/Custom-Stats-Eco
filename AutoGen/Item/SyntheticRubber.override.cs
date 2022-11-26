@@ -65,7 +65,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Synthetic Rubber")]
     [Weight(1000)]
-    [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Products", createAsSubPage: true)]
     public partial class SyntheticRubberItem : Item
     {
         public override LocString DisplayNamePlural { get { return Localizer.DoStr("Rubber"); } }

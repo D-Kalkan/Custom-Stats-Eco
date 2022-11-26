@@ -77,7 +77,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Mortared Stone")]
     [MaxStackSize(15)]
     [Weight(10000)]
-    [Ecopedia("Blocks", "Building Materials", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Blocks", "Building Materials", createAsSubPage: true)]
     [Tag("MortaredStone", 1)]
     [Tag("Constructable", 1)]
     [Tier(1)]

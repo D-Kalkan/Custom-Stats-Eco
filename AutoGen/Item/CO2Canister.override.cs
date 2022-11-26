@@ -28,7 +28,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("CO2 Canister")]
     [Weight(100)]
-    [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Products", createAsSubPage: true)]
     public partial class CO2CanisterItem : Item
     {
         public override LocString DisplayDescription { get { return Localizer.DoStr("For creating fancy foams!"); } }

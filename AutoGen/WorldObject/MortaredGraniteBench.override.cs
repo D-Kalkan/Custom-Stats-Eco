@@ -37,6 +37,7 @@ namespace Eco.Mods.TechTree
     using Eco.World.Blocks;
     using Eco.Gameplay.Housing.PropertyValues;
     using Eco.Gameplay.Civics.Objects;
+    using Eco.Gameplay.Settlements;
     using Eco.Gameplay.Systems.NewTooltip;
     using Eco.Core.Controller;
     using static Eco.Gameplay.Housing.PropertyValues.HomeFurnishingValue;
@@ -60,11 +61,6 @@ namespace Eco.Mods.TechTree
             this.ModsPostInitialize();
         }
 
-        public override void Destroy()
-        {
-            base.Destroy();
-        }
-
         /// <summary>Hook for mods to customize WorldObject before initialization. You can change housing values here.</summary>
         partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize WorldObject after initialization.</summary>
@@ -73,7 +69,7 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Mortared Granite Bench")]
-    [Ecopedia("Housing Objects", "Seating", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Housing Objects", "Seating", createAsSubPage: true)]
     [Tag("Housing", 1)]
     [Tag("Mortared Stone Furnishing", 1)]
     public partial class MortaredGraniteBenchItem : WorldObjectItem<MortaredGraniteBenchObject>
@@ -89,7 +85,7 @@ namespace Eco.Mods.TechTree
         public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
         {
             Category                 = RoomCategory.General,
-            SkillValue               = 1,
+            HouseValue               = 1,
             TypeForRoomLimit         = Localizer.DoStr("Seating"),
             DiminishingReturnPercent = 0.5f
         };

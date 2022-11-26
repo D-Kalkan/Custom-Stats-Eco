@@ -66,7 +66,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Advanced Circuit")]
     [Weight(1000)]
-    [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Products", createAsSubPage: true)]
     public partial class AdvancedCircuitItem : Item
     {
         public override LocString DisplayDescription { get { return Localizer.DoStr("A complex electrical component used in advanced electronics."); } }

@@ -24,7 +24,7 @@ namespace Eco.Mods.TechTree
     [Tag("Crop", 1)]
     [Tag("Harvestable", 1)]
     [Tag("Raw Food", 1)]
-    [Ecopedia("Food", "Produce", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Produce", createAsSubPage: true)]
     public partial class BeanSproutItem : FoodItem
     {
         public override LocString DisplayDescription    => Localizer.DoStr("The small sprouts from a grown bean plant.");

@@ -62,7 +62,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Basic Engineering Upgrade")]
     [Weight(1)]
-    [Ecopedia("Upgrade Modules", "Specialty Upgrades", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]                                                                      //_If_EcopediaPage_
+    [Ecopedia("Upgrade Modules", "Specialty Upgrades", createAsSubPage: true)]                                                                      //_If_EcopediaPage_
     [Tag("Upgrade", 1)]
     public partial class BasicEngineeringUpgradeItem :
         EfficiencyModule

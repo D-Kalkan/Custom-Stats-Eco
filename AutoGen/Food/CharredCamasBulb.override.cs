@@ -31,7 +31,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Charred Camas Bulb")] // Defines the localized name of the item.
     [Weight(100)] // Defines how heavy the CharredCamasBulb is.
     [Tag("CharredVegetable", 1)]
-    [Ecopedia("Food", "Charred Food", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Charred Food", createAsSubPage: true)]
     public partial class CharredCamasBulbItem : FoodItem
     {
 

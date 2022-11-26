@@ -93,7 +93,7 @@ namespace Eco.Mods.TechTree
     [Weight(500)] // Defines how heavy PhosphateFertilizer is.
     [Category("Tool")] // Gives this item the category of "Tool" for organization
     [Tag("Fertilizer", 1)] // Gives this item the Fertilizer tag for use in recipes
-    [Ecopedia("Items", "Fertilizer", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Fertilizer", createAsSubPage: true)]
         public partial class PhosphateFertilizerItem : FertilizerItem<PhosphateFertilizerItem>
     {
         /// <summary>The tooltip description for the item.</summary>

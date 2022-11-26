@@ -21,7 +21,7 @@ namespace Eco.Mods.TechTree
     [Weight(100)]
     [Fuel(4000)][Tag("Fuel")]
     [Tag("Fat", 1)]
-    [Ecopedia("Food", "Ingredients", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Ingredients", createAsSubPage: true)]
     public partial class OilItem : FoodItem
     {
         public override LocString DisplayNamePlural     => Localizer.DoStr("Oil");

@@ -30,7 +30,7 @@ namespace Eco.Mods.TechTree
     [Serialized] // Tells the save/load system this object needs to be serialized. 
     [LocDisplayName("Wild Mix")] // Defines the localized name of the item.
     [Weight(600)] // Defines how heavy the WildMix is.
-    [Ecopedia("Food", "Cooking", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Cooking", createAsSubPage: true)]
     public partial class WildMixItem : FoodItem
     {
 

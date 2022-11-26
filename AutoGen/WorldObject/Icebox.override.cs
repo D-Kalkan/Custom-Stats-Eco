@@ -65,11 +65,6 @@ namespace Eco.Mods.TechTree
             this.ModsPostInitialize();
         }
 
-        public override void Destroy()
-        {
-            base.Destroy();
-        }
-
         /// <summary>Hook for mods to customize WorldObject before initialization. You can change housing values here.</summary>
         partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize WorldObject after initialization.</summary>
@@ -78,7 +73,7 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Icebox")]
-    [Ecopedia("Housing Objects", "Kitchen", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Housing Objects", "Kitchen", createAsSubPage: true)]
     [Tag("Housing", 1)]
     [Tag("Hewn Furnishing", 1)]
     public partial class IceboxItem : WorldObjectItem<IceboxObject>
@@ -95,7 +90,7 @@ namespace Eco.Mods.TechTree
         public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
         {
             Category                 = RoomCategory.Kitchen,
-            SkillValue               = 1.5f,
+            HouseValue               = 1.5f,
             TypeForRoomLimit         = Localizer.DoStr("Food Storage"),
             DiminishingReturnPercent = 0.3f
         };

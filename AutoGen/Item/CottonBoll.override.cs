@@ -29,7 +29,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Cotton Boll")]
     [Weight(10)]
     [Yield(typeof(CottonBollItem), typeof(FarmingSkill), new float[] { 1f, 1.4f, 1.5f, 1.6f, 1.7f, 1.8f, 1.9f, 2.0f })]
-    [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Products", createAsSubPage: true)]
     [Tag("Crop", 1)]
     public partial class CottonBollItem : Item
     {

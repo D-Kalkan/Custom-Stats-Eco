@@ -66,7 +66,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Plastic")]
     [Weight(1000)]
     [Tag("Currency")][Currency]
-    [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Products", createAsSubPage: true)]
     public partial class PlasticItem : Item
     {
         public override LocString DisplayNamePlural { get { return Localizer.DoStr("Plastic"); } }

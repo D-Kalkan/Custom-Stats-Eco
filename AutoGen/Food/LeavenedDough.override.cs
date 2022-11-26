@@ -30,7 +30,7 @@ namespace Eco.Mods.TechTree
     [Serialized] // Tells the save/load system this object needs to be serialized. 
     [LocDisplayName("Leavened Dough")] // Defines the localized name of the item.
     [Weight(800)] // Defines how heavy the LeavenedDough is.
-    [Ecopedia("Food", "Baking", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Baking", createAsSubPage: true)]
     public partial class LeavenedDoughItem : FoodItem
     {
 

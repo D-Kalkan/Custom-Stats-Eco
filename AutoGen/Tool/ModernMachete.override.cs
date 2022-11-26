@@ -66,7 +66,7 @@ namespace Eco.Mods.TechTree
     [Weight(1000)]
     [Category("Tool")]
     [Tag("Tool", 1)]
-    [Ecopedia("Items", "Tools", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Tools", createAsSubPage: true)]
     public partial class ModernMacheteItem : MacheteItem
     {
                                                                                                                                                                                                                                            // Static values

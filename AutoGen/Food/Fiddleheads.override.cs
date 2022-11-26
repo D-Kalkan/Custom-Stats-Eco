@@ -21,7 +21,7 @@ namespace Eco.Mods.TechTree
     [Tag("Harvestable", 1)]
     [Tag("Greens", 1)]
     [Tag("Raw Food", 1)]
-    [Ecopedia("Food", "Produce", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Produce", createAsSubPage: true)]
     public partial class FiddleheadsItem : FoodItem
     {
         public override LocString DisplayNamePlural     => Localizer.DoStr("Fiddleheads");

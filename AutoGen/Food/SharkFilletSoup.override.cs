@@ -30,7 +30,7 @@ namespace Eco.Mods.TechTree
     [Serialized] // Tells the save/load system this object needs to be serialized. 
     [LocDisplayName("Shark Fillet Soup")] // Defines the localized name of the item.
     [Weight(600)] // Defines how heavy the SharkFilletSoup is.
-    [Ecopedia("Food", "Cooking", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Cooking", createAsSubPage: true)]
     public partial class SharkFilletSoupItem : FoodItem
     {
 

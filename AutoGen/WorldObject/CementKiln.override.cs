@@ -70,18 +70,13 @@ namespace Eco.Mods.TechTree
         protected override void Initialize()
         {
             this.ModsPreInitialize();
-            this.GetComponent<MinimapComponent>().Initialize(Localizer.DoStr("Crafting"));
+            this.GetComponent<MinimapComponent>().SetCategory(Localizer.DoStr("Crafting"));
             this.GetComponent<FuelSupplyComponent>().Initialize(2, fuelTagList);
             this.GetComponent<FuelConsumptionComponent>().Initialize(50);
             this.GetComponent<HousingComponent>().HomeValue = CementKilnItem.homeValue;
             this.GetComponent<LiquidProducerComponent>().Setup(typeof(SmogItem), 1, this.GetOccupancyType(BlockOccupancyType.ChimneyOut));
             this.GetComponent<AirPollutionComponent>().Initialize(this.GetComponent<LiquidProducerComponent>());
             this.ModsPostInitialize();
-        }
-
-        public override void Destroy()
-        {
-            base.Destroy();
         }
 
         /// <summary>Hook for mods to customize WorldObject before initialization. You can change housing values here.</summary>
@@ -92,7 +87,7 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Cement Kiln")]
-    [Ecopedia("Work Stations", "Craft Tables", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Work Stations", "Craft Tables", createAsSubPage: true)]
     [LiquidProducer(typeof(SmogItem), 1)]
     [AllowPluginModules(Tags = new[] { "AdvancedUpgrade" }, ItemTypes = new[] { typeof(MasonryAdvancedUpgradeItem) })] //noloc
     public partial class CementKilnItem : WorldObjectItem<CementKilnObject>, IPersistentData
@@ -112,7 +107,7 @@ namespace Eco.Mods.TechTree
         };
 
         [Tooltip(7)] private LocString PowerConsumptionTooltip => Localizer.Do($"Consumes: {Text.Info(50)}w of {new HeatPower().Name} power from fuel");
-        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren] public object PersistentData { get; set; }
+        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren(CacheAs.Instance)] public object PersistentData { get; set; }
     }
 
     [RequiresSkill(typeof(MechanicsSkill), 2)]

@@ -19,7 +19,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Maltodextrin")]
     [Weight(100)]
-    [Ecopedia("Food", "Ingredients", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Ingredients", createAsSubPage: true)]
     public partial class MaltodextrinItem : FoodItem
     {
         public override LocString DisplayDescription    => Localizer.DoStr("For powdering high-fat liquids.");

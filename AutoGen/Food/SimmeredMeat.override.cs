@@ -30,7 +30,7 @@ namespace Eco.Mods.TechTree
     [Serialized] // Tells the save/load system this object needs to be serialized. 
     [LocDisplayName("Simmered Meat")] // Defines the localized name of the item.
     [Weight(800)] // Defines how heavy the SimmeredMeat is.
-    [Ecopedia("Food", "Cooking", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Cooking", createAsSubPage: true)]
     public partial class SimmeredMeatItem : FoodItem
     {
 

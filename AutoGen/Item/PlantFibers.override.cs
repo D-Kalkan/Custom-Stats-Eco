@@ -31,7 +31,7 @@ namespace Eco.Mods.TechTree
     [Weight(10)]
     [Fuel(100)][Tag("Fuel")]
     [Yield(typeof(PlantFibersItem), typeof(FarmingSkill), new float[] { 1f, 1.4f, 1.5f, 1.6f, 1.7f, 1.8f, 1.9f, 2.0f })]
-    [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Products", createAsSubPage: true)]
     [Tag("NaturalFiber", 1)]
     [Tag("Burnable Fuel", 1)]
     [Tag("Crop", 1)]

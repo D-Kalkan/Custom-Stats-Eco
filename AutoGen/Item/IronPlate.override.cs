@@ -66,7 +66,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Iron Plate")]
     [Weight(500)]
     [Tag("Currency")][Currency]
-    [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Products", createAsSubPage: true)]
     public partial class IronPlateItem : Item
     {
         public override LocString DisplayDescription { get { return Localizer.DoStr("A solid iron plate for use in various crafting recipes."); } }

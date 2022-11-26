@@ -61,12 +61,7 @@ namespace Eco.Mods.TechTree
             this.GetComponent<MountComponent>().Initialize(1);
             this.ModsPostInitialize();
         }
-
-        public override void Destroy()
-        {
-            base.Destroy();
-        }
-
+        
         /// <summary>Hook for mods to customize WorldObject before initialization. You can change housing values here.</summary>
         partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize WorldObject after initialization.</summary>
@@ -75,7 +70,7 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Nylon Futon Bed")]
-    [Ecopedia("Housing Objects", "Bedroom", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Housing Objects", "Bedroom", createAsSubPage: true)]
     [Tag("Housing", 1)]
     public partial class NylonFutonBedItem : WorldObjectItem<NylonFutonBedObject>
     {
@@ -90,7 +85,7 @@ namespace Eco.Mods.TechTree
         public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
         {
             Category                 = RoomCategory.Bedroom,
-            SkillValue               = 4,
+            HouseValue               = 4,
             TypeForRoomLimit         = Localizer.DoStr("Bed"),
             DiminishingReturnPercent = 0.2f
         };

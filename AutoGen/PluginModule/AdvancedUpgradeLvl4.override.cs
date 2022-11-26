@@ -65,7 +65,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Advanced Upgrade 4")]
     [Weight(1)]
-    [Ecopedia("Upgrade Modules", "Advanced Upgrades", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]                                                                      //_If_EcopediaPage_
+    [Ecopedia("Upgrade Modules", "Advanced Upgrades", createAsSubPage: true)]                                                                      //_If_EcopediaPage_
     [Tag("Upgrade", 1)]
     [Tag("AdvancedUpgrade", 1)]
     public partial class AdvancedUpgradeLvl4Item :

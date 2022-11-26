@@ -78,7 +78,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Steel Pipe")]
     [MaxStackSize(10)]
     [Weight(2000)]
-    [Ecopedia("Blocks", "Pipes", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Blocks", "Pipes", createAsSubPage: true)]
     [Tag("Constructable", 1)]
     [Tier(3)]
     public partial class SteelPipeItem :

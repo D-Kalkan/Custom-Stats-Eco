@@ -56,18 +56,13 @@ namespace Eco.Mods.TechTree
         protected override void Initialize()
         {
             this.ModsPreInitialize();
-            this.GetComponent<MinimapComponent>().Initialize(Localizer.DoStr("Crafting"));
+            this.GetComponent<MinimapComponent>().SetCategory(Localizer.DoStr("Crafting"));
             var storage = this.GetComponent<PublicStorageComponent>();
             storage.Initialize(32);
             storage.Storage.AddInvRestriction(new StackLimitRestriction(400));
             storage.Storage.AddInvRestriction(new NotCarriedRestriction());
             storage.ShelfLifeMultiplier = 0.4f;
             this.ModsPostInitialize();
-        }
-
-        public override void Destroy()
-        {
-            base.Destroy();
         }
 
         /// <summary>Hook for mods to customize WorldObject before initialization. You can change housing values here.</summary>
@@ -79,7 +74,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Compost Bin")]
     [Weight(5000)]
-    [Ecopedia("Crafted Objects", "Storage", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Crafted Objects", "Storage", createAsSubPage: true)]
     [AllowPluginModules(Tags = new[] { "BasicUpgrade" }, ItemTypes = new[] { typeof(FarmingUpgradeItem) })] //noloc
     public partial class DumpsterCompostItem : WorldObjectItem<DumpsterCompostObject>
     {

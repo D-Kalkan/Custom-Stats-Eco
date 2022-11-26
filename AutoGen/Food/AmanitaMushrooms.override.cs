@@ -20,7 +20,7 @@ namespace Eco.Mods.TechTree
     [Tag("Crop", 1)]
     [Tag("Harvestable", 1)]
     [Tag("Fungus", 1)]
-    [Ecopedia("Food", "Produce", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Produce", createAsSubPage: true)]
     public partial class AmanitaMushroomsItem : FoodItem
     {
         public override LocString DisplayDescription    => Localizer.DoStr("A potentially poisonous mushroom. It might not be wise to eat it raw, but it can be detoxified when prepared properly by a chef. Eat at your own risk!");

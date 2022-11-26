@@ -30,7 +30,7 @@ namespace Eco.Mods.TechTree
     [Serialized] // Tells the save/load system this object needs to be serialized. 
     [LocDisplayName("Bear S U P R E M E")] // Defines the localized name of the item.
     [Weight(500)] // Defines how heavy the BearSUPREME is.
-    [Ecopedia("Food", "Cooking", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Cooking", createAsSubPage: true)]
     public partial class BearSUPREMEItem : FoodItem
     {
 

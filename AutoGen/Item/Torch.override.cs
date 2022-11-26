@@ -62,7 +62,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Torch")]
     [Weight(500)]
     [Fuel(8000)][Tag("Fuel")]
-    [Ecopedia("Items", "Tools", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Tools", createAsSubPage: true)]
     [Tag("Torch", 1)]
     [Tag("Primitive Tool", 1)]
     public partial class TorchItem : ToolItem

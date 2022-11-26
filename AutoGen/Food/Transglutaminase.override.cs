@@ -19,7 +19,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Transglutaminase")]
     [Weight(100)]
-    [Ecopedia("Food", "Ingredients", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Ingredients", createAsSubPage: true)]
     public partial class TransglutaminaseItem : FoodItem
     {
         public override LocString DisplayDescription    => Localizer.DoStr("Any enzyme that can be used to bond proteins together.");

@@ -36,7 +36,7 @@ namespace Eco.Mods.TechTree
     [Ecopedia("Crafted Objects", "Vehicles", createAsSubPage: true)]
     public partial class SteamTractorItem : WorldObjectItem<SteamTractorObject>, IPersistentData
     {
-        public override LocString DisplayDescription { get { return Localizer.DoStr("A tractor powered through steam."); } }
+        public override LocString DisplayDescription { get { return Localizer.DoStr("A tractor powered through steam, with a roaring V9 engine!"); } }
         [Serialized, SyncToView, TooltipChildren, NewTooltipChildren(CacheAs.Instance)] public object PersistentData { get; set; }
     }
 

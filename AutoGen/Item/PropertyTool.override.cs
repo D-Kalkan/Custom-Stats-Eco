@@ -61,7 +61,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Land Claim Stake")]
     [Weight(1000)]
-    [Ecopedia("Items", "Tools", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Tools", createAsSubPage: true)]
     [Tag("Tool", 1)]
     [Tag("Primitive Recyclable Tool", 1)]
     public partial class PropertyToolItem : ToolItem

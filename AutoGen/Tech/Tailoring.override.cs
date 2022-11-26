@@ -30,7 +30,7 @@ namespace Eco.Mods.TechTree
     /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
     [Serialized]
     [LocDisplayName("Tailoring")]
-    [Ecopedia("Professions", "Tailor", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Professions", "Tailor", createAsSubPage: true)]
     [RequiresSkill(typeof(TailorSkill), 0), Tag("Tailor Specialty"), Tier(2)]
     [Tag("Specialty")]
     [Tag("Teachable")]
@@ -75,7 +75,7 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Tailoring Skill Book")]
-    [Ecopedia("Items", "Skill Books", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Skill Books", createAsSubPage: true)]
     public partial class TailoringSkillBook : SkillBook<TailoringSkill, TailoringSkillScroll> {}
 
     [Serialized]

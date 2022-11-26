@@ -63,14 +63,9 @@ namespace Eco.Mods.TechTree
         protected override void Initialize()
         {
             this.ModsPreInitialize();
-            this.GetComponent<MinimapComponent>().Initialize(Localizer.DoStr("Crafting"));
+            this.GetComponent<MinimapComponent>().SetCategory(Localizer.DoStr("Crafting"));
             this.GetComponent<HousingComponent>().HomeValue = MachinistTableItem.homeValue;
             this.ModsPostInitialize();
-        }
-
-        public override void Destroy()
-        {
-            base.Destroy();
         }
 
         /// <summary>Hook for mods to customize WorldObject before initialization. You can change housing values here.</summary>
@@ -81,7 +76,7 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Machinist Table")]
-    [Ecopedia("Work Stations", "Craft Tables", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Work Stations", "Craft Tables", createAsSubPage: true)]
     [AllowPluginModules(Tags = new[] { "AdvancedUpgrade" }, ItemTypes = new[] { typeof(MechanicsAdvancedUpgradeItem), typeof(CarpentryAdvancedUpgradeItem) })] //noloc
     public partial class MachinistTableItem : ModuleItem<MachinistTableObject>, IPersistentData
     {
@@ -99,7 +94,7 @@ namespace Eco.Mods.TechTree
             TypeForRoomLimit         = Localizer.DoStr(""),
         };
 
-        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren] public object PersistentData { get; set; }
+        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren(CacheAs.Instance)] public object PersistentData { get; set; }
     }
 
     /// <summary>

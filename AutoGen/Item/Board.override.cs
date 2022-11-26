@@ -66,7 +66,7 @@ namespace Eco.Mods.TechTree
     [Weight(500)]
     [Fuel(2000)][Tag("Fuel")]
     [Tag("Currency")][Currency]
-    [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Products", createAsSubPage: true)]
     [Tag("WoodBoard", 1)]
     [Tag("Burnable Fuel", 1)]
     public partial class BoardItem : Item

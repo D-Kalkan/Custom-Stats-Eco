@@ -64,7 +64,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Nail")]
     [Weight(500)]
-    [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Products", createAsSubPage: true)]
     public partial class NailItem : Item
     {
         public override LocString DisplayDescription { get { return Localizer.DoStr("Nails used for construction."); } }

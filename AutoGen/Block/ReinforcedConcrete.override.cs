@@ -79,7 +79,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Reinforced Concrete")]
     [MaxStackSize(20)]
     [Weight(10000)]
-    [Ecopedia("Blocks", "Building Materials", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Blocks", "Building Materials", createAsSubPage: true)]
     [Tag("Concrete", 1)]
     [Tag("Constructable", 1)]
     [Tier(3)]

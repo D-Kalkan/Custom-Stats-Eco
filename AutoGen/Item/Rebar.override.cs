@@ -64,7 +64,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Rebar")]
     [Weight(3000)]
-    [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Products", createAsSubPage: true)]
     public partial class RebarItem : Item
     {
         public override LocString DisplayDescription { get { return Localizer.DoStr("Ribbed steel bars for reinforcing stuctures."); } }

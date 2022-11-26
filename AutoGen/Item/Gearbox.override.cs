@@ -66,7 +66,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Gearbox")]
     [Weight(500)]
-    [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Products", createAsSubPage: true)]
     public partial class GearboxItem : Item
     {
         public override LocString DisplayDescription { get { return Localizer.DoStr("Provides speed and torque conversions from a rotating power source to another device."); } }

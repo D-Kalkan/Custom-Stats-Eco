@@ -59,11 +59,6 @@ namespace Eco.Mods.TechTree
             this.ModsPostInitialize();
         }
 
-        public override void Destroy()
-        {
-            base.Destroy();
-        }
-
         /// <summary>Hook for mods to customize WorldObject before initialization. You can change housing values here.</summary>
         partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize WorldObject after initialization.</summary>
@@ -73,7 +68,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Mortared Sandstone Door")]
     [Tier(1)]
-    [Ecopedia("Housing Objects", "Doors", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Housing Objects", "Doors", createAsSubPage: true)]
     [Tag("Small Mortared Stone Furnishing", 1)]
     public partial class MortaredSandstoneDoorItem : WorldObjectItem<MortaredSandstoneDoorObject>
     {

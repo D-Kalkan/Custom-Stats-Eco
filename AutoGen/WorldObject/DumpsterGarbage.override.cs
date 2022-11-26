@@ -59,11 +59,6 @@ namespace Eco.Mods.TechTree
             this.ModsPostInitialize();
         }
 
-        public override void Destroy()
-        {
-            base.Destroy();
-        }
-
         /// <summary>Hook for mods to customize WorldObject before initialization. You can change housing values here.</summary>
         partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize WorldObject after initialization.</summary>
@@ -72,7 +67,7 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Dumpster")]
-    [Ecopedia("Crafted Objects", "Storage", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Crafted Objects", "Storage", createAsSubPage: true)]
     public partial class DumpsterGarbageItem : WorldObjectItem<DumpsterGarbageObject>
     {
         

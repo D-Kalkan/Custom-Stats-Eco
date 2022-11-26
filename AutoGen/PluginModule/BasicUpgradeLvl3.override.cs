@@ -64,7 +64,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Basic Upgrade 3")]
     [Weight(1)]
-    [Ecopedia("Upgrade Modules", "Basic Upgrades", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]                                                                      //_If_EcopediaPage_
+    [Ecopedia("Upgrade Modules", "Basic Upgrades", createAsSubPage: true)]                                                                      //_If_EcopediaPage_
     [Tag("Upgrade", 1)]
     [Tag("BasicUpgrade", 1)]
     public partial class BasicUpgradeLvl3Item :

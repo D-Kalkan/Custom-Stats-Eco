@@ -30,7 +30,7 @@ namespace Eco.Mods.TechTree
     [Serialized] // Tells the save/load system this object needs to be serialized. 
     [LocDisplayName("Huckleberry Pie")] // Defines the localized name of the item.
     [Weight(600)] // Defines how heavy the HuckleberryPie is.
-    [Ecopedia("Food", "Baking", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Baking", createAsSubPage: true)]
     public partial class HuckleberryPieItem : FoodItem
     {
 

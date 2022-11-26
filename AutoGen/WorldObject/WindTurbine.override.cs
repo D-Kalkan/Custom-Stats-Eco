@@ -65,11 +65,6 @@ namespace Eco.Mods.TechTree
             this.ModsPostInitialize();
         }
 
-        public override void Destroy()
-        {
-            base.Destroy();
-        }
-
         /// <summary>Hook for mods to customize WorldObject before initialization. You can change housing values here.</summary>
         partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize WorldObject after initialization.</summary>
@@ -79,7 +74,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Wind Turbine")]
     [Category("Hidden"), Tag("NotInBrowser")]
-    [Ecopedia("Crafted Objects", "Power Generation", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Crafted Objects", "Power Generation", createAsSubPage: true)]
     public partial class WindTurbineItem : WorldObjectItem<WindTurbineObject>
     {
         

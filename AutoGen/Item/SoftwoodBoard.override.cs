@@ -82,7 +82,7 @@ namespace Eco.Mods.TechTree
     [Weight(500)] // Defines how heavy SoftwoodBoard is.
     [Fuel(2000)][Tag("Fuel")] // Marks SoftwoodBoard as fuel item.
     [Tag("Currency")][Currency] // Defines if this item can be used to back a currency
-    [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Products", createAsSubPage: true)]
     [Tag("WoodBoard", 1)]
     [Tag("Burnable Fuel", 1)]
     public partial class SoftwoodBoardItem : Item

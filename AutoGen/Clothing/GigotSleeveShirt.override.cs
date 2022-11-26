@@ -29,7 +29,7 @@ namespace Eco.Mods.TechTree
     [Weight(100)]
     [Tag("Clothes", 1)]
     [Tag("Small Textile", 1)]
-    [Ecopedia("Items", "Clothing", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Clothing", createAsSubPage: true)]
     public partial class GigotSleeveShirtItem :
         ClothingItem
     {

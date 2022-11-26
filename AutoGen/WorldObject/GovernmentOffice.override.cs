@@ -55,13 +55,8 @@ namespace Eco.Mods.TechTree
             this.ModsPreInitialize();
             base.Initialize();
 
-            this.GetComponent<MinimapComponent>().Initialize(Localizer.DoStr("Civics"));
+            this.GetComponent<MinimapComponent>().SetCategory(Localizer.DoStr("Civics"));
             this.ModsPostInitialize();
-        }
-
-        public override void Destroy()
-        {
-            base.Destroy();
         }
 
         /// <summary>Hook for mods to customize WorldObject before initialization. You can change housing values here.</summary>
@@ -72,7 +67,7 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Government Office")]
-    [Ecopedia("Work Stations", "Government", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Work Stations", "Government", createAsSubPage: true)]
     public partial class GovernmentOfficeItem : WorldObjectItem<GovernmentOfficeObject>, IPersistentData
     {
         
@@ -83,7 +78,7 @@ namespace Eco.Mods.TechTree
                     | DirectionAxisFlags.Down
                 ;
 
-        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren] public object PersistentData { get; set; }
+        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren(CacheAs.Instance)] public object PersistentData { get; set; }
     }
 
     public partial class GovernmentOfficeRecipe : RecipeFamily

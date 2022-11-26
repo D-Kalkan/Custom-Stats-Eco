@@ -72,7 +72,7 @@ namespace Eco.Mods.TechTree
     [MaxStackSize(10)]
     [Weight(28000)]
     [StartsDiscovered]
-    [Ecopedia("Blocks", "Processed Rock", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Blocks", "Processed Rock", createAsSubPage: true)]
     [Tag("CrushedRock", 1)]
     [Tag("Excavatable", 1)]
     [RequiresTool(typeof(ShovelItem))]

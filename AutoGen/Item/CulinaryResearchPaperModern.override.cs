@@ -64,7 +64,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Culinary Research Paper Modern")]
     [Weight(10)]
-    [Ecopedia("Items", "Research Papers", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Research Papers", createAsSubPage: true)]
     [Tag("Modern Research", 1)]
     [Tag("Research", 1)]
     public partial class CulinaryResearchPaperModernItem : Item

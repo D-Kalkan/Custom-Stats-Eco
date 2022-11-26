@@ -67,7 +67,7 @@ namespace Eco.Mods.TechTree
     [Category("Tool")]
     [Tag("Tool", 1)]
     [Tag("Primitive Tool", 1)]
-    [Ecopedia("Items", "Tools", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Tools", createAsSubPage: true)]
     public partial class StoneRoadToolItem : RoadToolItem
     {
                                                                                                                                                                                                                                            // Static values

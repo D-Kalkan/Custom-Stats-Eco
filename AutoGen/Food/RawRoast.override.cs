@@ -19,7 +19,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Raw Roast")]
     [Weight(500)]
-    [Ecopedia("Food", "Raw Meat", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Raw Meat", createAsSubPage: true)]
     public partial class RawRoastItem : FoodItem
     {
         public override LocString DisplayDescription    => Localizer.DoStr("A trussed roast tied and ready to be cooked.");

@@ -40,7 +40,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Crushed Mixed Rock")]
     [MaxStackSize(10)]
     [Weight(26000)]
-    [Ecopedia("Blocks", "Processed Rock", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Blocks", "Processed Rock", createAsSubPage: true)]
     [Tag("CrushedRock", 1)]
     [Tag("Silica", 1)]
     [Tag("Excavatable", 1)]

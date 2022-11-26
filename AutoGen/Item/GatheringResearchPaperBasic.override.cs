@@ -65,7 +65,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Gathering Research Paper Basic")]
     [Weight(10)]
-    [Ecopedia("Items", "Research Papers", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Research Papers", createAsSubPage: true)]
     [Tag("Basic Research", 1)]
     [Tag("Research", 1)]
     public partial class GatheringResearchPaperBasicItem : Item

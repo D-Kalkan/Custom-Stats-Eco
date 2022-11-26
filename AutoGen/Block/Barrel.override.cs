@@ -75,7 +75,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Barrel")]
     [MaxStackSize(10)]
     [Weight(2000)]
-    [Ecopedia("Blocks", "Liquids", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Blocks", "Liquids", createAsSubPage: true)]
     public partial class BarrelItem :
  
     BlockItem<BarrelBlock>

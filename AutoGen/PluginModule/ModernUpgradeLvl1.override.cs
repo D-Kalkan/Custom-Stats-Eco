@@ -63,7 +63,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Modern Upgrade 1")]
     [Weight(1)]
-    [Ecopedia("Upgrade Modules", "Modern Upgrades", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]                                                                      //_If_EcopediaPage_
+    [Ecopedia("Upgrade Modules", "Modern Upgrades", createAsSubPage: true)]                                                                      //_If_EcopediaPage_
     [Tag("Upgrade", 1)]
     [Tag("ModernUpgrade", 1)]
     public partial class ModernUpgradeLvl1Item :

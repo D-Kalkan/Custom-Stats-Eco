@@ -56,11 +56,6 @@ namespace Eco.Mods.TechTree
             this.ModsPostInitialize();
         }
 
-        public override void Destroy()
-        {
-            base.Destroy();
-        }
-
         /// <summary>Hook for mods to customize WorldObject before initialization. You can change housing values here.</summary>
         partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize WorldObject after initialization.</summary>
@@ -69,7 +64,7 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Large Hanging Ceiba Sign")]
-    [Ecopedia("Crafted Objects", "Signs", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Crafted Objects", "Signs", createAsSubPage: true)]
     [Tag("Small Hewn Furnishing", 1)]
     public partial class LargeHangingCeibaSignItem : WorldObjectItem<LargeHangingCeibaSignObject>, IPersistentData
     {
@@ -78,7 +73,7 @@ namespace Eco.Mods.TechTree
 
 
 
-        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren] public object PersistentData { get; set; }
+        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren(CacheAs.Instance)] public object PersistentData { get; set; }
     }
 
     [RequiresSkill(typeof(CarpentrySkill), 3)]

@@ -31,7 +31,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Fried Hearts Of Palm")] // Defines the localized name of the item.
     [Weight(200)] // Defines how heavy the FriedHeartsOfPalm is.
     [Tag("FriedVegetable", 1)]
-    [Ecopedia("Food", "Campfire", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Campfire", createAsSubPage: true)]
     public partial class FriedHeartsOfPalmItem : FoodItem
     {
 

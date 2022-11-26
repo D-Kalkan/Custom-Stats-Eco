@@ -36,7 +36,7 @@ namespace Eco.Mods.TechTree
     [Ecopedia("Crafted Objects", "Vehicles", createAsSubPage: true)]
     public partial class PoweredCartItem : WorldObjectItem<PoweredCartObject>, IPersistentData
     {
-        public override LocString DisplayDescription { get { return Localizer.DoStr("Large cart for hauling sizable loads."); } }
+        public override LocString DisplayDescription { get { return Localizer.DoStr("A three wheeled 9 horse power, cart for hauling sizable loads."); } }
         [Serialized, SyncToView, TooltipChildren, NewTooltipChildren(CacheAs.Instance)] public object PersistentData { get; set; }
     }
 

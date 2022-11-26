@@ -19,7 +19,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Prime Cut")]
     [Weight(500)]
-    [Ecopedia("Food", "Raw Meat", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Raw Meat", createAsSubPage: true)]
     public partial class PrimeCutItem : FoodItem
     {
         public override LocString DisplayDescription    => Localizer.DoStr("A perfectly marbled piece of meat.");

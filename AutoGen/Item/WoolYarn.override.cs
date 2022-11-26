@@ -64,7 +64,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Wool Yarn")]
     [Weight(20)]
-    [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Products", createAsSubPage: true)]
     public partial class WoolYarnItem : Item
     {
         public override LocString DisplayNamePlural { get { return Localizer.DoStr("Wool Yarn"); } }

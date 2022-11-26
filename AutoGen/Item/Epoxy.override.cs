@@ -65,7 +65,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Epoxy")]
     [Weight(1000)]
-    [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Products", createAsSubPage: true)]
     public partial class EpoxyItem : Item
     {
         public override LocString DisplayNamePlural { get { return Localizer.DoStr("Epoxy"); } }

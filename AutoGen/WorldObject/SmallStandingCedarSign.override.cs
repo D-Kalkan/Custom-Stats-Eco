@@ -37,6 +37,7 @@ namespace Eco.Mods.TechTree
     using Eco.World.Blocks;
     using Eco.Gameplay.Housing.PropertyValues;
     using Eco.Gameplay.Civics.Objects;
+    using Eco.Gameplay.Settlements;
     using Eco.Gameplay.Systems.NewTooltip;
     using Eco.Core.Controller;
 
@@ -44,6 +45,7 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(PropertyAuthComponent))]
     [RequireComponent(typeof(CustomTextComponent))]
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
+    [Ecopedia("Crafted Objects", "Signs", subPageName: "SmallStandingCedarSign Item")]
     public partial class SmallStandingCedarSignObject : WorldObject, IRepresentsItem
     {
         public virtual Type RepresentedItemType => typeof(SmallStandingCedarSignItem);
@@ -57,11 +59,6 @@ namespace Eco.Mods.TechTree
             this.ModsPostInitialize();
         }
 
-        public override void Destroy()
-        {
-            base.Destroy();
-        }
-
         /// <summary>Hook for mods to customize WorldObject before initialization. You can change housing values here.</summary>
         partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize WorldObject after initialization.</summary>
@@ -70,7 +67,7 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Small Standing Cedar Sign")]
-    [Ecopedia("Crafted Objects", "Signs", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Crafted Objects", "Signs", createAsSubPage: true)]
     [Tag("Small Hewn Furnishing", 1)]
     public partial class SmallStandingCedarSignItem : WorldObjectItem<SmallStandingCedarSignObject>, IPersistentData
     {
@@ -82,7 +79,7 @@ namespace Eco.Mods.TechTree
                     | DirectionAxisFlags.Down
                 ;
 
-        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren] public object PersistentData { get; set; }
+        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren(CacheAs.Instance)] public object PersistentData { get; set; }
     }
 
     [RequiresSkill(typeof(CarpentrySkill), 5)]
@@ -92,15 +89,15 @@ namespace Eco.Mods.TechTree
         public SmallStandingCedarSignRecipe()
         {
             this.Init(
-                "SmallStandingCedarSign",  //noloc
-                Localizer.DoStr("Small Standing Cedar Sign"),
-                new List<IngredientElement>
+                name: "SmallStandingCedarSign",  //noloc
+                displayName: Localizer.DoStr("Small Standing Cedar Sign"),
+                ingredients: new List<IngredientElement>
                 {
                     new IngredientElement(typeof(CedarLogItem), 5, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)),
                     new IngredientElement("WoodBoard", 2, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
                     new IngredientElement("HewnLog", 4, typeof(CarpentrySkill), typeof(CarpentryLavishResourcesTalent)), //noloc
                 },
-                new List<CraftingElement>
+                items: new List<CraftingElement>
                 {
                     new CraftingElement<SmallStandingCedarSignItem>()
                 });

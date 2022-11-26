@@ -36,7 +36,7 @@ namespace Eco.Mods.TechTree
     [Ecopedia("Crafted Objects", "Vehicles", createAsSubPage: true)]
     public partial class TruckItem : WorldObjectItem<TruckObject>, IPersistentData
     {
-        public override LocString DisplayDescription { get { return Localizer.DoStr("Modern truck for hauling sizable loads."); } }
+        public override LocString DisplayDescription { get { return Localizer.DoStr("A modern class 1076 truck, for hauling sizable loads."); } }
         [Serialized, SyncToView, TooltipChildren, NewTooltipChildren(CacheAs.Instance)] public object PersistentData { get; set; }
     }
 

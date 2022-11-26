@@ -65,7 +65,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Cotton Thread")]
     [Weight(20)]
-    [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Products", createAsSubPage: true)]
     public partial class CottonThreadItem : Item
     {
         public override LocString DisplayNamePlural { get { return Localizer.DoStr("Cotton Thread"); } }

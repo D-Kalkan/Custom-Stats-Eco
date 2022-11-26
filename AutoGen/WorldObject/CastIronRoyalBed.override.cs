@@ -62,11 +62,6 @@ namespace Eco.Mods.TechTree
             this.ModsPostInitialize();
         }
 
-        public override void Destroy()
-        {
-            base.Destroy();
-        }
-
         /// <summary>Hook for mods to customize WorldObject before initialization. You can change housing values here.</summary>
         partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize WorldObject after initialization.</summary>
@@ -75,7 +70,7 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Cast Iron Royal Bed")]
-    [Ecopedia("Housing Objects", "Bedroom", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Housing Objects", "Bedroom", createAsSubPage: true)]
     [Tag("Housing", 1)]
     public partial class CastIronRoyalBedItem : WorldObjectItem<CastIronRoyalBedObject>
     {
@@ -90,7 +85,7 @@ namespace Eco.Mods.TechTree
         public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
         {
             Category                 = RoomCategory.Bedroom,
-            SkillValue               = 4.2f,
+            HouseValue               = 4.2f,
             TypeForRoomLimit         = Localizer.DoStr("Bed"),
             DiminishingReturnPercent = 0.2f
         };

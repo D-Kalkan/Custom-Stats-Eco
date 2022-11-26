@@ -58,11 +58,6 @@ namespace Eco.Mods.TechTree
             this.ModsPostInitialize();
         }
 
-        public override void Destroy()
-        {
-            base.Destroy();
-        }
-
         /// <summary>Hook for mods to customize WorldObject before initialization. You can change housing values here.</summary>
         partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize WorldObject after initialization.</summary>
@@ -71,7 +66,7 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Limestone Owl Statue")]
-    [Ecopedia("Housing Objects", "Decoration", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Housing Objects", "Decoration", createAsSubPage: true)]
     [Tag("Housing", 1)]
     [Tag("Small Mortared Stone Furnishing", 1)]
     public partial class LimestoneOwlStatueItem : WorldObjectItem<LimestoneOwlStatueObject>
@@ -87,7 +82,7 @@ namespace Eco.Mods.TechTree
         public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
         {
             Category                 = RoomCategory.LivingRoom,
-            SkillValue               = 1.2f,
+            HouseValue               = 1.2f,
             TypeForRoomLimit         = Localizer.DoStr("Decoration"),
             DiminishingReturnPercent = 0.6f
         };

@@ -21,7 +21,7 @@ namespace Eco.Mods.TechTree
     [Tag("Harvestable", 1)]
     [Tag("Fruit", 1)]
     [Tag("Raw Food", 1)]
-    [Ecopedia("Food", "Produce", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Produce", createAsSubPage: true)]
     public partial class PricklyPearFruitItem : FoodItem
     {
         public override LocString DisplayDescription    => Localizer.DoStr("A succulent fruit coated in a rather terrifying array of spines.");

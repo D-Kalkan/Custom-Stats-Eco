@@ -58,11 +58,6 @@ namespace Eco.Mods.TechTree
             this.ModsPostInitialize();
         }
 
-        public override void Destroy()
-        {
-            base.Destroy();
-        }
-
         /// <summary>Hook for mods to customize WorldObject before initialization. You can change housing values here.</summary>
         partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize WorldObject after initialization.</summary>
@@ -71,7 +66,7 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Hardwood Lumber Table")]
-    [Ecopedia("Housing Objects", "Tables", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Housing Objects", "Tables", createAsSubPage: true)]
     [Tag("Housing", 1)]
     [Tag("Lumber Furnishing", 1)]
     public partial class HardwoodLumberTableItem : WorldObjectItem<HardwoodLumberTableObject>
@@ -87,7 +82,7 @@ namespace Eco.Mods.TechTree
         public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
         {
             Category                 = RoomCategory.General,
-            SkillValue               = 2,
+            HouseValue               = 2,
             TypeForRoomLimit         = Localizer.DoStr("Table"),
             DiminishingReturnPercent = 0.6f
         };

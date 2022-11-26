@@ -27,29 +27,30 @@ namespace Eco.Mods.TechTree
 
 
     [RequiresSkill(typeof(FertilizersSkill), 0)]
+    [Ecopedia("Items", "Tools", subPageName: "SoilSampler Item")]
     public partial class SoilSamplerRecipe : RecipeFamily
     {
         public SoilSamplerRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "SoilSampler",  //noloc
-                Localizer.DoStr("Soil Sampler"),
-                new List<IngredientElement>
+                name: "SoilSampler",  //noloc
+                displayName: Localizer.DoStr("Soil Sampler"),
+                ingredients: new List<IngredientElement>
                 {
                     new IngredientElement("Wood", 10, typeof(FertilizersSkill), typeof(FertilizersLavishResourcesTalent)), //noloc
                     new IngredientElement("WoodBoard", 2, typeof(FertilizersSkill), typeof(FertilizersLavishResourcesTalent)), //noloc
                 },
-                new List<CraftingElement>
+                items: new List<CraftingElement>
                 {
                     new CraftingElement<SoilSamplerItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 1;
             this.LaborInCalories = CreateLaborInCaloriesValue(50, typeof(FertilizersSkill));
-            this.CraftMinutes = CreateCraftTimeValue(typeof(SoilSamplerRecipe), 4, typeof(FertilizersSkill), typeof(FertilizersFocusedSpeedTalent), typeof(FertilizersParallelSpeedTalent));
+            this.CraftMinutes = CreateCraftTimeValue(beneficiary: typeof(SoilSamplerRecipe), start: 4, skillType: typeof(FertilizersSkill), typeof(FertilizersFocusedSpeedTalent), typeof(FertilizersParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Soil Sampler"), typeof(SoilSamplerRecipe));
+            this.Initialize(displayText: Localizer.DoStr("Soil Sampler"), recipeType: typeof(SoilSamplerRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(ToolBenchObject), this);
         }

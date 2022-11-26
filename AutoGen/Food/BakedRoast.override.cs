@@ -31,7 +31,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Baked Roast")] // Defines the localized name of the item.
     [Weight(900)] // Defines how heavy the BakedRoast is.
     [Tag("BakedFood", 1)]
-    [Ecopedia("Food", "Baking", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Baking", createAsSubPage: true)]
     public partial class BakedRoastItem : FoodItem
     {
 

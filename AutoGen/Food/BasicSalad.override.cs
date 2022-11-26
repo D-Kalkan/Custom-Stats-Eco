@@ -27,7 +27,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Basic Salad")] // Defines the localized name of the item.
     [Weight(300)] // Defines how heavy the BasicSalad is.
     [Tag("Salad", 1)]
-    [Ecopedia("Food", "Cooking", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Cooking", createAsSubPage: true)]
     public partial class BasicSaladItem : FoodItem
     {
 

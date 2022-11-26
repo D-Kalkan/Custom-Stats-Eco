@@ -64,7 +64,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Charcoal")]
     [Weight(1000)]
     [Fuel(20000)][Tag("Fuel")]
-    [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Products", createAsSubPage: true)]
     [Tag("Coal", 1)]
     [Tag("Burnable Fuel", 1)]
     [Tag("Charcoal", 1)]

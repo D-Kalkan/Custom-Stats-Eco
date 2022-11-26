@@ -66,7 +66,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Substrate")]
     [Weight(1000)]
-    [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Products", createAsSubPage: true)]
     public partial class SubstrateItem : Item
     {
         public override LocString DisplayDescription { get { return Localizer.DoStr("The foundation material for complex electronics."); } }

@@ -65,11 +65,6 @@ namespace Eco.Mods.TechTree
             this.ModsPostInitialize();
         }
 
-        public override void Destroy()
-        {
-            base.Destroy();
-        }
-
         /// <summary>Hook for mods to customize WorldObject before initialization. You can change housing values here.</summary>
         partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize WorldObject after initialization.</summary>
@@ -78,7 +73,7 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Brazier")]
-    [Ecopedia("Housing Objects", "Lights", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Housing Objects", "Lights", createAsSubPage: true)]
     [Tag("Housing", 1)]
     [Tag("Metal Furnishing", 1)]
     public partial class BrazierItem : WorldObjectItem<BrazierObject>
@@ -94,7 +89,7 @@ namespace Eco.Mods.TechTree
         public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
         {
             Category                 = RoomCategory.General,
-            SkillValue               = 1.2f,
+            HouseValue               = 1.2f,
             TypeForRoomLimit         = Localizer.DoStr("Lights"),
             DiminishingReturnPercent = 0.7f
         };

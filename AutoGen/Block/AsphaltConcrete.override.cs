@@ -79,7 +79,7 @@ namespace Eco.Mods.TechTree
     [MaxStackSize(10)]
     [Weight(10000)]
     [MakesRoads]
-    [Ecopedia("Blocks", "Roads", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Blocks", "Roads", createAsSubPage: true)]
     [Tag("Road", 1)]
     [Tag("Constructable", 1)]
     [Tag("RoadType", 1)]

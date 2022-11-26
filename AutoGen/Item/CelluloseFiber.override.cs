@@ -64,7 +64,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Cellulose Fiber")]
     [Weight(100)]
-    [Ecopedia("Items", "Products", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Products", createAsSubPage: true)]
     public partial class CelluloseFiberItem : Item
     {
         public override LocString DisplayDescription { get { return Localizer.DoStr("Created by taking pulped plants and extruding them similarly to synthetic fibers."); } }

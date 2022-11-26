@@ -19,7 +19,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Corn Starch")]
     [Weight(100)]
-    [Ecopedia("Food", "Ingredients", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Ingredients", createAsSubPage: true)]
     public partial class CornStarchItem : FoodItem
     {
         public override LocString DisplayDescription    => Localizer.DoStr("Obtained from the endosperm of the kernal, cornstarch can be used as a thickening agent for sauces.");

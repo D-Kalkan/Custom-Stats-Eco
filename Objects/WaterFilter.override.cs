@@ -50,7 +50,7 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(StatusComponent))]
     [RequireComponent(typeof(MustBeOwnedComponent))]
     [Priority(Priority)]
-    [Ecopedia(null, "Pipe Component", display: InPageTooltip.CachedTooltip)]
+    [Ecopedia(null, "Pipe Component")]
     public class FilterComponent : WorldObjectComponent, IOperatingWorldObjectComponent, IPersistentData
     {
         // Ensure initialized after PowerGridComponent to setup accumulator

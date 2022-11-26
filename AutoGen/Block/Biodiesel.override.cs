@@ -78,7 +78,7 @@ namespace Eco.Mods.TechTree
     [MaxStackSize(10)]
     [Weight(30000)]
     [Fuel(80000)][Tag("Fuel")]
-    [Ecopedia("Blocks", "Liquids", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Blocks", "Liquids", createAsSubPage: true)]
     [Tag("Liquid Fuel", 1)]
     public partial class BiodieselItem :
  

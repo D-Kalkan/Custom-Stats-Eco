@@ -20,7 +20,7 @@ namespace Eco.Mods.TechTree
     [Category("Tools")]
     [Tag("Tool", 1)]
     [Tag("Primitive Tool", 1)]
-    [Ecopedia("Items", "Tools", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Items", "Tools", createAsSubPage: true)]
     [Weight(1000)]
     public class SoilSamplerItem : ToolItem
     {
@@ -51,7 +51,8 @@ namespace Eco.Mods.TechTree
                     title.Append(context.Block.GetType().Name + " " + context.BlockPosition.ToString());
                 }
                 text.AppendLine(WorldLayerManager.Obj.DescribePos(target.Value.XZ));
-                context.Player.OpenInfoPanel(title.ToString(), text.ToString(), "soilsampler");
+
+                context.Player.LargeInfoBox(title.ToString(), text.ToString());
 
                 this.BurnCaloriesNow(context.Player);
             }

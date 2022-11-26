@@ -63,14 +63,9 @@ namespace Eco.Mods.TechTree
         protected override void Initialize()
         {
             this.ModsPreInitialize();
-            this.GetComponent<MinimapComponent>().Initialize(Localizer.DoStr("Cooking"));
+            this.GetComponent<MinimapComponent>().SetCategory(Localizer.DoStr("Cooking"));
             this.GetComponent<HousingComponent>().HomeValue = KitchenItem.homeValue;
             this.ModsPostInitialize();
-        }
-
-        public override void Destroy()
-        {
-            base.Destroy();
         }
 
         /// <summary>Hook for mods to customize WorldObject before initialization. You can change housing values here.</summary>
@@ -81,7 +76,7 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Kitchen")]
-    [Ecopedia("Housing Objects", "Kitchen", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Housing Objects", "Kitchen", createAsSubPage: true)]
     [Tag("Housing", 1)]
     [AllowPluginModules(Tags = new[] { "AdvancedUpgrade" }, ItemTypes = new[] { typeof(AdvancedCookingUpgradeItem) })] //noloc
     public partial class KitchenItem : WorldObjectItem<KitchenObject>, IPersistentData
@@ -97,12 +92,12 @@ namespace Eco.Mods.TechTree
         public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
         {
             Category                 = RoomCategory.Kitchen,
-            SkillValue               = 3,
+            HouseValue               = 3,
             TypeForRoomLimit         = Localizer.DoStr("Cooking"),
             DiminishingReturnPercent = 0.3f
         };
 
-        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren] public object PersistentData { get; set; }
+        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren(CacheAs.Instance)] public object PersistentData { get; set; }
     }
 
     [RequiresSkill(typeof(CarpentrySkill), 6)]

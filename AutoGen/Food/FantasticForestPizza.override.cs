@@ -30,7 +30,7 @@ namespace Eco.Mods.TechTree
     [Serialized] // Tells the save/load system this object needs to be serialized. 
     [LocDisplayName("Fantastic Forest Pizza")] // Defines the localized name of the item.
     [Weight(300)] // Defines how heavy the FantasticForestPizza is.
-    [Ecopedia("Food", "Baking", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Baking", createAsSubPage: true)]
     public partial class FantasticForestPizzaItem : FoodItem
     {
 

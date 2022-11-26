@@ -15,7 +15,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Raw Meat")]
     [Weight(100)]
-    [Ecopedia("Food", "Raw Meat", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Raw Meat", createAsSubPage: true)]
     public partial class RawMeatItem : FoodItem
     {
         public override LocString DisplayNamePlural     => Localizer.DoStr("Raw Meat");

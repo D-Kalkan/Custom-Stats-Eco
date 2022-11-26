@@ -26,7 +26,7 @@ namespace Eco.Mods.TechTree
     [Serialized] // Tells the save/load system this object needs to be serialized. 
     [LocDisplayName("Cereal Germ")] // Defines the localized name of the item.
     [Weight(10)] // Defines how heavy the CerealGerm is.
-    [Ecopedia("Food", "Ingredients", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Ingredients", createAsSubPage: true)]
     public partial class CerealGermItem : FoodItem
     {
 

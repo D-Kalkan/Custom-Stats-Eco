@@ -78,7 +78,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Glass")]
     [MaxStackSize(20)]
     [Weight(10000)]
-    [Ecopedia("Blocks", "Building Materials", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Blocks", "Building Materials", createAsSubPage: true)]
     [Tag("Constructable", 1)]
     [Tier(2)]
     public partial class GlassItem :

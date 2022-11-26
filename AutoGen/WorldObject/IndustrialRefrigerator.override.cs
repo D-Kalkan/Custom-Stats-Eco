@@ -66,11 +66,6 @@ namespace Eco.Mods.TechTree
             this.ModsPostInitialize();
         }
 
-        public override void Destroy()
-        {
-            base.Destroy();
-        }
-
         /// <summary>Hook for mods to customize WorldObject before initialization. You can change housing values here.</summary>
         partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize WorldObject after initialization.</summary>
@@ -79,7 +74,7 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Industrial Refrigerator")]
-    [Ecopedia("Crafted Objects", "Storage", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Crafted Objects", "Storage", createAsSubPage: true)]
     public partial class IndustrialRefrigeratorItem : WorldObjectItem<IndustrialRefrigeratorObject>
     {
         [Tooltip(50)] public TooltipSection UpdateTooltip() => new TooltipSection(Localizer.Do($"{(1.5f > 1 ? Localizer.DoStr("Increases") : Localizer.DoStr("Decreases"))} total shelf life by: {Text.InfoLight(Text.Percent(Math.Abs(1.5f-1)))}").Dash());

@@ -69,11 +69,6 @@ namespace Eco.Mods.TechTree
             this.ModsPostInitialize();
         }
 
-        public override void Destroy()
-        {
-            base.Destroy();
-        }
-
         /// <summary>Hook for mods to customize WorldObject before initialization. You can change housing values here.</summary>
         partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize WorldObject after initialization.</summary>
@@ -82,7 +77,7 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Refrigerator")]
-    [Ecopedia("Housing Objects", "Kitchen", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Housing Objects", "Kitchen", createAsSubPage: true)]
     [Tag("Housing", 1)]
     public partial class RefrigeratorItem : WorldObjectItem<RefrigeratorObject>
     {
@@ -98,7 +93,7 @@ namespace Eco.Mods.TechTree
         public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
         {
             Category                 = RoomCategory.Kitchen,
-            SkillValue               = 5,
+            HouseValue               = 5,
             TypeForRoomLimit         = Localizer.DoStr("Food Storage"),
             DiminishingReturnPercent = 0.3f
         };

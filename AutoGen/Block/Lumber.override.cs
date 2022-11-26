@@ -79,7 +79,7 @@ namespace Eco.Mods.TechTree
     [Weight(10000)]
     [Fuel(4000)][Tag("Fuel")]
     [ResourcePile]
-    [Ecopedia("Blocks", "Building Materials", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Blocks", "Building Materials", createAsSubPage: true)]
     [Tag("Lumber", 1)]
     [Tag("Burnable Fuel", 1)]
     [Tag("Constructable", 1)]

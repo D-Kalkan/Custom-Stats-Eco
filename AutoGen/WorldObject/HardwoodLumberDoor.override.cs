@@ -37,6 +37,7 @@ namespace Eco.Mods.TechTree
     using Eco.World.Blocks;
     using Eco.Gameplay.Housing.PropertyValues;
     using Eco.Gameplay.Civics.Objects;
+    using Eco.Gameplay.Settlements;
     using Eco.Gameplay.Systems.NewTooltip;
     using Eco.Core.Controller;
 
@@ -59,11 +60,6 @@ namespace Eco.Mods.TechTree
             this.ModsPostInitialize();
         }
 
-        public override void Destroy()
-        {
-            base.Destroy();
-        }
-
         /// <summary>Hook for mods to customize WorldObject before initialization. You can change housing values here.</summary>
         partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize WorldObject after initialization.</summary>
@@ -73,7 +69,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Hardwood Lumber Door")]
     [Tier(2)]
-    [Ecopedia("Housing Objects", "Doors", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Housing Objects", "Doors", createAsSubPage: true)]
     [Tag("Small Lumber Furnishing", 1)]
     public partial class HardwoodLumberDoorItem : WorldObjectItem<HardwoodLumberDoorObject>
     {
@@ -94,14 +90,14 @@ namespace Eco.Mods.TechTree
         public HardwoodLumberDoorRecipe()
         {
             this.Init(
-                "HardwoodLumberDoor",  //noloc
-                Localizer.DoStr("Hardwood Lumber Door"),
-                new List<IngredientElement>
+                name: "HardwoodLumberDoor",  //noloc
+                displayName: Localizer.DoStr("Hardwood Lumber Door"),
+                ingredients: new List<IngredientElement>
                 {
                     new IngredientElement(typeof(HardwoodLumberItem), 6, true),
                     new IngredientElement("WoodBoard", 12, true), //noloc
                 },
-                new List<CraftingElement>
+                items: new List<CraftingElement>
                 {
                     new CraftingElement<HardwoodLumberDoorItem>()
                 });

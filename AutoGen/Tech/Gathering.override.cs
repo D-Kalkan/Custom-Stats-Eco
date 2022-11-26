@@ -30,7 +30,7 @@ namespace Eco.Mods.TechTree
     /// <summary>Auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.</summary>
     [Serialized]
     [LocDisplayName("Gathering")]
-    [Ecopedia("Professions", "Farmer", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Professions", "Farmer", createAsSubPage: true)]
     [RequiresSkill(typeof(TailoringSkill), 0), Tag("Farmer Specialty"), Tier(1)]
     [Tag("Specialty")]
     [Tag("Teachable")]

@@ -31,7 +31,7 @@ namespace Eco.Mods.TechTree
     [LocDisplayName("Wilted Fiddleheads")] // Defines the localized name of the item.
     [Weight(200)] // Defines how heavy the WiltedFiddleheads is.
     [Tag("CharredGreen", 1)]
-    [Ecopedia("Food", "Charred Food", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Food", "Charred Food", createAsSubPage: true)]
     public partial class WiltedFiddleheadsItem : FoodItem
     {
 

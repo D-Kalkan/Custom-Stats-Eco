@@ -58,11 +58,6 @@ namespace Eco.Mods.TechTree
             this.ModsPostInitialize();
         }
 
-        public override void Destroy()
-        {
-            base.Destroy();
-        }
-
         /// <summary>Hook for mods to customize WorldObject before initialization. You can change housing values here.</summary>
         partial void ModsPreInitialize();
         /// <summary>Hook for mods to customize WorldObject after initialization.</summary>
@@ -71,7 +66,7 @@ namespace Eco.Mods.TechTree
 
     [Serialized]
     [LocDisplayName("Rug Medium")]
-    [Ecopedia("Housing Objects", "Decoration", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Housing Objects", "Decoration", createAsSubPage: true)]
     [Tag("Housing", 1)]
     [Tag("Textile", 1)]
     public partial class RugMediumItem : WorldObjectItem<RugMediumObject>
@@ -88,7 +83,7 @@ namespace Eco.Mods.TechTree
         public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
         {
             Category                 = RoomCategory.General,
-            SkillValue               = 1,
+            HouseValue               = 1,
             TypeForRoomLimit         = Localizer.DoStr("Rug"),
             DiminishingReturnPercent = 0.5f
         };
