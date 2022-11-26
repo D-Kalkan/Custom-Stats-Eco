@@ -37,6 +37,7 @@ namespace Eco.Mods.TechTree
     /// </remarks>
     [RequiresSkill(typeof(CarpentrySkill), 1)]
     [ForceCreateView]
+    [Ecopedia("Blocks", "Building Materials", subPageName: "HardwoodLumber Item")]
     public partial class HardwoodLumberRecipe : Recipe
     {
         public HardwoodLumberRecipe()
@@ -87,7 +88,7 @@ namespace Eco.Mods.TechTree
     [MaxStackSize(20)]
     [Weight(10000)]
     [Fuel(4000)][Tag("Fuel")]
-    [Ecopedia("Blocks", "Building Materials", createAsSubPage: true, display: InPageTooltip.DynamicTooltip)]
+    [Ecopedia("Blocks", "Building Materials", createAsSubPage: true)]
     [Tag("Lumber", 1)]
     [Tag("Burnable Fuel", 1)]
     [Tag("Constructable", 1)]
