@@ -85,7 +85,7 @@ namespace Eco.Mods.TechTree
         public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
         {
             Category                 = RoomCategory.Bedroom,
-            HouseValue               = 4,
+            HouseValue               = 5f,
             TypeForRoomLimit         = Localizer.DoStr("Bed"),
             DiminishingReturnPercent = 0.2f
         };
