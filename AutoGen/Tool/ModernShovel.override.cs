@@ -71,7 +71,7 @@ namespace Eco.Mods.TechTree
     {
                                                                                                                                                                                                                                            // Static values
         private static IDynamicValue caloriesBurn           = new MultiDynamicValue(MultiDynamicOps.Multiply, new TalentModifiedValue(typeof(ModernShovelItem), typeof(ToolEfficiencyTalent)), CreateCalorieValue(10, typeof(SelfImprovementSkill), typeof(ModernShovelItem)));
-        private static IDynamicValue exp                    = new ConstantValue(0.1f);
+        private static IDynamicValue exp                    = new ConstantValue(0.2f);
         private static IDynamicValue tier                   = new ConstantValue(4);
         private static SkillModifiedValue skilledRepairCost = new SkillModifiedValue(15, AdvancedSmeltingSkill.MultiplicativeStrategy, typeof(AdvancedSmeltingSkill), Localizer.DoStr("repair cost"), DynamicValueType.Efficiency);
 
