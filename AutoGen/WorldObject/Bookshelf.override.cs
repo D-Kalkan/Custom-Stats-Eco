@@ -86,7 +86,7 @@ namespace Eco.Mods.TechTree
         public override HomeFurnishingValue HomeValue => homeValue;
         public static readonly HomeFurnishingValue homeValue = new HomeFurnishingValue()
         {
-            Category                 = RoomCategory.General,
+            Category                 = RoomCategory.LivingRoom,
             HouseValue               = 2,
             TypeForRoomLimit         = Localizer.DoStr("Shelves"),
             DiminishingReturnPercent = 0.5f

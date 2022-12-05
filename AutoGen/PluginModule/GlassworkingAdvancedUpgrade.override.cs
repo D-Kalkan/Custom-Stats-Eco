@@ -50,7 +50,7 @@ namespace Eco.Mods.TechTree
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Glassworking Advanced Upgrade"), typeof(GlassworkingAdvancedUpgradeRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(KilnObject), this);
+            CraftingComponent.AddRecipe(typeof(GlassworksObject), this);
         }
 
         /// <summary>Hook for mods to customize RecipeFamily before initialization. You can change recipes, xp, labor, time here.</summary>
