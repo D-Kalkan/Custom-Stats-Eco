@@ -11,19 +11,21 @@ This is a series of modifications made to the Eco+ Server files to facilitate a 
 ## Main Features ##
 
 * Overhauled the fertilizer skill into a recycling profession
-* Overhauled the self improvement skill
+* Self Improvement xp awarded from hammer/shovel usage
 * Combined Hunting with Butchery
 * Combined Farming with Gathering
+* Food Spoilage rate increased, and cooking require more raw ingredients
 * New fuel coke for steam vehicles crafted by Mechanics
 * New fuel diesel for modern vehicles crafted by Industry
 * Reduced the effectiveness of upgrade modules
 * Overhauled research to be completed by the enitre server
+* Bloomery now creates pollution
 * Mass produced items create garbage as an additional minor output
-* A wide range of balance changes touching almost every profession notably: 
-	Tailors can now craft land claim papers at end game <br>
-	Pottery can craft Iron Barrels <br>
-	Carpentry can craft transmission poles <br>
-	Electronics require ceramics <br>
+* A wide range of balance changes touching almost every profession notably: <br>
+	- Tailors can now craft land claim papers at end game <br>
+	- Pottery can craft Iron Barrels <br>
+	- Carpentry can craft transmission poles <br>
+	- Electronics require ceramics <br>
 
 
 
