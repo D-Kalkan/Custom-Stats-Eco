@@ -42,7 +42,7 @@ namespace Eco.Mods.TechTree
         /// <summary>The amount of calories awarded for eating the food item.</summary>
         public override float Calories                  => 700;
         /// <summary>The nutritional value of the food item.</summary>
-        public override Nutrients Nutrition             => new Nutrients() { Carbs = 8, Fat = 2, Protein = 6, Vitamins = 12};
+        public override Nutrients Nutrition             => new Nutrients() { Carbs = 9, Fat = 3, Protein = 7, Vitamins = 13};
 
         /// <summary>Defines the default time it takes for this item to spoil. This value can be modified by the inventory this item currently resides in.</summary>
         protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(48);
@@ -72,6 +72,7 @@ namespace Eco.Mods.TechTree
                 ingredients: new List<IngredientElement>
                 {
                     new IngredientElement(typeof(TaroRootItem), 15, typeof(BakingSkill), typeof(BakingLavishResourcesTalent)),
+                    new IngredientElement("Fat", 0.2f, typeof(CampfireCookingSkill), typeof(CampfireCookingLavishResourcesTalent)),
                 },
 
                 // Define our recipe output items.
