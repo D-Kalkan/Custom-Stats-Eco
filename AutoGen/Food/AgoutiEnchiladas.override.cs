@@ -18,16 +18,16 @@ namespace Eco.Mods.TechTree
 
     /// <summary>
     /// <para>
-    /// Server side food item definition for the "AgoutiEnchiladas" item. 
+    /// Server side food item definition for the "AgoutiEnchiladas" item.
     /// This object inherits the FoodItem base class to allow for consumption mechanics.
     /// </para>
     /// <para>More information about FoodItem objects can be found at https://docs.play.eco/api/server/eco.gameplay/Eco.Gameplay.Items.FoodItem.html</para>
     /// </summary>
     /// <remarks>
-    /// This is an auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization. 
+    /// This is an auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.
     /// If you wish to modify this class, please create a new partial class or follow the instructions in the "UserCode" folder to override the entire file.
     /// </remarks>
-    [Serialized] // Tells the save/load system this object needs to be serialized. 
+    [Serialized] // Tells the save/load system this object needs to be serialized.
     [LocDisplayName("Agouti Enchiladas")] // Defines the localized name of the item.
     [Weight(550)] // Defines how heavy the AgoutiEnchiladas is.
     [Ecopedia("Food", "Cooking", createAsSubPage: true)]
@@ -43,7 +43,7 @@ namespace Eco.Mods.TechTree
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 20, Fat = 27, Protein = 8, Vitamins = 3};
 
         /// <summary>Defines the default time it takes for this item to spoil. This value can be modified by the inventory this item currently resides in.</summary>
-        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(24);
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(30);
     }
 
 
@@ -52,7 +52,7 @@ namespace Eco.Mods.TechTree
     /// <para>More information about RecipeFamily objects can be found at https://docs.play.eco/api/server/eco.gameplay/Eco.Gameplay.Items.RecipeFamily.html</para>
     /// </summary>
     /// <remarks>
-    /// This is an auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization. 
+    /// This is an auto-generated class. Don't modify it! All your changes will be wiped with next update! Use Mods* partial methods instead for customization.
     /// If you wish to modify this class, please create a new partial class or follow the instructions in the "UserCode" folder to override the entire file.
     /// </remarks>
     [RequiresSkill(typeof(AdvancedCookingSkill), 4)]
@@ -85,7 +85,7 @@ namespace Eco.Mods.TechTree
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 1; // Defines how much experience is gained when crafted.
-            
+
             // Defines the amount of labor required and the required skill to add labor
             this.LaborInCalories = CreateLaborInCaloriesValue(65, typeof(AdvancedCookingSkill));
 

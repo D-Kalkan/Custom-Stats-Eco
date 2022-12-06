@@ -22,10 +22,10 @@ namespace Eco.Mods.TechTree
     {
         public override LocString DisplayNamePlural     => Localizer.DoStr("Tallow");
         public override LocString DisplayDescription    => Localizer.DoStr("Rendered animal fat useful for more than just cooking.");
-        
+
         public override float Calories                  => 200;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 0, Fat = 8, Protein = 0, Vitamins = 0};
-        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(72);
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(720);
     }
 
 }
