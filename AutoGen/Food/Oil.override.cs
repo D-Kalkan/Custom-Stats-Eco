@@ -26,10 +26,10 @@ namespace Eco.Mods.TechTree
     {
         public override LocString DisplayNamePlural     => Localizer.DoStr("Oil");
         public override LocString DisplayDescription    => Localizer.DoStr("A plant fat extracted for use in cooking.");
-        
+
         public override float Calories                  => 120;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 0, Fat = 15, Protein = 0, Vitamins = 0};
-        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(36);
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(96);
     }
 
 

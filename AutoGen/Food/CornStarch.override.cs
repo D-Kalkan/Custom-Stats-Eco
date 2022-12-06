@@ -23,10 +23,10 @@ namespace Eco.Mods.TechTree
     public partial class CornStarchItem : FoodItem
     {
         public override LocString DisplayDescription    => Localizer.DoStr("Obtained from the endosperm of the kernal, cornstarch can be used as a thickening agent for sauces.");
-        
+
         public override float Calories                  => 10;
         public override Nutrients Nutrition             => new Nutrients() { Carbs = 0, Fat = 0, Protein = 0, Vitamins = 0};
-        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(48);
+        protected override int BaseShelfLife            => (int)TimeUtil.HoursToSeconds(72);
     }
 
 
