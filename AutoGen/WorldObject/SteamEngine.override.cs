@@ -68,7 +68,7 @@ namespace Eco.Mods.TechTree
         {
             this.ModsPreInitialize();
             this.GetComponent<FuelSupplyComponent>().Initialize(2, fuelTagList);
-            this.GetComponent<FuelConsumptionComponent>().Initialize(100);
+            this.GetComponent<FuelConsumptionComponent>().Initialize(30);
             this.GetComponent<PowerGridComponent>().Initialize(10, new ElectricPower());
             this.GetComponent<PowerGeneratorComponent>().Initialize(1000);
             this.GetComponent<HousingComponent>().HomeValue = SteamEngineItem.homeValue;
